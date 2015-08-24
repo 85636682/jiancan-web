@@ -1,0 +1,21 @@
+<% if @shops.count >= 1 %>
+<table class="table">
+  <tbody>
+  <% @shops.each do |shop| %>
+    <tr>
+      <th scope="row">1</th>
+      <td><%= shop.name %></td>
+      <td><%= shop.address %></td>
+      <td><%= shop.mobile %></td>
+      <td>
+        <a href="<%= edit_cpanel_shop_path(shop) %>" class="btn btn-primary-outline btn-sm">修改</a>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% else %>
+<p>
+  还未拥有店铺，<a href="<%= new_cpanel_shop_path %>">现在创建？</a>
+</p>
+<% end %>

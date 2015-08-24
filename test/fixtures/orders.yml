@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sn: MyString
+  takeout: false
+  total_price: 9.99
+  status: MyString
+  shop_id: 1
+  user_id: 1
+
+two:
+  sn: MyString
+  takeout: false
+  total_price: 9.99
+  status: MyString
+  shop_id: 1
+  user_id: 1

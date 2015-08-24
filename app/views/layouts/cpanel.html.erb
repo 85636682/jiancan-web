@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ding</title>
+  <%= stylesheet_link_tag    'cpanel', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'cpanel', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="cpanel-page">
+  <nav class="navbar navbar-light bg-faded">
+    <div class="container">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <ul class="nav navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+      </ul>
+      <% if merchant_signed_in? %>
+      <ul class="nav navbar-nav pull-right">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><%= current_merchant.name.blank? ? current_merchant.email : current_merchant.name %></a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">账 号</a>
+            <div class="dropdown-divider"></div>
+            <%= link_to "注 销", destroy_merchant_session_path, method: :delete, :class => "dropdown-item" %>
+          </div>
+        </li>
+      </ul>
+      <% end %>
+    </div>
+  </nav>
+  <br/>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="sidebar">
+          <div class="list-group">
+            <a href="<%= cpanel_orders_path %>" class="list-group-item <%= active_controller?("orders") %>">订单管理</a>
+            <a href="<%= cpanel_shops_path %>" class="list-group-item <%= active_controller?("shops") %>">
+              店铺管理
+            </a>
+            <a href="<%= cpanel_products_path %>" class="list-group-item <%= active_controller?("products") %>">菜色管理</a>
+            <a href="<%= cpanel_rooms_path %>" class="list-group-item <%= active_controller?("rooms") %>">座位管理</a>
+            <a href="<%= cpanel_categories_path %>" class="list-group-item <%= active_controller?("categories") %>">分类管理</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-9">
+        <div class="card card-block right-content">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

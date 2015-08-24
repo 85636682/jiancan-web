@@ -1,0 +1,6 @@
+class Product < ActiveRecord::Base
+  belongs_to :shop
+  belongs_to :category
+  has_many :order_products
+  has_many :orders, :through => :order_products, :dependent => :destroy
+end

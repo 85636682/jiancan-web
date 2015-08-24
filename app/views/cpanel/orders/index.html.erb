@@ -1,0 +1,23 @@
+<% if current_merchant.shops.count >= 1 %>
+  <% if @orders.count >= 1 %>
+    <table class="table">
+      <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <th scope="row">1</th>
+          <td><%= order.sn %></td>
+          <td>￥<%= order.total_price %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>
+      还未生成任何订单，<a href="<%= new_cpanel_order_path %>">现在添加？</a>
+    </p>
+  <% end %>
+<% else %>
+<p>
+  还未拥有店铺，<a href="<%= new_cpanel_shop_path %>">现在创建？</a>
+</p>
+<% end %>

@@ -1,0 +1,33 @@
+<% if current_merchant.shops.count >= 1 %>
+  <% if @rooms.count >= 1 %>
+    <table class="table">
+      <thead>
+        <tr>
+          <td colspan="4">
+            <a href="<%= new_cpanel_room_path %>" class="btn btn-primary-outline btn-sm">添加</a>
+          </td>
+        </tr>
+      </thead>
+      <tbody>
+      <% @rooms.each do |room| %>
+        <tr>
+          <th scope="row">1</th>
+          <td><%= room.name %></td>
+          <td><%= room.seat %> 人</td>
+          <td>
+            <a href="<%= edit_cpanel_room_path(room) %>" class="btn btn-primary-outline btn-sm">修改</a>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>
+      还未添加任何房台，<a href="<%= new_cpanel_room_path %>">现在添加？</a>
+    </p>
+  <% end %>
+<% else %>
+<p>
+  还未拥有店铺，<a href="<%= new_cpanel_shop_path %>">现在创建？</a>
+</p>
+<% end %>
