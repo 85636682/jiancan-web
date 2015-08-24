@@ -1,15 +1,15 @@
 # config valid only for Capistrano 3.1
 lock '3.2.1'
 
-set :application, 'ding'
+set :application, 'dingist'
 #set :repo_url, 'git@github.com:85636682/dongqilai.git'
-set :repo_url, 'git@coding.net:dongqilai/ding.git'
+set :repo_url, 'git@git.coding.net:dongqilai/dingist.git'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 # Default deploy_to directory is /var/www/my_app
-set :deploy_to, "/home/ubuntu/www/ding"
+set :deploy_to, "/home/ubuntu/www/dingist"
 
 # Default value for :scm is :git
 # set :scm, :git
