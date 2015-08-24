@@ -23,6 +23,12 @@ module Ding
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
+    config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
+    config.i18n.default_locale = "zh-CN"
+    I18n.enforce_available_locales = false
+    config.time_zone = 'Beijing'
+    config.encoding = "utf-8"
+
     config.autoload_paths << Rails.root.join('app/api')
 
     config.middleware.use Rack::Cors do
