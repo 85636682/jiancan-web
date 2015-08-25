@@ -25,6 +25,11 @@ class Cpanel::ShopsController < CpanelController
   end
 
   def update
+    if @shop.update(shop_params)
+      redirect_to cpanel_shops_path, :notice => "更新成功！"
+    else
+      render :edit, :notice => "更新失败！"
+    end
   end
 
   private
