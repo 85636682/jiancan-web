@@ -1,0 +1,49 @@
+module V1
+  class Orders < Grape::API
+    resource :orders do
+      desc '创建订单'
+      post '', serializer: OrderSerializer, root: 'order' do
+        authenticate!
+        room_id = params[:takeout] ? 0 : params[:room_id]
+        @order = Order.new(:takeout => params[:takeout], :shop_id => params[:shop_id], :room_id => room_id,
+                           :sn => Order.create_sn(params[:shop_id]), :user_id => params[:user_id], :total_price => 0)
+        if @order.save
+          render @order
+        else
+          error!({ error: @reply.errors.full_messages }, 400)
+        end
+      end
+
+      desc '返回某个商铺或者商铺某台桌的订单'
+      params do
+        requires :shop_id, type: Integer, desc: '商铺的Id'
+        optional :room_id, type: Integer, desc: '如果你需要只看某台桌的订单，请传此参数'
+      end
+      get '', serializer: OrderSerializer, root: 'orders' do
+        authenticate!
+        if params[:room_id].blank?
+          @orders = Order.where(:shop_id => params[:shop_id]).order("created_at ASC")
+        else
+          @orders = Order.where(:room_id => params[:room_id]).order("created_at ASC")
+        end
+      end
+
+      desc '给订单添加商品'
+      params do
+      end
+      post 'products' do
+        authenticate!
+        @order = Order.find(params[:id])
+        amount = 0
+        params[:products_quantity].each do |key, value|
+          product = Product.find(key)
+          if not product.blank?
+            OrderProduct.create(:order_id => @order.id, :product_id => key, :quantity => value)
+            amount += product.price.to_i * value.to_i
+          end
+        end
+        @order.update(:amount => amount)
+      end
+    end
+  end
+end

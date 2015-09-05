@@ -11,6 +11,7 @@ module V1
 
     mount V1::Shops
     mount V1::Categories
+    mount V1::Merchants
 
   end
 end
