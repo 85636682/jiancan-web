@@ -1,4 +1,5 @@
 class Order < ActiveRecord::Base
+  extend Enumerize
   enumerize :status,     in: [:pending, :settled, :completed, :canceled], default: :pending
 
   belongs_to :shop
