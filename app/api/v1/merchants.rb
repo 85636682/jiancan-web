@@ -7,12 +7,19 @@ module V1
         requires :password, type: String, desc: "用户登录密码"
       end
       post 'login' do
+        msg = token = ""
         resource = Merchant.find_by_email(params[:email])
-        if !resource.blank? && resource.valid_password?(params[:password])
-          { token: resource.token }
+        if resource.blank?
+          msg = "此用户不存在！"
         else
-          { token: "" }
+          if resource.valid_password?(params[:password])
+            msg = "登录成功！"
+            token = resource.private_token
+          else
+            msg = "密码不正确！"
+          end
         end
+        { msg: msg, token: token}
       end
 
       desc "测试"
