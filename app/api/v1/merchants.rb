@@ -8,7 +8,7 @@ module V1
       end
       post 'login' do
         resource = Merchant.find_by_email(params[:email])
-        if resource.valid_password?(params[:password])
+        if !resource.blank? && resource.valid_password?(params[:password])
           { token: resource.token }
         else
           { token: "" }
