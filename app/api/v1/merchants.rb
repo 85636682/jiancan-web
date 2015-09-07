@@ -14,6 +14,11 @@ module V1
           { token: "" }
         end
       end
+
+      desc "测试"
+      get 'login' do
+        { token: "测试" }
+      end
     end
     
   end
