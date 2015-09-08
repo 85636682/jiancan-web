@@ -41,13 +41,15 @@
       <div class="col-sm-3">
         <div class="sidebar">
           <div class="list-group">
-            <a href="<%= cpanel_orders_path %>" class="list-group-item <%= active_controller?("orders") %>">订单管理</a>
             <a href="<%= cpanel_shops_path %>" class="list-group-item <%= active_controller?("shops") %>">
               店铺管理
             </a>
+            <% if current_merchant.shops.count < 1 %>
+            <a href="<%= cpanel_orders_path %>" class="list-group-item <%= active_controller?("orders") %>">订单管理</a>
             <a href="<%= cpanel_products_path %>" class="list-group-item <%= active_controller?("products") %>">菜色管理</a>
             <a href="<%= cpanel_rooms_path %>" class="list-group-item <%= active_controller?("rooms") %>">座位管理</a>
             <a href="<%= cpanel_categories_path %>" class="list-group-item <%= active_controller?("categories") %>">分类管理</a>
+            <% end %>
           </div>
         </div>
       </div>
