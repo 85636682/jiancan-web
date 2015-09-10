@@ -5,7 +5,7 @@ module V1
       optional :offset, type: Integer, default: 0
       optional :limit,  type: Integer, default: 20, values: 1..150
     end
-    get 'products', each_serializer: ProductSerializer, root: 'products' do
+    get ':id/products', each_serializer: ProductSerializer, root: 'products' do
       @category = Category.find(params[:id])
       @products = @category.products.offset(params[:offset]).limit(params[:limit]).order("id ASC")
     end

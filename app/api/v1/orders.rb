@@ -19,7 +19,7 @@ module V1
         requires :shop_id, type: Integer, desc: '商铺的Id'
         optional :room_id, type: Integer, desc: '如果你需要只看某台桌的订单，请传此参数'
       end
-      get '', serializer: OrderSerializer, root: 'orders' do
+      get '', each_serializer: OrderSerializer, root: 'orders' do
         authenticate!
         if params[:room_id].blank?
           @orders = Order.where(:shop_id => params[:shop_id]).order("created_at ASC")
