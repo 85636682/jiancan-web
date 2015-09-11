@@ -1,5 +1,5 @@
 class ProductSerializer < BaseSerializer
-  attributes :id, :name, :shop_id, :shop, :avatar, :created_at, :updated_at
+  attributes :id, :name, :shop_id, :shop, :avatar, :created_at, :updated_at,
              :category_id, :category
 
   def avatar
