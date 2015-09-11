@@ -5,7 +5,7 @@ module V1
       params do
         requires :shop_id, type: Integer, desc: '商铺的Id'
       end
-      get '', each_serializer: ProductSerializer, root: 'products' do
+      get '', each_serializer: ProductSerializer do
         @products = Product.where(:shop_id => params[:shop_id]).order("created_at ASC")
       end
     end
