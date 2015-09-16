@@ -2,11 +2,15 @@ module V1
   class Orders < Grape::API
     resource :orders do
       desc '创建订单'
+      params do
+        required :shop_id, type: Integer, desc: "店铺id"
+        required :room_id, type: Integer, desc: "台桌房间id"
+      end
       post '', serializer: OrderSerializer, root: 'order' do
         authenticate!
-        room_id = params[:takeout] ? 0 : params[:room_id]
-        @order = Order.new(:takeout => params[:takeout], :shop_id => params[:shop_id], :room_id => room_id,
-                           :sn => Order.create_sn(params[:shop_id]), :user_id => params[:user_id], :total_price => 0)
+        @order = Order.new(:shop_id => params[:shop_id], :room_id => room_id,
+                           :sn => Order.create_sn(params[:shop_id]), 
+                           :total_price => 0, :takeout => false)
         if @order.save
           render @order
         else
