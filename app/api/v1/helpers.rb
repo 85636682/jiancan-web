@@ -1,7 +1,7 @@
 module V1
   module Helpers
     def current_worker
-      @current_worker ||= Worker.where(private_token: params[:token]).first
+      @current_worker ||= Worker.where(private_token: params[:access_token]).first
     end
 
     def authenticate!

@@ -7,7 +7,7 @@ module V1
         requires :imei,  type: String, desc: "IMEI"
       end
       post 'login' do
-        msg = token = ""
+        msg = access_token = ""
         resource = Merchant.find_by_email(params[:email])
         if resource.blank? && (resource.shops.count < 1)
           msg = "此用户和店铺不存在！"
@@ -17,10 +17,10 @@ module V1
             msg = "密码不正确！"
           else
             msg = "登录成功！"
-            token = worker.get_private_token
+            access_token = worker.get_private_token
           end
         end
-        { msg: msg, token: token, shop_id: shop_id }
+        { msg: msg, access_token: access_token, shop_id: shop_id }
       end
 
     end    
