@@ -13,7 +13,7 @@ module V1
       get ':id/order', serializer: OrderSerializer, root: 'order' do
         @order = Order.find_by_room_id(params[:id])
         if @order.blank?
-          @order = Order.new(:shop_id => params[:shop_id], :room_id => params[:id]
+          @order = Order.new(:shop_id => params[:shop_id], :room_id => params[:id],
                              :sn => Order.create_sn(params[:shop_id]), 
                              :total_price => 0, :takeout => false)
         end
