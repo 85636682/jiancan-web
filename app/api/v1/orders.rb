@@ -35,7 +35,7 @@ module V1
       desc '给订单添加商品'
       params do
       end
-      post 'products' do
+      post ':id/products' do
         authenticate!
         @order = Order.find(params[:id])
         amount = 0
