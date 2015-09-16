@@ -1,0 +1,2 @@
+module Cpanel::WorkersHelper
+end

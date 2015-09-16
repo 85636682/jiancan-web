@@ -18,7 +18,7 @@ module V1
         if @order.save
           render @order
         else
-          error!({ error: @topic.errors.full_messages }, 400)
+          error!({ error: @order.errors.full_messages }, 400)
         end
       end
     end

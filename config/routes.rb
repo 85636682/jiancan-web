@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :rooms
     resources :orders
     resources :categories
+    resources :workers
   end
 
   devise_for :merchants, controllers: {

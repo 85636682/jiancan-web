@@ -1,7 +1,7 @@
 defaults: &defaults
   app_name: "Dingist"
   foot_html: "&copy; Dingist."
-  domain: "dingist.com"
+  domain: "yiguanli.org"
   email_sender: '85636682@qq.com'
   upyun_username: "dongqilai"
   upyun_password: "hs123456"
