@@ -14,6 +14,7 @@ module V1
     mount V1::Products
     mount V1::Categories
     mount V1::Orders
+    mount V1::Rooms
 
   end
 end

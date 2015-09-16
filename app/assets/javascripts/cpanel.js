@@ -4,6 +4,7 @@
 //= require bootstrap
 //= require 'china_city/jquery.china_city'
 //= require nprogress
+//= require jquery.qrcode.min
 //= require turbolinks
 
 NProgress.configure({
