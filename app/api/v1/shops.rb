@@ -1,9 +1,6 @@
 module V1
   class Shops < Grape::API
     resource :shops do
-      get '', each_serializer: ShopSerializer, root: 'shops' do
-        render current_merchant.shops
-      end
 
       desc '获取某店铺下所有分类'
       params do

@@ -10,7 +10,7 @@ module V1
     helpers V1::Helpers
 
     mount V1::Shops
-    mount V1::Merchants
+    mount V1::Workers
     mount V1::Products
     mount V1::Categories
     mount V1::Orders
