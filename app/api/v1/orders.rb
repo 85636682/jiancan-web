@@ -34,6 +34,7 @@ module V1
 
       desc '给订单添加商品'
       params do
+        requires :products_quantity, type: Array[Integer], desc: '包含所有添加商品的ids'
       end
       post ':id/products' do
         authenticate!
