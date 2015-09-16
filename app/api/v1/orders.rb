@@ -14,7 +14,7 @@ module V1
         if @order.save
           render @order
         else
-          error!({ error: @reply.errors.full_messages }, 400)
+          error!({ error: @order.errors.full_messages }, 400)
         end
       end
 
@@ -30,11 +30,12 @@ module V1
         else
           @orders = Order.where(:room_id => params[:room_id]).order("created_at ASC")
         end
+        render @orders
       end
 
       desc '给订单添加商品'
       params do
-        requires :products_quantity, type: Array[Integer], desc: '包含所有添加商品的ids'
+        requires :products_quantity, type: Array[Integer], desc: '包含所有添加商品id的整形数组，用商品的id作为key，用所选商品的数据作为value'
       end
       post ':id/products' do
         authenticate!
