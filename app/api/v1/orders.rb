@@ -20,7 +20,7 @@ module V1
 
       desc '返回某个商铺或者商铺某台桌的订单'
       params do
-        requires :shop_id, type: Integer, desc: '商铺的Id'
+        required :shop_id, type: Integer, desc: '商铺的Id'
         optional :room_id, type: Integer, desc: '如果你需要只看某台桌的订单，请传此参数'
       end
       get '', each_serializer: OrderSerializer, root: 'orders' do
