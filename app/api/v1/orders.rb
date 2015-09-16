@@ -3,8 +3,8 @@ module V1
     resource :orders do
       desc '创建订单'
       params do
-        required :shop_id, type: Integer, desc: "店铺id"
-        required :room_id, type: Integer, desc: "台桌房间id"
+        requires :shop_id, type: Integer, desc: "店铺id"
+        requires :room_id, type: Integer, desc: "台桌房间id"
       end
       post '', serializer: OrderSerializer, root: 'order' do
         authenticate!
@@ -20,7 +20,7 @@ module V1
 
       desc '返回某个商铺或者商铺某台桌的订单'
       params do
-        required :shop_id, type: Integer, desc: '商铺的Id'
+        requires :shop_id, type: Integer, desc: '商铺的Id'
         optional :room_id, type: Integer, desc: '如果你需要只看某台桌的订单，请传此参数'
       end
       get '', each_serializer: OrderSerializer, root: 'orders' do
