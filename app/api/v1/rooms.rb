@@ -6,7 +6,7 @@ module V1
         @orders = Order.where(:room_id => params[:id])
       end
 
-      desc '获取某台桌的订单，如果没有就生成'
+      desc '获取某台桌的订单，如果没有就生成，如果是扫描台桌二维码，用这条api'
       params do
         requires :shop_id, type: Integer, desc: '商铺的Id'
       end
