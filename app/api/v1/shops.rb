@@ -31,7 +31,7 @@ module V1
       end
       get 'orders', each_serializer: OrderSerializer, root: 'orders' do
         authenticate!
-        @orders = Order.where("shop_id = ? && status = ?", params[:shop_id], params[:status]).offset(params[:offset]).limit(params[:limit]).order("created_at DESC")
+        @orders = Order.where("shop_id = ? AND status = ?", params[:shop_id], params[:status]).offset(params[:offset]).limit(params[:limit]).order("created_at DESC")
         render @orders
       end
 

@@ -21,14 +21,14 @@
           <a class="nav-link" href="#">关于</a>
         </li>
       </ul>
-      <% if merchant_signed_in? %>
+      <% if admin_signed_in? %>
       <ul class="nav navbar-nav pull-right">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><%= current_merchant.name.blank? ? current_merchant.email : current_merchant.name %></a>
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><%= current_admin.email %></a>
           <div class="dropdown-menu">
             <a class="dropdown-item" href="#">账 号</a>
             <div class="dropdown-divider"></div>
-            <%= link_to "注 销", destroy_merchant_session_path, method: :delete, :class => "dropdown-item" %>
+            <%= link_to "注 销", destroy_admin_session_path, method: :delete, :class => "dropdown-item" %>
           </div>
         </li>
       </ul>
@@ -41,17 +41,11 @@
       <div class="col-sm-3">
         <div class="sidebar">
           <div class="list-group">
-            <a href="<%= cpanel_shops_path %>" class="list-group-item <%= active_controller?("shops") %>">
+            <a href="<%= admin_shops_path %>" class="list-group-item <%= active_controller?("shops") %>">
               店铺管理
             </a>
-            <% if current_merchant.shops.count >= 1 %>
-            <a href="<%= cpanel_orders_path %>" class="list-group-item <%= active_controller?("orders") %>">订单管理</a>
-            <a href="<%= cpanel_products_path %>" class="list-group-item <%= active_controller?("products") %>">菜色管理</a>
-            <a href="<%= cpanel_rooms_path %>" class="list-group-item <%= active_controller?("rooms") %>">座位管理</a>
-            <a href="<%= cpanel_categories_path %>" class="list-group-item <%= active_controller?("categories") %>">分类管理</a>
-            <a href="<%= cpanel_workers_path %>" class="list-group-item <%= active_controller?("workers") %>">员工管理</a>
-            <a href="<%= cpanel_market_products_path %>" class="list-group-item <%= active_controller?("market_products") %>">采购商城</a>
-            <% end %>
+            <a href="<%= admin_orders_path %>" class="list-group-item <%= active_controller?("orders") %>">订单管理</a>
+            <a href="<%= admin_market_products_path %>" class="list-group-item <%= active_controller?("market_products") %>">采购管理</a>
           </div>
         </div>
       </div>

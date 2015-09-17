@@ -13,6 +13,12 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     # return the path based on resource
-    cpanel_home_index_path
+    if resource.is_a?(Merchant)
+      cpanel_home_index_path
+    elsif resource.is_a?(Admin)
+      admin_market_products_path
+    else
+      root_path
+    end
   end
 end

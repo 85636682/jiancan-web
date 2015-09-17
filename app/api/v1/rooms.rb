@@ -9,7 +9,7 @@ module V1
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
       get 'orders', each_serializer: OrderSerializer, root: 'orders' do
-        @orders = Order.where("room_id = ? && status = ?", params[:room_id], params[:status]).offset(params[:offset]).limit(params[:limit]).order("id DESC")
+        @orders = Order.where("room_id = ? AND status = ?", params[:room_id], params[:status]).offset(params[:offset]).limit(params[:limit]).order("id DESC")
       end
 
       desc '获取某台桌的订单，如果没有就生成，如果是扫描台桌二维码，用这条api'

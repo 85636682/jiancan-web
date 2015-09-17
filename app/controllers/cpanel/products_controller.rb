@@ -29,7 +29,7 @@ class Cpanel::ProductsController < CpanelController
     if @product.update(product_params)
       redirect_to cpanel_products_path, :notice => "保存成功！"
     else
-      render :new, :notice => "保存失败！"
+      render :edit, :notice => "保存失败！"
     end
   end
 

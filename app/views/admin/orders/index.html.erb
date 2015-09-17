@@ -1,0 +1,12 @@
+    <table class="table">
+      <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <th scope="row">1</th>
+          <td><%= order.sn %></td>
+          <td>￥<%= order.total_price %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  

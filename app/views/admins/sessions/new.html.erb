@@ -1,0 +1,35 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12" style="height:100px;"></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4">
+      
+    </div>
+    <div class="col-sm-4">
+      <div class="card card-block">
+        <h2>Log in <a href="<%= root_path %>"><em class="pull-right">close</em></a></h2>
+
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <fieldset class="form-group">
+            <%= f.label :email %>
+            <%= f.email_field :email, autofocus: true, class: "form-control" %>
+          </fieldset>
+
+          <fieldset class="form-group">
+            <%= f.label :password %>
+            <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+          </fieldset>
+
+          <%= f.submit "登 录", class: "btn btn-primary btn-lg btn-block" %>
+
+        <% end %>
+
+      </div>
+    </div>
+    <div class="col-sm-4">
+      
+    </div>
+  </div>
+  
+</div>
