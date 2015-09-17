@@ -2,26 +2,37 @@ module V1
   class Rooms < Grape::API
     resource :rooms do
       desc '获取某台桌的所有订单'
-      get ':id/orders', each_serializer: OrderSerializer, root: 'orders' do
-        @orders = Order.where(:room_id => params[:id])
+      params do
+        requires :room_id, type: Integer
+        optional :offset, type: Integer, default: 0
+        optional :limit,  type: Integer, default: 20, values: 1..150
+      end
+      get 'orders', each_serializer: OrderSerializer, root: 'orders' do
+        @orders = Order.where(:room_id => params[:room_id]).offset(params[:offset]).limit(params[:limit]).order("id DESC")
       end
 
       desc '获取某台桌的订单，如果没有就生成，如果是扫描台桌二维码，用这条api'
       params do
-        requires :shop_id, type: Integer, desc: '商铺的Id'
+        requires :room_id, type: Integer, desc: '台桌的Id'
       end
-      get ':id/order', serializer: OrderSerializer, root: 'order' do
-        @order = Order.find_by_room_id(params[:id])
-        if @order.blank?
-          @order = Order.new(:shop_id => params[:shop_id], :room_id => params[:id],
-                             :sn => Order.create_sn(params[:shop_id]), 
-                             :total_price => 0, :takeout => false)
-        end
-        if @order.save
-          render @order
+      get 'order', serializer: OrderSerializer, root: 'order' do
+        @room = Room.find(params[:room_id])
+        if @room.blank?
+          error!({ error: "台桌不存在！" }, 400)
         else
-          error!({ error: @order.errors.full_messages }, 400)
+          @order = Order.find_by_room_id(@room.id)
+          if @order.blank?
+            @order = Order.new(:shop_id => @room.shop.id, :room_id => @room.id,
+                               :sn => Order.create_sn(@room.shop.id), 
+                               :total_price => 0, :takeout => false)
+          end
+          if @order.save
+            render @order
+          else
+            error!({ error: @order.errors.full_messages }, 400)
+          end
         end
+        
       end
     end
   end

@@ -22,24 +22,27 @@ module V1
       params do
         requires :shop_id, type: Integer, desc: '商铺的Id'
         optional :room_id, type: Integer, desc: '如果你需要只看某台桌的订单，请传此参数'
+        optional :offset, type: Integer, default: 0
+        optional :limit,  type: Integer, default: 20, values: 1..150
       end
       get '', each_serializer: OrderSerializer, root: 'orders' do
         authenticate!
         if params[:room_id].blank?
-          @orders = Order.where(:shop_id => params[:shop_id]).order("created_at ASC")
+          @orders = Order.where(:shop_id => params[:shop_id]).offset(params[:offset]).limit(params[:limit]).order("created_at DESC")
         else
-          @orders = Order.where(:room_id => params[:room_id]).order("created_at ASC")
+          @orders = Order.where(:room_id => params[:room_id]).offset(params[:offset]).limit(params[:limit]).order("created_at DESC")
         end
         render @orders
       end
 
       desc '给订单添加商品'
       params do
+        requires :order_id, type: Integer, desc: '订单的id'
         requires :products_quantity, type: Array[Integer], desc: '包含所有添加商品id的整形数组，用商品的id作为key，用所选商品的数据作为value'
       end
-      post ':id/products' do
+      post 'products' do
         authenticate!
-        @order = Order.find(params[:id])
+        @order = Order.find(params[:order_id])
         amount = 0
         params[:products_quantity].each do |key, value|
           product = Product.find(key)

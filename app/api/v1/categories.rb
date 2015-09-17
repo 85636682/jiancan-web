@@ -3,11 +3,12 @@ module V1
     resource :categories do
       desc '获取某店铺下所有商品'
       params do
+        requires :category_id, type: Integer
         optional :offset, type: Integer, default: 0
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
-      get ':id/products', each_serializer: ProductSerializer, root: 'products' do
-        @category = Category.find(params[:id])
+      get 'products', each_serializer: ProductSerializer, root: 'products' do
+        @category = Category.find(params[:category_id])
         @products = @category.products.offset(params[:offset]).limit(params[:limit]).order("id ASC")
       end
 
