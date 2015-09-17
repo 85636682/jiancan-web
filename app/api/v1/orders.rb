@@ -18,23 +18,6 @@ module V1
         end
       end
 
-      desc '返回某个商铺或者商铺某台桌的订单'
-      params do
-        requires :shop_id, type: Integer, desc: '商铺的Id'
-        optional :room_id, type: Integer, desc: '如果你需要只看某台桌的订单，请传此参数'
-        optional :offset, type: Integer, default: 0
-        optional :limit,  type: Integer, default: 20, values: 1..150
-      end
-      get '', each_serializer: OrderSerializer, root: 'orders' do
-        authenticate!
-        if params[:room_id].blank?
-          @orders = Order.where(:shop_id => params[:shop_id]).offset(params[:offset]).limit(params[:limit]).order("created_at DESC")
-        else
-          @orders = Order.where(:room_id => params[:room_id]).offset(params[:offset]).limit(params[:limit]).order("created_at DESC")
-        end
-        render @orders
-      end
-
       desc '给订单添加商品'
       params do
         requires :order_id, type: Integer, desc: '订单的id'

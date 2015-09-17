@@ -1,5 +1,5 @@
 class Order < ActiveRecord::Base
-  extend Enumerize
+  extend Enumerize  #pending 订单消费状态  settled订单结算状态  completed 订单完成支付  canceled订单取消
   enumerize :status,     in: [:pending, :settled, :completed, :canceled], default: :pending
 
   belongs_to :shop
