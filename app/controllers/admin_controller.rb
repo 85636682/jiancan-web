@@ -1,7 +1,6 @@
 class AdminController < ApplicationController
   layout "admin"
 
-  def index
-    
-  end
+  before_action :require_admin
+
 end

@@ -1,7 +1,4 @@
 class CpanelController < ApplicationController
   layout "cpanel"
-
-  def index
-    
-  end
+  before_action :require_merchant
 end

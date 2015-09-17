@@ -6,6 +6,16 @@ class ApplicationController < ActionController::Base
   def require_merchant
     if merchant_signed_in?
       redirect_to cpanel_home_index_path
+    else
+      redirect_to new_merchant_session_path
+    end
+  end
+
+  def require_admin
+    if admin_signed_in?
+      redirect_to admin_market_products_path
+    else
+      redirect_to new_admin_session_path
     end
   end
 
