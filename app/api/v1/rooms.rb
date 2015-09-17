@@ -4,11 +4,12 @@ module V1
       desc '获取某台桌的所有订单'
       params do
         requires :room_id, type: Integer
+        requires :status, type: Symbol, values: [:pending, :settled, :completed, :canceled], default: :pending, desc: "pending 订单消费状态  settled订单结算状态  completed 订单完成支付  canceled订单取消"
         optional :offset, type: Integer, default: 0
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
       get 'orders', each_serializer: OrderSerializer, root: 'orders' do
-        @orders = Order.where(:room_id => params[:room_id]).offset(params[:offset]).limit(params[:limit]).order("id DESC")
+        @orders = Order.where("room_id = ? && status = ?", params[:room_id], params[:status]).offset(params[:offset]).limit(params[:limit]).order("id DESC")
       end
 
       desc '获取某台桌的订单，如果没有就生成，如果是扫描台桌二维码，用这条api'
