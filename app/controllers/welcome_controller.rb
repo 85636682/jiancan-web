@@ -1,6 +1,4 @@
 class WelcomeController < ApplicationController
-  before_filter :require_merchant, except: :api
-  
   def index
   end
 

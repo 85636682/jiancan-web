@@ -4,17 +4,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   def require_merchant
-    if merchant_signed_in?
-      redirect_to cpanel_home_index_path
-    else
+    if not merchant_signed_in?
       redirect_to new_merchant_session_path
     end
   end
 
   def require_admin
-    if admin_signed_in?
-      redirect_to admin_market_products_path
-    else
+    if not admin_signed_in?
       redirect_to new_admin_session_path
     end
   end
