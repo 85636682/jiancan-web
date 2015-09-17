@@ -15,7 +15,7 @@ module V1
           if worker.blank?
             error!({ error: "密码不正确！" }, 401)
           else
-            { msg: "登录成功！", access_token: worker.get_private_token, shop_id: shop_id }
+            { msg: "登录成功！", access_token: worker.get_private_token, shop_id: resource.shops.first.id }
           end
         end
       end
