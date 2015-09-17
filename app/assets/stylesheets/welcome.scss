@@ -1,4 +1,3 @@
-
 .api-doc {
   .route-list {
     padding: 20px 0;
@@ -14,15 +13,15 @@
     margin-top: 15px;
     h5 { 
       color: #333; 
-      border-bottom: 1px solid $gray;
+      border-bottom: 1px solid #ccc;
       margin: 0; margin-bottom: 10px;
       padding: 5px 0 0 0;
       label { 
         font-size: 12px;
-        font-weight: normal; display: inline-block; width: 50px; color: $blackLight; 
+        font-weight: normal; display: inline-block; width: 50px; color: #000; 
       }
     }
-    .content { margin: 0 15px; }
+    .content { margin: 0 15px; width: 100%; }
     .desc {
       h4 { border: 0px; font-size: 13px !important; margin:0; color: #999; }
     }

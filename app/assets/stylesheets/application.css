@@ -13,6 +13,7 @@
  *= require bootstrap
  *= require nprogress
  *= require_self
+ *= require_tree .
  */
 
 .page-home .page-footer {
