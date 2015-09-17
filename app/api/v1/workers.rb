@@ -11,7 +11,7 @@ module V1
         if resource.blank? && (resource.shops.count < 1)
           error!({ error: "此用户和店铺不存在！" }, 400)
         else
-          worker = Worker.where("imei = ? AND shop_id = ?", params[:imei], resource.shops.first.id)
+          worker = Worker.where("imei = ? AND shop_id = ?", params[:imei], resource.shops.first.id).first
           if worker.blank?
             error!({ error: "密码不正确！" }, 401)
           else
