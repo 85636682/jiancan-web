@@ -7,22 +7,18 @@ module V1
         requires :imei,  type: String, desc: "IMEI"
       end
       post 'login' do
-        msg = access_token = ""
         resource = Merchant.find_by_email(params[:email])
         if resource.blank? && (resource.shops.count < 1)
-          msg = "此用户和店铺不存在！"
+          error!({ error: "此用户和店铺不存在！" }, 400)
         else
           worker = Worker.where("imei = ? && shop_id = ?", params[:imei], resource.shops.first.id)
           if worker.blank?
-            msg = "密码不正确！"
+            error!({ error: "密码不正确！" }, 401)
           else
-            msg = "登录成功！"
-            access_token = worker.get_private_token
+            { msg: "登录成功！", access_token: worker.get_private_token, shop_id: shop_id }
           end
         end
-        { msg: msg, access_token: access_token, shop_id: shop_id }
       end
-
     end    
   end
 end
