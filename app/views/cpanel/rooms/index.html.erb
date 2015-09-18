@@ -1,13 +1,7 @@
+<%= render 'navbar' %>
 <% if not current_merchant.shop.blank? %>
   <% if @rooms.count >= 1 %>
     <table class="table">
-      <thead>
-        <tr>
-          <td colspan="4">
-            <a href="<%= new_cpanel_room_path %>" class="btn btn-primary-outline btn-sm">添加</a>
-          </td>
-        </tr>
-      </thead>
       <tbody>
       <% @rooms.each do |room| %>
         <tr>

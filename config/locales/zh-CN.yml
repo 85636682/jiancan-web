@@ -1,0 +1,28 @@
+  activerecord:
+    models:
+      admin: "管理员"
+      order:
+        takeout:
+          true: "外卖"
+          false: "本店"
+  enumerize:
+    user:
+      gender:
+        male: "男"
+        female: "女"
+    message:
+      status:
+        unread: "未读"
+        read: "已读"
+      level:
+        primary: "普通"
+        warning: "重要"
+        danger: "紧急"
+    notification:
+      status:
+        unread: "未读"
+        read: "已读"
+      level:
+        primary: "普通"
+        warning: "重要"
+        danger: "紧急"

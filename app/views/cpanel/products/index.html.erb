@@ -1,13 +1,7 @@
+<%= render 'navbar' %>
 <% if not current_merchant.shop.blank? %>
   <% if @products.count >= 1 %>
     <table class="table">
-      <thead>
-        <tr>
-          <td colspan="6">
-            <a href="<%= new_cpanel_product_path %>" class="btn btn-primary-outline btn-sm">添加</a>
-          </td>
-        </tr>
-      </thead>
       <tbody>
       <% @products.each do |product| %>
         <tr>

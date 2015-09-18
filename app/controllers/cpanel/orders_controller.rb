@@ -15,6 +15,8 @@ class Cpanel::OrdersController < CpanelController
 
   def create
     @order = Order.new(order_params)
+    @order.total_price = 0
+    @order.user_id = 0
     if @order.save!
       redirect_to cpanel_orders_path, :notice => "保存成功！"
     else

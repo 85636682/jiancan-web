@@ -1,0 +1,10 @@
+<div class="navbar navbar-light bg-faded navigation">
+  <a class="nav-link btn btn-primary-outline btn-sm" href="<%= request.referrer %>">
+    <i class="fa fa-arrow-left"></i> 返回
+  </a>
+  <% if action_name == 'index' %>
+  <a class="nav-link btn btn-primary-outline btn-sm pull-right" href="<%= new_cpanel_category_path %>">
+    <i class="fa fa-plus"></i> 添加
+  </a>
+  <% end %>
+</div>
