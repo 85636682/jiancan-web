@@ -1,4 +1,4 @@
-<% if current_merchant.shops.count >= 1 %>
+<% if not current_merchant.shop.blank? %>
   <% if @orders.count >= 1 %>
     <table class="table">
       <tbody>

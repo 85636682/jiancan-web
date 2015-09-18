@@ -3,7 +3,7 @@ class Cpanel::RoomsController < CpanelController
   before_action :set_room, only: [:show, :edit, :update]
 
   def index
-    @rooms = current_merchant.shops.first.rooms
+    @rooms = current_merchant.shop.rooms
   end
 
   def show
@@ -39,7 +39,7 @@ class Cpanel::RoomsController < CpanelController
   private
 
   def set_shop
-    @shop = current_merchant.shops.first
+    @shop = current_merchant.shop
   end
 
   def set_room

@@ -8,14 +8,14 @@ module V1
       end
       post 'login' do
         resource = Merchant.find_by_email(params[:email])
-        if resource.blank? && (resource.shops.count < 1)
+        if resource.blank? && resource.shop.blank?
           error!({ error: "此用户和店铺不存在！" }, 400)
         else
-          worker = Worker.where("imei = ? AND shop_id = ?", params[:imei], resource.shops.first.id).first
+          worker = Worker.where("imei = ? AND shop_id = ?", params[:imei], resource.shop.id).first
           if worker.blank?
             error!({ error: "密码不正确！" }, 401)
           else
-            { msg: "登录成功！", access_token: worker.get_private_token, shop_id: resource.shops.first.id }
+            { msg: "登录成功！", access_token: worker.get_private_token, shop_id: resource.shop.id }
           end
         end
       end

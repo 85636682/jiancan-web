@@ -3,7 +3,7 @@ class Cpanel::OrdersController < CpanelController
   before_action :set_order, only: [:show, :edit, :update]
 
   def index
-    @orders = current_merchant.shops.first.orders
+    @orders = current_merchant.shop.orders
   end
 
   def show
@@ -34,7 +34,7 @@ class Cpanel::OrdersController < CpanelController
   private
 
   def set_shop
-    @shop = current_merchant.shops.first
+    @shop = current_merchant.shop
   end
 
   def set_order

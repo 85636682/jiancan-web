@@ -1,6 +1,24 @@
 Rails.application.routes.draw do
 
   namespace :admin do
+  get 'market_categories/index'
+  end
+
+  namespace :admin do
+  get 'market_categories/new'
+  end
+
+  namespace :admin do
+  get 'market_categories/edit'
+  end
+
+  get 'market_categories/index'
+
+  get 'market_categories/new'
+
+  get 'market_categories/edit'
+
+  namespace :admin do
   get 'orders/index'
   end
 

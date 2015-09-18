@@ -3,7 +3,7 @@ class Cpanel::WorkersController < CpanelController
   before_action :set_worker, only: [:edit, :destroy]
 
   def index
-    @workers = current_merchant.shops.first.workers
+    @workers = current_merchant.shop.workers
   end
 
   def new
@@ -41,7 +41,7 @@ class Cpanel::WorkersController < CpanelController
   private
 
   def set_shop
-    @shop = current_merchant.shops.first
+    @shop = current_merchant.shop
   end
 
   def set_worker

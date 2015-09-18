@@ -2,7 +2,7 @@ class Cpanel::ShopsController < CpanelController
   before_action :set_shop, only: [:show, :edit, :update]
 
   def index
-    @shops = current_merchant.shops
+    @shop = current_merchant.shop
   end
 
   def show
@@ -13,7 +13,8 @@ class Cpanel::ShopsController < CpanelController
   end
 
   def create
-    @shop = current_merchant.shops.build(shop_params)
+    @shop = Shop.new(shop_params)
+    @shop.merchant_id = current_merchant.id
     if @shop.save!
       redirect_to cpanel_shops_path, :notice => "保存成功！"
     else

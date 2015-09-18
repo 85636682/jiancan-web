@@ -3,7 +3,7 @@ class Cpanel::CategoriesController < CpanelController
   before_action :set_category, only: [:show, :edit, :update]
 
   def index
-    @categories = current_merchant.shops.first.categories
+    @categories = current_merchant.shop.categories
   end
 
   def show
@@ -39,7 +39,7 @@ class Cpanel::CategoriesController < CpanelController
   private
 
   def set_shop
-    @shop = current_merchant.shops.first
+    @shop = current_merchant.shop
   end
 
   def set_category
