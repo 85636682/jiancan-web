@@ -4,11 +4,12 @@ module V1
 
       desc '获取某店铺下所有分类'
       params do
+        requires :shop_id, type: Integer
         optional :offset, type: Integer, default: 0
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
       get 'categories', each_serializer: CategorySerializer, root: 'categories' do
-        @shop = Shop.find(params[:id])
+        @shop = Shop.find(params[:shop_id])
         @categories = @shop.categories.offset(params[:offset]).limit(params[:limit]).order("id ASC")
       end
 
