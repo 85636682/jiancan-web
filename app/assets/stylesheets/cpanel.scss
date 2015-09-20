@@ -13,33 +13,46 @@
  *= require bootstrap
  *= require nprogress
  *= require font-awesome-plug
+ *= reuqire pnotify.custom.min
  *= require_self
  */
+
+@import "vars";
 
 body {
   background: #E7EAEC;
   font-family: "RobotoDraft", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.cpanel-page .navbar {
-  height: 80px;
-  padding-top: 20px;
-  border-bottom: solid 1px #ccc;
-  border-radius: 0px;
-  background-color: #FFF; 
+.header {
+  .navbar {
+    height: 80px;
+    padding-top: 20px;
+    border-bottom: solid 1px #ccc;
+    border-radius: 0px;
+    background-color: #FFF;
+
+    .notification-count {
+      .count { margin-left: 4px; display: none; font-size: 12px;}
+      .new {
+        color: $redLight !important;
+        .count { display: inline; }
+      }
+    }
+  }
 }
 
 .right-content {
   background-color: #FFF;
-}
 
-.right-content .navbar {
-  height: 60px;
-  padding-top: 10px;
-  border-radius: 0px;
-  background-color: #FFF; 
-}
+  .navbar {
+    height: 60px;
+    padding-top: 10px;
+    border-radius: 0px;
+    background-color: #FFF; 
+  }
 
-.right-content .content-form {
-  margin-top: 20px;
+  .content-form {
+    margin-top: 20px;
+  }
 }

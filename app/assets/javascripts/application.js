@@ -14,6 +14,7 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require nprogress
+//= require pnotify.custom.min
 //= require_tree .
 //= require turbolinks
 

@@ -1,1 +1,5 @@
 <%= render 'navbar' %>
+<% if @order.blank? %>
+  此订单已经失效，<a href="<%= cpanel_orders_path %>">返回查看其他订单？</a>
+<% else %>
+<% end %>

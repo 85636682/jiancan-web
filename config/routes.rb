@@ -1,43 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :admin do
-  get 'market_categories/index'
-  end
-
-  namespace :admin do
-  get 'market_categories/new'
-  end
-
-  namespace :admin do
-  get 'market_categories/edit'
-  end
-
-  get 'market_categories/index'
-
-  get 'market_categories/new'
-
-  get 'market_categories/edit'
-
-  namespace :admin do
-  get 'orders/index'
-  end
-
-  namespace :admin do
-  get 'orders/show'
-  end
-
-  namespace :admin do
-  get 'orders/edit'
-  end
-
-  namespace :admin do
-  get 'orders/update'
-  end
-
-  namespace :admin do
-  get 'orders/destroy'
-  end
-
   namespace :cpanel do
     get 'home/index'
     resources :shops, expect: :destroy
@@ -47,6 +9,11 @@ Rails.application.routes.draw do
     resources :categories
     resources :workers
     resources :market_products, only: [:index, :show]
+    resources :notifications, only: [:index, :destroy] do
+      member do
+        get :read
+      end
+    end
   end
 
   devise_for :merchants, controllers: {
@@ -57,6 +24,7 @@ Rails.application.routes.draw do
     resources :market_products
     resources :shops
     resources :orders
+    resources :market_categories
   end
 
   devise_for :admins, controllers: {

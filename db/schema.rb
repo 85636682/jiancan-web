@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150918004004) do
+ActiveRecord::Schema.define(version: 20150919133753) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,17 @@ ActiveRecord::Schema.define(version: 20150918004004) do
 
   add_index "merchants", ["email"], name: "index_merchants_on_email", unique: true, using: :btree
   add_index "merchants", ["reset_password_token"], name: "index_merchants_on_reset_password_token", unique: true, using: :btree
+
+  create_table "notifications", force: :cascade do |t|
+    t.string   "title"
+    t.string   "content"
+    t.string   "content_path"
+    t.integer  "merchant_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.boolean  "read"
+    t.integer  "order_id"
+  end
 
   create_table "order_products", force: :cascade do |t|
     t.integer  "order_id"

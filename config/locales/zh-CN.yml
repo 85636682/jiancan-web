@@ -1,6 +1,12 @@
+"zh-CN":
   activerecord:
     models:
       admin: "管理员"
+      order: "订单"
+    attributes:
+      admin:
+        email: "邮箱"
+        password: "密码"
       order:
         takeout:
           true: "外卖"

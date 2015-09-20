@@ -10,6 +10,13 @@ gem 'rails-deprecated_sanitizer'
 
 gem 'responders', '~> 2.0'
 
+gem 'redis', '~> 3.2.1'
+gem 'hiredis', '~> 0.6.0'
+# Redis 命名空间
+gem 'redis-namespace', '~> 1.5.1'
+# 将一些数据存放入 Redis
+gem 'redis-objects', '1.1.0'
+
 # 用户系统
 gem 'devise'
 gem 'devise-encryptable'
@@ -33,6 +40,9 @@ gem "select2-rails"
 
 # 短信
 gem 'smart_sms'
+
+# 实时通知
+gem 'message_bus'
 
 # 枚举
 gem 'enumerize'

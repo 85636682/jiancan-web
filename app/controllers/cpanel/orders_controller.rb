@@ -1,6 +1,6 @@
 class Cpanel::OrdersController < CpanelController
   before_action :set_shop, only: [:new]
-  before_action :set_order, only: [:show, :edit, :update]
+  before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   def index
     @orders = current_merchant.shop.orders
@@ -15,6 +15,7 @@ class Cpanel::OrdersController < CpanelController
 
   def create
     @order = Order.new(order_params)
+    @order.sn = Order.create_sn(params[:order][:shop_id])
     @order.total_price = 0
     @order.user_id = 0
     if @order.save!
@@ -31,6 +32,11 @@ class Cpanel::OrdersController < CpanelController
   end
 
   def destroy
+    if @order.destroy
+      redirect_to cpanel_orders_path, :notice => '删除成功！'
+    else
+      redirect_to cpanel_orders_path, :notice => '删除失败！' 
+    end
   end
 
   private
