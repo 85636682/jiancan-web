@@ -28,12 +28,11 @@ module V1
                                :sn => Order.create_sn(@room.shop.id), 
                                :total_price => 0, :takeout => false)
             @order.worker_id = current_worker.id
+            if not @order.save
+              error!({ error: @order.errors.full_messages }, 400)
+            end
           end
-          if @order.save
-            render @order
-          else
-            error!({ error: @order.errors.full_messages }, 400)
-          end
+          render @order
         end
         
       end
