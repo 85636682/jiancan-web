@@ -20,7 +20,7 @@
   <div class="form-group row">
     <label for="inputAvatar" class="col-sm-2 form-control-label">店铺头像</label>
     <div class="col-sm-1">
-      <%= image_tag(@market_product.avatar.url("80x80"), :alt=>"店铺头像", :class=>"img-circle", :width => "40", :height => "40") %>
+      <%= image_tag(@market_product.avatar.url("80x80"), :alt=>"店铺头像", :class=>"img-circle", :width => "40", :height => "40", :id => "show_avatar") %>
     </div>
     <div class="col-sm-9">
       <label class="file">
@@ -48,3 +48,17 @@
   </div>
   
 <% end %>
+
+  <script>
+    $("#market_product_avatar").change(function(){
+      if (this.files && this.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#show_avatar').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(this.files[0]);
+      }
+    });
+  </script>
