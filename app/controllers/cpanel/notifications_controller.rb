@@ -1,6 +1,6 @@
 class Cpanel::NotificationsController < CpanelController
   def index
-    @notifications = current_merchant.notifications.order("created_at DESC")
+    @notifications = current_merchant.notifications.order("created_at DESC").paginate(:page => params[:page], :per_page => 20)
   end
 
   def read

@@ -14,6 +14,7 @@
       <% end %>
       </tbody>
     </table>
+    <%= will_paginate @categories, renderer: BootstrapPagination::Rails %>
   <% else %>
     <p>
       还未添加任何分类，<a href="<%= new_cpanel_category_path %>">现在添加？</a>

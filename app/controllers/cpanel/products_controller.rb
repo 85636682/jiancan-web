@@ -3,7 +3,7 @@ class Cpanel::ProductsController < CpanelController
   before_action :set_product, only: [:show, :edit, :update]
 
   def index
-    @products = current_merchant.shop.products
+    @products = current_merchant.shop.products.paginate(:page => params[:page], :per_page => 20)
   end
 
   def show

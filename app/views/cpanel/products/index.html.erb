@@ -19,6 +19,7 @@
       <% end %>
       </tbody>
     </table>
+    <%= will_paginate @products, renderer: BootstrapPagination::Rails %>
   <% else %>
     <p>
       还未添加任何菜色，<a href="<%= new_cpanel_product_path %>">现在添加？</a>

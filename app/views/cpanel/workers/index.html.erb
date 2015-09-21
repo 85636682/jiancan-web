@@ -16,6 +16,7 @@
       <% end %>
       </tbody>
     </table>
+    <%= will_paginate @workers, renderer: BootstrapPagination::Rails %>
   <% else %>
     <p>
       还未添加任何员工，<a href="<%= new_cpanel_worker_path %>">现在添加？</a>

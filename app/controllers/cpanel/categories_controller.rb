@@ -3,7 +3,7 @@ class Cpanel::CategoriesController < CpanelController
   before_action :set_category, only: [:show, :edit, :update]
 
   def index
-    @categories = current_merchant.shop.categories
+    @categories = current_merchant.shop.categories.paginate(:page => params[:page], :per_page => 10)
   end
 
   def show

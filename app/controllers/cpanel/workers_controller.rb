@@ -3,7 +3,7 @@ class Cpanel::WorkersController < CpanelController
   before_action :set_worker, only: [:edit, :destroy]
 
   def index
-    @workers = current_merchant.shop.workers
+    @workers = current_merchant.shop.workers.paginate(:page => params[:page], :per_page => 10)
   end
 
   def new

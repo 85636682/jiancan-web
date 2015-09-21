@@ -18,6 +18,7 @@
       <% end %>
       </tbody>
     </table>
+    <%= will_paginate @orders, renderer: BootstrapPagination::Rails %>
   <% else %>
     <p>
       还未生成任何订单，<a href="<%= new_cpanel_order_path %>">现在添加？</a>

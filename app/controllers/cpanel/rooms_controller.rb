@@ -3,7 +3,7 @@ class Cpanel::RoomsController < CpanelController
   before_action :set_room, only: [:show, :edit, :update]
 
   def index
-    @rooms = current_merchant.shop.rooms
+    @rooms = current_merchant.shop.rooms.paginate(:page => params[:page], :per_page => 10)
   end
 
   def show

@@ -15,6 +15,7 @@
       <% end %>
       </tbody>
     </table>
+    <%= will_paginate @rooms, renderer: BootstrapPagination::Rails %>
   <% else %>
     <p>
       还未添加任何房台，<a href="<%= new_cpanel_room_path %>">现在添加？</a>
