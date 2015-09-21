@@ -1,5 +1,5 @@
 class Admin::MarketCategoriesController < AdminController
-  before_action :set_market_category, only: [:show, :edit, :update]
+  before_action :set_market_category, only: [:show, :edit, :update, :destroy]
 
   def index
     @market_categories = MarketCategory.all
@@ -15,7 +15,7 @@ class Admin::MarketCategoriesController < AdminController
   def create
     @market_category = MarketCategory.new(market_category_params)
     if @market_category.save!
-      redirect_to cpanel_market_categories_path, :notice => "保存成功！"
+      redirect_to admin_market_categories_path, :notice => "保存成功！"
     else
       render :new, :notice => "保存失败！"
     end
@@ -26,13 +26,18 @@ class Admin::MarketCategoriesController < AdminController
 
   def update
     if @market_category.update(market_category_params)
-      redirect_to cpanel_market_categories_path, :notice => "保存成功！"
+      redirect_to admin_market_categories_path, :notice => "保存成功！"
     else
       render :new, :notice => "保存失败！"
     end
   end
 
   def destroy
+    if @market_category.destroy
+      redirect_to admin_market_categories_path, :notice => "删除成功！"
+    else
+      redirect_to admin_market_categories_path, :notice => "删除失败！"
+    end
   end
 
   private

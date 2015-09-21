@@ -43,10 +43,10 @@ class Admin::MarketProductsController < AdminController
   private
 
   def set_market_product
-    @market_product = MarketProduct.find(param[:id])
+    @market_product = MarketProduct.find(params[:id])
   end
 
   def market_product_params
-    params.require(:market_product).permit(:name, :price, :avatar, :shop_id, :category_id)
+    params.require(:market_product).permit(:name, :price, :avatar, :market_category_id)
   end
 end

@@ -1,13 +1,6 @@
-
+<%= render 'navbar' %>
   <% if @market_products.count >= 1 %>
     <table class="table">
-      <thead>
-        <tr>
-          <td colspan="6">
-            <a href="<%= new_cpanel_product_path %>" class="btn btn-primary-outline btn-sm">添加</a>
-          </td>
-        </tr>
-      </thead>
       <tbody>
       <% @market_products.each do |product| %>
         <tr>
@@ -17,8 +10,9 @@
           </td>
           <td><%= product.name %></td>
           <td>￥<%= product.price %></td>
+          <td><%= product.market_category.name %></td>
           <td>
-            <a href="<%= edit_admin_product_path(product) %>" class="btn btn-primary-outline btn-sm">修改</a>
+            <a href="<%= edit_admin_market_product_path(product) %>" class="btn btn-primary-outline btn-sm">修改</a>
           </td>
         </tr>
       <% end %>

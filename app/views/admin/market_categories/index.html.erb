@@ -1,20 +1,14 @@
-
+<%= render 'navbar' %>
   <% if @market_categories.count >= 1 %>
     <table class="table">
-      <thead>
-        <tr>
-          <td colspan="4">
-            <a href="<%= new_admin_market_category_path %>" class="btn btn-primary-outline btn-sm">添加</a>
-          </td>
-        </tr>
-      </thead>
       <tbody>
       <% @market_categories.each do |market_category| %>
         <tr>
-          <td scope="row">1</td>
+          <td scope="row"><%= market_category.id %></td>
           <td><%= market_category.name %></td>
           <td>
             <a href="<%= edit_admin_market_category_path(market_category) %>" class="btn btn-primary-outline btn-sm">修改</a>
+            <%= link_to "删除", admin_market_category_path(market_category), :class => "btn btn-primary-outline btn-sm", :method => :delete %>
           </td>
         </tr>
       <% end %>
