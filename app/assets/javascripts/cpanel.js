@@ -30,8 +30,9 @@ $(document).on('page:change',  function() {
   MessageBus.start(); // call once at startup
   // how often do you want the callback to fire in ms
   MessageBus.callbackInterval = 500;
-  MessageBus.subscribe("/notifications_count/#{App.access_token}", function(data){
+  MessageBus.subscribe("/notifications_count/" + App.access_token, function(data){
     // data shipped from server
+    alert("start2");
     var div, link, new_title, span, url;
     span = $(".notification-count span");
     link = $(".notification-count a");
