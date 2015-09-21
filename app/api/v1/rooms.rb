@@ -17,6 +17,7 @@ module V1
         requires :room_id, type: Integer, desc: '台桌的Id'
       end
       get 'order', serializer: OrderSerializer, root: 'order' do
+        authenticate!
         @room = Room.find(params[:room_id])
         if @room.blank?
           error!({ error: "台桌不存在！" }, 400)
@@ -26,6 +27,7 @@ module V1
             @order = Order.new(:shop_id => @room.shop.id, :room_id => @room.id,
                                :sn => Order.create_sn(@room.shop.id), 
                                :total_price => 0, :takeout => false)
+            @order.worker_id = current_worker.id
           end
           if @order.save
             render @order
