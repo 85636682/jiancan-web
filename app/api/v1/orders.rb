@@ -11,7 +11,7 @@ module V1
         @order = Order.new(:shop_id => params[:shop_id], :room_id => room_id,
                            :sn => Order.create_sn(params[:shop_id]), 
                            :total_price => 0, :takeout => false)
-        @order.worker_id = @current_worker.id
+        @order.worker_id = current_worker.id
         if @order.save
           render @order
         else
