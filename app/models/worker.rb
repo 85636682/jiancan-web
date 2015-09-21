@@ -1,5 +1,6 @@
 class Worker < ActiveRecord::Base
   belongs_to :shop
+  has_many :orders
 
   # 重新生成 Private Token
   def update_private_token
