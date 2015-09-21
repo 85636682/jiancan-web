@@ -9,7 +9,7 @@
           <td>￥<%= order.total_price %></td>
           <td><%= order.takeout %></td>
           <td><%= order.room.name %></td>
-          <td><%= order.worker_id %><%= order.worker.name if not order.worker.blank? %></td>
+          <td><%= order.worker.name if not order.worker.blank? %></td>
           <td>
             <a href="<%= edit_cpanel_order_path(order) %>" class="btn btn-primary-outline btn-sm">修改</a>
             <%= link_to "删除", cpanel_order_path(order), :class => "btn btn-primary-outline btn-sm", :method => :delete %>
