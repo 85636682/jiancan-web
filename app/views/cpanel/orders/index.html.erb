@@ -7,7 +7,7 @@
         <tr>
           <th scope="row"><%= order.sn %></th>
           <td>￥<%= order.total_price %></td>
-          <td><%= order.takeout %></td>
+          <td><%= order.takeout ? "外卖" : "本店" %></td>
           <td><%= order.room.name %></td>
           <td><%= order.worker.name if not order.worker.blank? %></td>
           <td>
