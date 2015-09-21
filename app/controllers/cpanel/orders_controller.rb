@@ -50,6 +50,6 @@ class Cpanel::OrdersController < CpanelController
   end
 
   def order_params
-    params.require(:order).permit(:sn, :total_price, :status, :takeout, :user_id, :room_id, :shop_id)
+    params.require(:order).permit(:sn, :total_price, :status, :takeout, :user_id, :room_id, :shop_id, :worker_id)
   end
 end
