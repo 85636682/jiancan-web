@@ -5,7 +5,7 @@ class Merchant < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_one :shop
-  has_many :notifications
+  has_many :notifications, :dependent => :destroy
 
   # 重新生成 Private Token
   def update_private_token

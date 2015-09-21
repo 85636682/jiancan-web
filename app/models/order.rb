@@ -8,7 +8,7 @@ class Order < ActiveRecord::Base
   belongs_to :worker
   has_many :order_products
   has_many :products, :through => :order_products, :dependent => :destroy
-  has_many :notifications
+  has_many :notifications, :dependent => :destroy
 
   def self.create_sn(shop_id)
     DateTime.parse(Time.now.iso8601).strftime('%Y%m%d%H%M') + sprintf('%05d', shop_id) + rand(999).to_s
