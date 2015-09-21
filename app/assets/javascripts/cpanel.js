@@ -48,7 +48,8 @@ $(document).on('page:change',  function() {
       $(function(){
         new PNotify({
             title: data.title,
-            text: data.content
+            text: data.content,
+            addclass: "stack-topleft"
         });
       });
     } else {
