@@ -5,7 +5,7 @@
       <tbody>
       <% @workers.each do |worker| %>
         <tr>
-          <th scope="row">1</th>
+          <th scope="row"><%= worker.id %></th>
           <td><%= worker.name %></td>
           <td><%= worker.imei %></td>
           <td>
