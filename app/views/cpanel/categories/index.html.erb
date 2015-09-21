@@ -5,7 +5,7 @@
       <tbody>
       <% @categories.each do |category| %>
         <tr>
-          <td scope="row">1</td>
+          <td scope="row"><%= category.id %></td>
           <td><%= category.name %></td>
           <td>
             <a href="<%= edit_cpanel_category_path(category) %>" class="btn btn-primary-outline btn-sm">修改</a>

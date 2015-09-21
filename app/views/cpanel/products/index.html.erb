@@ -5,7 +5,7 @@
       <tbody>
       <% @products.each do |product| %>
         <tr>
-          <th scope="row">1</th>
+          <th scope="row"><%= product.id %></th>
           <td>
             <%= image_tag(product.avatar.url("80x80"), :alt=>"商品头像", :class=>"img-circle", :width => "40", :height => "40") %>
           </td>

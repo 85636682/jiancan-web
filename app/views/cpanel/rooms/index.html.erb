@@ -5,7 +5,7 @@
       <tbody>
       <% @rooms.each do |room| %>
         <tr>
-          <th scope="row">1</th>
+          <th scope="row"><%= room.id %></th>
           <td><%= room.name %></td>
           <td><%= room.seat %> 人</td>
           <td>
