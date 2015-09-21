@@ -13,6 +13,16 @@ class Cpanel::NotificationsController < CpanelController
     end
   end
 
+  def read_all
+    current_merchant.notifications.where(:read => false).update_all(:read => true)
+    redirect_to cpanel_notifications_path, :notice => '已经清空信箱！'
+  end
+
+  def clear
+    current_merchant.notifications.delete_all
+    redirect_to cpanel_notifications_path, :notice => '已经清空信箱！'
+  end
+
   def destroy
     @notification = Notification.find(params[:id])
     if @notification.destroy

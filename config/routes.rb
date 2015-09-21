@@ -13,6 +13,10 @@ Rails.application.routes.draw do
       member do
         get :read
       end
+      collection do
+        get :read_all
+        get :clear
+      end
     end
   end
 
