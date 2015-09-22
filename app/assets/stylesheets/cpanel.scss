@@ -32,7 +32,7 @@ body {
     border-radius: 0px;
     background-color: #FFF;
 
-    .notification-count {
+    .cart-count, .notification-count {
       .count { margin-left: 4px; display: none; font-size: 12px;}
       .new {
         color: $redLight !important;
