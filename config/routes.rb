@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       end
     end
     resources :cart, only: [:index, :create, :update, :destroy]
+    resources :market_orders, only: [:index, :show, :create, :destroy]
   end
 
   devise_for :merchants, controllers: {

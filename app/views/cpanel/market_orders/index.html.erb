@@ -1,0 +1,21 @@
+<%= render 'navbar' %>
+<% if not current_merchant.shop.blank? %>
+  <table class="table">
+    <tbody>
+    <% @market_orders.each do |order| %>
+      <tr>
+        <th scope="row"><%= order.sn %></th>
+        <td>￥<%= order.total_price %></td>
+        <td>
+          <%= link_to "删除", cpanel_market_order_path(order), :class => "btn btn-primary-outline btn-sm", :method => :delete %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @market_orders, renderer: BootstrapPagination::Rails %>
+<% else %>
+<p>
+  还未拥有店铺，<a href="<%= new_cpanel_shop_path %>">现在创建？</a>
+</p>
+<% end %>
