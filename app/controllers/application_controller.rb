@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   helper_method :unread_notify_count
+  helper_method :cart_market_product_count
   
   def require_merchant
     if not merchant_signed_in?
@@ -32,5 +33,10 @@ class ApplicationController < ActionController::Base
   def unread_notify_count
     return 0 if current_merchant.blank?
     @unread_notify_count ||= current_merchant.notifications.unread.count
+  end
+
+  def cart_market_product_count
+    return 0 if current_merchant.blank?
+    @cart_market_product_count ||= current_merchant.market_order_market_products.where(:market_order_id => nil).count
   end
 end

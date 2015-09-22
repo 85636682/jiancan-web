@@ -25,10 +25,10 @@
         <% if merchant_signed_in? %>
         <ul class="nav navbar-nav pull-right">
           <li class="nav-item cart-count">
-            <a href="<%= cpanel_cart_index_path %>" class="nav-link <%= 'new' if current_merchant.market_order_market_products.count > 0 %>">
+            <a href="<%= cpanel_cart_index_path %>" class="nav-link <%= 'new' if cart_market_product_count > 0 %>">
               <i class="fa fa-shopping-cart"></i>
-              <span class="count" style="<%= 'display:inline;' if current_merchant.market_order_market_products.count > 0 %>">
-                <%= current_merchant.market_order_market_products.count %>
+              <span class="count" style="<%= 'display:inline;' if cart_market_product_count > 0 %>">
+                <%= cart_market_product_count %>
               </span>
             </a>
           </li>
