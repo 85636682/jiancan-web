@@ -1,0 +1,26 @@
+<%= render 'navbar' %>
+<table class="table">
+  <tbody>
+    <tr>
+      <td>
+        订单号：<%= @market_order.sn %>
+      </td>
+      <td>总额：￥<%= @market_order.total_price %></td>
+      <td>
+        <%= link_to "删除", cpanel_market_order_path(@market_order), :class => "btn btn-primary-outline btn-sm", :method => :delete %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <ul>
+          <% @market_order.market_order_market_products.each do |market_order_market_product| %>
+          <li>
+            <%= image_tag(market_order_market_product.market_product.avatar.url("80x80"), :alt=>"商品头像", :class=>"img-circle", :width => "40", :height => "40") %>
+            <%= market_order_market_product.market_product.name %>
+            ¥ <%= market_order_market_product.market_product.price %> X <%= market_order_market_product.count %></li>
+          <% end %>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>

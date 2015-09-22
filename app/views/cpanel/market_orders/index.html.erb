@@ -4,7 +4,9 @@
     <tbody>
     <% @market_orders.each do |order| %>
       <tr>
-        <th scope="row"><%= order.sn %></th>
+        <th scope="row">
+          <a href="<%= cpanel_market_order_path(order) %>"><%= order.sn %></a>
+        </th>
         <td>￥<%= order.total_price %></td>
         <td>
           <%= link_to "删除", cpanel_market_order_path(order), :class => "btn btn-primary-outline btn-sm", :method => :delete %>
