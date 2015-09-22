@@ -24,6 +24,12 @@
         </ul>
         <% if merchant_signed_in? %>
         <ul class="nav navbar-nav pull-right">
+          <li class="nav-item cart-count">
+            <a href="<%= cpanel_cart_index_path %>" class="nav-link">
+              <i class="fa fa-shopping-cart"></i>
+              <span class="count"></span>
+            </a>
+          </li>
           <li class="nav-item notification-count">
             <a href="<%= cpanel_notifications_path %>" class="nav-link <%= 'new' if unread_notify_count > 0 %>">
               <i class="fa fa-bell-o"></i>

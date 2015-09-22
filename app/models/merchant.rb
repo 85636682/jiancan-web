@@ -6,6 +6,7 @@ class Merchant < ActiveRecord::Base
 
   has_one :shop
   has_many :notifications, :dependent => :destroy
+  has_many :market_order_market_products
 
   # 重新生成 Private Token
   def update_private_token

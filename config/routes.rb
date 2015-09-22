@@ -18,6 +18,7 @@ Rails.application.routes.draw do
         get :clear
       end
     end
+    resources :cart, only: [:index, :create, :update, :destroy]
   end
 
   devise_for :merchants, controllers: {

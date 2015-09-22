@@ -10,10 +10,14 @@
           </td>
           <td><%= product.name %></td>
           <td>￥<%= product.price %></td>
+          <td>
+            <%= link_to "购买", cpanel_cart_index_path(:market_product_id => product.id), :class => "btn btn-primary-outline btn-sm", :method => :post %>
+          </td>
         </tr>
       <% end %>
       </tbody>
     </table>
+    <%= will_paginate @market_products, renderer: BootstrapPagination::Rails %>
 <% else %>
 <p>
   还未拥有店铺，<a href="<%= new_cpanel_shop_path %>">现在创建？</a>
