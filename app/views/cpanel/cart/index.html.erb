@@ -4,13 +4,18 @@
       <tbody>
       <% @market_order_market_products.each do |market_order_market_product| %>
         <tr>
-          <th scope="row">1</th>
           <td>
             <%= image_tag(market_order_market_product.market_product.avatar.url("80x80"), :alt=>"商品头像", :class=>"img-circle", :width => "40", :height => "40") %>
           </td>
           <td><%= market_order_market_product.market_product.name %></td>
           <td>￥<%= market_order_market_product.market_product.price %></td>
-          <td><%= market_order_market_product.count %></td>
+          <td width="150">
+            <div class="input-group">
+              <%= link_to "—", cpanel_cart_path(market_order_market_product, :count => market_order_market_product.count - 1), :class => "input-group-addon", :method => :put %>
+              <input type="text" class="form-control" value="<%= market_order_market_product.count %>">
+              <%= link_to "＋", cpanel_cart_path(market_order_market_product, :count => market_order_market_product.count + 1), :class => "input-group-addon", :method => :put %>
+            </div>
+          </td>
           <td>
             <%= link_to "删除", cpanel_cart_path(market_order_market_product), :class => "btn btn-primary-outline btn-sm", :method => :delete %>
           </td>

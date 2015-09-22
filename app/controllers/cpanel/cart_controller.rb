@@ -2,7 +2,7 @@ class Cpanel::CartController < CpanelController
   before_action :set_market_order_market_product, only: [:update, :destroy]
 
   def index
-    @market_order_market_products = current_merchant.market_order_market_products.paginate(:page => params[:page], :per_page => 10)
+    @market_order_market_products = current_merchant.market_order_market_products.order("created_at DESC").paginate(:page => params[:page], :per_page => 10)
   end
 
   def create
