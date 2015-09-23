@@ -1,6 +1,14 @@
 <%= render 'navbar' %>
 <% if not current_merchant.shop.blank? %>
     <table class="table">
+      <thead>
+        <tr>
+          <th>图片</th>
+          <th>名称 <i class="fa fa-sort"></i></th>
+          <th>价格 <i class="fa fa-sort"></i></th>
+          <th>操作</th>
+        </tr>
+      </thead>
       <tbody>
       <% @market_products.each do |product| %>
         <tr>

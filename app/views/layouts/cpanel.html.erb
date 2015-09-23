@@ -61,15 +61,27 @@
         <div class="sidebar">
           <div class="list-group">
             <a href="<%= cpanel_shops_path %>" class="list-group-item <%= active_controller?("shops") %>">
-              店铺管理
+              <i class="fa fa-sun-o"></i> 店铺管理
             </a>
             <% if not current_merchant.shop.blank? %>
-            <a href="<%= cpanel_orders_path %>" class="list-group-item <%= active_controller?("orders") %>">订单管理</a>
-            <a href="<%= cpanel_products_path %>" class="list-group-item <%= active_controller?("products") %>">菜色管理</a>
-            <a href="<%= cpanel_rooms_path %>" class="list-group-item <%= active_controller?("rooms") %>">座位管理</a>
-            <a href="<%= cpanel_categories_path %>" class="list-group-item <%= active_controller?("categories") %>">分类管理</a>
-            <a href="<%= cpanel_workers_path %>" class="list-group-item <%= active_controller?("workers") %>">员工管理</a>
-            <a href="<%= cpanel_market_products_path %>" class="list-group-item <%= active_controller?("market_products") %>">采购商城</a>
+            <a href="<%= cpanel_orders_path %>" class="list-group-item <%= active_controller?("orders") %>">
+              <i class="fa fa-bars"></i> 订单管理
+            </a>
+            <a href="<%= cpanel_products_path %>" class="list-group-item <%= active_controller?("products") %>">
+              <i class="fa fa-cutlery"></i> 菜色管理
+            </a>
+            <a href="<%= cpanel_rooms_path %>" class="list-group-item <%= active_controller?("rooms") %>">
+              <i class="fa fa-cube"></i> 座位管理
+            </a>
+            <a href="<%= cpanel_categories_path %>" class="list-group-item <%= active_controller?("categories") %>">
+              <i class="fa fa-sitemap"></i> 分类管理
+            </a>
+            <a href="<%= cpanel_workers_path %>" class="list-group-item <%= active_controller?("workers") %>">
+              <i class="fa fa-user"></i> 员工管理
+            </a>
+            <a href="<%= cpanel_market_products_path %>" class="list-group-item <%= active_controller?("market_products") %>">
+              <i class="fa fa-shopping-cart"></i> 采购商城
+            </a>
             <% end %>
           </div>
         </div>

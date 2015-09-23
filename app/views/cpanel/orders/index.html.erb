@@ -2,10 +2,20 @@
 <% if not current_merchant.shop.blank? %>
   <% if @orders.count >= 1 %>
     <table class="table">
+      <thead>
+        <tr>
+          <th>订单编号 <i class="fa fa-sort"></i></th>
+          <th>总额 <i class="fa fa-sort"></i></th>
+          <th>是否外卖 <i class="fa fa-sort"></i></th>
+          <th>台号 <i class="fa fa-sort"></i></th>
+          <th>员工 <i class="fa fa-sort"></i></th>
+          <th>操作</th>
+        </tr>
+      </thead>
       <tbody>
       <% @orders.each do |order| %>
         <tr>
-          <th scope="row"><%= order.sn %></th>
+          <td><%= order.sn %></td>
           <td>￥<%= order.total_price %></td>
           <td><%= order.takeout ? "外卖" : "本店" %></td>
           <td><%= order.room.name %></td>

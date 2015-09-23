@@ -20,7 +20,7 @@
 @import "vars";
 
 body {
-  background: #E7EAEC;
+  background: #f2f9fe;;
   font-family: "RobotoDraft", "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
@@ -42,6 +42,17 @@ body {
   }
 }
 
+.sidebar {
+  .list-group {
+    a, a:hover {
+      color: #036ebe;
+    }
+    a.active, a.active:hover {
+      color: #ffffff;
+    }
+  }
+}
+
 .right-content {
   background-color: #FFF;
 
@@ -54,5 +65,9 @@ body {
 
   .content-form {
     margin-top: 20px;
+  }
+
+  table td {
+    font-size: 20px;
   }
 }
