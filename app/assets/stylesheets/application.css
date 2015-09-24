@@ -12,7 +12,6 @@
  *
  *= require bootstrap
  *= require nprogress
- *= reuqire pnotify.custom.min
  *= require welcome
  *= require_self
  */
