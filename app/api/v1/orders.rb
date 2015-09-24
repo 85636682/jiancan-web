@@ -22,13 +22,14 @@ module V1
       desc '给订单添加商品'
       params do
         requires :order_id, type: Integer, desc: '订单的id'
-        requires :products_quantity, type: String, desc: '包含所有添加商品id的整形数组，用商品的id作为key，用所选商品的数据作为value'
+        requires :products_quantity, type: String, desc: 'Json格式的字符串，包含所有添加商品id的整形数组，用商品的id作为key，用所选商品的数据作为value'
       end
       post 'products' do
         authenticate!
         @order = Order.find(params[:order_id])
         amount = 0
-        params[:products_quantity].each do |key, value|
+        products_quantity = JSON.parse(params[:products_quantity])
+        products_quantity.each do |key, value|
           product = Product.find(key)
           if not product.blank?
             OrderProduct.create(:order_id => @order.id, :product_id => key, :quantity => value)
