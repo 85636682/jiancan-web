@@ -29,4 +29,13 @@ module ApplicationHelper
   def markdown(desc)
     desc
   end
+
+  def order_unread?(order)
+    return false if current_merchant.blank?
+    if current_merchant.notifications.unread.where(:order_id => order.id).count == 1
+      return true
+    else
+      return false
+    end
+  end
 end

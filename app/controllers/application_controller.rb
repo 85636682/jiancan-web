@@ -39,4 +39,5 @@ class ApplicationController < ActionController::Base
     return 0 if current_merchant.blank?
     @cart_market_product_count ||= current_merchant.market_order_market_products.where(:market_order_id => nil).count
   end
+
 end

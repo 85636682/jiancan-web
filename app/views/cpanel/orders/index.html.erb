@@ -18,6 +18,9 @@
         <tr>
           <td>
             <a href="<%= cpanel_order_path(order) %>"><%= order.sn %></a>
+            <% if order_unread?(order) %>
+              <%= image_tag("new.gif") %>
+            <% end %>
           </td>
           <td><%= formattime(order.created_at, :unit => 'noYear') %></td>
           <td>￥<%= order.total_price %></td>
