@@ -12,6 +12,12 @@
           true: "外卖"
           false: "本店"
   enumerize:
+    order:
+      status:
+        pending: "新建"
+        settled: "结算"
+        completed: "完成"
+        canceled: "取消"
     user:
       gender:
         male: "男"

@@ -2,4 +2,29 @@
 <% if @order.blank? %>
   此订单已经失效，<a href="<%= cpanel_orders_path %>">返回查看其他订单？</a>
 <% else %>
+<table class="table">
+  <tbody>
+    <tr>
+      <td>
+        订单号：<%= @order.sn %>
+      </td>
+      <td>总额：￥<%= @order.total_price %></td>
+      <td>
+        状态：<%= @order.status.text %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <ul>
+          <% @order.order_products.each do |order_product| %>
+          <li>
+            <%= image_tag(order_product.market_product.avatar.url("80x80"), :alt=>"商品头像", :class=>"img-circle", :width => "40", :height => "40") %>
+            <%= order_product.product.name %>
+            ¥ <%= order_product.product.price %> X <%= order_product.count %></li>
+          <% end %>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
 <% end %>

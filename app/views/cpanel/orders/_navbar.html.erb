@@ -6,5 +6,12 @@
   <a class="nav-link btn btn-primary-outline btn-sm pull-right" href="<%= new_cpanel_order_path %>">
     <i class="fa fa-plus"></i> 添加
   </a>
+  <% elsif action_name == 'show' %>
+  <div class="btn-group pull-right">
+    <a class="nav-link btn btn-primary-outline btn-sm" href="<%= edit_cpanel_order_path(@order) %>">
+      <i class="fa fa-plus"></i> 修改
+    </a>
+    <%= link_to "删除", cpanel_order_path(@order), :class => "btn btn-primary-outline btn-sm", :method => :delete %>
+  </div>
   <% end %>
 </div>
