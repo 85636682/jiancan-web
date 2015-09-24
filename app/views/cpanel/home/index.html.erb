@@ -1,7 +1,9 @@
-<div class="row">
-  <div class="col-sm-4">11</div>
-  <div class="col-sm-8">22</div>
-</div>
-<div class="row">
-  <div class="col-sm-12">33</div>
-</div>
+<% if current_merchant.shop.blank? %>
+<p>
+  还未拥有店铺，<a href="<%= new_cpanel_shop_path %>">现在创建？</a>
+</p>
+<% else %>
+<p>
+  欢迎来到Dingist！
+</p>
+<% end %>
