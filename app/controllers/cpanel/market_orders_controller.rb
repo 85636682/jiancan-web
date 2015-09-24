@@ -27,7 +27,7 @@ class Cpanel::MarketOrdersController < CpanelController
 
       redirect_to cpanel_market_orders_path, :notice => "保存成功！"
     else
-      redirect_to cpanel_market_orders_path, :notice => "保存失败！"
+      redirect_to cpanel_market_orders_path, :alert => "保存失败！"
     end
   end
 
@@ -35,7 +35,7 @@ class Cpanel::MarketOrdersController < CpanelController
     if @market_order.destroy
       redirect_to cpanel_market_orders_path, :notice => "删除成功！"
     else
-      redirect_to cpanel_market_orders_path, :notice => "删除失败！"
+      redirect_to cpanel_market_orders_path, :alert => "删除失败！"
     end
   end
 

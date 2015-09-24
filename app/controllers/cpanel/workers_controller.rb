@@ -15,7 +15,7 @@ class Cpanel::WorkersController < CpanelController
     if @worker.save!
       redirect_to cpanel_workers_path, :notice => "保存成功！"
     else
-      render :new, :notice => "保存失败！"
+      render :new, :alert => "保存失败！"
     end
   end
 
@@ -26,7 +26,7 @@ class Cpanel::WorkersController < CpanelController
     if @worker.update(worker_params)
       redirect_to cpanel_workers_path, :notice => "保存成功！"
     else
-      render :new, :notice => "保存失败！"
+      render :edit, :alert => "保存失败！"
     end
   end
 
@@ -34,7 +34,7 @@ class Cpanel::WorkersController < CpanelController
     if @worker.destroy
       redirect_to cpanel_workers_path, :notice => "删除成功！"
     else
-      redirect_to cpanel_workers_path, :notice => "删除失败！"
+      redirect_to cpanel_workers_path, :alert => "删除失败！"
     end
   end
 

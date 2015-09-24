@@ -9,7 +9,7 @@ class Cpanel::NotificationsController < CpanelController
     if @notification.update(:read => read)
       redirect_to cpanel_notifications_path, :notice => '更新成功！'
     else
-      redirect_to cpanel_notifications_path, :notice => '更新失败！'  
+      redirect_to cpanel_notifications_path, :alert => '更新失败！'  
     end
   end
 
@@ -28,7 +28,7 @@ class Cpanel::NotificationsController < CpanelController
     if @notification.destroy
       redirect_to cpanel_notifications_path, :notice => '删除成功！'
     else
-      redirect_to cpanel_notifications_path, :notice => '删除失败！'  
+      redirect_to cpanel_notifications_path, :alert => '删除失败！'  
     end
   end
 end

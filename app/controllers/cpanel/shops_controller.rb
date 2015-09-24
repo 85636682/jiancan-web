@@ -18,7 +18,7 @@ class Cpanel::ShopsController < CpanelController
     if @shop.save!
       redirect_to cpanel_shops_path, :notice => "保存成功！"
     else
-      render :new, :notice => "保存失败！"
+      render :new, :alert => "保存失败！"
     end
   end
 
@@ -29,7 +29,7 @@ class Cpanel::ShopsController < CpanelController
     if @shop.update(shop_params)
       redirect_to cpanel_shops_path, :notice => "更新成功！"
     else
-      render :edit, :notice => "更新失败！"
+      render :edit, :alert => "更新失败！"
     end
   end
 

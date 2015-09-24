@@ -13,7 +13,7 @@ class Cpanel::CartController < CpanelController
     if @market_order_market_product.save
       redirect_to cpanel_market_products_path, :notice => "添加成功！"
     else
-      redirect_to cpanel_market_products_path, :notice => "添加失败！"
+      redirect_to cpanel_market_products_path, :alert => "添加失败！"
     end
   end
 
@@ -21,7 +21,7 @@ class Cpanel::CartController < CpanelController
     if @market_order_market_product.update(:count => params[:count])
       redirect_to cpanel_cart_index_path, :notice => "更新成功！"
     else
-      redirect_to cpanel_cart_index_path, :notice => "更新失败！"
+      redirect_to cpanel_cart_index_path, :alert => "更新失败！"
     end
   end
 
@@ -29,7 +29,7 @@ class Cpanel::CartController < CpanelController
     if @market_order_market_product.destroy
       redirect_to cpanel_cart_index_path, :notice => "删除成功！"
     else
-      redirect_to cpanel_cart_index_path, :notice => "删除失败！"
+      redirect_to cpanel_cart_index_path, :alert => "删除失败！"
     end
   end
 

@@ -40,7 +40,7 @@ class Cpanel::OrdersController < CpanelController
     if @order.destroy
       redirect_to cpanel_orders_path, :notice => '删除成功！'
     else
-      redirect_to cpanel_orders_path, :notice => '删除失败！' 
+      redirect_to cpanel_orders_path, :alert => '删除失败！' 
     end
   end
 

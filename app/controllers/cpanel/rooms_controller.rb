@@ -18,7 +18,7 @@ class Cpanel::RoomsController < CpanelController
     if @room.save!
       redirect_to cpanel_rooms_path, :notice => "保存成功！"
     else
-      render :new, :notice => "保存失败！"
+      render :new, :alert => "保存失败！"
     end
   end
 
@@ -29,7 +29,7 @@ class Cpanel::RoomsController < CpanelController
     if @room.update(room_params)
       redirect_to cpanel_rooms_path, :notice => "保存成功！"
     else
-      render :new, :notice => "保存失败！"
+      render :edit, :alert => "保存失败！"
     end
   end
 
