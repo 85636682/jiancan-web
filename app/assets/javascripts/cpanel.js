@@ -6,7 +6,7 @@
 //= require nprogress
 //= require message-bus
 //= require jquery.qrcode.min
-//= require pnotify.custom.min
+//= require bootstrap-notify.min
 //= require turbolinks
 
 window.App = {
@@ -27,8 +27,6 @@ $(document).on('page:fetch',   function() { NProgress.start(); });
 $(document).on('page:change',  function() { 
   NProgress.done();
 
-  PNotify.prototype.options.styling = "fontawesome";
-
   MessageBus.start(); // call once at startup
   // how often do you want the callback to fire in ms
   MessageBus.callbackInterval = 500;
@@ -45,12 +43,11 @@ $(document).on('page:change',  function() {
 
       link.addClass("new");
 
-      $(function(){
-        new PNotify({
-            title: data.title,
-            text: data.content,
-            addclass: "stack-topleft"
-        });
+      $.notify({
+        title: "<strong>" + data.title + "</strong> ",
+        message: "您有新订单(" + data.content + ")，请赶快处理 <a href=\"" + data.content_path + "\">点击这里</a>"
+      },{
+        delay: 10000
       });
     } else {
       span.hide();
