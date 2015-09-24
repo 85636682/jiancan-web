@@ -1,6 +1,8 @@
 class OrderSerializer < BaseSerializer
   attributes :id, :sn, :status, :created_at, :updated_at, :room_id, :room, :worker_id, :worker
 
+  has_many :products, serializer: ProductSerializer
+
   def room
     RoomSerializer.new(object.room, root: false)
   end
@@ -17,9 +19,4 @@ class OrderSerializer < BaseSerializer
     DateTime.parse(object.updated_at.iso8601).strftime('%Y年%m月%d日 %H:%M')
   end
 
-  has_many :products
-
-  def products
-    object.products
-  end
 end
