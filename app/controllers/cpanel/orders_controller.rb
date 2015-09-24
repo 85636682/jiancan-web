@@ -1,6 +1,6 @@
 class Cpanel::OrdersController < CpanelController
   before_action :set_shop, only: [:new]
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :settle, :complete]
 
   def index
     @orders = current_merchant.shop.orders.order("created_at DESC").paginate(:page => params[:page], :per_page => 20)
@@ -23,7 +23,7 @@ class Cpanel::OrdersController < CpanelController
       @order.user_id = 0
       @order.shop_id = current_merchant.shop.id
       if @order.save!
-        redirect_to cpanel_orders_path, :notice => "保存成功！"
+        redirect_to cpanel_order_path(@order), :notice => "保存成功！"
       else
         render :new, :alert => "保存失败！"
       end
@@ -34,6 +34,11 @@ class Cpanel::OrdersController < CpanelController
   end
 
   def update
+    if @order.update(order_params)
+      redirect_to cpanel_order_path(@order), :notice => "收款成功！"
+    else
+      redirect_to cpanel_order_path(@order), :notice => "收款失败！"
+    end
   end
 
   def destroy
@@ -42,6 +47,11 @@ class Cpanel::OrdersController < CpanelController
     else
       redirect_to cpanel_orders_path, :alert => '删除失败！' 
     end
+  end
+
+  def settle
+    @order.settled
+    redirect_to cpanel_order_path(@order), :notice => "结账成功！"
   end
 
   private
@@ -55,6 +65,6 @@ class Cpanel::OrdersController < CpanelController
   end
 
   def order_params
-    params.require(:order).permit(:sn, :total_price, :status, :takeout, :user_id, :room_id, :worker_id)
+    params.require(:order).permit(:sn, :total_price, :status, :takeout, :user_id, :room_id, :worker_id, :collect)
   end
 end

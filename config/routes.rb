@@ -5,7 +5,11 @@ Rails.application.routes.draw do
     resources :shops, expect: :destroy
     resources :products
     resources :rooms
-    resources :orders
+    resources :orders do
+      member do
+        get :settle
+      end
+    end
     resources :categories
     resources :workers
     resources :market_products, only: [:index, :show]

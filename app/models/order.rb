@@ -26,4 +26,38 @@ class Order < ActiveRecord::Base
     true
   end
 
+  def pending?
+    status == 'pending'
+  end
+
+  def settled
+    if status.pending?
+      update_attributes(:status => 'settled')
+    end
+  end
+
+  def settled?
+    status == 'settled'
+  end
+
+  def completed
+    if status.settled?
+      update_attributes(:status => 'completed')
+    end
+  end
+
+  def completed?
+    status == 'completed'
+  end
+
+  def canceled
+    if status.pending?
+      update_attributes(:status => 'canceled')
+    end
+  end
+
+  def canceled?
+    status == 'canceled'
+  end
+
 end

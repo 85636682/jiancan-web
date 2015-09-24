@@ -4,23 +4,39 @@
 <% else %>
 <table class="table">
   <tbody>
+    <% if @order.settled? %>
+    <tr>
+      <td colspan="4">
+        <%= form_for [:cpanel, @order], :html => { :class => "form-inline" } do |f| %>
+        <%= f.hidden_field :status, :value => 'completed' %>
+        <div class="form-group">
+          <label for="Collect">实收款：</label>
+          <%= f.text_field :collect, :class => "form-control", :placeholder => "填写金额" %>
+        </div>
+        <%= f.submit "收 款", class: "btn btn-primary" %>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
     <tr>
       <td>
         订单号：<%= @order.sn %>
       </td>
       <td>总额：￥<%= @order.total_price %></td>
+      <td>实收：¥<%= @order.collect %></td>
       <td>
         状态：<%= @order.status.text %>
       </td>
     </tr>
     <tr>
-      <td colspan="3">
+      <td colspan="4">
         <ul>
           <% @order.order_products.each do |order_product| %>
           <li>
             <%= image_tag(order_product.market_product.avatar.url("80x80"), :alt=>"商品头像", :class=>"img-circle", :width => "40", :height => "40") %>
             <%= order_product.product.name %>
-            ¥ <%= order_product.product.price %> X <%= order_product.count %></li>
+            ¥ <%= order_product.product.price %> X <%= order_product.count %>
+          </li>
           <% end %>
         </ul>
       </td>

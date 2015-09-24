@@ -8,10 +8,23 @@
   </a>
   <% elsif action_name == 'show' %>
   <div class="btn-group pull-right">
-    <a class="nav-link btn btn-primary-outline btn-sm" href="<%= edit_cpanel_order_path(@order) %>">
-      <i class="fa fa-plus"></i> 修改
+    <% if @order.pending? %>
+      <a href="<%= settle_cpanel_order_path(@order) %>" class="nav-link btn btn-primary-outline btn-sm">
+        <i class="fa fa-credit-card"></i> 结账
+      </a>
+      <a class="nav-link btn btn-primary-outline btn-sm" href="<%= edit_cpanel_order_path(@order) %>">
+        <i class="fa fa-plus"></i> 修改
+      </a>
+      <%= link_to cpanel_order_path(@order), :class => "btn btn-primary-outline btn-sm", :method => :delete do %>
+        <i class="fa fa-trash-o"></i> 删除
+      <% end %>
+    <% end %>
+  </div>
+  <% elsif action_name == 'settle' %>
+  <div class="btn-group pull-right">
+    <a href="<%= %>" class="nav-link btn btn-primary-outline btn-sm">
+      <i class="fa fa-money"></i> 收款
     </a>
-    <%= link_to "删除", cpanel_order_path(@order), :class => "btn btn-primary-outline btn-sm", :method => :delete %>
   </div>
   <% end %>
 </div>
