@@ -36,7 +36,7 @@ module V1
             amount += product.price.to_i * value.to_i
           end
         end
-        @order.update(:amount => amount)
+        @order.update(:total_price => amount)
       end
 
       desc '根据订单号SN搜索订单'
