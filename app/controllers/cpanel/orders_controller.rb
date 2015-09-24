@@ -15,13 +15,18 @@ class Cpanel::OrdersController < CpanelController
 
   def create
     @order = Order.new(order_params)
-    @order.sn = Order.create_sn(params[:order][:shop_id])
-    @order.total_price = 0
-    @order.user_id = 0
-    if @order.save!
-      redirect_to cpanel_orders_path, :notice => "保存成功！"
+    if @order.room_id.blank? && !@order.takeout
+      redirect_to new_cpanel_order_path, :alert => "非外卖订单要选择台号！"
     else
-      render :new, :notice => "保存失败！"
+      @order.sn = Order.create_sn(current_merchant.shop.id)
+      @order.total_price = 0
+      @order.user_id = 0
+      @order.shop_id = current_merchant.shop.id
+      if @order.save!
+        redirect_to cpanel_orders_path, :notice => "保存成功！"
+      else
+        render :new, :alert => "保存失败！"
+      end
     end
   end
 
@@ -50,6 +55,6 @@ class Cpanel::OrdersController < CpanelController
   end
 
   def order_params
-    params.require(:order).permit(:sn, :total_price, :status, :takeout, :user_id, :room_id, :shop_id, :worker_id)
+    params.require(:order).permit(:sn, :total_price, :status, :takeout, :user_id, :room_id, :worker_id)
   end
 end
