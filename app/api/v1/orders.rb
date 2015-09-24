@@ -22,7 +22,10 @@ module V1
       desc '给订单添加商品'
       params do
         requires :order_id, type: Integer, desc: '订单的id'
-        requires :products_quantity, type: Array[Integer], desc: '包含所有添加商品id的整形数组，用商品的id作为key，用所选商品的数据作为value'
+        requires :products_quantity, type: Hash, desc: '包含所有添加商品id的整形数组，用商品的id作为key，用所选商品的数据作为value' do
+          requires :key
+          requires :value
+        end
       end
       post 'products' do
         authenticate!
