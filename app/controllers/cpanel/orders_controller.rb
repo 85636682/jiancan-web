@@ -3,7 +3,7 @@ class Cpanel::OrdersController < CpanelController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
   def index
-    @orders = current_merchant.shop.orders.paginate(:page => params[:page], :per_page => 20)
+    @orders = current_merchant.shop.orders.order("created_at DESC").paginate(:page => params[:page], :per_page => 20)
   end
 
   def show
