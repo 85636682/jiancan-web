@@ -1,9 +1,14 @@
 "zh-CN":
   activerecord:
     models:
+      merchant: "商家"
       admin: "管理员"
       order: "订单"
     attributes:
+      merchant:
+        email: "邮箱"
+        password: "密码"
+        password_confirmation: "确认密码"
       admin:
         email: "邮箱"
         password: "密码"

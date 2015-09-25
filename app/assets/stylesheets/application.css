@@ -13,5 +13,6 @@
  *= require bootstrap
  *= require nprogress
  *= require welcome
+ *= require font-awesome-plug
  *= require_self
  */
