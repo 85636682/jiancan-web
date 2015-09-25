@@ -34,7 +34,13 @@ module V1
           products_quantity.each do |key, value|
             product = Product.find(key)
             if not product.blank?
-              success = OrderProduct.create(:order_id => @order.id, :product_id => key, :quantity => value)
+              order_product = OrderProduct.where(:order_id => @order.id, :product_id => key).first
+              if order_product.blank?
+                success = OrderProduct.create(:order_id => @order.id, :product_id => key, :quantity => value)
+              else
+                quantity = order_product.quantity + value
+                success = order_product.update(:quantity => quantity)
+              end
               amount += product.price.to_i * value.to_i
             end
           end
