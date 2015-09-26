@@ -24,7 +24,7 @@ NProgress.configure({
 });
 
 $(document).on('page:fetch',   function() { NProgress.start(); });
-$(document).on('page:change',  function() { 
+$(document).on('page:change',  function() {
   NProgress.done();
 
   MessageBus.start(); // call once at startup
@@ -32,7 +32,7 @@ $(document).on('page:change',  function() {
   MessageBus.callbackInterval = 500;
   MessageBus.subscribe("/notifications_count/" + App.access_token, function(data){
     // data shipped from server
-
+    console.log("执行subscribe");
     var div, link, new_title, span, url;
     span = $(".notification-count span");
     link = $(".notification-count a");
