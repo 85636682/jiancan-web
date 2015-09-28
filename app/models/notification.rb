@@ -13,6 +13,7 @@ class Notification < ActiveRecord::Base
       hash = notify_hash
       hash[:count] = merchant.notifications.unread.count
       MessageBus.publish "/notifications_count/#{merchant.private_token}", hash
+      logger.error "-------------publish-----------------"
     end
   end
 
