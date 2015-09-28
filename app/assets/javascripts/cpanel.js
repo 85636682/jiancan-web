@@ -28,11 +28,12 @@ $(document).on('page:fetch',   function() {
 });
 $(document).on('page:change',  function() {
   NProgress.done();
-
+  alert('1');
   MessageBus.start(); // call once at startup
   // how often do you want the callback to fire in ms
   MessageBus.callbackInterval = 60000;
   MessageBus.subscribe("/notifications_count/" + App.access_token, function(data){
+    alert('2');
     // data shipped from server
     var div, link, new_title, span, url;
     span = $(".notification-count span");
