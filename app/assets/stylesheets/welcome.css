@@ -227,6 +227,11 @@
     font-weight: bold;
 }
 
+.page-footer nav a {
+    margin-left: 10px;
+    font-size: 18px;
+}
+
 .page-footer p {
     color: #999999;
     color: rgba(0, 0, 0, 0.3);
