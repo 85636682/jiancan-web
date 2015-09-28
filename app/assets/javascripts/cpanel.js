@@ -25,12 +25,11 @@ NProgress.configure({
 
 $(document).on('page:fetch',   function() { 
   NProgress.start();
-  MessageBus.start(); // call once at startup
 });
 $(document).on('page:change',  function() {
   NProgress.done();
 
-  
+  MessageBus.start(); // call once at startup
   // how often do you want the callback to fire in ms
   MessageBus.callbackInterval = 60000;
   MessageBus.subscribe("/notifications_count/" + App.access_token, function(data){
@@ -56,7 +55,7 @@ $(document).on('page:change',  function() {
       link.removeClass("new");
     }
     span.text(data.count);
-    return document.title = new_title;
+    document.title = new_title;
   });
 });
 $(document).on('page:restore', function() { NProgress.remove(); });
