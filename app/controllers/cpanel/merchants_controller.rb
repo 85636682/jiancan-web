@@ -9,7 +9,7 @@ class Cpanel::MerchantsController < CpanelController
     if @merchant.update(merchant_params)
       redirect_to edit_cpanel_merchant_path(@merchant), :notice => "更新成功！"
     else
-      render "edit"
+      redirect_to edit_cpanel_merchant_path(@merchant), :alert => "更新失败！"
     end
   end
 
@@ -19,7 +19,7 @@ class Cpanel::MerchantsController < CpanelController
       sign_in @merchant, :bypass => true
       redirect_to edit_cpanel_merchant_path(@merchant), :notice => "更新成功！"
     else
-      render "edit"
+      redirect_to edit_cpanel_merchant_path(@merchant), :alert => "更新失败，密码长度太短或者当前密码错误！"
     end
   end
 
