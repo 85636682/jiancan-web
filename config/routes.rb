@@ -24,6 +24,11 @@ Rails.application.routes.draw do
     end
     resources :cart, only: [:index, :create, :update, :destroy]
     resources :market_orders, only: [:index, :show, :create, :destroy]
+    resources :merchants, only: [:edit, :update] do
+      collection do
+        patch 'update_password'
+      end
+    end
   end
 
   devise_for :merchants, controllers: {

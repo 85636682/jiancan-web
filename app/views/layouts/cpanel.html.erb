@@ -6,7 +6,7 @@
   <%= javascript_include_tag 'cpanel', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body class="cpanel-page">
+<body class="cpanel-page" data-controller-name="<%= controller_name %>">
   <div class="header">
     <nav class="navbar navbar-light bg-faded">
       <div class="container">
@@ -22,6 +22,16 @@
             <a class="nav-link" href="#">关于</a>
           </li>
         </ul>
+        <ul class="nav navbar-nav pull-center">
+          <li class="nav-item">
+            <form action="<%= cpanel_orders_path %>" class="navbar-form form-inline form-search" method="get">
+              <div class="form-group">
+                <input class="form-control" id="appendedInputButton" type="text" placeholder="搜索订单..."/>
+              </div>
+              <i class="fa fa-search"></i>
+            </form>
+          </li>
+        </ul><!--/.nav-collapse -->
         <% if merchant_signed_in? %>
         <ul class="nav navbar-nav pull-right">
           <li class="nav-item cart-count">
@@ -43,7 +53,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><%= current_merchant.name.blank? ? current_merchant.email : current_merchant.name %></a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">账 号</a>
+              <a class="dropdown-item" href="<%= edit_cpanel_merchant_path(current_merchant) %>">账 号</a>
               <div class="dropdown-divider"></div>
               <%= link_to "注 销", destroy_merchant_session_path, method: :delete, :class => "dropdown-item" %>
             </div>
