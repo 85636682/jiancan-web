@@ -52,5 +52,5 @@ window.App =
   isLogined : ->
     App.current_merchant_id != null
 
-$(document).on 'page:change', ->
+$(document).on 'ready', ->
   window._appView = new AppView()
