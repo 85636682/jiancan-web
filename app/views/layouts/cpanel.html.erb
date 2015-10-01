@@ -109,7 +109,7 @@
   <script type="text/javascript" data-turbolinks-eval=false>
     <% if current_merchant %>
       App.current_merchant_id = <%= current_merchant.id %>;
-      App.access_token = "<%= current_merchant.private_token %>";
+      App.access_token = "<%= current_merchant.temp_access_token %>";
     <% end %>
   </script>
 </body>

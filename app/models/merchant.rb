@@ -19,4 +19,10 @@ class Merchant < ActiveRecord::Base
   def ensure_private_token!
     update_private_token if private_token.blank?
   end
+
+  def temp_access_token
+    Rails.cache.fetch("user-#{id}-temp_access_token-#{Time.now.strftime('%Y%m%d')}") do
+      SecureRandom.hex
+    end
+  end
 end
