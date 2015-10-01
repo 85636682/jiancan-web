@@ -1,6 +1,6 @@
 #= require jquery
-#= require jquery.turbolinks.min
 #= require jquery_ujs
+#= require jquery.turbolinks.min
 #= require bootstrap
 #= require underscore
 #= require backbone
@@ -46,7 +46,7 @@ AppView = Backbone.View.extend
       document.title = new_title
     true
 
-window.App = 
+window.App =
   current_merchant_id: null,
   access_token: '',
   isLogined : ->
