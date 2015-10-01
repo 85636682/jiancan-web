@@ -46,11 +46,10 @@ Rails.application.routes.draw do
     sessions: "admins/sessions"
   }
 
-  mount ChinaCity::Engine => '/china_city'
-
   require 'dispatch'
   mount Api::Dispatch => '/api'
   
+  get 'china_city/:id', to: 'city_data#show'
   get 'welcome/api'
   root "welcome#index"
 end

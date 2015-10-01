@@ -66,9 +66,6 @@ gem 'message_bus'
 # 枚举
 gem 'enumerize'
 
-# 城市插件
-gem 'china_city'
-
 # alipay
 gem 'alipay', '~> 0.7.1'
 

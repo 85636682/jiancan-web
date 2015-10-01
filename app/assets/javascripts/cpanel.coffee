@@ -4,17 +4,21 @@
 #= require bootstrap
 #= require underscore
 #= require backbone
-#= require 'china_city/jquery.china_city'
 #= require message-bus
 #= require jquery.qrcode.min
 #= require bootstrap-notify.min
 #= require turbolinks
+#= require shops
+#= require_self
 
 AppView = Backbone.View.extend
   el: 'body'
 
   initialize: ->
     @initNotificationSubscribe()
+
+    if $('body').data('controller-name') in ['shops']
+      window._shopView = new ShopView({parentView: @})
 
   initNotificationSubscribe : () ->
     return if not App.access_token?
