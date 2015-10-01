@@ -12,7 +12,7 @@ class Notification < ActiveRecord::Base
     if merchant
       hash = notify_hash
       hash[:count] = merchant.notifications.unread.count
-      MessageBus.publish "/notifications_count/#{merchant.private_token}", hash
+      MessageBus.publish "/notifications_count/#{merchant.temp_access_token}", hash
     end
   end
 
