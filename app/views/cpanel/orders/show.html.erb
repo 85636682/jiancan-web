@@ -34,7 +34,7 @@
         <ul>
           <% @order.order_products.each do |order_product| %>
           <li>
-            <%= image_tag(order_product.market_product.avatar.url("80x80"), :alt=>"商品头像", :class=>"img-circle", :width => "40", :height => "40") %>
+            <%= image_tag(order_product.product.avatar.url("80x80"), :alt=>"商品头像", :class=>"img-circle", :width => "40", :height => "40") %>
             <%= order_product.product.name %>
             ¥ <%= order_product.product.price %> X <%= order_product.count %>
           </li>
