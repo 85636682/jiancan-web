@@ -24,9 +24,9 @@
         </ul>
         <ul class="nav navbar-nav pull-center">
           <li class="nav-item">
-            <form action="<%= cpanel_orders_path %>" class="navbar-form form-inline form-search" method="get">
+            <form action="<%= search_cpanel_orders_path %>" class="navbar-form form-inline form-search" method="get">
               <div class="form-group">
-                <input class="form-control" id="appendedInputButton" type="text" placeholder="搜索订单..."/>
+                <input class="form-control" name="sn" type="text" placeholder="搜索订单..."/>
               </div>
               <i class="fa fa-search"></i>
             </form>

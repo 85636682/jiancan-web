@@ -9,6 +9,9 @@ Rails.application.routes.draw do
       member do
         get :settle
       end
+      collection do
+        get :search
+      end
     end
     resources :categories
     resources :workers
@@ -48,7 +51,7 @@ Rails.application.routes.draw do
 
   require 'dispatch'
   mount Api::Dispatch => '/api'
-  
+
   get 'china_city/:id', to: 'city_data#show'
   get 'welcome/api'
   root "welcome#index"

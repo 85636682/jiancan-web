@@ -45,13 +45,22 @@ class Cpanel::OrdersController < CpanelController
     if @order.destroy
       redirect_to cpanel_orders_path, :notice => '删除成功！'
     else
-      redirect_to cpanel_orders_path, :alert => '删除失败！' 
+      redirect_to cpanel_orders_path, :alert => '删除失败！'
     end
   end
 
   def settle
     @order.settled
     redirect_to cpanel_order_path(@order), :notice => "结账成功！"
+  end
+
+  def search
+    @order = Order.find_by_sn(params[:sn])
+    if @order.blank?
+      redirect_to cpanel_orders_path, :alert => '没有该订单！'
+    else
+      redirect_to cpanel_order_path(@order), :notice => '搜索成功！'
+    end
   end
 
   private
