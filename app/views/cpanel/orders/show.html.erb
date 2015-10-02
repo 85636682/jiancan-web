@@ -36,7 +36,7 @@
           <li>
             <%= image_tag(order_product.product.avatar.url("80x80"), :alt=>"商品头像", :class=>"img-circle", :width => "40", :height => "40") %>
             <%= order_product.product.name %>
-            ¥ <%= order_product.product.price %> X <%= order_product.count %>
+            ¥ <%= order_product.product.price %> X <%= order_product.quantity %>
           </li>
           <% end %>
         </ul>
