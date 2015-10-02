@@ -39,8 +39,7 @@ AppView = Backbone.View.extend
         },{
           delay: 10000
         })
-        console.log($("#newOrderRing"))
-        $("#newOrderRing").target.play()
+        $("#newOrderRing").get(0).play()
       else
         span.hide()
         link.removeClass("new")
