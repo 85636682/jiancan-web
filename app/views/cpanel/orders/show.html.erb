@@ -28,6 +28,7 @@
         状态：<%= @order.status.text %>
       </td>
     </tr>
+    <% if @order.order_products.count > 0 %>
     <tr>
       <td colspan="4">
         <ul>
@@ -41,6 +42,7 @@
         </ul>
       </td>
     </tr>
+    <% end %>
   </tbody>
 </table>
 <% end %>
