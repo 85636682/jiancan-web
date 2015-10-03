@@ -1,6 +1,6 @@
 class Cpanel::RoomsController < CpanelController
   before_action :set_shop, only: [:new, :edit]
-  before_action :set_room, only: [:show, :edit, :update]
+  before_action :set_room, only: [:show, :edit, :update, :destroy]
 
   def index
     @rooms = current_merchant.shop.rooms.paginate(:page => params[:page], :per_page => 10)
@@ -34,6 +34,11 @@ class Cpanel::RoomsController < CpanelController
   end
 
   def destroy
+    if @room.destroy
+      redirect_to cpanel_rooms_path, :notice => "删除成功！"
+    else
+      redirect_to cpanel_rooms_path, :notice => "删除失败！"
+    end
   end
 
   private

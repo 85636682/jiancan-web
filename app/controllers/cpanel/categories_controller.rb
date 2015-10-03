@@ -1,6 +1,6 @@
 class Cpanel::CategoriesController < CpanelController
   before_action :set_shop, only: [:new, :edit]
-  before_action :set_category, only: [:show, :edit, :update]
+  before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   def index
     @categories = current_merchant.shop.categories.paginate(:page => params[:page], :per_page => 10)
@@ -34,6 +34,11 @@ class Cpanel::CategoriesController < CpanelController
   end
 
   def destroy
+    if @category.destroy
+      redirect_to cpanel_categories_path, :notice => "删除成功！"
+    else
+      redirect_to cpanel_categories_path, :notice => "删除失败！"
+    end
   end
 
   private

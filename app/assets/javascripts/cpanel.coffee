@@ -5,10 +5,15 @@
 #= require underscore
 #= require backbone
 #= require message-bus
+#= require jquery.validate
 #= require jquery.qrcode.min
 #= require bootstrap-notify.min
 #= require turbolinks
 #= require shops
+#= require categories
+#= require workers
+#= require products
+#= require rooms
 #= require_self
 
 AppView = Backbone.View.extend
@@ -19,6 +24,14 @@ AppView = Backbone.View.extend
 
     if $('body').data('controller-name') in ['shops']
       window._shopView = new ShopView({parentView: @})
+    if $('body').data('controller-name') in ['categories']
+      window._categoryView = new CategoryView({parentView: @})
+    if $('body').data('controller-name') in ['workers']
+      window._workerView = new WorkerView({parentView: @})
+    if $('body').data('controller-name') in ['products']
+      window._productView = new ProductView({parentView: @})
+    if $('body').data('controller-name') in ['rooms']
+      window._roomView = new RoomView({parentView: @})
 
   initNotificationSubscribe : () ->
     return if not App.access_token?

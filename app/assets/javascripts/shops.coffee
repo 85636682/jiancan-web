@@ -6,6 +6,18 @@ window.ShopView = Backbone.View.extend
 
   initialize: (opts) ->
     @parentView = opts.parentView
+    @initFormValidate()
+
+  initFormValidate : () ->
+    $(".content-form form").validate
+      rules:
+        'shop[name]': 'required'
+        'shop[mobile]': 'required'
+        'shop[address]': 'required'
+      messages:
+        'shop[name]': '请输入店铺的名称'
+        'shop[mobile]': '请输入店铺的电话'
+        'shop[address]': '请输入店铺的地址'
 
   selectCity: (e) ->
     _el = $(e.target)

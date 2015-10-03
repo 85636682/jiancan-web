@@ -21,7 +21,7 @@
           </td>
           <td><%= product.name %></td>
           <td>￥<%= product.price %></td>
-          <td><%= product.category.name %></td>
+          <td><%= product.category.name if not product.category.blank? %></td>
           <td>
             <a href="<%= edit_cpanel_product_path(product) %>" class="btn btn-primary-outline btn-sm">修改</a>
           </td>
