@@ -9,7 +9,7 @@ module V1
       post '', serializer: OrderSerializer, root: 'order' do
         authenticate!
         @order = Order.new(:shop_id => params[:shop_id], :room_id => params[:room_id],
-                           :sn => Order.create_sn(params[:shop_id]), 
+                           :sn => Order.create_sn(params[:shop_id]),
                            :total_price => 0, :takeout => false)
         @order.worker_id = current_worker.id
         if @order.save
@@ -38,13 +38,14 @@ module V1
               if order_product.blank?
                 success = OrderProduct.create(:order_id => @order.id, :product_id => key, :quantity => value)
               else
-                quantity = order_product.quantity + value
+                quantity = order_product.quantity + value.to_i
                 success = order_product.update(:quantity => quantity)
               end
               amount += product.price.to_i * value.to_i
             end
           end
-          success = @order.update(:total_price => amount)
+          total_price = @order.total_price + amount
+          success = @order.update(:total_price => total_price)
         end
 
         if success
