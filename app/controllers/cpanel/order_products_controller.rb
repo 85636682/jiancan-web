@@ -17,13 +17,12 @@ class Cpanel::OrderProductsController < CpanelController
         if not product.blank?
           order_product = OrderProduct.where(:order_id => @order.id, :product_id => key).first
           if order_product.blank?
-            quantity = value.to_i
-            success = OrderProduct.create(:order_id => @order.id, :product_id => key, :quantity => quantity)
+            success = OrderProduct.create(:order_id => @order.id, :product_id => key, :quantity => value)
           else
             quantity = order_product.quantity + value.to_i
             success = order_product.update(:quantity => quantity)
           end
-          amount += product.price.to_i * quantity
+          amount += product.price.to_i * value.to_i
         end
       end
       total_price = @order.total_price + amount
