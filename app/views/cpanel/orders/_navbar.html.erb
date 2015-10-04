@@ -9,11 +9,14 @@
   <% elsif action_name == 'show' %>
   <div class="btn-group pull-right">
     <% if @order.pending? %>
+      <a href="<%= new_cpanel_order_product_path(:order_id => @order.id) %>" class="nav-link btn btn-primary-outline btn-sm">
+        <i class="fa fa-plus"></i> 添加菜色
+      </a>
       <a href="<%= settle_cpanel_order_path(@order) %>" class="nav-link btn btn-primary-outline btn-sm">
         <i class="fa fa-credit-card"></i> 结账
       </a>
       <a class="nav-link btn btn-primary-outline btn-sm" href="<%= edit_cpanel_order_path(@order) %>">
-        <i class="fa fa-plus"></i> 修改
+        <i class="fa fa-edit"></i> 修改
       </a>
       <%= link_to cpanel_order_path(@order), :class => "btn btn-primary-outline btn-sm", :method => :delete do %>
         <i class="fa fa-trash-o"></i> 删除

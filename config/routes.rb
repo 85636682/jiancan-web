@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
 
   namespace :cpanel do
+  get 'order_products/new'
+  end
+
+  namespace :cpanel do
+  get 'order_products/create'
+  end
+
+  namespace :cpanel do
     get 'home/index'
     resources :shops, expect: :destroy
     resources :products
@@ -13,6 +21,7 @@ Rails.application.routes.draw do
         get :search
       end
     end
+    resources :order_products, only: [:new, :create]
     resources :categories
     resources :workers
     resources :market_products, only: [:index, :show]

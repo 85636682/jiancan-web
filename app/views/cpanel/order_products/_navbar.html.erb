@@ -1,0 +1,11 @@
+
+<div class="navbar navbar-light bg-faded navigation">
+  <a class="nav-link btn btn-primary-outline btn-sm" href="<%= request.referrer %>">
+    <i class="fa fa-arrow-left"></i> 返回
+  </a>
+  <% if action_name == "new" %>
+  <a class="nav-link btn btn-primary-outline btn-sm pull-right" href="#" onclick="$('#new_order_product').submit();return false;">
+    <i class="fa fa-floppy-o"></i> 保存
+  </a>
+  <% end %>
+</div>
