@@ -21,6 +21,8 @@ AppView = Backbone.View.extend
   el: 'body'
 
   initialize: ->
+    @initNotificationSubscribe()
+
     if $('body').data('controller-name') in ['shops']
       window._shopView = new ShopView({parentView: @})
     if $('body').data('controller-name') in ['categories']
@@ -34,14 +36,9 @@ AppView = Backbone.View.extend
     if $('body').data('controller-name') in ['order_products']
       window._orderProductsView = new OrderProductsView({parentView: @})
 
-window.App =
-  current_merchant_id: null,
-  access_token: '',
-  isLogined : ->
-    App.current_merchant_id != null
-
-$(document).on 'ready', ->
-  if App.access_token? App.access_token.length >= 5
+  initNotificationSubscribe : () ->
+    return if not App.access_token?
+    return if App.access_token.length < 5
     MessageBus.start()
     MessageBus.callbackInterval = 1000
     MessageBus.subscribe "/notifications_count/#{App.access_token}", (data) ->
@@ -64,6 +61,13 @@ $(document).on 'ready', ->
         link.removeClass("new")
       span.text(data.count)
       document.title = new_title
+    true
+
+window.App =
+  current_merchant_id: null,
+  access_token: '',
+  isLogined : ->
+    App.current_merchant_id != null
 
 $(document).on 'page:change', ->
   window._appView = new AppView()
