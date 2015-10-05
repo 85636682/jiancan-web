@@ -68,7 +68,7 @@ body {
     height: 60px;
     padding-top: 10px;
     border-radius: 0px;
-    background-color: #FFF; 
+    background-color: #FFF;
   }
 
   .content-form {
@@ -93,4 +93,160 @@ body {
     border-bottom: 1px solid #eee;
     background: #f9f9f9;
   }
+}
+
+.bg-base-1 {
+  background: #5d67dd;
+  color: #fff
+}
+
+.bg-base-2 {
+  background: #ff005d;
+  color: #fff
+}
+
+
+.price-tablelist {
+  font-size: 13px;
+}
+.price-tablelist .head {
+  padding: 25px 0
+}
+
+.price-tablelist .head .pricing-title {
+  margin: 0;
+  padding: 0;
+  font-size: 22px;
+  font-weight: 600
+}
+
+.price-tablelist .head .pricing-subtitle {
+  color: #ccc
+}
+
+.price-tablelist .price-choose {
+  height: 120px;
+  font-size: 30px;
+  line-height: 120px;
+  border: 1px solid #f1f1f1;
+  border-bottom: 0;
+}
+
+.price-tablelist .price {
+  height: 120px;
+  line-height: 120px;
+  border-left: 1px solid #f1f1f1;
+  border-right: 1px solid #f1f1f1
+}
+
+.price-tablelist .pricing-col:last-child .price {
+  border-right: 1px solid #f1f1f1
+}
+
+.price-tablelist .price .pricing-currency {
+  font-size: 30px
+}
+
+.price-tablelist .price .pricing-price {
+  font-weight: 700;
+  font-size: 60px;
+  color: #333
+}
+
+.price-tablelist .price span {
+  font-size: 18px
+}
+
+.price-tablelist .col-md-4, .price-tablelist .col-md-2 {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 30px
+}
+
+.price-tablelist .pricing-col ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #f1f1f1;
+  transition: color .75s ease-in-out
+}
+
+.price-tablelist .pricing-col:last-child ul {
+  border-right: 1px solid #f1f1f1
+}
+
+.price-tablelist .pricing-col ul:hover {
+  transition: color .75s ease-in-out
+}
+
+.price-tablelist li {
+  padding: 12px 0;
+  margin: 0 20px;
+  list-style-type: none;
+  border-color: #f1f1f1;
+  border-bottom: 1px dashed #f1f1f1
+}
+
+.price-tablelist li:last-child {
+  border: 0
+}
+
+.price-tablelist li a {
+  text-decoration: none;
+  display: block;
+  width: 200px;
+  -webkit-transition: font-size .3s ease, background-color .3s ease;
+  -moz-transition: font-size .3s ease, background-color .3s ease;
+  -o-transition: font-size .3s ease, background-color .3s ease;
+  -ms-transition: font-size .3s ease, background-color .3s ease;
+  transition: font-size .3s ease, background-color .3s ease
+}
+
+.price-tablelist .pricing-col ul li a:hover {
+  font-size: 30px;
+  background: #f6f6f6
+}
+
+.price-tablelist .pricing-col ul li .fa-close {
+  color: #cf000f
+}
+
+.price-tablelist .pricing-col ul li .fa-check {
+  color: #26a65b
+}
+
+.price-tablelist ul.price-features li {
+  text-align: left;
+  padding-left: 20px;
+  padding-right: 20px
+}
+
+.price-tablelist ul.price-features li i, .price-tablelist .col-feature i {
+  margin-right: 10px;
+  color: #5d67dd
+}
+
+.price-tablelist ul.price-features {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #f1f1f1;
+  transition: color .75s ease-in-out
+}
+
+.price-tablelist ul.price-features:hover {
+  color: inherit
+}
+
+.price-tablelist ul.price-features li {
+  transition: color .75s ease-in-out
+}
+
+.price-tablelist ul.price-features li:hover {
+  color: #5d67dd;
+  transition: color .75s ease-in-out
+}
+
+.price-tablelist .pricing-col .footer {
+  padding: 15px 0
 }

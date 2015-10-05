@@ -1,15 +1,8 @@
 Rails.application.routes.draw do
-
-  namespace :cpanel do
-  get 'order_products/new'
-  end
-
-  namespace :cpanel do
-  get 'order_products/create'
-  end
-
   namespace :cpanel do
     get 'home/index'
+    get 'home/prices'
+    get 'home/about'
     resources :shops, expect: :destroy
     resources :products
     resources :rooms
