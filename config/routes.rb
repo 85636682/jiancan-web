@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :orders do
       member do
         get :settle
+        get :cancel
       end
       collection do
         get :search

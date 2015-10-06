@@ -63,16 +63,25 @@ class Cpanel::OrdersController < CpanelController
   end
 
   def destroy
-    if @order.destroy
-      redirect_to cpanel_orders_path, :notice => '删除成功！'
+    if @order.pending?
+      if @order.destroy
+        redirect_to cpanel_orders_path, :notice => '删除成功！'
+      else
+        redirect_to cpanel_orders_path, :alert => '删除失败！'
+      end
     else
-      redirect_to cpanel_orders_path, :alert => '删除失败！'
+      redirect_to cpanel_order_path(@order), :alert => '此订单已经结账，不能删除！'
     end
   end
 
   def settle
     @order.settled
     redirect_to cpanel_order_path(@order), :notice => "结账成功！"
+  end
+
+  def cancel
+    @order.canceled
+    redirect_to cpanel_orders_path, :notice => "取消成功！"
   end
 
   def search
