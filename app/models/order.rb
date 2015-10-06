@@ -11,7 +11,7 @@ class Order < ActiveRecord::Base
   has_many :notifications, :dependent => :destroy
 
   def self.create_sn(shop_id)
-    DateTime.parse(Time.now.iso8601).strftime('%Y%m%d%H%M') + sprintf('%03d', shop_id) + rand(999).to_s
+    DateTime.parse(Time.now.iso8601).strftime('%Y%m%d%H%M%S') + rand(999).to_s
   end
 
   after_create do
