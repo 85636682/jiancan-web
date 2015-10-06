@@ -20,7 +20,7 @@
         <i class="fa fa-edit"></i> 修改
       </a>
       <% end %>
-      <%= link_to cpanel_order_path(@order), :class => "btn btn-primary-outline btn-sm", :method => :delete do %>
+      <%= link_to cpanel_order_path(@order), :class => "btn btn-primary-outline btn-sm", :method => :delete, data: { :confirm => '删除后不能恢复，确定删除?' } do %>
         <i class="fa fa-trash-o"></i> 删除
       <% end %>
     <% end %>

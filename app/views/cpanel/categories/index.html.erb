@@ -16,7 +16,7 @@
           <td><%= category.name %></td>
           <td>
             <a href="<%= edit_cpanel_category_path(category) %>" class="btn btn-primary-outline btn-sm">修改</a>
-            <%= link_to "删除", cpanel_category_path(category), :class => "btn btn-primary-outline btn-sm", :method => :delete %>
+            <%= link_to "删除", cpanel_category_path(category), :class => "btn btn-primary-outline btn-sm", :method => :delete, data: { :confirm => '删除后不能恢复，确定删除?' } %>
           </td>
         </tr>
       <% end %>
