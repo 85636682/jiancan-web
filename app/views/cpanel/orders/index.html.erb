@@ -7,7 +7,6 @@
           <th>订单编号 <i class="fa fa-sort"></i></th>
           <th>时间 <i class="fa fa-sort"></i></th>
           <th>总额 <i class="fa fa-sort"></i></th>
-          <th>外卖 <i class="fa fa-sort"></i></th>
           <th>台号 <i class="fa fa-sort"></i></th>
           <th>员工 <i class="fa fa-sort"></i></th>
           <th>操作</th>
@@ -24,11 +23,12 @@
           </td>
           <td><%= formattime(order.created_at, :unit => 'noYear') %></td>
           <td>￥<%= order.total_price %></td>
-          <td><%= order.takeout ? "是" : "否" %></td>
-          <td><%= order.room.name if not order.room.blank? %></td>
-          <td><%= order.worker.name if not order.worker.blank? %></td>
+          <td><%= order.room.blank? ? "外卖" : order.room.name %></td>
+          <td><%= order.worker.blank? ? "总台" : order.worker.name %></td>
           <td>
+            <% if not order.takeout %>
             <a href="<%= edit_cpanel_order_path(order) %>" class="btn btn-primary-outline btn-sm">修改</a>
+            <% end %>
             <%= link_to "删除", cpanel_order_path(order), :class => "btn btn-primary-outline btn-sm", :method => :delete %>
           </td>
         </tr>

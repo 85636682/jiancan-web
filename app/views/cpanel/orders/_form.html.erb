@@ -1,0 +1,25 @@
+<%= form_for [:cpanel, @order] do |f| %>
+  <div class="form-group row">
+    <label for="inputPassword3" class="col-sm-2 form-control-label">所属台桌</label>
+    <div class="col-sm-10" style="padding-top:8px;">
+      <%= f.collection_select(:room_id, current_merchant.shop.rooms, :id, :name, { :prompt => "选择台桌" }, { :class => "form-control" }) %>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputPassword3" class="col-sm-2 form-control-label">是否外卖</label>
+    <div class="col-sm-10" style="padding-top:8px;">
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :takeout %> 勾选为外卖
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputEmail3" class="col-sm-2 form-control-label"></label>
+    <div class="col-sm-10">
+      <%= f.submit "保 存", class: "btn btn-primary" %>
+    </div>
+  </div>
+
+<% end %>

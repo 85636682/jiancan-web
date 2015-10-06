@@ -17,7 +17,17 @@ class Cpanel::OrdersController < CpanelController
     @order = Order.new(order_params)
     if @order.room_id.blank? && !@order.takeout
       redirect_to new_cpanel_order_path, :alert => "非外卖订单要选择台号！"
+    elsif @order.takeout && !@order.room_id.blank?
+      redirect_to new_cpanel_order_path, :alert => "外卖订单不用选择台号！"
     else
+      if not @order.takeout
+        tmp_order = Order.where(:room_id => @order.room_id, :status => 'pending').first
+        if not tmp_order.blank?
+          redirect_to new_cpanel_order_path, :alert => "此台桌还有未结算的订单！"
+          return
+        end
+      end
+
       @order.sn = Order.create_sn(current_merchant.shop.id)
       @order.total_price = 0
       @order.user_id = 0
@@ -34,10 +44,21 @@ class Cpanel::OrdersController < CpanelController
   end
 
   def update
-    if @order.update(order_params)
-      redirect_to cpanel_order_path(@order), :notice => "收款成功！"
+    if @order.takeout
+      redirect_to cpanel_order_path(@order), :alert => "外卖单不能修改！"
     else
-      redirect_to cpanel_order_path(@order), :notice => "收款失败！"
+      if @order.room_id != params[:order][:room_id].to_i
+        tmp_order = Order.where(:room_id => @order.room_id, :status => 'pending').first
+        if not tmp_order.blank?
+          redirect_to edit_cpanel_order_path(@order), :alert => "所选择的台桌还有未结算的订单！"
+          return
+        end
+      end
+      if @order.update(order_params)
+        redirect_to cpanel_order_path(@order), :notice => "修改成功！"
+      else
+        redirect_to cpanel_order_path(@order), :notice => "修改失败！"
+      end
     end
   end
 
