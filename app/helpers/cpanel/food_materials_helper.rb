@@ -1,0 +1,2 @@
+module Cpanel::FoodMaterialsHelper
+end

@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
+
   namespace :cpanel do
     get 'home/index'
     get 'home/prices'
     get 'home/about'
     resources :shops, expect: :destroy
     resources :products
+    resources :food_materials
     resources :rooms
     resources :orders do
       member do
