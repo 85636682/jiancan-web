@@ -1,9 +1,25 @@
 <%= render 'navbar' %>
 <% if not @shop.blank? %>
 <table class="table">
+  <thead>
+    <th>
+      头像
+    </th>
+    <th>
+      店名
+    </th>
+    <th>
+      地址
+    </th>
+    <th>
+      电话
+    </th>
+    <th>
+      操作
+    </th>
+  </thead>
   <tbody>
     <tr>
-      <th scope="row">1</th>
       <td>
         <%= image_tag(@shop.avatar.url("80x80"), :alt=>"店铺头像", :class=>"img-circle", :width => "40", :height => "40") %>
       </td>

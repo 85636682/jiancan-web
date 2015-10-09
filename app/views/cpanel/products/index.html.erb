@@ -4,7 +4,6 @@
     <table class="table">
       <thead>
         <tr>
-          <th># <i class="fa fa-sort"></i></th>
           <th>图片</th>
           <th>名称 <i class="fa fa-sort"></i></th>
           <th>价格 <i class="fa fa-sort"></i></th>
@@ -15,7 +14,6 @@
       <tbody>
       <% @products.each do |product| %>
         <tr>
-          <td><%= product.id %></td>
           <td>
             <%= image_tag(product.avatar.url("80x80"), :alt=>"商品头像", :class=>"img-circle", :width => "40", :height => "40") %>
           </td>

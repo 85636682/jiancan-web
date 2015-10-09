@@ -4,7 +4,6 @@
     <table class="table">
       <thead>
         <tr>
-          <th># <i class="fa fa-sort"></i></th>
           <th>
             图片
           </th>
@@ -24,7 +23,6 @@
       <tbody>
       <% @food_materials.each do |food_material| %>
         <tr>
-          <td><%= food_material.id %></td>
           <td>
             <%= image_tag(food_material.avatar.url("80x80"), :alt=>"商品头像", :class=>"img-circle", :width => "40", :height => "40") %>
           </td>
