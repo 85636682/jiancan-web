@@ -20,6 +20,9 @@
 AppView = Backbone.View.extend
   el: 'body'
 
+  events:
+    "change input[type='file'].avatar" : "showAvatar"
+
   initialize: ->
     @initNotificationSubscribe()
 
@@ -40,6 +43,14 @@ AppView = Backbone.View.extend
     return if not App.access_token?
     return if App.access_token.length < 5
     true
+
+  showAvatar : (e) ->
+    _this = e.target
+    if _this.files && _this.files[0]
+      reader = new FileReader
+      reader.onload = (e) ->
+        $('#show_avatar').attr 'src', e.target.result
+      reader.readAsDataURL _this.files[0]
 
 window.App =
   current_merchant_id: null,

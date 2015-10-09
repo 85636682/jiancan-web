@@ -38,11 +38,11 @@
   <div class="form-group row">
     <label for="inputAvatar" class="col-sm-2 form-control-label">店铺头像</label>
     <div class="col-sm-1">
-      <%= image_tag(@shop.avatar.url("80x80"), :alt=>"店铺头像", :class=>"img-circle", :width => "40", :height => "40") %>
+      <%= image_tag(@shop.avatar.url("80x80"), :alt=>"店铺头像", :class=>"img-circle", :width => "40", :height => "40", :id => "show_avatar") %>
     </div>
     <div class="col-sm-9">
       <label class="file">
-        <%= f.file_field :avatar %>
+        <%= f.file_field :avatar, :class => 'avatar' %>
         <span class="file-custom"></span>
       </label>
     </div>
@@ -53,5 +53,5 @@
       <%= f.submit "保 存", class: "btn btn-primary" %>
     </div>
   </div>
-  
+
 <% end %>
