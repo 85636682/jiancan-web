@@ -1,4 +1,4 @@
-<h3>修改资料</h3>
+<h5><i class="fa fa-database"></i> 修改资料</h5>
 <%= form_for [:cpanel, @merchant] do |f| %>
   <div class="form-group row">
     <%= f.label :email, class: "col-sm-2 form-control-label" %>
@@ -13,7 +13,7 @@
   </div>
 <% end %>
 <br/>
-<h3>修改密码</h3>
+<h5><i class="fa fa-key"></i> 修改密码</h5>
 <%= form_for [:cpanel, @merchant], :url => { :action => "update_password" } do |f| %>
   <div class="form-group row">
     <%= f.label :password, class: "col-sm-2 form-control-label" %>
