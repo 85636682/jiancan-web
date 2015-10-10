@@ -58,6 +58,16 @@ body {
     a.active, a.active:hover {
       color: #ffffff;
     }
+    .orderTips {
+      display: none;
+    }
+    .new {
+      .orderTips {
+        margin-top:3px;
+        background-color: $redLight;
+        display: inline;
+      }
+    }
   }
 }
 

@@ -63,10 +63,12 @@ $(document).on 'ready', ->
   MessageBus.callbackInterval = 1000
   MessageBus.subscribe "/notifications_count/#{App.access_token}", (data) ->
     span = $(".notification-count span")
+    orderTips = $(".orderTips")
     link = $(".notification-count a")
     new_title = document.title.replace(/^\(\d+\) /, '')
     if data.count > 0
       span.show()
+      orderTips.show()
       new_title = "(#{data.count}) #{new_title}"
       link.addClass("new")
       $.notify({
@@ -78,8 +80,10 @@ $(document).on 'ready', ->
       $("#newOrderRing").get(0).play()
     else
       span.hide()
+      orderTips.hide()
       link.removeClass("new")
     span.text(data.count)
+    orderTips.text(data.count)
     document.title = new_title
 
 $(document).on 'page:change', ->

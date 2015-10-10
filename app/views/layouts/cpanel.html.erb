@@ -77,7 +77,8 @@
               <i class="fa fa-sun-o"></i> 店铺管理
             </a>
             <% if not current_merchant.shop.blank? %>
-            <a href="<%= cpanel_orders_path %>" class="list-group-item <%= active_controller?("orders") %>">
+            <a href="<%= cpanel_orders_path %>" class="list-group-item <%= 'new' if unread_notify_count > 0 %> <%= active_controller?("orders") %>">
+              <span class="label label-default label-pill pull-right orderTips"><%= unread_notify_count %></span>
               <i class="fa fa-bars"></i> 订单管理
             </a>
             <a href="<%= cpanel_products_path %>" class="list-group-item <%= active_controller?("products") %>">
