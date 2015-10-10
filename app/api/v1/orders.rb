@@ -63,6 +63,24 @@ module V1
         @order = Order.find_by_sn(params[:sn])
       end
 
+      desc '订单结账'
+      params do
+        requires :order_id, type: Integer, desc: '订单ID'
+      end
+      get 'settle' do
+        @order = Order.find(params[:order_id])
+        if @order.blank?
+          error!({ error: "订单不存在！" }, 400)
+        else
+          if @order.pending?
+            @order.settled
+            render @order
+          else
+            error!({ error: "订单已经结账！" }, 400)
+          end
+        end
+      end
+
     end
   end
 end

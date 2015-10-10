@@ -85,6 +85,11 @@ body {
     padding-right: 20px;
   }
 
+  .selectProductForOrder {
+    display:none;
+    color: $redLight;
+  }
+
 }
 
 .form-control {

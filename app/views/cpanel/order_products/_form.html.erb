@@ -2,27 +2,17 @@
 <%= hidden_field_tag "order_id", @order.id %>
 <table class="table">
   <thead>
-    <th width="60">
-      选中
-    </th>
-    <th>
-      名称
-    </th>
-    <th>
-      数量
-    </th>
-    <th>
-      单价
-    </th>
-    <th>
-      分类
-    </th>
+    <th width="60">#</th>
+    <th>名称</th>
+    <th>数量</th>
+    <th>单价</th>
+    <th>分类</th>
   </thead>
   <tbody>
     <% @products.each do |product| %>
     <tr>
       <td>
-        <i class="fa fa-check-square-o" style="display:none;" id="products_quantity_<%= product.id %>_check"></i>
+        <i class="fa fa-check-square-o selectProductForOrder" id="products_quantity_<%= product.id %>_check"></i>
         <%= hidden_field_tag "products_quantity[#{product.id}]", "0", :id => "products_quantity_#{product.id}" %>
       </td>
       <td>
