@@ -6,6 +6,9 @@
         <tr>
           <th>名称 <i class="fa fa-sort"></i></th>
           <th>手机IMEI码 <i class="fa fa-sort"></i></th>
+          <th>
+            入职时间 <i class="fa fa-sort"></i>
+          </th>
           <th>操作</th>
         </tr>
       </thead>
@@ -14,6 +17,9 @@
         <tr>
           <td><%= worker.name %></td>
           <td><%= worker.imei %></td>
+          <td>
+            <%= formattime(worker.created_at, :unit => 'day') %>
+          </td>
           <td>
             <a href="<%= edit_cpanel_worker_path(worker) %>" class="btn btn-primary-outline btn-sm">修改</a>
           </td>
