@@ -11,7 +11,7 @@
     <nav class="navbar navbar-light bg-faded">
       <div class="container">
         <a class="navbar-brand" href="<%= root_path %>"><em><h3>Dingist</h3></em></a>
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav info-bar">
           <li class="nav-item">
             <a class="nav-link" href="#">特点</a>
           </li>
@@ -33,7 +33,7 @@
           </li>
         </ul><!--/.nav-collapse -->
         <% if merchant_signed_in? %>
-        <ul class="nav navbar-nav pull-right">
+        <ul class="nav navbar-nav pull-right merchant-bar">
           <li class="nav-item cart-count">
             <a href="<%= cpanel_cart_index_path %>" class="nav-link <%= 'new' if cart_market_product_count > 0 %>">
               <i class="fa fa-shopping-cart"></i>
@@ -51,7 +51,13 @@
             </a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><%= current_merchant.name.blank? ? current_merchant.email : current_merchant.name %></a>
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+              <%= current_merchant.name.blank? ? current_merchant.email : current_merchant.name %>
+            </a>
+            <a class="navbar-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              <span class="sr-only">Toggle</span>
+              <i class="fa fa-reorder"></i>
+            </a>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="<%= edit_cpanel_merchant_path(current_merchant) %>">账 号</a>
               <div class="dropdown-divider"></div>

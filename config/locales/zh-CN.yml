@@ -7,6 +7,7 @@
     attributes:
       merchant:
         email: "邮箱"
+        name: "用户名"
         password: "密码"
         password_confirmation: "确认密码"
         current_password: "当前密码"

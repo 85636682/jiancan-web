@@ -26,6 +26,6 @@ class Cpanel::MerchantsController < CpanelController
   private
 
   def merchant_params
-    params.require(:merchant).permit(:password, :password_confirmation, :current_password, :email)
+    params.require(:merchant).permit(:password, :password_confirmation, :current_password, :email, :name)
   end
 end

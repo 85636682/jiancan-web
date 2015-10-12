@@ -48,6 +48,36 @@ body {
       }
     }
   }
+
+  .merchant-bar {
+    .dropdown-toggle { display: block; }
+    .navbar-toggle { display: none;   padding: 6px 8px; margin: 0;}
+  }
+
+  @media (max-width: 767px) {
+    .navbar-header {
+      text-align: center;
+      padding: 2px 0;
+      .navbar-brand {
+        font-size: 12px; float: none; margin: 0 auto;
+        height: auto; padding: 0px 10px;
+      }
+    }
+    .navbar-nav { float: left; margin: 0px; }
+    .navbar-nav>li { float: left; }
+    .navbar-nav.navbar-right { float:right; }
+    .merchant-bar {
+      .dropdown-toggle { display: none; }
+      .navbar-toggle { display: block; border-radius: 0px; }
+      .dropdown.open .navbar-toggle { background-color: $grayDark; }
+    }
+    .info-bar { display: none; }
+    .form-search {
+      .fa-search {
+        display: none;
+      }
+    }
+  }
 }
 
 .sidebar {
@@ -272,17 +302,4 @@ body {
 
 .price-tablelist .pricing-col .footer {
   padding: 15px 0
-}
-
-/*iPad竖板*/
-@media screen and (max-device-width: 768px) and (orientation: portrait) {
-  .container {
-    width: 90%;
-  }
-}
-/*iPad横板*/
-@media screen and (max-device-width: 1024px) and (orientation: landscape) {
-  .container {
-    width: 90%;
-  }
 }
