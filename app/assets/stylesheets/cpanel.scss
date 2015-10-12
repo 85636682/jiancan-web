@@ -54,7 +54,7 @@ body {
     .navbar-toggle { display: none;   padding: 6px 8px; margin: 0;}
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 767px) {
     .navbar-header {
       text-align: center;
       padding: 2px 0;
@@ -66,16 +66,18 @@ body {
     .navbar-nav { float: left; margin: 0px; }
     .navbar-nav>li { float: left; }
     .navbar-nav.navbar-right { float:right; }
-    .merchant-bar {
-      .dropdown-toggle { display: none; }
-      .navbar-toggle { display: block; border-radius: 0px; }
-      .dropdown.open .navbar-toggle { background-color: $grayDark; }
-    }
     .info-bar { display: none; }
     .form-search {
       .fa-search {
         display: none;
       }
+    }
+  }
+  @media (max-width: 1024px) {
+    .merchant-bar {
+      .dropdown-toggle { display: none; }
+      .navbar-toggle { display: block; border-radius: 0px; }
+      .dropdown.open .navbar-toggle { background-color: $grayDark; }
     }
   }
 }
