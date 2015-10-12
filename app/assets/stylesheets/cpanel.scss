@@ -77,7 +77,9 @@ body {
     .merchant-bar {
       .dropdown-toggle { display: none; }
       .navbar-toggle { display: block; border-radius: 0px; }
-      .dropdown.open .navbar-toggle { background-color: $grayDark; }
+      .dropdown.open .navbar-toggle {
+        background-color: $grayDark;
+      }
     }
   }
 }
