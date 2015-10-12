@@ -4,20 +4,16 @@
     <table class="table">
       <thead>
         <tr>
-          <th># <i class="fa fa-sort"></i></th>
           <th>名称 <i class="fa fa-sort"></i></th>
           <th>手机IMEI码 <i class="fa fa-sort"></i></th>
-          <th>私人Token <i class="fa fa-sort"></i></th>
           <th>操作</th>
         </tr>
       </thead>
       <tbody>
       <% @workers.each do |worker| %>
         <tr>
-          <td><%= worker.id %></td>
           <td><%= worker.name %></td>
           <td><%= worker.imei %></td>
-          <td><%= worker.private_token %></td>
           <td>
             <a href="<%= edit_cpanel_worker_path(worker) %>" class="btn btn-primary-outline btn-sm">修改</a>
           </td>
