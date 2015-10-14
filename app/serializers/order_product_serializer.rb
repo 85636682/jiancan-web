@@ -1,5 +1,5 @@
 class OrderProductSerializer < BaseSerializer
-  attributes :id, :order_id, :product_id, :product, :quantity
+  attributes :id, :order_id, :product_id, :product, :quantity, :status
 
   def product
     ProductSerializer.new(object.product, root: false)

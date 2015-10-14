@@ -36,6 +36,18 @@ module V1
         render @orders
       end
 
+      desc '获取某店铺下所有订单的菜色'
+      params do
+        requires :shop_id, type: Integer, desc: '店铺Id'
+        requires :status, type: Symbol, values: [:pending, :settled, :completed, :canceled], default: :pending, desc: "pending 订单消费状态  settled订单结算状态  completed 订单完成支付  canceled订单取消"
+        optional :offset, type: Integer, default: 0
+        optional :limit,  type: Integer, default: 20, values: 1..150
+      end
+      get 'orders_products', each_serializer: OrderProductSerializer, root: 'orders_products' do
+
+        @orders_products = OrderProduct.joins(:order).where("orders.shop_id = ?", params[:shop_id]).order("created_at DESC")
+        render @orders_products
+      end
     end
   end
 end
