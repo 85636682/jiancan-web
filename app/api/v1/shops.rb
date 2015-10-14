@@ -42,10 +42,10 @@ module V1
         optional :offset, type: Integer, default: 0
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
-      get 'orders_products', each_serializer: OrderProductSerializer, root: 'orders_products' do
+      get 'order_products', each_serializer: OrderProductSerializer, root: 'order_products' do
         authenticate!
-        @orders_products = OrderProduct.joins(:order).where("orders.shop_id = ?", @current_worker.shop_id).order("created_at DESC")
-        render @orders_products
+        @order_products = OrderProduct.joins(:order).where("orders.shop_id = ?", @current_worker.shop_id).order("created_at DESC")
+        render @order_products
       end
     end
   end
