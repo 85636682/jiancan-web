@@ -1,6 +1,11 @@
 module V1
   class Shops < Grape::API
     resource :shops do
+      desc '返回当前用户所关联的店铺信息，用于非登录页面'
+      get '', serializer: ShopSerializer, root: 'shop' do
+        authenticate!
+        render current_worker.shop
+      end
 
       desc '获取某店铺下所有分类'
       params do
