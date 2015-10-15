@@ -334,6 +334,7 @@ DEPENDENCIES
   activerecord-postgis-adapter (= 3.0.0.beta2)
   activesupport-json_encoder
   alipay (~> 0.7.1)
+  bcrypt
   better_errors
   binding_of_caller
   by_star!

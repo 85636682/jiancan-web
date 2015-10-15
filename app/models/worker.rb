@@ -1,4 +1,6 @@
 class Worker < ActiveRecord::Base
+  has_secure_password
+  
   belongs_to :shop
   has_many :orders
 

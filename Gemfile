@@ -39,6 +39,7 @@ gem 'redis-objects', '1.1.0'
 # 用户系统
 gem 'devise'
 gem 'devise-encryptable'
+gem 'bcrypt'
 
 # 上传组件
 gem 'carrierwave'
@@ -127,4 +128,3 @@ end
 group :production do
   gem 'dalli'
 end
-

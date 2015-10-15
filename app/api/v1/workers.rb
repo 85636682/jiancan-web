@@ -3,22 +3,17 @@ module V1
     resource :workers do
       desc "用户登录"
       params do
-        requires :email, type: String, desc: "用户登录邮箱"
-        requires :imei,  type: String, desc: "IMEI"
+        requires :login, type: String, desc: "员工账号"
+        requires :password,  type: String, desc: "员工密码"
       end
       post 'login' do
-        resource = Merchant.find_by_email(params[:email])
-        if resource.blank? && resource.shop.blank?
-          error!({ error: "此用户和店铺不存在！" }, 400)
+        worker = Worker.find_by_login(params[:login])
+        if worker && worker.authenticate(params[:password])
+          { msg: "登录成功！", access_token: worker.get_private_token }
         else
-          worker = Worker.where("imei = ? AND shop_id = ?", params[:imei], resource.shop.id).first
-          if worker.blank?
-            error!({ error: "密码不正确！" }, 401)
-          else
-            { msg: "登录成功！", access_token: worker.get_private_token, shop_id: resource.shop.id }
-          end
+          error!({ error: "用户和密码不正确！" }, 401)
         end
       end
-    end    
+    end
   end
 end

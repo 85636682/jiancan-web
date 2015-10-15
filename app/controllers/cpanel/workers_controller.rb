@@ -1,6 +1,6 @@
 class Cpanel::WorkersController < CpanelController
   before_action :set_shop, only: [:new, :edit]
-  before_action :set_worker, only: [:edit, :destroy]
+  before_action :set_worker, only: [:edit, :destroy, :update]
 
   def index
     @workers = current_merchant.shop.workers.paginate(:page => params[:page], :per_page => 10)
@@ -45,10 +45,10 @@ class Cpanel::WorkersController < CpanelController
   end
 
   def set_worker
-    
+    @worker = Worker.find(params[:id])
   end
 
   def worker_params
-    params.require(:worker).permit(:name, :imei, :shop_id)
+    params.require(:worker).permit(:name, :imei, :shop_id, :password, :password_confirmation, :login)
   end
 end
