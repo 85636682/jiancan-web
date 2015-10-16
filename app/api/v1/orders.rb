@@ -8,14 +8,19 @@ module V1
       end
       post '', serializer: OrderSerializer, root: 'order' do
         authenticate!
-        @order = Order.new(:shop_id => params[:shop_id], :room_id => params[:room_id],
-                           :sn => Order.create_sn(params[:shop_id]),
-                           :total_price => 0, :takeout => false)
-        @order.worker_id = current_worker.id
-        if @order.save
-          render @order
+        @room = Room.find(params[:room_id])
+        if @room.blank? || (@room.shop_id != params[:shop_id])
+          error!({ error: "店铺或台桌不存在！" }, 400)
         else
-          error!({ error: @order.errors.full_messages }, 400)
+          @order = Order.new(:shop_id => params[:shop_id], :room_id => params[:room_id],
+                             :sn => Order.create_sn(params[:shop_id]),
+                             :total_price => 0, :takeout => false)
+          @order.worker_id = current_worker.id
+          if @order.save
+            render @order
+          else
+            error!({ error: @order.errors.full_messages }, 400)
+          end
         end
       end
 
