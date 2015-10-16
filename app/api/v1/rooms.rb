@@ -22,10 +22,10 @@ module V1
         if @room.blank?
           error!({ error: "台桌不存在！" }, 400)
         else
-          @order = Order.find_by_room_id(@room.id)
+          @order = Order.where("room_id = ? AND status = 'pending'", @room.id).first
           if @order.blank?
             @order = Order.new(:shop_id => @room.shop.id, :room_id => @room.id,
-                               :sn => Order.create_sn(@room.shop.id), 
+                               :sn => Order.create_sn(@room.shop.id),
                                :total_price => 0, :takeout => false)
             @order.worker_id = current_worker.id
             if not @order.save
@@ -34,7 +34,7 @@ module V1
           end
           render @order
         end
-        
+
       end
     end
   end
