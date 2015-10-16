@@ -3,17 +3,16 @@ module V1
     resource :orders do
       desc '创建订单'
       params do
-        requires :shop_id, type: Integer, desc: "店铺id"
         requires :room_id, type: Integer, desc: "台桌房间id"
       end
       post '', serializer: OrderSerializer, root: 'order' do
         authenticate!
         @room = Room.find(params[:room_id])
-        if @room.blank? || (@room.shop_id != params[:shop_id])
-          error!({ error: "店铺或台桌不存在！" }, 400)
+        if @room.blank?
+          error!({ error: "台桌不存在！" }, 400)
         else
-          @order = Order.new(:shop_id => params[:shop_id], :room_id => params[:room_id],
-                             :sn => Order.create_sn(params[:shop_id]),
+          @order = Order.new(:shop_id => @room.shop_id, :room_id => @room.id,
+                             :sn => Order.create_sn(@room.shop_id),
                              :total_price => 0, :takeout => false)
           @order.worker_id = current_worker.id
           if @order.save
