@@ -7,7 +7,7 @@ module V1
       end
       post '', serializer: OrderSerializer, root: 'order' do
         authenticate!
-        @room = Room.find(params[:room_id])
+        @room = Room.find_by_id(params[:room_id])
         if @room.blank?
           error!({ error: "台桌不存在！" }, 400)
         else
@@ -38,7 +38,7 @@ module V1
         products_quantity = JSON.parse(params[:products_quantity])
         ActiveRecord::Base.transaction do
           products_quantity.each do |key, value|
-            product = Product.find(key)
+            product = Product.find_by_id(key)
             if not product.blank?
               order_product = OrderProduct.where(:order_id => @order.id, :product_id => key).first
               if order_product.blank?
@@ -74,7 +74,7 @@ module V1
         requires :order_id, type: Integer, desc: '订单ID'
       end
       get 'settle' do
-        @order = Order.find(params[:order_id])
+        @order = Order.find_by_id(params[:order_id])
         if @order.blank?
           error!({ error: "订单不存在！" }, 400)
         else
