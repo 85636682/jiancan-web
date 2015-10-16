@@ -11,15 +11,17 @@ module V1
         if @room.blank?
           error!({ error: "台桌不存在！" }, 400)
         else
-          @order = Order.new(:shop_id => @room.shop_id, :room_id => @room.id,
-                             :sn => Order.create_sn(@room.shop_id),
-                             :total_price => 0, :takeout => false)
-          @order.worker_id = current_worker.id
-          if @order.save
-            render @order
-          else
-            error!({ error: @order.errors.full_messages }, 400)
+          @order = Order.where("room_id = ? AND status = 'pending'", @room.id).first
+          if @order.blank?
+            @order = Order.new(:shop_id => @room.shop.id, :room_id => @room.id,
+                               :sn => Order.create_sn(@room.shop.id),
+                               :total_price => 0, :takeout => false)
+            @order.worker_id = current_worker.id
+            if not @order.save
+              error!({ error: @order.errors.full_messages }, 400)
+            end
           end
+          render @order
         end
       end
 

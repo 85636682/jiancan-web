@@ -18,7 +18,7 @@ module V1
       end
       get 'order', serializer: OrderSerializer, root: 'order' do
         authenticate!
-        @room = Room.find(params[:room_id])
+        @room = Room.find_by_id(params[:room_id])
         if @room.blank?
           error!({ error: "台桌不存在！" }, 400)
         else
