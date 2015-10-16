@@ -18,18 +18,21 @@
     <p>错误的情况 Response Body 一定会是这样的格式: <code>{ "error" : "Error message" }</code></p>
 
     <h4>API 路由</h4>
-    
+
     <p>URL 基本路径：<%= request.protocol %><%= Setting.domain %>/api/v1</p>
     <div class="row">
       <div class="col-md-3">
         <ul class="route-list">
           <% @routes.each do |route| %>
+          <% if route[:desc] != "" %>
           <li><%= route[:method] %> <a href="#route-<%= route[:id] %>"><%= route[:name] %></a></li>
+          <% end %>
           <% end %>
         </ul>
       </div>
       <div class="routes col-md-9">
         <% @routes.each do |route| %>
+        <% if route[:desc] != "" %>
         <div class="route" id="route-<%= route[:id] %>">
           <h5><label><%= route[:method] %></label> <%= route[:name] %></h5>
           <div class="content">
@@ -66,6 +69,7 @@
             <% end %>
           </div>
         </div>
+        <% end %>
         <% end %>
       </div>
     </div>
