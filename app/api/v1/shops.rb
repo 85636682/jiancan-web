@@ -14,8 +14,12 @@ module V1
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
       get 'categories', each_serializer: CategorySerializer, root: 'categories' do
-        @shop = Shop.find(params[:shop_id])
-        @categories = @shop.categories.offset(params[:offset]).limit(params[:limit]).order("id ASC")
+        @shop = Shop.find_by_id(params[:shop_id])
+        if @shop.blank?
+          error!({ error: "店铺不存在！" }, 400)
+        else
+          @categories = @shop.categories.offset(params[:offset]).limit(params[:limit]).order("id ASC")
+        end
       end
 
       desc '获取某店铺下所有商品'
@@ -24,8 +28,12 @@ module V1
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
       get 'products', each_serializer: ProductSerializer, root: 'products' do
-        @shop = Shop.find(params[:id])
-        @products = @shop.products.offset(params[:offset]).limit(params[:limit]).order("id ASC")
+        @shop = Shop.find_by_id(params[:id])
+        if @shop.blank?
+          error!({ error: "店铺不存在！" }, 400)
+        else
+          @products = @shop.products.offset(params[:offset]).limit(params[:limit]).order("id ASC")
+        end
       end
 
       desc '返回某店铺下所有订单'

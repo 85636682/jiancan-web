@@ -32,32 +32,36 @@ module V1
       end
       post 'products' do
         authenticate!
-        @order = Order.find(params[:order_id])
-        amount = 0
-        success = true
-        products_quantity = JSON.parse(params[:products_quantity])
-        ActiveRecord::Base.transaction do
-          products_quantity.each do |key, value|
-            product = Product.find_by_id(key)
-            if not product.blank?
-              order_product = OrderProduct.where(:order_id => @order.id, :product_id => key).first
-              if order_product.blank?
-                success = OrderProduct.create(:order_id => @order.id, :product_id => key, :quantity => value)
-              else
-                quantity = order_product.quantity + value.to_i
-                success = order_product.update(:quantity => quantity)
-              end
-              amount += product.price.to_i * value.to_i
-            end
-          end
-          total_price = @order.total_price + amount
-          success = @order.update(:total_price => total_price)
-        end
-
-        if success
-          render @order
+        @order = Order.find_by_id(params[:order_id])
+        if @order.blank?
+          error!({ error: "订单不存在！" }, 400)
         else
-          error!({ error: "商品实效，导致添加失败！" }, 400)
+          amount = 0
+          success = true
+          products_quantity = JSON.parse(params[:products_quantity])
+          ActiveRecord::Base.transaction do
+            products_quantity.each do |key, value|
+              product = Product.find_by_id(key)
+              if not product.blank?
+                order_product = OrderProduct.where(:order_id => @order.id, :product_id => key).first
+                if order_product.blank?
+                  success = OrderProduct.create(:order_id => @order.id, :product_id => key, :quantity => value)
+                else
+                  quantity = order_product.quantity + value.to_i
+                  success = order_product.update(:quantity => quantity)
+                end
+                amount += product.price.to_i * value.to_i
+              end
+            end
+            total_price = @order.total_price + amount
+            success = @order.update(:total_price => total_price)
+          end
+
+          if success
+            render @order
+          else
+            error!({ error: "商品实效，导致添加失败！" }, 400)
+          end
         end
       end
 

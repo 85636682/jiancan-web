@@ -8,8 +8,12 @@ module V1
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
       get 'products', each_serializer: ProductSerializer, root: 'products' do
-        @category = Category.find(params[:category_id])
-        @products = @category.products.offset(params[:offset]).limit(params[:limit]).order("id ASC")
+        @category = Category.find_by_id(params[:category_id])
+        if @category.blank?
+          error!({ error: "分类不存在！" }, 400)
+        else
+          @products = @category.products.offset(params[:offset]).limit(params[:limit]).order("id ASC")
+        end
       end
 
       desc '返回某个商铺的分类'
