@@ -7,7 +7,7 @@ module V1
         render current_worker.shop
       end
 
-      desc '获取某店铺下所有分类'
+      desc '获取店铺下所有分类'
       params do
         requires :shop_id, type: Integer
         optional :offset, type: Integer, default: 0
@@ -22,7 +22,7 @@ module V1
         end
       end
 
-      desc '获取某店铺下所有商品'
+      desc '获取店铺下所有商品'
       params do
         optional :offset, type: Integer, default: 0
         optional :limit,  type: Integer, default: 20, values: 1..150
@@ -36,7 +36,7 @@ module V1
         end
       end
 
-      desc '返回某店铺下所有订单'
+      desc '返回店铺下所有订单'
       params do
         requires :shop_id, type: Integer, desc: '店铺的Id'
         requires :status, type: Symbol, values: [:pending, :settled, :completed, :canceled], default: :pending, desc: "pending 订单消费状态  settled订单结算状态  completed 订单完成支付  canceled订单取消"
@@ -49,16 +49,35 @@ module V1
         render @orders
       end
 
-      desc '获取某店铺下所有订单的菜色'
+      desc '获取店铺下所有订单的菜色'
       params do
-        requires :status, type: Symbol, values: [:pending, :settled, :completed, :canceled], default: :pending, desc: "pending 订单消费状态  settled订单结算状态  completed 订单完成支付  canceled订单取消"
+        requires :status, type: Symbol, values: [:pending, :cooking, :finished, :canceled], default: :pending, desc: "订单菜色的状态"
         optional :offset, type: Integer, default: 0
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
       get 'order_products', each_serializer: OrderProductSerializer, root: 'order_products' do
         authenticate!
-        @order_products = OrderProduct.joins(:order).where("orders.shop_id = ?", @current_worker.shop_id).order("created_at DESC")
+        @order_products = OrderProduct.joins(:order).where("orders.shop_id = ? AND orders.status = 'pending'", @current_worker.shop_id).order("created_at DESC")
         render @order_products
+      end
+
+      desc '更新店铺下某订单的菜色'
+      params do
+        requires :id, type: Integer, desc: "订单菜色的ID"
+        requires :status, type: Symbol, values: [:pending, :cooking, :finished, :canceled], desc: "订单菜色的状态"
+      end
+      put 'order_products', serializer: OrderProductSerializer, root: 'order_product' do
+        authenticate!
+        @order_product = OrderProduct.find_by_id(params[:id])
+        if @order_product.blank?
+          error!({ error: "该订单不存在此菜色！" }, 400)
+        else
+          if @order_product.update(:status => params[:status])
+            render @order_product
+          else
+            error!({ error: "更新失败！" }, 400)
+          end
+        end
       end
     end
   end
