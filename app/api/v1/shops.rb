@@ -22,6 +22,21 @@ module V1
         end
       end
 
+      desc '获取店铺下所有台桌'
+      params do
+        requires :shop_id, type: Integer
+        optional :offset, type: Integer, default: 0
+        optional :limit,  type: Integer, default: 20, values: 1..150
+      end
+      get 'rooms', each_serializer: RoomSerializer, root: 'rooms' do
+        @shop = Shop.find_by_id(params[:shop_id])
+        if @shop.blank?
+          error!({ error: "店铺不存在！" }, 400)
+        else
+          @rooms = @shop.rooms.offset(params[:offset]).limit(params[:limit]).order("id ASC")
+        end
+      end
+
       desc '获取店铺下所有商品'
       params do
         optional :offset, type: Integer, default: 0

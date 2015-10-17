@@ -8,4 +8,8 @@ class OrderProduct < ActiveRecord::Base
   def self.find_quantity(product_id, order_id)
     where(:product_id => product_id, :order_id => order_id).first.quantity
   end
+
+  def pending?
+    status == 'pending'
+  end
 end

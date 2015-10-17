@@ -65,6 +65,23 @@ module V1
         end
       end
 
+      desc '从订单删除状态为pending的菜色'
+      params do
+        requires :order_product_id, type: Integer, desc: 'order_product的id'
+      end
+      delete 'products' do
+        @order_product = OrderProduct.find_by_id(params[:order_product_id])
+        if @order_product.blank? || !@order_product.pending?
+          error!({ error: "菜色不存在或者已经烹煮！" }, 400)
+        else
+          if @order_product.destroy
+            { msg: '删除成功！' }
+          else
+            error!({ error: "菜色删除失败！" }, 400)
+          end
+        end
+      end
+
       desc '根据订单号SN搜索订单'
       params do
         requires :sn, type: String, desc: '订单编号'
