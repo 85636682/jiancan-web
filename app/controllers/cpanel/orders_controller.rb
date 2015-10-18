@@ -75,13 +75,25 @@ class Cpanel::OrdersController < CpanelController
   end
 
   def settle
-    @order.settled
-    redirect_to cpanel_order_path(@order), :notice => "结账成功！"
+    if @order.pendings_count > 0
+      redirect_to cpanel_order_path(@order), :alert => "结账失败，还有菜色还未完成！"
+    else
+      if @order.pending?
+        @order.settled
+        redirect_to cpanel_order_path(@order), :notice => "结账成功！"
+      else
+        redirect_to cpanel_order_path(@order), :alert => "订单已经结账！"
+      end
+    end
   end
 
   def cancel
-    @order.canceled
-    redirect_to cpanel_orders_path, :notice => "取消成功！"
+    if @order.pending?
+      @order.canceled
+      redirect_to cpanel_orders_path, :notice => "取消成功！"
+    else
+      redirect_to cpanel_order_path(@order), :alert => "取消失败，订单已经结账！"
+    end
   end
 
   def search

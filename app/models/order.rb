@@ -14,6 +14,10 @@ class Order < ActiveRecord::Base
     DateTime.parse(Time.now.iso8601).strftime('%Y%m%d%H%M%S') + rand(999).to_s
   end
 
+  def pendings_count
+    self.order_products.where(:status => 'pending').count
+  end
+
   after_create do
     Order.notify_order_created(id)
   end

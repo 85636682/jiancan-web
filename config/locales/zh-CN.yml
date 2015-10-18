@@ -25,6 +25,12 @@
         settled: "结算"
         completed: "完成"
         canceled: "取消"
+    order_product:
+      status:
+        pending: '新建'
+        cooking: '烹饪'
+        finished: '完成'
+        canceled: '取消'
     user:
       gender:
         male: "男"

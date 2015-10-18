@@ -96,8 +96,8 @@ module V1
       end
       get 'settle' do
         @order = Order.find_by_id(params[:order_id])
-        if @order.blank?
-          error!({ error: "订单不存在！" }, 400)
+        if @order.blank? || @order.pendings_count > 0
+          error!({ error: "订单不存在或者还有菜色未完成！" }, 400)
         else
           if @order.pending?
             @order.settled

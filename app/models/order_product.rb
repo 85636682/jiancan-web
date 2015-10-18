@@ -7,7 +7,7 @@ class OrderProduct < ActiveRecord::Base
 
   after_create :update_sales_volume
   def update_sales_volume
-    sales_volume = product.sales_volume
+    sales_volume = product.sales_volume ||= 0
     product.update(:sales_volume => sales_volume + 1)
   end
 

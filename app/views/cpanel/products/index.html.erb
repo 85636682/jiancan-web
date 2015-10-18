@@ -8,6 +8,9 @@
           <th>名称 <i class="fa fa-sort"></i></th>
           <th>价格 <i class="fa fa-sort"></i></th>
           <th>分类 <i class="fa fa-sort"></i></th>
+          <th>
+            销售量
+          </th>
           <th>操作</th>
         </tr>
       </thead>
@@ -20,6 +23,9 @@
           <td><%= product.name %></td>
           <td>￥<%= product.price %></td>
           <td><%= product.category.name if not product.category.blank? %></td>
+          <td>
+            <%= product.sales_volume %>
+          </td>
           <td>
             <a href="<%= edit_cpanel_product_path(product) %>" class="btn btn-primary-outline btn-sm">修改</a>
           </td>
