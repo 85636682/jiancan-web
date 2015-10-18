@@ -78,12 +78,12 @@ module V1
 
       desc '更新店铺下某订单的菜色'
       params do
-        requires :id, type: Integer, desc: "订单菜色的ID"
+        requires :order_product_id, type: Integer, desc: "订单菜色的ID"
         requires :status, type: Symbol, values: [:pending, :cooking, :finished, :canceled], desc: "订单菜色的状态"
       end
-      put 'order_products', serializer: OrderProductSerializer, root: 'order_product' do
+      put 'order_products', serializer: OrderProductSerializer, root: 'OrderProduct' do
         authenticate!
-        @order_product = OrderProduct.find_by_id(params[:id])
+        @order_product = OrderProduct.find_by_id(params[:order_product_id])
         if @order_product.blank?
           error!({ error: "该订单不存在此菜色！" }, 400)
         else
