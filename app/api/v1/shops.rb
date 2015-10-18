@@ -81,7 +81,7 @@ module V1
         requires :order_product_id, type: Integer, desc: "订单菜色的ID"
         requires :status, type: Symbol, values: [:pending, :cooking, :finished, :canceled], desc: "订单菜色的状态"
       end
-      put 'order_products', serializer: OrderProductSerializer, root: false do
+      put 'order_products', serializer: OrderProductSerializer, root: 'order_product' do
         authenticate!
         @order_product = OrderProduct.find_by_id(params[:order_product_id])
         if @order_product.blank?

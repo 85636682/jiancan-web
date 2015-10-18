@@ -30,7 +30,7 @@ module V1
         requires :order_id, type: Integer, desc: '订单的id'
         requires :products_quantity, type: String, desc: 'Json格式的字符串，包含所有添加商品id和对应数量，用商品的id作为key，用所选商品的数据作为value'
       end
-      post 'products' do
+      post 'products', serializer: OrderSerializer, root: 'order' do
         authenticate!
         @order = Order.find_by_id(params[:order_id])
         if @order.blank?
@@ -86,7 +86,7 @@ module V1
       params do
         requires :sn, type: String, desc: '订单编号'
       end
-      get 'search' do
+      get 'search', serializer: OrderSerializer, root: 'order' do
         @order = Order.find_by_sn(params[:sn])
       end
 
@@ -94,7 +94,7 @@ module V1
       params do
         requires :order_id, type: Integer, desc: '订单ID'
       end
-      get 'settle' do
+      get 'settle', serializer: OrderSerializer, root: 'order' do
         @order = Order.find_by_id(params[:order_id])
         if @order.blank? || @order.pendings_count > 0
           error!({ error: "订单不存在或者还有菜色未完成！" }, 400)
