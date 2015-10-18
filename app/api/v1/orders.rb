@@ -44,7 +44,7 @@ module V1
               product = Product.find_by_id(key)
               if not product.blank?
                 order_product = OrderProduct.where(:order_id => @order.id, :product_id => key).first
-                if order_product.blank?
+                if order_product.blank? || !order_product.pending?
                   success = OrderProduct.create(:order_id => @order.id, :product_id => key, :quantity => value)
                 else
                   quantity = order_product.quantity + value.to_i
