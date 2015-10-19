@@ -35,9 +35,11 @@ class Order < ActiveRecord::Base
   end
 
   def settled
+    success = false
     if status.pending?
-      update_attributes(:status => 'settled')
+      success = update_attributes(:status => 'settled')
     end
+    success
   end
 
   def settled?
@@ -45,9 +47,11 @@ class Order < ActiveRecord::Base
   end
 
   def completed
+    success = false
     if status.settled?
-      update_attributes(:status => 'completed')
+      success = update_attributes(:status => 'completed')
     end
+    success
   end
 
   def completed?
@@ -55,9 +59,11 @@ class Order < ActiveRecord::Base
   end
 
   def canceled
+    success = false
     if status.pending?
-      update_attributes(:status => 'canceled')
+      success = update_attributes(:status => 'canceled')
     end
+    success
   end
 
   def canceled?

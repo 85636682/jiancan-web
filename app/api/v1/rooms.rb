@@ -8,7 +8,7 @@ module V1
         optional :offset, type: Integer, default: 0
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
-      get 'orders', each_serializer: OrderSerializer, root: 'orders' do
+      get 'orders', each_serializer: OrderSerializer, root: false do
         @orders = Order.where("room_id = ? AND status = ?", params[:room_id], params[:status]).offset(params[:offset]).limit(params[:limit]).order("id DESC")
       end
 
@@ -16,7 +16,7 @@ module V1
       params do
         requires :room_id, type: Integer, desc: '台桌的Id'
       end
-      get 'order', serializer: OrderSerializer, root: 'order' do
+      get 'order', serializer: OrderSerializer, root: false do
         authenticate!
         @room = Room.find_by_id(params[:room_id])
         if @room.blank?

@@ -7,7 +7,7 @@ module V1
         optional :offset, type: Integer, default: 0
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
-      get 'products', each_serializer: ProductSerializer, root: 'products' do
+      get 'products', each_serializer: ProductSerializer, root: false do
         @category = Category.find_by_id(params[:category_id])
         if @category.blank?
           error!({ error: "分类不存在！" }, 400)
@@ -20,7 +20,7 @@ module V1
       params do
         requires :shop_id, type: Integer, desc: '商铺的Id'
       end
-      get '', each_serializer: CategorySerializer, root: 'categories' do
+      get '', each_serializer: CategorySerializer, root: false do
         @categories = Category.where(:shop_id => params[:shop_id]).order("created_at ASC")
       end
     end

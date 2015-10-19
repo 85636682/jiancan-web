@@ -2,7 +2,7 @@ module V1
   class Shops < Grape::API
     resource :shops do
       desc '返回当前用户所关联的店铺信息，用于非登录页面'
-      get 'current', serializer: ShopSerializer, root: 'shop' do
+      get 'current', serializer: ShopSerializer, root: false do
         authenticate!
         render current_worker.shop
       end
@@ -13,7 +13,7 @@ module V1
         optional :offset, type: Integer, default: 0
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
-      get 'categories', each_serializer: CategorySerializer, root: 'categories' do
+      get 'categories', each_serializer: CategorySerializer, root: false do
         @shop = Shop.find_by_id(params[:shop_id])
         if @shop.blank?
           error!({ error: "店铺不存在！" }, 400)
@@ -28,7 +28,7 @@ module V1
         optional :offset, type: Integer, default: 0
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
-      get 'rooms', each_serializer: RoomSerializer, root: 'rooms' do
+      get 'rooms', each_serializer: RoomSerializer, root: false do
         @shop = Shop.find_by_id(params[:shop_id])
         if @shop.blank?
           error!({ error: "店铺不存在！" }, 400)
@@ -42,7 +42,7 @@ module V1
         optional :offset, type: Integer, default: 0
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
-      get 'products', each_serializer: ProductSerializer, root: 'products' do
+      get 'products', each_serializer: ProductSerializer, root: false do
         @shop = Shop.find_by_id(params[:id])
         if @shop.blank?
           error!({ error: "店铺不存在！" }, 400)
@@ -58,7 +58,7 @@ module V1
         optional :offset, type: Integer, default: 0
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
-      get 'orders', each_serializer: OrderSerializer, root: 'orders' do
+      get 'orders', each_serializer: OrderSerializer, root: false do
         authenticate!
         @orders = Order.where("shop_id = ? AND status = ?", params[:shop_id], params[:status]).offset(params[:offset]).limit(params[:limit]).order("created_at DESC")
         render @orders
@@ -70,30 +70,12 @@ module V1
         optional :offset, type: Integer, default: 0
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
-      get 'order_products', each_serializer: OrderProductSerializer, root: 'order_products' do
+      get 'order_products', each_serializer: OrderProductSerializer, root: false do
         authenticate!
         @order_products = OrderProduct.joins(:order).where("orders.shop_id = ? AND orders.status = 'pending'", @current_worker.shop_id).order("created_at DESC")
         render @order_products
       end
 
-      desc '更新店铺下某订单的菜色'
-      params do
-        requires :order_product_id, type: Integer, desc: "订单菜色的ID"
-        requires :status, type: Symbol, values: [:pending, :cooking, :finished, :canceled], desc: "订单菜色的状态"
-      end
-      put 'order_products', serializer: OrderProductSerializer, root: 'order_product' do
-        authenticate!
-        @order_product = OrderProduct.find_by_id(params[:order_product_id])
-        if @order_product.blank?
-          error!({ error: "该订单不存在此菜色！" }, 400)
-        else
-          if @order_product.update(:status => params[:status])
-            render @order_product
-          else
-            error!({ error: "更新失败！" }, 400)
-          end
-        end
-      end
     end
   end
 end

@@ -7,7 +7,7 @@ module V1
         optional :offset, type: Integer, default: 0
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
-      get '', each_serializer: ProductSerializer, root: 'products' do
+      get '', each_serializer: ProductSerializer, root: false do
         @products = Product.all.offset(params[:offset]).limit(params[:limit]).order("created_at ASC")
       end
     end
