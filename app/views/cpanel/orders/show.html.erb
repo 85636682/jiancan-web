@@ -65,7 +65,9 @@
                 <%= order_product.quantity %>
               </td>
               <td>
-                <%= order_product.status.text %>
+                <a href="<%= status_cpanel_order_product_path(order_product) %>" class="btn btn-primary-outline">
+                  <%= order_product.status.text %>
+                </a>
               </td>
             </tr>
             <% end %>

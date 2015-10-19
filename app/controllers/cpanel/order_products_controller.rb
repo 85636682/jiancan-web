@@ -1,11 +1,11 @@
 class Cpanel::OrderProductsController < CpanelController
+  before_action :set_order, only: [:new, :create]
+
   def new
     @products = current_merchant.shop.products.order("category_id ASC")
-    @order = Order.find(params[:order_id])
   end
 
   def create
-    @order = Order.find(params[:order_id])
     amount = 0
     success = true
     #这里要改
@@ -34,5 +34,29 @@ class Cpanel::OrderProductsController < CpanelController
     else
       redirect_to cpanel_order_path(@order), :alert => "添加删除！"
     end
+  end
+
+  def status
+    @order_product = OrderProduct.find(params[:id])
+    case @order_product.status
+    when 'pending'
+      status = 'cooking'
+    when 'cooking'
+      status = 'finished'
+    when 'finished'
+      status = 'NoUpdate'
+    end
+    puts status
+    if status == 'NoUpdate' || @order_product.update(:status => status)
+      redirect_to cpanel_order_path(@order_product.order), :notice => "更新成功！"
+    else
+      redirect_to cpanel_order_path(@order_product.order), :alert => "更新失败！"
+    end
+  end
+
+  private
+
+  def set_order
+    @order = Order.find(params[:order_id])
   end
 end

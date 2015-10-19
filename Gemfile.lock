@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/jpush/jpush-api-ruby-client.git
+  revision: 17e150a4c94c6ee29ebcfa2c8c84f331b531ead4
+  specs:
+    jpush (3.2.2)
+
+GIT
   remote: git://github.com/radar/by_star
   revision: d2d997c98b43999283d6c443351dfae3815c02b4
   specs:
@@ -6,7 +12,7 @@ GIT
       activesupport
 
 GEM
-  remote: http://ruby.taobao.org/
+  remote: https://ruby.taobao.org/
   specs:
     actionmailer (4.2.4)
       actionpack (= 4.2.4)
@@ -358,6 +364,7 @@ DEPENDENCIES
   grape-active_model_serializers
   hiredis (~> 0.6.0)
   jbuilder (~> 2.0)
+  jpush!
   jquery-rails
   jwt
   letter_opener

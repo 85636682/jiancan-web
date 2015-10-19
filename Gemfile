@@ -1,4 +1,4 @@
-source 'http://ruby.taobao.org'
+source 'https://ruby.taobao.org'
 
 gem 'rails', '~> 4.2.4'
 gem 'sprockets', '~> 3.3.3'
@@ -63,6 +63,9 @@ gem 'smart_sms'
 
 # 实时通知
 gem 'message_bus'
+
+# 推送
+gem 'jpush', :git => 'git://github.com/jpush/jpush-api-ruby-client.git'
 
 # 枚举
 gem 'enumerize'
