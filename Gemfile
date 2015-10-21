@@ -126,6 +126,7 @@ group :development, :test do
   gem 'thin'
   gem 'better_errors'            #出错提示友好版
   gem 'binding_of_caller'     #出错提示友好版
+  gem 'rails_db'
 end
 
 group :production do

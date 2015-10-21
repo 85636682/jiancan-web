@@ -104,6 +104,8 @@ GEM
       carrierwave (>= 0.5.7)
       faraday (>= 0.8.0)
     chronic (0.10.2)
+    codemirror-rails (5.6)
+      railties (>= 3.0, < 5)
     coderay (1.1.0)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
@@ -146,8 +148,13 @@ GEM
       railties (>= 3.0.0)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
+    font-awesome-rails (4.4.0.0)
+      railties (>= 3.2, < 5.0)
     font-awesome-sass (4.3.2.1)
       sass (~> 3.2)
+    foundation-rails (5.5.3.2)
+      railties (>= 3.1.0)
+      sass (>= 3.3.0, < 3.5)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     grape (0.13.0)
@@ -235,6 +242,14 @@ GEM
     rails-html-sanitizer (1.0.2)
       loofah (~> 2.0)
     rails-simple-search (0.9.9)
+    rails_db (0.1)
+      codemirror-rails
+      font-awesome-rails
+      foundation-rails
+      jquery-rails
+      rails (>= 3.1.0)
+      sass
+      sass-rails
     railties (4.2.4)
       actionpack (= 4.2.4)
       activesupport (= 4.2.4)
@@ -377,6 +392,7 @@ DEPENDENCIES
   rails (~> 4.2.4)
   rails-deprecated_sanitizer
   rails-simple-search (~> 0.9.9)
+  rails_db
   redis (~> 3.2.1)
   redis-namespace (~> 1.5.1)
   redis-objects (= 1.1.0)
