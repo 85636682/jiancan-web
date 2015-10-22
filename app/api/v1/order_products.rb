@@ -32,7 +32,7 @@ module V1
           error!({ error: "菜色不存在或者已经烹煮！" }, 400)
         else
           success = true
-          if @order_product.quantity + params[:quantity].to_i == 0
+          if @order_product.quantity + params[:quantity].to_i <= 0
             temp_total_price = @order_product.order.total_price + @order_product.product.price * params[:quantity].to_i
             ActiveRecord::Base.transaction do
               success = @order_product.order.update(:total_price => temp_total_price)

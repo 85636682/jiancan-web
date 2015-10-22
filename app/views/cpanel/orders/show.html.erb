@@ -34,6 +34,9 @@
         <table class="table">
           <thead>
             <th>
+              #
+            </th>
+            <th>
               图片
             </th>
             <th>
@@ -52,6 +55,9 @@
           <tbody>
             <% @order.order_products.each do |order_product| %>
             <tr>
+              <td>
+                <%= order_product.id %>
+              </td>
               <td>
                 <%= image_tag(order_product.product.avatar.url("80x80"), :alt=>"商品头像", :class=>"img-circle", :width => "40", :height => "40") %>
               </td>
