@@ -28,8 +28,17 @@ body {
     height: 80px;
     padding-top: 20px;
     background: #84bde4;
-    opacity: 0.3;
+    background:rgba(255,251,240,0.1);
+    filter:Alpha(opacity=30);
     border-radius: 0px;
+
+    .navbar-brand {
+      color: #FFFFFF;
+    }
+
+    .info-bar a {
+      color: #FFFFFF;
+    }
 
     .btn-primary-outline {
       color: #FFFFFF;
@@ -43,10 +52,10 @@ body {
   text-align: center;
   color: #FFFFFF;
   .company-logo {
-    margin-top: 230px;
   }
   .company-name {
-    margin-top: 200px;
+    font-size: 50px;
+    margin-top: 100px;
   }
   .company-say {
     font-size: 90px;
