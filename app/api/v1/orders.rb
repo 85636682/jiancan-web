@@ -37,7 +37,7 @@ module V1
           if success
             render @order
           else
-            error!({ error: "商品实效，导致添加失败！" }, 400)
+            error!({ error: "商品失效，导致添加失败！" }, 400)
           end
         end
       end

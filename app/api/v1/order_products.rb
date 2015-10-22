@@ -28,8 +28,8 @@ module V1
       put 'quantity' do
         authenticate!
         @order_product = OrderProduct.find_by_id(params[:order_product_id])
-        if @order_product.blank?
-          error!({ error: "该订单不存在此菜色！" }, 400)
+        if @order_product.blank? || !@order_product.pending?
+          error!({ error: "菜色不存在或者已经烹煮！" }, 400)
         else
           success = true
           temp_quantity = @order_product.quantity + params[:quantity].to_i

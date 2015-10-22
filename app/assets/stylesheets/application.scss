@@ -1,0 +1,72 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require bootstrap
+ *= require font-awesome-plug
+ *= require_self
+ */
+
+body {
+  width: 100%;
+  min-width: 998px;
+  overflow-x: hidden;
+  font-size: 14px;
+  background: #fff image-url("bg1800.jpg") no-repeat center top;
+}
+
+.header {
+  .navbar {
+    height: 80px;
+    padding-top: 20px;
+    background: #84bde4;
+    opacity: 0.3;
+    border-radius: 0px;
+
+    .btn-primary-outline {
+      color: #FFFFFF;
+      border-color: #FFFFFF;
+    }
+  }
+}
+
+.company-info {
+  font-weight: lighter;
+  text-align: center;
+  color: #FFFFFF;
+  .company-logo {
+    margin-top: 230px;
+  }
+  .company-name {
+    margin-top: 200px;
+  }
+  .company-say {
+    font-size: 90px;
+  }
+  .app-downs {
+    margin-top: 80px;
+    font-size: 23px;
+    a {
+      font-weight: lighter;
+      font-size: 28px;
+      color: #FFF;
+      margin-left: 20px;
+    }
+    .down-name {
+      text-align: center;
+      padding: 10px;
+    }
+  }
+}
+
+.form-section {
+  color: #FFFFFF;
+}

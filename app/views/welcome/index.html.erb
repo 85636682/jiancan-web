@@ -1,59 +1,59 @@
-<div class="root">
-    <div class="top-bg"></div>
-    <div class="home-main">
-      <div class="home-content">
-        <div class="home-phones" id="iphone">
-          <div id="iphone-overlay">
-            <img src="//instagramstatic-a.akamaihd.net/bluebar/c030a3b/images/homepage/screenshot1.jpg" class="active" />
-            <img src="//instagramstatic-a.akamaihd.net/bluebar/c030a3b/images/homepage/screenshot2.jpg" />
-            <img src="//instagramstatic-a.akamaihd.net/bluebar/c030a3b/images/homepage/screenshot3.jpg" />
-            <img src="//instagramstatic-a.akamaihd.net/bluebar/c030a3b/images/homepage/screenshot4.jpg" />
-            <img src="//instagramstatic-a.akamaihd.net/bluebar/c030a3b/images/homepage/screenshot5.jpg" />
-          </div>
-          <i class="home-phones-glare"></i>
-        </div>
-        <div class="right-column">
-          <header class="home-header login-only">
-            <h1 class="instagram-title">Instagram - 在 iPhone 上快速分享精美照片</h1>
-            <div class="home-account-links">
-              <% if merchant_signed_in? %>
-                <%= link_to "进入后台", cpanel_home_index_path %>
-              <% else %>
-                <%= link_to "登录", new_merchant_session_path, class: "home-login home-account-link" %>
-                <%= link_to "注册", new_merchant_registration_path, class: "home-login home-account-link" %>
-              <% end %>
-            </div>
-          </header>
-          <div class="content">
-            <div class="tab">
-              <div class="tab-content">
-                <h1>捕捉并分享世界各地的美好时刻</h1>
-                <p>免费 与 轻松 分享生活精彩，与好友保持联系，尽在 Instagram。
-                </p>
-                <p>
-                  拍摄照片或视频，利用各种滤镜和创意工具随心定制。在 Instagram 发布后，即可立刻分享至 Facebook、Twitter、Tumblr 等各大社交网络，或直接以私信发送。根据你感兴趣的内容搜索用户，或加入极富灵感的社区。
-                </p>
-                <div class="platform-badge-container">
-                  <a class="platform-badge" href="/download/ios/?campaign=desktopHome&medium=badge">
-                    <img alt="已在 App Store 中提供" class="platform-badge-image" src="//instagramstatic-a.akamaihd.net/bluebar/c030a3b/images/appstore-install-badges/badge_ios_chinese_simplified.png"/></a>
-                  <a class="platform-badge" href="/download/android/?campaign=desktopHome&medium=badge">
-                    <img alt="已在 Google Play 中提供" class="platform-badge-image" src="//instagramstatic-a.akamaihd.net/bluebar/c030a3b/images/appstore-install-badges/simplified_chinese_get.png"/></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="splash-middle"></div>
-      <footer class="page-footer" role="contentinfo">
-        <div class="wrapper">
-          <nav class="nav">
-            <a href="/about/us/">关于我们</a>
-            <a href="<%= welcome_api_path %>">API</a>
-          </nav>
-          <p class="copyright">&copy; 2015 Instagram</p>
-        </div>
-      </footer>
-    </div>
+<section class="company-info">
+  <div class="company-logo">
   </div>
+  <h1 class="company-name">
+    简餐
+  </h1>
+  <p class="company-say">
+    智能些，简单些
+  </p>
+  <div class="app-downs">
+    <ul class="list-unstyled list-inline">
+      <li>
+        <div class="down-name">
+          服务员 APP：
+        </div>
+        <div class="down-links">
+          <a href="#" class="btn btn-primary btn-lg">
+            <i class="fa fa-android"></i> 立即下载
+          </a>
+          <a href="#" class="btn btn-primary btn-lg">
+            <i class="fa fa-apple"></i> App store
+          </a>
+        </div>
+      </li>
+      <li style="padding-left:25px;">|</li>
+      <li>
+        <div class="down-name">
+          厨房 APP：
+        </div>
+        <div class="down-links">
+          <a href="#" class="btn btn-primary btn-lg">
+            <i class="fa fa-android"></i> 立即下载
+          </a>
+          <a href="#" class="btn btn-primary btn-lg">
+            <i class="fa fa-apple"></i> App store
+          </a>
+        </div>
+      </li>
+      <!--
+      <li>
+        <div class="down-name">
+          用户 APP：
+        </div>
+        <div class="down-links">
+          <a href="#" class="btn btn-primary btn-lg">
+            <i class="fa fa-android"></i> 立即下载
+          </a>
+          <a href="#" class="btn btn-primary btn-lg">
+            <i class="fa fa-apple"></i> App store
+          </a>
+        </div>
+      </li>
+    -->
+    </ul>
+  </div>
+  <p class="app-info">
+    官网版本：1.0  |  运行环境：android 4.4 以上、ios 8 以上
+  </p>
+</section>

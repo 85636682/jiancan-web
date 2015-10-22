@@ -1,12 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Ding</title>
+  <title>简餐</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body class="page-home spring-refresh">
+<body>
+  <div class="header">
+    <nav class="navbar navbar-light bg-faded">
+      <div class="container">
+        <a class="navbar-brand" href="<%= root_path %>"><em><h3>简餐</h3></em></a>
+        <ul class="nav navbar-nav info-bar">
+          <li class="nav-item">
+            <a class="nav-link" href="#">特点</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= cpanel_home_prices_path %>">价格</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= cpanel_home_about_path %>">关于</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav pull-right">
+        <% if merchant_signed_in? %>
+          <li class="nav-item">
+            <%= link_to "进入后台", cpanel_home_index_path, :class => "btn btn-primary" %>
+          </li>
+        <% else %>
+        <li class="nav-item">
+          <%= link_to "登录", new_merchant_session_path, class: "btn btn-primary-outline" %>
+          <%= link_to "注册", new_merchant_registration_path, class: "btn btn-primary-outline" %>
+        </li>
+        <% end %>
+        </ul>
+      </div>
+    </nav>
+  </div>
   <%= yield %>
 </body>
 </html>
