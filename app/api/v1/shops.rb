@@ -53,14 +53,13 @@ module V1
 
       desc '返回店铺下所有订单'
       params do
-        requires :shop_id, type: Integer, desc: '店铺的Id'
         requires :status, type: Symbol, values: [:pending, :settled, :completed, :canceled], default: :pending, desc: "pending 订单消费状态  settled订单结算状态  completed 订单完成支付  canceled订单取消"
         optional :offset, type: Integer, default: 0
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
       get 'orders', each_serializer: OrderSerializer, root: false do
         authenticate!
-        @orders = Order.where("shop_id = ? AND status = ?", params[:shop_id], params[:status]).offset(params[:offset]).limit(params[:limit]).order("created_at DESC")
+        @orders = Order.where("shop_id = ? AND status = ?", @current_worker.shop_id, params[:status]).offset(params[:offset]).limit(params[:limit]).order("created_at DESC")
         render @orders
       end
 
