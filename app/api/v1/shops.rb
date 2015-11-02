@@ -39,11 +39,12 @@ module V1
 
       desc '获取店铺下所有商品'
       params do
+        requires :shop_id, type: Integer
         optional :offset, type: Integer, default: 0
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
       get 'products', each_serializer: ProductSerializer, root: false do
-        @shop = Shop.find_by_id(params[:id])
+        @shop = Shop.find_by_id(params[:shop_id])
         if @shop.blank?
           error!({ error: "店铺不存在！" }, 400)
         else
