@@ -1,5 +1,5 @@
 class OrderSerializer < BaseSerializer
-  attributes :id, :sn, :status, :total_price, :created_at, :updated_at, :room_id, :room, :worker_id, :worker
+  attributes :id, :sn, :status, :total_price, :created_at, :updated_at, :room_id, :room, :worker_id, :worker, :shop_id
 
   has_many :order_products, serializer: OrderProductSerializer
 
@@ -9,6 +9,10 @@ class OrderSerializer < BaseSerializer
 
   def worker
     WorkerSerializer.new(object.worker, root: false)
+  end
+
+  def shop
+    ShopSerializer.new(object.shop, root: false)
   end
 
   def created_at
