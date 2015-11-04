@@ -1,6 +1,6 @@
 class OrderProduct < ActiveRecord::Base
   extend Enumerize  #pending 新建状态  cooking烹饪状态  finished完成状态  canceled取消
-  enumerize :status,     in: [:pending, :cooking, :finished, :canceled], default: :pending
+  enumerize :status,     in: [:maybe, :pending, :cooking, :finished, :canceled], default: :pending
 
   belongs_to :order
   belongs_to :product
