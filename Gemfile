@@ -97,7 +97,7 @@ gem "puma", "2.11.0"
 
 gem 'whenever', :require => false
 
-
+gem 'rails_db'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -131,5 +131,4 @@ end
 
 group :production do
   gem 'dalli'
-    gem 'rails_db'
 end

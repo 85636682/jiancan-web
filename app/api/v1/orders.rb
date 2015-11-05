@@ -53,11 +53,8 @@ module V1
                   quantity = order_product.quantity + value.to_i
                   success = order_product.update(:quantity => quantity)
                 end
-                amount += product.price.to_i * value.to_i
               end
             end
-            total_price = @order.total_price + amount
-            success = @order.update(:total_price => total_price)
           end
 
           if success
