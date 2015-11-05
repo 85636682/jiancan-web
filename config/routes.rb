@@ -17,7 +17,7 @@ Rails.application.routes.draw do
         get :search
       end
     end
-    resources :order_products, only: [:new, :create] do
+    resources :order_products, only: [:new, :create, :delete] do
       member do
         get :status
       end
