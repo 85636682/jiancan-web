@@ -10,6 +10,9 @@
           <th>台号 <i class="fa fa-sort"></i></th>
           <th>员工 <i class="fa fa-sort"></i></th>
           <th>状态 <i class="fa fa-sort"></i></th>
+          <th>
+            操作
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -26,6 +29,9 @@
           <td><%= order.room.blank? ? "外卖" : order.room.name %></td>
           <td><%= order.worker.blank? ? "总台" : order.worker.name %></td>
           <td><%= order.status.text %></td>
+          <td>
+            <%= link_to "删除", cpanel_order_path(order), :class => "btn btn-primary-outline btn-sm", :method => :delete, data: { :confirm => '删除后不能恢复，确定删除?' } %>
+          </td>
         </tr>
       <% end %>
       </tbody>
