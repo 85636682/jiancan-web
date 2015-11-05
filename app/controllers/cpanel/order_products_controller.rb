@@ -56,6 +56,7 @@ class Cpanel::OrderProductsController < CpanelController
 
   def destroy
     #if @order.pending?
+    @order_product.find(params[:id])
       if @order_product.destroy
         redirect_to cpanel_order_products_path, :notice => '删除成功！'
       else
