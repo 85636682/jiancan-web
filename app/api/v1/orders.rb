@@ -6,7 +6,7 @@ module V1
       params do
         requires :order_id, type: Integer, desc: '订单的id'
       end
-      get 'cart', serializer: OrderProductSerializer, root: false do
+      get 'cart', each_serializer: OrderProductSerializer, root: false do
         @order_products = OrderProduct.where(:order_id => params[:order_id], :status => 'maybe')
       end
 
