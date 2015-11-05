@@ -79,7 +79,7 @@
                 </a>
               </td>
               <td>
-                <%= link_to "删除", cpanel_order_products_path(order_product), :class => "btn btn-primary-outline btn-sm", :method => :delete, data: { :confirm => '删除后不能恢复，确定删除?' } %>
+                <%= link_to "删除", cpanel_order_product_path(order_product), :class => "btn btn-primary-outline btn-sm", :method => :delete, data: { :confirm => '删除后不能恢复，确定删除?' } %>
               </td>
             </tr>
             <% end %>
