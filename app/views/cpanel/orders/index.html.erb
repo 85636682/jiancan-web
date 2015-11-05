@@ -4,6 +4,9 @@
     <table class="table">
       <thead>
         <tr>
+          <th>
+            #
+          </th>
           <th>订单编号 <i class="fa fa-sort"></i></th>
           <th>时间 <i class="fa fa-sort"></i></th>
           <th>总额 <i class="fa fa-sort"></i></th>
@@ -18,6 +21,9 @@
       <tbody>
       <% @orders.each do |order| %>
         <tr>
+          <td>
+            <%= order.id %>
+          </td>
           <td>
             <a href="<%= cpanel_order_path(order) %>"><%= order.sn %></a>
             <% if order_unread?(order) %>
