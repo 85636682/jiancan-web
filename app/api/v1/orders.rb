@@ -2,12 +2,29 @@ module V1
   class Orders < Grape::API
     resource :orders do
 
-      decs '读取购物车'
+      desc '读取购物车'
       params do
         requires :order_id, type: Integer, desc: '订单的id'
       end
       get 'cart', serializer: OrderProductSerializer, root: false do
         @order_products = OrderProduct.where(:order_id => params[:order_id], :status => 'maybe')
+      end
+
+      desc '从购物车删除'
+      params do
+        requires :order_product_id, type: Integer, desc: 'order_product的id'
+      end
+      delete 'cart' do
+        @order_product = OrderProduct.find_by_id(params[:order_product_id])
+        if @order_product.blank? || !@order_product.maybe?
+          error!({ error: "菜色不存在或者已经烹煮！" }, 400)
+        else
+          if @order_product.destroy
+            { msg: 'ok' }
+          else
+            error!({ error: "菜色删除失败！" }, 400)
+          end
+        end
       end
 
       desc '添加购物车'

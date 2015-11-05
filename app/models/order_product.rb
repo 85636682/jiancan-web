@@ -15,6 +15,10 @@ class OrderProduct < ActiveRecord::Base
     where(:product_id => product_id, :order_id => order_id).first.quantity
   end
 
+  def maybe?
+    status == 'maybe'
+  end
+
   def pending?
     status == 'pending'
   end
