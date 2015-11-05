@@ -48,7 +48,7 @@ module V1
               if not product.blank?
                 order_product = OrderProduct.where(:order_id => @order.id, :product_id => key, :status => "maybe").first
                 if order_product.blank?
-                  success = OrderProduct.create(:order_id => @order.id, :product_id => key, :quantity => value)
+                  success = OrderProduct.create(:order_id => @order.id, :product_id => key, :quantity => value, :status => "maybe")
                 else
                   quantity = order_product.quantity + value.to_i
                   success = order_product.update(:quantity => quantity)
