@@ -57,10 +57,11 @@ class Cpanel::OrderProductsController < CpanelController
   def destroy
     #if @order.pending?
     @order_product = OrderProduct.find(params[:id])
+    @order = @order_product.order
       if @order_product.destroy
-        redirect_to cpanel_order_products_path, :notice => '删除成功！'
+        redirect_to cpanel_order_path(@order), :notice => '删除成功！'
       else
-        redirect_to cpanel_order_products_path, :alert => '删除失败！'
+        redirect_to cpanel_order_path(@order), :alert => '删除失败！'
       end
     #else
     #  redirect_to cpanel_order_path(@order), :alert => '此订单已经结账，不能删除！'
