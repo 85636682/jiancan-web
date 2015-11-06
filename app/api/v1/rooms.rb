@@ -34,7 +34,6 @@ module V1
           end
           render @order
         end
-
       end
     end
   end
