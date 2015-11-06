@@ -20,7 +20,7 @@
     </div>
   </div>
   <script>
-    $('#qrcode').qrcode({width: 64, height: 64, text: "{ room_id: <%= @room.id %>, room_name: <%= @room.name %>, shop_id: <%= @shop.id %>, shop_name: <%= @shop.name %> }"});
+    $('#qrcode').qrcode({width: 64, height: 64, text: "{ room_id: <%= @room.id %>, room_name: <%= @room.name %> }"});
   </script>
   <% end %>
   <div class="form-group row">
