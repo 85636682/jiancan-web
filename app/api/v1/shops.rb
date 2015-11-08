@@ -14,7 +14,7 @@ module V1
       end
       get 'categories', each_serializer: CategorySerializer, root: false do
         authenticate!
-        @categories = Categorie.where(:shop_id => current_worker.shop_id).offset(params[:offset]).limit(params[:limit]).order("id ASC")
+        @categories = Category.where(:shop_id => current_worker.shop_id).offset(params[:offset]).limit(params[:limit]).order("id ASC")
       end
 
       desc '获取店铺下所有台桌'
