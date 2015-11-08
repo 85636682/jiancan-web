@@ -9,47 +9,32 @@ module V1
 
       desc '获取店铺下所有分类'
       params do
-        requires :shop_id, type: Integer
         optional :offset, type: Integer, default: 0
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
       get 'categories', each_serializer: CategorySerializer, root: false do
-        @shop = Shop.find_by_id(params[:shop_id])
-        if @shop.blank?
-          error!({ error: "店铺不存在！" }, 400)
-        else
-          @categories = @shop.categories.offset(params[:offset]).limit(params[:limit]).order("id ASC")
-        end
+        authenticate!
+        @categories = Categorie.where(:shop_id => current_worker.shop_id).offset(params[:offset]).limit(params[:limit]).order("id ASC")
       end
 
       desc '获取店铺下所有台桌'
       params do
-        requires :shop_id, type: Integer
         optional :offset, type: Integer, default: 0
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
       get 'rooms', each_serializer: RoomSerializer, root: false do
-        @shop = Shop.find_by_id(params[:shop_id])
-        if @shop.blank?
-          error!({ error: "店铺不存在！" }, 400)
-        else
-          @rooms = @shop.rooms.offset(params[:offset]).limit(params[:limit]).order("id ASC")
-        end
+        authenticate!
+        @rooms = Room.where(:shop_id => current_worker.shop_id).offset(params[:offset]).limit(params[:limit]).order("id ASC")
       end
 
       desc '获取店铺下所有商品'
       params do
-        requires :shop_id, type: Integer
         optional :offset, type: Integer, default: 0
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
       get 'products', each_serializer: ProductSerializer, root: false do
-        @shop = Shop.find_by_id(params[:shop_id])
-        if @shop.blank?
-          error!({ error: "店铺不存在！" }, 400)
-        else
-          @products = @shop.products.offset(params[:offset]).limit(params[:limit]).order("id ASC")
-        end
+        authenticate!
+        @products = Product.where(:shop_id => current_worker.shop_id).offset(params[:offset]).limit(params[:limit]).order("id ASC")
       end
 
       desc '返回店铺下所有订单'
