@@ -2,69 +2,6 @@ module V1
   class Orders < Grape::API
     resource :orders do
 
-      desc '读取购物车'
-      params do
-        requires :order_id, type: Integer, desc: '订单的id'
-      end
-      get 'cart', each_serializer: OrderProductSerializer, root: false do
-        @order_products = OrderProduct.where(:order_id => params[:order_id], :status => 'maybe')
-      end
-
-      desc '从购物车删除'
-      params do
-        requires :order_product_id, type: Integer, desc: 'order_product的id'
-      end
-      delete 'cart' do
-        @order_product = OrderProduct.find_by_id(params[:order_product_id])
-        if @order_product.blank? || !@order_product.maybe?
-          error!({ error: "菜色不存在或者已经烹煮！" }, 400)
-        else
-          if @order_product.destroy
-            { msg: 'ok' }
-          else
-            error!({ error: "菜色删除失败！" }, 400)
-          end
-        end
-      end
-
-      desc '添加购物车'
-      params do
-        requires :order_id, type: Integer, desc: '订单的id'
-        requires :products_quantity, type: String, desc: 'Json格式的字符串，包含所有添加商品id和对应数量，用商品的id作为key，用所选商品的数据作为value'
-      end
-      post 'cart', serializer: OrderSerializer, root: false do
-        authenticate!
-        @order = Order.find_by_id(params[:order_id])
-        if @order.blank?
-          error!({ error: "订单不存在！" }, 400)
-        else
-          amount = 0
-          success = true
-          products_quantity = JSON.parse(params[:products_quantity])
-          ActiveRecord::Base.transaction do
-            products_quantity.each do |key, value|
-              next if value.to_i < 1
-              product = Product.find_by_id(key)
-              if not product.blank?
-                order_product = OrderProduct.where(:order_id => @order.id, :product_id => key, :status => "maybe").first
-                if order_product.blank?
-                  success = OrderProduct.create(:order_id => @order.id, :product_id => key, :quantity => value, :status => "maybe")
-                else
-                  quantity = order_product.quantity + value.to_i
-                  success = order_product.update(:quantity => quantity)
-                end
-              end
-            end
-          end
-
-          if success
-            render @order
-          else
-            error!({ error: "商品失效，导致添加失败！" }, 400)
-          end
-        end
-      end
-
       desc '给订单添加商品'
       params do
         requires :order_id, type: Integer, desc: '订单的id'
