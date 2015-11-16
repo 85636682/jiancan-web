@@ -30,4 +30,8 @@ class OrderProduct < ActiveRecord::Base
   def canceled?
     status == 'canceled'
   end
+
+  def push_to_kitchen
+
+  end
 end

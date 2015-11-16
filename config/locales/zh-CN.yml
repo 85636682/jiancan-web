@@ -31,6 +31,10 @@
         cooking: '烹饪'
         finished: '完成'
         canceled: '取消'
+    worker:
+      department:
+        waiter: '前台'
+        kitchen: '厨房'
     user:
       gender:
         male: "男"
