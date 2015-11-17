@@ -26,9 +26,9 @@ class OrderProduct < ActiveRecord::Base
     end
     if success
       workers = Worker.where(:shop_id => order.shop.id, :department => "waiter")
-      alias = []
+      receiver = []
       workers.each do |worker|
-        alias << worker.pusher_id
+        receiver << worker.pusher_id
       end
       master_secret = 'f235d2a9ff190aa676c3a391'
       app_key = '6286de72365249a7dfe95b66'
@@ -38,7 +38,7 @@ class OrderProduct < ActiveRecord::Base
         notification: JPush::Notification.build(
           alert: '有菜色正在烹饪，请及时查看！'),
         audience: JPush::Audience.build(
-          _alias: alias))
+          _alias: receiver))
       res = client.sendPush(payload)
       logger.debug("Got result  " +  res.toJSON)
     end
@@ -55,9 +55,9 @@ class OrderProduct < ActiveRecord::Base
     end
     if success
       workers = Worker.where(:shop_id => order.shop.id, :department => "waiter")
-      alias = []
+      receiver = []
       workers.each do |worker|
-        alias << worker.pusher_id
+        receiver << worker.pusher_id
       end
       master_secret = 'f235d2a9ff190aa676c3a391'
       app_key = '6286de72365249a7dfe95b66'
@@ -67,7 +67,7 @@ class OrderProduct < ActiveRecord::Base
         notification: JPush::Notification.build(
           alert: '有菜色已经完成，请及时查看！'),
         audience: JPush::Audience.build(
-          _alias: alias))
+          _alias: receiver))
       res = client.sendPush(payload)
       logger.debug("Got result  " +  res.toJSON)
     end
@@ -87,9 +87,9 @@ class OrderProduct < ActiveRecord::Base
 
   def push_to_kitchen
     workers = Worker.where(:shop_id => order.shop.id, :department => "kitchen")
-    alias = []
+    receiver = []
     workers.each do |worker|
-      alias << worker.pusher_id
+      receiver << worker.pusher_id
     end
     master_secret = 'f235d2a9ff190aa676c3a391'
     app_key = '6286de72365249a7dfe95b66'
@@ -99,7 +99,7 @@ class OrderProduct < ActiveRecord::Base
       notification: JPush::Notification.build(
         alert: '有顾客下单新菜色，请及时查看！'),
       audience: JPush::Audience.build(
-        _alias: alias))
+        _alias: receiver))
     res = client.sendPush(payload)
     logger.debug("Got result  " +  res.toJSON)
   end
