@@ -1,3 +1,5 @@
+require 'jpush'
+
 class OrderProduct < ActiveRecord::Base
   extend Enumerize  #pending 新建状态  cooking烹饪状态  finished完成状态  canceled取消
   enumerize :status,     in: [:pending, :cooking, :finished, :canceled], default: :pending
@@ -31,7 +33,23 @@ class OrderProduct < ActiveRecord::Base
     status == 'canceled'
   end
 
+  after_create :push_to_kitchen
   def push_to_kitchen
-
+    workers = Worker.where(:shop_id => order.shop.id, :department => "kitchen")
+    alias = []
+    workers.each do |worker|
+      alias << worker.pusher_id
+    end
+    master_secret = 'f235d2a9ff190aa676c3a391'
+    app_key = '6286de72365249a7dfe95b66'
+    client = JPush::JPushClient.new(app_key, master_secret)
+    payload = JPush::PushPayload.build(
+      platform: JPush::Platform.all,
+      notification: JPush::Notification.build(
+        alert: '有顾客下单新菜色，请及时查看！'),
+      audience: JPush::Audience.build(
+        _alias: alias))
+    res = client.sendPush(payload)
+    logger.debug("Got result  " +  res.toJSON)
   end
 end
