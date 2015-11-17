@@ -49,6 +49,6 @@ class Cpanel::WorkersController < CpanelController
   end
 
   def worker_params
-    params.require(:worker).permit(:name, :imei, :shop_id, :password, :password_confirmation, :login)
+    params.require(:worker).permit(:name, :imei, :shop_id, :password, :password_confirmation, :login, :department)
   end
 end
