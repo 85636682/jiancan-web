@@ -7,12 +7,6 @@ class OrderProduct < ActiveRecord::Base
   belongs_to :order
   belongs_to :product
 
-  after_create :update_sales_volume
-  def update_sales_volume
-    sales_volume = product.sales_volume ||= 0
-    product.update(:sales_volume => sales_volume + 1)
-  end
-
   def self.find_quantity(product_id, order_id)
     where(:product_id => product_id, :order_id => order_id).first.quantity
   end
@@ -25,15 +19,72 @@ class OrderProduct < ActiveRecord::Base
     status == 'cooking'
   end
 
+  def cooking
+    success = false
+    if status.pending?
+      success = update_attributes(:status => 'cooking')
+    end
+    if success
+      workers = Worker.where(:shop_id => order.shop.id, :department => "waiter")
+      alias = []
+      workers.each do |worker|
+        alias << worker.pusher_id
+      end
+      master_secret = 'f235d2a9ff190aa676c3a391'
+      app_key = '6286de72365249a7dfe95b66'
+      client = JPush::JPushClient.new(app_key, master_secret)
+      payload = JPush::PushPayload.build(
+        platform: JPush::Platform.all,
+        notification: JPush::Notification.build(
+          alert: '有菜色正在烹饪，请及时查看！'),
+        audience: JPush::Audience.build(
+          _alias: alias))
+      res = client.sendPush(payload)
+      logger.debug("Got result  " +  res.toJSON)
+    end
+    success
+  end
+
   def finished?
     status == 'finished'
+  end
+
+  def finished
+    if status.cooking?
+      success = update_attributes(:status => 'finished')
+    end
+    if success
+      workers = Worker.where(:shop_id => order.shop.id, :department => "waiter")
+      alias = []
+      workers.each do |worker|
+        alias << worker.pusher_id
+      end
+      master_secret = 'f235d2a9ff190aa676c3a391'
+      app_key = '6286de72365249a7dfe95b66'
+      client = JPush::JPushClient.new(app_key, master_secret)
+      payload = JPush::PushPayload.build(
+        platform: JPush::Platform.all,
+        notification: JPush::Notification.build(
+          alert: '有菜色已经完成，请及时查看！'),
+        audience: JPush::Audience.build(
+          _alias: alias))
+      res = client.sendPush(payload)
+      logger.debug("Got result  " +  res.toJSON)
+    end
+    success
   end
 
   def canceled?
     status == 'canceled'
   end
 
-  after_create :push_to_kitchen
+  after_create :update_sales_volume, :push_to_kitchen
+
+  def update_sales_volume
+    sales_volume = product.sales_volume ||= 0
+    product.update(:sales_volume => sales_volume + 1)
+  end
+
   def push_to_kitchen
     workers = Worker.where(:shop_id => order.shop.id, :department => "kitchen")
     alias = []

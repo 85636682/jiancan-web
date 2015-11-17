@@ -12,7 +12,14 @@ module V1
         if @order_product.blank?
           error!({ error: "该订单不存在此菜色！" }, 400)
         else
-          if @order_product.update(:status => params[:status])
+          success = false
+          case params[:status]
+          when "cooking"
+            success = @order_product.cooking
+          when "finished"
+            success = @order_product.finished
+          end
+          if success
             { msg: 'ok' }
           else
             error!({ error: "更新失败！" }, 400)
