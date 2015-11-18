@@ -37,6 +37,12 @@ class OrderProduct < ActiveRecord::Base
         platform: JPush::Platform.all,
         notification: JPush::Notification.build(
           alert: '有菜色正在烹饪，请及时查看！'),
+        message: JPush::Message.build(
+          msg_content: "",
+          title: "",
+          content_type: "",
+          extras: { "status" : "cooking", "status_text" : "烹饪" }
+        ),
         audience: JPush::Audience.build(
           _alias: receiver))
       res = client.sendPush(payload)
@@ -66,6 +72,12 @@ class OrderProduct < ActiveRecord::Base
         platform: JPush::Platform.all,
         notification: JPush::Notification.build(
           alert: '有菜色已经完成，请及时查看！'),
+        message: JPush::Message.build(
+          msg_content: "",
+          title: "",
+          content_type: "",
+          extras:  { "status" : "finished", "status_text" : "完成" }
+        ),
         audience: JPush::Audience.build(
           _alias: receiver))
       res = client.sendPush(payload)
@@ -98,6 +110,12 @@ class OrderProduct < ActiveRecord::Base
       platform: JPush::Platform.all,
       notification: JPush::Notification.build(
         alert: '有顾客下单新菜色，请及时查看！'),
+      message: JPush::Message.build(
+        msg_content: "",
+        title: "",
+        content_type: "",
+        extras: self.as_json(include: :product)
+      ),
       audience: JPush::Audience.build(
         _alias: receiver))
     res = client.sendPush(payload)
