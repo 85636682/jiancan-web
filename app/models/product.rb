@@ -6,8 +6,4 @@ class Product < ActiveRecord::Base
 
   mount_uploader :avatar, ImageUploader
   attr_accessor :uploader_secure_token
-
-  def avatar
-    avatar.url("80x80")
-  end
 end
