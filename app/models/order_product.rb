@@ -11,10 +11,6 @@ class OrderProduct < ActiveRecord::Base
     where(:product_id => product_id, :order_id => order_id).first.quantity
   end
 
-  def status_text
-    status.text
-  end
-
   def pending?
     status == 'pending'
   end
@@ -119,7 +115,7 @@ class OrderProduct < ActiveRecord::Base
         msg_content: "",
         title: "",
         content_type: "",
-        extras: self.as_json(include: { product: { methods: :avatar } }, methods: :status_text)
+        extras: self.as_json(include: :product)
       ),
       audience: JPush::Audience.build(
         _alias: receiver))
