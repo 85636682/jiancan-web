@@ -56,6 +56,7 @@ class OrderProduct < ActiveRecord::Base
   end
 
   def finished
+    success = false
     if status.cooking?
       success = update_attributes(:status => 'finished')
     end

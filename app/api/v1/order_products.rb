@@ -14,9 +14,9 @@ module V1
         else
           success = false
           case params[:status]
-          when "cooking"
+          when :cooking
             success = @order_product.cooking
-          when "finished"
+          when :finished
             success = @order_product.finished
           end
           if success
