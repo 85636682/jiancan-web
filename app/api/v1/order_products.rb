@@ -13,19 +13,16 @@ module V1
           error!({ error: "该订单不存在此菜色！" }, 400)
         else
           success = false
-          msg = '更新失败！'
           case params[:status]
           when :cooking
             success = @order_product.cooking
-            msg = 'cooking'
           when :finished
             success = @order_product.finished
-            msg = 'finished'
           end
           if success
             { msg: 'ok' }
           else
-            error!({ error: msg }, 400)
+            error!({ error: "更新失败！" }, 400)
           end
         end
       end
