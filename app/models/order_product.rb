@@ -41,7 +41,7 @@ class OrderProduct < ActiveRecord::Base
           msg_content: "",
           title: "",
           content_type: "",
-          extras: { "status" : "cooking", "status_text" : "烹饪" }
+          extras: { "status" => "cooking", "status_text" => "烹饪" }
         ),
         audience: JPush::Audience.build(
           _alias: receiver))
@@ -76,7 +76,7 @@ class OrderProduct < ActiveRecord::Base
           msg_content: "",
           title: "",
           content_type: "",
-          extras:  { "status" : "finished", "status_text" : "完成" }
+          extras:  { "status" => "finished", "status_text" => "完成" }
         ),
         audience: JPush::Audience.build(
           _alias: receiver))
