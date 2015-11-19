@@ -45,7 +45,7 @@ class OrderProduct < ActiveRecord::Base
     workers = Worker.where(:shop_id => order.shop.id, :department => "waiter")
     receiver = []
     workers.each do |worker|
-      receiver << worker.pusher_id
+      receiver.push(worker.pusher_id)
     end
     master_secret = 'f235d2a9ff190aa676c3a391'
     app_key = '6286de72365249a7dfe95b66'
@@ -63,8 +63,7 @@ class OrderProduct < ActiveRecord::Base
       audience: JPush::Audience.build(
         _alias: receiver))
     res = client.sendPush(payload)
-    jpush_log = Logger.new(STDOUT)
-    jpush_log.debug("Got result (" + result.code.to_s + ") " +  result.toJSON)
+    Rails.logger.debug("Receiver: " + receiver + "Got result (" + result.code.to_s + ") " +  result.toJSON)
   end
 
   def push_to_kitchen(extras)
@@ -89,8 +88,7 @@ class OrderProduct < ActiveRecord::Base
       audience: JPush::Audience.build(
         _alias: receiver))
     res = client.sendPush(payload)
-    jpush_log = Logger.new(STDOUT)
-    jpush_log.debug("Got result (" + result.code.to_s + ") " +  result.toJSON)
+    Rails.logger.debug("Receiver: " + receiver + "Got result (" + result.code.to_s + ") " +  result.toJSON)
   end
 
   after_create :update_sales_volume

@@ -17,11 +17,12 @@ class Cpanel::OrderProductsController < CpanelController
         if not product.blank?
           order_product = OrderProduct.where(:order_id => @order.id, :product_id => key, :status => "pending").first
           if order_product.blank?
-            success = OrderProduct.create(:order_id => @order.id, :product_id => key, :quantity => value)
+            success = order_product = OrderProduct.create(:order_id => @order.id, :product_id => key, :quantity => value)
           else
             quantity = order_product.quantity + value.to_i
             success = order_product.update(:quantity => quantity)
           end
+          order_product.push_to_kitchen(OrderProductSerializer.new(order_product, root: false))
           amount += product.price.to_i * value.to_i
         end
       end
