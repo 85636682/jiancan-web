@@ -63,10 +63,10 @@ class OrderProduct < ActiveRecord::Base
       audience: JPush::Audience.build(
         _alias: receiver))
     res = client.sendPush(payload)
-    worker_logfile = File.open("#{Rails.root}/log/jpush.log", 'a')
-    worker_logfile.sync = true
-    WORKER_LOG = Logger.new(worker_logfile)
-    WORKER_LOG.debug("Got result (" + result.code.to_s + ") " +  result.toJSON)
+    jpush_logfile = File.open("#{Rails.root}/log/jpush.log", 'a')
+    jpush_logfile.sync = true
+    jpush_log = Logger.new(jpush_logfile)
+    jpush_log.debug("Got result (" + result.code.to_s + ") " +  result.toJSON)
   end
 
   def push_to_kitchen(extras)
@@ -91,10 +91,10 @@ class OrderProduct < ActiveRecord::Base
       audience: JPush::Audience.build(
         _alias: receiver))
     res = client.sendPush(payload)
-    worker_logfile = File.open("#{Rails.root}/log/jpush.log", 'a')
-    worker_logfile.sync = true
-    WORKER_LOG = Logger.new(worker_logfile)
-    WORKER_LOG.debug("Got result  (" + result.code.to_s + ")  " +  result.toJSON)
+    jpush_logfile = File.open("#{Rails.root}/log/jpush.log", 'a')
+    jpush_logfile.sync = true
+    jpush_log = Logger.new(jpush_logfile)
+    jpush_log.debug("Got result (" + result.code.to_s + ") " +  result.toJSON)
   end
 
   after_create :update_sales_volume
