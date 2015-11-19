@@ -63,7 +63,7 @@ class OrderProduct < ActiveRecord::Base
       audience: JPush::Audience.build(
         _alias: receiver))
     res = client.sendPush(payload)
-    logger.debug("Got result  " +  result.toJSON)
+    logger.debug("Got result (" + result.code.to_s + ") " +  result.toJSON)
   end
 
   def push_to_kitchen(extras)
@@ -88,7 +88,7 @@ class OrderProduct < ActiveRecord::Base
       audience: JPush::Audience.build(
         _alias: receiver))
     res = client.sendPush(payload)
-    logger.debug("Got result  " +  result.toJSON)
+    logger.debug("Got result  (" + result.code.to_s + ")  " +  result.toJSON)
   end
 
   after_create :update_sales_volume
