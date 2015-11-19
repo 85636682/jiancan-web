@@ -28,11 +28,7 @@ module V1
                   quantity = order_product.quantity + value.to_i
                   success = order_product.update(:quantity => quantity)
                 end
-                order_product.push_to_kitchen(
-                  OrderProductSerializer.new(order_product, root: false).as_json(
-                    include: :product
-                  )
-                )
+                order_product.push_to_kitchen(OrderProductSerializer.new(order_product, root: false).as_json)
                 amount += product.price.to_i * value.to_i
               end
             end
