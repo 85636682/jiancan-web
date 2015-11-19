@@ -47,6 +47,7 @@ class OrderProduct < ActiveRecord::Base
     workers.each do |worker|
       receiver.push(worker.pusher_id)
     end
+    Rails.logger.debug(receiver)
     JcLog.create(content: "Receiver: #{receiver.join(",")}", level: "debug", code: "500")
     master_secret = 'f235d2a9ff190aa676c3a391'
     app_key = '6286de72365249a7dfe95b66'
@@ -74,6 +75,7 @@ class OrderProduct < ActiveRecord::Base
     workers.each do |worker|
       receiver << worker.pusher_id
     end
+    Rails.logger.debug(receiver)
     JcLog.create(content: "Receiver: #{receiver.join(",")}", level: "debug", code: "500")
     master_secret = 'f235d2a9ff190aa676c3a391'
     app_key = '6286de72365249a7dfe95b66'
