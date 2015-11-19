@@ -1,5 +1,5 @@
 class OrderProductSerializer < BaseSerializer
-  attributes :id, :order_id, :product_id, :product, :quantity, :status,
+  attributes :id, :order_id, :product_id, :quantity, :status,
              :status_text, :created_at, :updated_at
 
   belongs_to :product, serializer: ProductSerializer
