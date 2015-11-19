@@ -47,28 +47,22 @@ class OrderProduct < ActiveRecord::Base
     workers.each do |worker|
       receiver << worker.pusher_id
     end
-    JcLog.create(content: "ReceiverCount: #{receiver.count};#{receiver.join(',')}")
     if not receiver.empty?
-      begin
-        master_secret = 'f235d2a9ff190aa676c3a391'
-        app_key = '6286de72365249a7dfe95b66'
-        client = JPush::JPushClient.new(app_key, master_secret)
-        payload = JPush::PushPayload.build(
-          platform: JPush::Platform.all,
-          notification: JPush::Notification.build(
-            alert: '有菜色状态改变了，请及时查看！'),
-          message: JPush::Message.build(
-            msg_content: "",
-            title: "",
-            content_type: "",
-            extras: { "status" => status, "status_text" => status.text }
-          ),
-          audience: JPush::Audience.build(
-            _alias: receiver))
-        res = client.sendPush(payload)
-      rescue
-        JcLog.create(content: "ReceiverCount: #{receiver.count};Got result: #{res.toJSON} ")
-      end
+      master_secret = 'f235d2a9ff190aa676c3a391'
+      app_key = '6286de72365249a7dfe95b66'
+      client = JPush::JPushClient.new(app_key, master_secret)
+      payload = JPush::PushPayload.build(
+        platform: JPush::Platform.all,
+        notification: JPush::Notification.build(
+          alert: '有菜色状态改变了，请及时查看！'),
+        message: JPush::Message.build(
+          msg_content: "",
+          title: "",
+          content_type: "",
+          extras: { "status" => status, "status_text" => status.text }
+        ),
+        audience: JPush::Audience.build(_alias: receiver))
+      res = client.sendPush(payload)
     end
   end
 
@@ -94,11 +88,7 @@ class OrderProduct < ActiveRecord::Base
         ),
         audience: JPush::Audience.build(
           _alias: receiver))
-      begin
-        res = client.sendPush(payload)
-      rescue
-        JcLog.create(content: "#{extras}")
-      end
+      res = client.sendPush(payload)
     end
   end
 
