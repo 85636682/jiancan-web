@@ -47,7 +47,7 @@ class OrderProduct < ActiveRecord::Base
     workers.each do |worker|
       receiver.push(worker.pusher_id)
     end
-    JcLog.create(content: "Receiver: " + receiver, level: "debug", code: "500")
+    JcLog.create(content: "Receiver: " + receiver.to_s, level: "debug", code: "500")
     master_secret = 'f235d2a9ff190aa676c3a391'
     app_key = '6286de72365249a7dfe95b66'
     client = JPush::JPushClient.new(app_key, master_secret)
@@ -74,7 +74,7 @@ class OrderProduct < ActiveRecord::Base
     workers.each do |worker|
       receiver << worker.pusher_id
     end
-    JcLog.create(content: "Receiver: " + receiver, level: "debug", code: "500")
+    JcLog.create(content: "Receiver: " + receiver.to_s, level: "debug", code: "500")
     master_secret = 'f235d2a9ff190aa676c3a391'
     app_key = '6286de72365249a7dfe95b66'
     client = JPush::JPushClient.new(app_key, master_secret)
