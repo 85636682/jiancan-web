@@ -38,16 +38,16 @@ class Cpanel::OrderProductsController < CpanelController
 
   def status
     @order_product = OrderProduct.find(params[:id])
+    success = false
     case @order_product.status
     when 'pending'
-      status = 'cooking'
+      success = @order_product.cooking
     when 'cooking'
-      status = 'finished'
+      success = @order_product.finished
     when 'finished'
-      status = 'NoUpdate'
+      success = true
     end
-    puts status
-    if status == 'NoUpdate' || @order_product.update(:status => status)
+    if success
       redirect_to cpanel_order_path(@order_product.order), :notice => "更新成功！"
     else
       redirect_to cpanel_order_path(@order_product.order), :alert => "更新失败！"
