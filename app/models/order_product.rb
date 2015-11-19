@@ -55,12 +55,6 @@ class OrderProduct < ActiveRecord::Base
         platform: JPush::Platform.all,
         notification: JPush::Notification.build(
           alert: '有菜色状态改变了，请及时查看！'),
-        message: JPush::Message.build(
-          msg_content: "",
-          title: "",
-          content_type: "",
-          extras: { "status" => status, "status_text" => status.text }
-        ),
         audience: JPush::Audience.build(
           _alias: receiver))
       begin
