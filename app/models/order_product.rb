@@ -45,10 +45,8 @@ class OrderProduct < ActiveRecord::Base
     workers = Worker.where(:shop_id => order.shop.id, :department => "waiter")
     receiver = []
     workers.each do |worker|
-      receiver.push(worker.pusher_id)
+      receiver << worker.pusher_id
     end
-    Rails.logger.debug(receiver)
-    JcLog.create(content: "Receiver: #{receiver.join(",")}", level: "debug", code: "500")
     master_secret = 'f235d2a9ff190aa676c3a391'
     app_key = '6286de72365249a7dfe95b66'
     client = JPush::JPushClient.new(app_key, master_secret)
@@ -65,8 +63,6 @@ class OrderProduct < ActiveRecord::Base
       audience: JPush::Audience.build(
         _alias: receiver))
     res = client.sendPush(payload)
-    JcLog.create(content: "Got result (" + res.code.to_s + ") " +  res.toJSON,
-                level: "debug", code: "500")
   end
 
   def push_to_kitchen(extras)
@@ -75,8 +71,6 @@ class OrderProduct < ActiveRecord::Base
     workers.each do |worker|
       receiver << worker.pusher_id
     end
-    Rails.logger.debug(receiver)
-    JcLog.create(content: "Receiver: #{receiver.join(",")}", level: "debug", code: "500")
     master_secret = 'f235d2a9ff190aa676c3a391'
     app_key = '6286de72365249a7dfe95b66'
     client = JPush::JPushClient.new(app_key, master_secret)
@@ -93,8 +87,6 @@ class OrderProduct < ActiveRecord::Base
       audience: JPush::Audience.build(
         _alias: receiver))
     res = client.sendPush(payload)
-    JcLog.create(content: "Got result (" + res.code.to_s + ") " +  res.toJSON,
-                level: "debug", code: "500")
   end
 
   after_create :update_sales_volume
