@@ -65,7 +65,7 @@ class OrderProduct < ActiveRecord::Base
           _alias: receiver))
       begin
         res = client.sendPush(payload)
-      rescue
+      ensure
         JcLog.create(content: "#{receiver.count}")
       end
     end
@@ -95,7 +95,7 @@ class OrderProduct < ActiveRecord::Base
           _alias: receiver))
       begin
         res = client.sendPush(payload)
-      rescue
+      ensure
         JcLog.create(content: "#{extras}")
       end
     end
