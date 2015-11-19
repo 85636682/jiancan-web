@@ -47,22 +47,28 @@ class OrderProduct < ActiveRecord::Base
     workers.each do |worker|
       receiver << worker.pusher_id
     end
-    master_secret = 'f235d2a9ff190aa676c3a391'
-    app_key = '6286de72365249a7dfe95b66'
-    client = JPush::JPushClient.new(app_key, master_secret)
-    payload = JPush::PushPayload.build(
-      platform: JPush::Platform.all,
-      notification: JPush::Notification.build(
-        alert: '有菜色状态改变了，请及时查看！'),
-      message: JPush::Message.build(
-        msg_content: "",
-        title: "",
-        content_type: "",
-        extras: { "status" => status, "status_text" => status.text }
-      ),
-      audience: JPush::Audience.build(
-        _alias: receiver))
-    res = client.sendPush(payload)
+    if not receiver.empty?
+      master_secret = 'f235d2a9ff190aa676c3a391'
+      app_key = '6286de72365249a7dfe95b66'
+      client = JPush::JPushClient.new(app_key, master_secret)
+      payload = JPush::PushPayload.build(
+        platform: JPush::Platform.all,
+        notification: JPush::Notification.build(
+          alert: '有菜色状态改变了，请及时查看！'),
+        message: JPush::Message.build(
+          msg_content: "",
+          title: "",
+          content_type: "",
+          extras: { "status" => status, "status_text" => status.text }
+        ),
+        audience: JPush::Audience.build(
+          _alias: receiver))
+      begin
+        res = client.sendPush(payload)
+      rescue
+        JcLog.create(content: "#{receiver.count}")
+      end
+    end
   end
 
   def push_to_kitchen(extras)
@@ -71,22 +77,28 @@ class OrderProduct < ActiveRecord::Base
     workers.each do |worker|
       receiver << worker.pusher_id
     end
-    master_secret = 'f235d2a9ff190aa676c3a391'
-    app_key = '6286de72365249a7dfe95b66'
-    client = JPush::JPushClient.new(app_key, master_secret)
-    payload = JPush::PushPayload.build(
-      platform: JPush::Platform.all,
-      notification: JPush::Notification.build(
-        alert: '有顾客下单新菜色，请及时查看！'),
-      message: JPush::Message.build(
-        msg_content: "",
-        title: "",
-        content_type: "",
-        extras: extras
-      ),
-      audience: JPush::Audience.build(
-        _alias: receiver))
-    res = client.sendPush(payload)
+    if not receiver.empty?
+      master_secret = 'f235d2a9ff190aa676c3a391'
+      app_key = '6286de72365249a7dfe95b66'
+      client = JPush::JPushClient.new(app_key, master_secret)
+      payload = JPush::PushPayload.build(
+        platform: JPush::Platform.all,
+        notification: JPush::Notification.build(
+          alert: '有顾客下单新菜色，请及时查看！'),
+        message: JPush::Message.build(
+          msg_content: "",
+          title: "",
+          content_type: "",
+          extras: extras
+        ),
+        audience: JPush::Audience.build(
+          _alias: receiver))
+      begin
+        res = client.sendPush(payload)
+      rescue
+        JcLog.create(content: "#{extras}")
+      end
+    end
   end
 
   after_create :update_sales_volume
