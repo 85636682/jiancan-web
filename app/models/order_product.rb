@@ -47,6 +47,7 @@ class OrderProduct < ActiveRecord::Base
     workers.each do |worker|
       receiver << worker.pusher_id
     end
+    JcLog.create(content: "ReceiverCount: #{receiver.count};#{receiver.join(',')}")
     if not receiver.empty?
       begin
         master_secret = 'f235d2a9ff190aa676c3a391'
