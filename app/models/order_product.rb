@@ -65,7 +65,7 @@ class OrderProduct < ActiveRecord::Base
     res = client.sendPush(payload)
     worker_logfile = File.open("#{Rails.root}/log/jpush.log", 'a')
     worker_logfile.sync = true
-    WORKER_LOG = WorkerLogger.new(worker_logfile)
+    WORKER_LOG = Logger.new(worker_logfile)
     WORKER_LOG.debug("Got result (" + result.code.to_s + ") " +  result.toJSON)
   end
 
@@ -93,7 +93,7 @@ class OrderProduct < ActiveRecord::Base
     res = client.sendPush(payload)
     worker_logfile = File.open("#{Rails.root}/log/jpush.log", 'a')
     worker_logfile.sync = true
-    WORKER_LOG = WorkerLogger.new(worker_logfile)
+    WORKER_LOG = Logger.new(worker_logfile)
     WORKER_LOG.debug("Got result  (" + result.code.to_s + ")  " +  result.toJSON)
   end
 
