@@ -2,7 +2,7 @@ class OrderProductSerializer < BaseSerializer
   attributes :id, :order_id, :product_id, :quantity, :status,
              :status_text, :created_at, :updated_at
 
-  belongs_to :product, serializer: ProductSerializer
+  has_one :product, serializer: ProductSerializer
 
   def created_at
     DateTime.parse(object.created_at.iso8601).strftime('%Y年%m月%d日 %H:%M')
