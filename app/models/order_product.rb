@@ -63,9 +63,7 @@ class OrderProduct < ActiveRecord::Base
       audience: JPush::Audience.build(
         _alias: receiver))
     res = client.sendPush(payload)
-    jpush_logfile = File.open("#{Rails.root}/log/jpush.log", 'a')
-    jpush_logfile.sync = true
-    jpush_log = Logger.new(jpush_logfile)
+    jpush_log = Logger.new(STDOUT)
     jpush_log.debug("Got result (" + result.code.to_s + ") " +  result.toJSON)
   end
 
@@ -91,9 +89,7 @@ class OrderProduct < ActiveRecord::Base
       audience: JPush::Audience.build(
         _alias: receiver))
     res = client.sendPush(payload)
-    jpush_logfile = File.open("#{Rails.root}/log/jpush.log", 'a')
-    jpush_logfile.sync = true
-    jpush_log = Logger.new(jpush_logfile)
+    jpush_log = Logger.new(STDOUT)
     jpush_log.debug("Got result (" + result.code.to_s + ") " +  result.toJSON)
   end
 
