@@ -1,17 +1,12 @@
 class ProductSerializer < BaseSerializer
-  attributes :id, :name, :shop_id, :shop, :avatar, :created_at, :updated_at,
-             :category_id, :category, :sales_volume
+  attributes :id, :name, :shop_id, :avatar, :created_at, :updated_at,
+             :category_id, :sales_volume
+
+  has_one :shop, serializer: ShopSerializer
+  has_one :category, serializer: CategorySerializer
 
   def avatar
     object.avatar.url("80x80")
-  end
-
-  def shop
-    ShopSerializer.new(object.shop, root: false)
-  end
-
-  def category
-    CategorySerializer.new(object.category, root: false)
   end
 
   def created_at
