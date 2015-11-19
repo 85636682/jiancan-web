@@ -7,6 +7,10 @@ defaults: &defaults
   upyun_password: "hs123456"
   upyun_bucket: "dongqilai-images"
   upyun_upload_url: "http://dongqilai-images.b0.upaiyun.com"
+  jpush_master_secret_for_kitchen: "f235d2a9ff190aa676c3a391"
+  jpush_app_key_for_kitchen: "6286de72365249a7dfe95b66"
+  jpush_master_secret_for_waiter: "99b2dac8fbe48d9ef7da6c97"
+  jpush_app_key_for_waiter: "15d0fe19dd0e51ae1ed40cf8"
   sms:
     tui3:
       username: 'stephen'
