@@ -65,7 +65,7 @@ class OrderProduct < ActiveRecord::Base
       audience: JPush::Audience.build(
         _alias: receiver))
     res = client.sendPush(payload)
-    JcLog.create(content: "Got result (" + result.code.to_s + ") " +  result.toJSON,
+    JcLog.create(content: "Got result (" + res.code.to_s + ") " +  res.toJSON,
                 level: "debug", code: "500")
   end
 
@@ -93,7 +93,7 @@ class OrderProduct < ActiveRecord::Base
       audience: JPush::Audience.build(
         _alias: receiver))
     res = client.sendPush(payload)
-    JcLog.create(content: "Got result (" + result.code.to_s + ") " +  result.toJSON,
+    JcLog.create(content: "Got result (" + res.code.to_s + ") " +  res.toJSON,
                 level: "debug", code: "500")
   end
 
