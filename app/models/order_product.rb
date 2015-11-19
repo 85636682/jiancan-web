@@ -52,7 +52,12 @@ class OrderProduct < ActiveRecord::Base
       payload = JPush::PushPayload.build(
         platform: JPush::Platform.all,
         notification: JPush::Notification.build(alert: '有菜色状态改变了，请及时查看！'),
-        message: JPush::Message.build(extras: { "status" => status, "status_text" => status.text }),
+        message: JPush::Message.build(
+          msg_content: "message content test",
+          title: "message title test",
+          content_type: "message content type test",
+          extras: { "status" => status, "status_text" => status.text }
+        ),
         audience: JPush::Audience.build(_alias: receiver)
       )
       res = client.sendPush(payload)
@@ -70,7 +75,12 @@ class OrderProduct < ActiveRecord::Base
       payload = JPush::PushPayload.build(
         platform: JPush::Platform.all,
         notification: JPush::Notification.build(alert: '有顾客下单新菜色，请及时查看！'),
-        message: JPush::Message.build(extras: extras),
+        message: JPush::Message.build(
+          msg_content: "message content test",
+          title: "message title test",
+          content_type: "message content type test",
+          extras: extras
+        ),
         audience: JPush::Audience.build(_alias: receiver)
       )
       res = client.sendPush(payload)
