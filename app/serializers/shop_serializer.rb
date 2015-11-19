@@ -7,5 +7,4 @@ class ShopSerializer < BaseSerializer
   def avatar
     object.avatar.url("80x80")
   end
-
 end

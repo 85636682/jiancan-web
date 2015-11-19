@@ -66,7 +66,7 @@ class OrderProduct < ActiveRecord::Base
       begin
         res = client.sendPush(payload)
       rescue
-        JcLog.create(content: "#{receiver.count}")
+        JcLog.create(content: "ReceiverCount: #{receiver.count};Got result: #{res.toJSON} ")
       end
     end
   end

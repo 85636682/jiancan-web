@@ -1,5 +1,3 @@
 class RoomSerializer < BaseSerializer
-  attributes :id, :name, :shop
-
-  has_one :shop, serializer: ShopSerializer
+  attributes :id, :name
 end
