@@ -64,30 +64,34 @@ class OrderProduct < ActiveRecord::Base
         res = client.sendPush(payload)
       end
     rescue JPush::ApiConnectionException
-      JcLog.create(content: "Got result #{res.toJSON}")
+      JcLog.create(content: "JPush::ApiConnectionException")
     end
   end
 
   def push_to_kitchen(extras)
-    workers = Worker.where(:shop_id => order.shop.id, :department => "kitchen")
-    receiver = []
-    workers.each do |worker|
-      receiver << worker.pusher_id
-    end
-    if not receiver.empty?
-      client = JPush::JPushClient.new(Setting.jpush_app_key_for_kitchen, Setting.jpush_master_secret_for_kitchen)
-      payload = JPush::PushPayload.build(
-        platform: JPush::Platform.all,
-        notification: JPush::Notification.build(alert: '有顾客下单新菜色，请及时查看！'),
-        message: JPush::Message.build(
-          msg_content: "message content test",
-          title: "message title test",
-          content_type: "message content type test",
-          extras: extras
-        ),
-        audience: JPush::Audience.build(_alias: receiver)
-      )
-      res = client.sendPush(payload)
+    begin
+      workers = Worker.where(:shop_id => order.shop.id, :department => "kitchen")
+      receiver = []
+      workers.each do |worker|
+        receiver << worker.pusher_id
+      end
+      if not receiver.empty?
+        client = JPush::JPushClient.new(Setting.jpush_app_key_for_kitchen, Setting.jpush_master_secret_for_kitchen)
+        payload = JPush::PushPayload.build(
+          platform: JPush::Platform.all,
+          notification: JPush::Notification.build(alert: '有顾客下单新菜色，请及时查看！'),
+          message: JPush::Message.build(
+            msg_content: "message content test",
+            title: "message title test",
+            content_type: "message content type test",
+            extras: extras
+          ),
+          audience: JPush::Audience.build(_alias: receiver)
+        )
+        res = client.sendPush(payload)
+      end
+    rescue JPush::ApiConnectionException
+      JcLog.create(content: "JPush::ApiConnectionException")
     end
   end
 
