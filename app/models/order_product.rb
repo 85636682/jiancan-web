@@ -48,7 +48,6 @@ class OrderProduct < ActiveRecord::Base
       receiver << worker.pusher_id
     end
     if not receiver.empty?
-      extra_room_id = room_id.blank? ? 0 : room_id
       client = JPush::JPushClient.new(Setting.jpush_app_key_for_waiter, Setting.jpush_master_secret_for_waiter)
       payload = JPush::PushPayload.build(
         platform: JPush::Platform.all,
@@ -57,7 +56,7 @@ class OrderProduct < ActiveRecord::Base
           msg_content: "message content test",
           title: "message title test",
           content_type: "message content type test",
-          extras: { "status" => status, "status_text" => status.text, "room_id" => extra_room_id }
+          extras: { "status" => status, "status_text" => status.text, "order_id" => order_id }
         ),
         audience: JPush::Audience.build(_alias: receiver)
       )
