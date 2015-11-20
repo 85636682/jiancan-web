@@ -42,25 +42,29 @@ class OrderProduct < ActiveRecord::Base
   end
 
   def push_to_waiter
-    workers = Worker.where(:shop_id => order.shop.id, :department => "waiter")
-    receiver = []
-    workers.each do |worker|
-      receiver << worker.pusher_id
-    end
-    if not receiver.empty?
-      client = JPush::JPushClient.new(Setting.jpush_app_key_for_waiter, Setting.jpush_master_secret_for_waiter)
-      payload = JPush::PushPayload.build(
-        platform: JPush::Platform.all,
-        notification: JPush::Notification.build(alert: '有菜色状态改变了，请及时查看！'),
-        message: JPush::Message.build(
-          msg_content: "message content test",
-          title: "message title test",
-          content_type: "message content type test",
-          extras: { "status" => status, "status_text" => status.text, "sn" => sn }
-        ),
-        audience: JPush::Audience.build(_alias: receiver)
-      )
-      res = client.sendPush(payload)
+    begin
+      workers = Worker.where(:shop_id => order.shop.id, :department => "waiter")
+      receiver = []
+      workers.each do |worker|
+        receiver << worker.pusher_id
+      end
+      if not receiver.empty?
+        client = JPush::JPushClient.new(Setting.jpush_app_key_for_waiter, Setting.jpush_master_secret_for_waiter)
+        payload = JPush::PushPayload.build(
+          platform: JPush::Platform.all,
+          notification: JPush::Notification.build(alert: '有菜色状态改变了，请及时查看！'),
+          message: JPush::Message.build(
+            msg_content: "message content test",
+            title: "message title test",
+            content_type: "message content type test",
+            extras: { "status" => status, "status_text" => status.text, "sn" => sn }
+          ),
+          audience: JPush::Audience.build(_alias: receiver)
+        )
+        res = client.sendPush(payload)
+      end
+    rescue JPush::ApiConnectionException
+      JcLog.create(content: "Got result #{res.toJSON}")
     end
   end
 
