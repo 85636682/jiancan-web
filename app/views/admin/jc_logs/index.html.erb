@@ -1,0 +1,30 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        #
+      </th>
+      <th>
+        等级
+      </th>
+      <th>
+        内容
+      </th>
+      <th>
+        产生时间
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @jc_logs.each do |jc_log| %>
+    <tr>
+      <th scope="row"><%= jc_log.id %></th>
+      <td><%= jc_log.level %></td>
+      <td><%= jc_log.content %></td>
+      <td>
+        <%= formattime(jc_log.created_at, :unit => 'hour') %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

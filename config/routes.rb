@@ -52,6 +52,7 @@ Rails.application.routes.draw do
     resources :shops
     resources :orders
     resources :market_categories
+    resources :jc_logs, only: [:index, :destroy]
   end
 
   devise_for :admins, controllers: {

@@ -1,0 +1,2 @@
+module Admin::JcLogsHelper
+end
