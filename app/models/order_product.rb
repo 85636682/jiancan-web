@@ -56,7 +56,7 @@ class OrderProduct < ActiveRecord::Base
           msg_content: "message content test",
           title: "message title test",
           content_type: "message content type test",
-          extras: { "status" => status, "status_text" => status.text, "order_id" => order_id }
+          extras: { "status" => status, "status_text" => status.text, "sn" => sn }
         ),
         audience: JPush::Audience.build(_alias: receiver)
       )
