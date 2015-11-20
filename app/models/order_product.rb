@@ -48,7 +48,7 @@ class OrderProduct < ActiveRecord::Base
       receiver << worker.pusher_id
     end
     if not receiver.empty?
-      extra_room_id = room_id.empty? ? 0 : room_id
+      extra_room_id = room_id.blank? ? 0 : room_id
       client = JPush::JPushClient.new(Setting.jpush_app_key_for_waiter, Setting.jpush_master_secret_for_waiter)
       payload = JPush::PushPayload.build(
         platform: JPush::Platform.all,
