@@ -52,7 +52,17 @@ class OrderProduct < ActiveRecord::Base
         client = JPush::JPushClient.new(Setting.jpush_app_key_for_waiter, Setting.jpush_master_secret_for_waiter)
         payload = JPush::PushPayload.build(
           platform: JPush::Platform.all,
-          notification: JPush::Notification.build(alert: '有菜色状态改变了，请及时查看！'),
+          notification: JPush::Notification.build(
+            alert: '有菜色状态改变了，请及时查看！',
+            android: JPush::AndroidNotification.build(
+              alert: '有菜色状态改变了，请及时查看！',
+              extras:  { "status" => status, "status_text" => status.text, "sn" => order.sn }
+            ),
+            ios: JPush::IOSNotification.build(
+              alert: '有菜色状态改变了，请及时查看！',
+              extras:  { "status" => status, "status_text" => status.text, "sn" => order.sn }
+            )
+          ),
           message: JPush::Message.build(
             msg_content: "message content test",
             title: "message title test",
