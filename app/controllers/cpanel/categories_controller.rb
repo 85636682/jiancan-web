@@ -1,5 +1,5 @@
 class Cpanel::CategoriesController < CpanelController
-  before_action :set_shop, only: [:new, :edit]
+  before_action :set_shop, only: [:new, :edit, :create]
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -15,7 +15,7 @@ class Cpanel::CategoriesController < CpanelController
 
   def create
     @category = Category.new(category_params)
-    if @category.save!
+    if @category.save
       redirect_to cpanel_categories_path, :notice => "保存成功！"
     else
       render :new, :alert => "保存失败！"

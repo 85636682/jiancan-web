@@ -7,6 +7,9 @@ class Worker < ActiveRecord::Base
   belongs_to :shop
   has_many :orders
 
+  validates :name, :login, presence: true
+  validates :name, :login, uniqueness: true
+
   def pusher_id
     "#{department}_#{id}"
   end

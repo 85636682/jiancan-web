@@ -1,5 +1,5 @@
 class Cpanel::RoomsController < CpanelController
-  before_action :set_shop, only: [:new, :edit]
+  before_action :set_shop, only: [:new, :edit, :create]
   before_action :set_room, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -15,7 +15,7 @@ class Cpanel::RoomsController < CpanelController
 
   def create
     @room = Room.new(room_params)
-    if @room.save!
+    if @room.save
       redirect_to cpanel_rooms_path, :notice => "保存成功！"
     else
       render :new, :alert => "保存失败！"

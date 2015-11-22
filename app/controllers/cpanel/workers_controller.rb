@@ -1,5 +1,5 @@
 class Cpanel::WorkersController < CpanelController
-  before_action :set_shop, only: [:new, :edit]
+  before_action :set_shop, only: [:new, :edit, :create]
   before_action :set_worker, only: [:edit, :destroy, :update]
 
   def index
@@ -12,7 +12,7 @@ class Cpanel::WorkersController < CpanelController
 
   def create
     @worker = Worker.new(worker_params)
-    if @worker.save!
+    if @worker.save
       redirect_to cpanel_workers_path, :notice => "保存成功！"
     else
       render :new, :alert => "保存失败！"

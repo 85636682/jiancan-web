@@ -1,5 +1,6 @@
 <%= form_for [:cpanel, @worker] do |f| %>
   <%= f.hidden_field :shop_id, value: @shop.id %>
+  <%= render "shared/error_messages", target: @worker %>
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 form-control-label">员工名称</label>
     <div class="col-sm-10">
