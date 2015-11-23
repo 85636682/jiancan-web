@@ -1,5 +1,5 @@
 <%= render 'navbar' %>
-<table class="table table-border" style="width:96%;height:100%;border-color: #C2C8CF;">
+<table class="table table-border" style="width:96%;border-color: #C2C8CF;">
   <tbody>
     <tr>
       <td colspan="4">
@@ -45,10 +45,8 @@
 			}
 		]
 	};
-  $(document).on('page:change', function(){
-		var ctx = document.getElementById("myChart").getContext("2d");
-		window.myLine = new Chart(ctx).Line(lineChartData, {
-			responsive: true
-		});
+  var ctx = document.getElementById("myChart").getContext("2d");
+	window.myLine = new Chart(ctx).Line(lineChartData, {
+		responsive: true
 	});
 </script>
