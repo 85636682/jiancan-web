@@ -11,6 +11,7 @@
 #= require moment-with-locales.min
 #= require Chart.min
 #= require turbolinks
+#= require home
 #= require shops
 #= require categories
 #= require workers
@@ -28,6 +29,8 @@ AppView = Backbone.View.extend
   initialize: ->
     @initNotificationSubscribe()
 
+    if $('body').data('controller-name') in ['home']
+      window._homeView = new HomeView({parentView: @})
     if $('body').data('controller-name') in ['shops']
       window._shopView = new ShopView({parentView: @})
     if $('body').data('controller-name') in ['categories']
