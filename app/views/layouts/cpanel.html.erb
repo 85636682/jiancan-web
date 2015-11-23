@@ -36,6 +36,7 @@
         </ul><!--/.nav-collapse -->
         <% if merchant_signed_in? %>
         <ul class="nav navbar-nav pull-right merchant-bar">
+          <% if Rails.env.development? %>
           <li class="nav-item cart-count">
             <a href="<%= cpanel_cart_index_path %>" class="nav-link <%= 'new' if cart_market_product_count > 0 %>">
               <i class="fa fa-shopping-cart"></i>
@@ -44,6 +45,7 @@
               </span>
             </a>
           </li>
+          <% end %>
           <li class="nav-item notification-count">
             <a href="<%= cpanel_notifications_path %>" class="nav-link <%= 'new' if unread_notify_count > 0 %>">
               <i class="fa fa-bell-o"></i>
@@ -84,6 +86,9 @@
               <i class="fa fa-sun-o"></i> 店铺管理
             </a>
             <% if not current_merchant.shop.blank? %>
+            <a href="<%= cpanel_home_statistic_path %>" class="list-group-item <%= active_controller?("home") %>">
+              <i class="fa fa-bar-chart"></i> 数据统计
+            </a>
             <a href="<%= cpanel_orders_path %>" class="list-group-item <%= 'new' if unread_notify_count > 0 %> <%= active_controller?("orders") %>">
               <span class="label label-default label-pill pull-right orderTips"><%= unread_notify_count %></span>
               <i class="fa fa-bars"></i> 订单管理

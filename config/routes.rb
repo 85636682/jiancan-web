@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     get 'home/index'
     get 'home/prices'
     get 'home/about'
+    get 'home/statistic'
     resources :shops, expect: :destroy
     resources :products
     resources :food_materials

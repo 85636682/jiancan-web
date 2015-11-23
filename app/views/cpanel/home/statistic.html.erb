@@ -1,0 +1,32 @@
+<%= render 'navbar' %>
+<div class="">
+  <canvas id="myChart"  style="width:100%;height:100%"></canvas>
+</div>
+
+<script>
+	var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
+	var lineChartData = {
+		labels : [moment().subtract(6,'d').format('MM/DD'), moment().subtract(5,'d').format('MM/DD'),
+              moment().subtract(4,'d').format('MM/DD'), moment().subtract(3,'d').format('MM/DD'),
+              moment().subtract(2,'d').format('MM/DD'), moment().subtract(1,'d').format('MM/DD'),
+              moment().format('MM/DD')],
+		datasets : [
+			{
+				label: "My First dataset",
+				fillColor : "rgba(220,220,220,0.2)",
+				strokeColor : "rgba(220,220,220,1)",
+				pointColor : "rgba(220,220,220,1)",
+				pointStrokeColor : "#fff",
+				pointHighlightFill : "#fff",
+				pointHighlightStroke : "rgba(220,220,220,1)",
+				data : <%= @totals %>
+			}
+		]
+	};
+	window.onload = function(){
+		var ctx = document.getElementById("myChart").getContext("2d");
+		window.myLine = new Chart(ctx).Line(lineChartData, {
+			responsive: true
+		});
+	}
+</script>

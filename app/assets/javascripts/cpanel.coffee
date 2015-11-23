@@ -8,6 +8,8 @@
 #= require jquery.validate
 #= require jquery.qrcode.min
 #= require bootstrap-notify.min
+#= require moment-with-locales.min
+#= require Chart.min
 #= require turbolinks
 #= require shops
 #= require categories
