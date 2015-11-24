@@ -86,7 +86,7 @@
               <i class="fa fa-sun-o"></i> 店铺管理
             </a>
             <% if not current_merchant.shop.blank? %>
-            <a href="<%= cpanel_home_statistic_path %>" class="list-group-item <%= active_controller?("home") %>">
+            <a href="<%= cpanel_home_statistic_path %>" class="list-group-item <%= active_controller_and_actioner?("home", "statistic") %>">
               <i class="fa fa-bar-chart"></i> 数据统计
             </a>
             <a href="<%= cpanel_orders_path %>" class="list-group-item <%= 'new' if unread_notify_count > 0 %> <%= active_controller?("orders") %>">

@@ -1,6 +1,6 @@
 source 'https://ruby.taobao.org'
 
-gem 'rails', '~> 4.2.4'
+gem 'rails', '~> 4.2.5'
 gem 'sprockets', '~> 3.3.3'
 
 # Use SCSS for stylesheets
@@ -93,7 +93,7 @@ gem 'font-awesome-sass', '~> 4.3.1'
 # YAML 配置信息
 gem "settingslogic"
 
-gem "puma", "2.11.0"
+gem "puma", "2.15.3"
 
 gem 'whenever', :require => false
 
