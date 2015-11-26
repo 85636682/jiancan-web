@@ -31,7 +31,8 @@ test:
 production:
   encoding: utf8
   adapter: postgis
-  database: jiancan_production
+  database: ding_production
+  #database: jiancan_production
   pool: 5
   timeout: 5000
   #username: jiancan
