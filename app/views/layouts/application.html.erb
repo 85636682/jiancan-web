@@ -10,18 +10,7 @@
   <div class="header">
     <nav class="navbar navbar-light bg-faded">
       <div class="container">
-        <a class="navbar-brand" href="<%= root_path %>"><em><h3>简餐</h3></em></a>
-        <ul class="nav navbar-nav info-bar">
-          <li class="nav-item">
-            <a class="nav-link" href="#">特点</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<%= cpanel_home_prices_path %>">价格</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="<%= cpanel_home_about_path %>">关于</a>
-          </li>
-        </ul>
+        <a class="navbar-brand" href="<%= root_path %>"><h3>简餐</h3></a>
         <ul class="nav navbar-nav pull-right">
         <% if merchant_signed_in? %>
           <li class="nav-item">

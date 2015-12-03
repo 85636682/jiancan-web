@@ -31,17 +31,17 @@ test:
 production:
   encoding: utf8
   adapter: postgis
-  database: ding_production
-  #database: jiancan_production
+  #database: ding_production
+  database: jiancan_production
   pool: 5
   timeout: 5000
-  #username: jiancan
-  #password: bbH-mwJ-L35-xYV
-  #su_username: postgres     # a superuser for the database
-  #su_password: bH6-zXH-PKX-6V4  # the superuser's password
-  username: postgres
-  password: 861117900331hs
+  username: jiancan
+  password: bbH-mwJ-L35-xYV
   su_username: postgres     # a superuser for the database
-  su_password: 861117900331hs  # the superuser's password
+  su_password: bH6-zXH-PKX-6V4  # the superuser's password
+  #username: postgres
+  #password: 861117900331hs
+  #su_username: postgres     # a superuser for the database
+  #su_password: 861117900331hs  # the superuser's password
   host: localhost
   schema_search_path: public
