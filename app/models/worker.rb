@@ -16,16 +16,20 @@ class Worker < ActiveRecord::Base
   # 重新生成 Private Token
   def update_private_token
     random_key = "#{SecureRandom.hex(10)}:#{id}"
-    update_attribute(:private_token, random_key)
+    update_attributes(:private_token => random_key, :private_token_updated_at => DateTime.now)
   end
 
   after_create :ensure_private_token!
   def ensure_private_token!
-    update_private_token if private_token.blank?
+    update_private_token
   end
 
   def get_private_token
     ensure_private_token!
     private_token
+  end
+
+  def check_token_updated
+    private_token_updated_at + 7 > DateTime.now
   end
 end
