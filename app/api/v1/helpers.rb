@@ -5,7 +5,8 @@ module V1
     end
 
     def authenticate!
-      error!('401 Unauthenticated', 401) unless current_worker || current_worker.check_token_updated
+      error!('401 Unauthenticated', 401) unless current_worker
+      error!('401 Unauthenticated', 401) unless current_worker.check_token_updated
     end
 
     def waiter!
