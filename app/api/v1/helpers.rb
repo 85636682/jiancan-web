@@ -9,11 +9,11 @@ module V1
     end
 
     def waiter!
-      error!('401 No Waiter', 401) unless current_worker.waiter?
+      error!('401 No Waiter', 401) unless current_worker.department.waiter?
     end
 
     def kitchen!
-      error!('401 No Kitchen', 401) unless current_worker.kitchen?
+      error!('401 No Kitchen', 401) unless current_worker.department.kitchen?
     end
   end
 end
