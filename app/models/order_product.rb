@@ -27,20 +27,6 @@ class OrderProduct < ActiveRecord::Base
     status == 'canceled'
   end
 
-  def cooking
-    success = false
-    success = update_attributes(:status => 'cooking') if status.pending?
-    push_to_waiter if success
-    success
-  end
-
-  def finished
-    success = false
-    success = update_attributes(:status => 'finished') if status.cooking?
-    push_to_waiter if success
-    success
-  end
-
   def push_to_waiter
     begin
       workers = Worker.where(:shop_id => order.shop.id, :department => "waiter")

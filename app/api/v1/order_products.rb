@@ -13,18 +13,16 @@ module V1
         if @order_product.blank?
           error!({ error: "该订单不存在此菜色！" }, 400)
         else
-          success = false
-          case params[:status]
-          when :cooking
-            success = @order_product.cooking
-          when :finished
-            success = @order_product.finished
+          if params[:status] == "cooking"
+            error!({ error: "菜色状态不是新建！" }, 400) unless status.pending?
+            error!({ error: "菜色变为烹饪出错！" }, 400) unless @order_product.update_attributes(:status => 'cooking')
+            @order_product.push_to_waiter
+          elsif params[:status] == "finished"
+            error!({ error: "菜色状态不是烹饪！" }, 400) unless status.cooking?
+            error!({ error: "菜色变为完成出错！" }, 400) unless @order_product.update_attributes(:status => 'finished')
+            @order_product.push_to_waiter
           end
-          if success
-            { msg: 'ok' }
-          else
-            error!({ error: "更新失败！" }, 400)
-          end
+          { msg: 'ok' }
         end
       end
 
