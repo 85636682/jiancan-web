@@ -31,5 +31,6 @@ class Worker < ActiveRecord::Base
 
   def check_token_updated
     private_token_updated_at + 7 > DateTime.now
+    JCLog.create(:content => "#{private_token_updated_at} + 7 > #{DateTime.now}:" + (private_token_updated_at + 7 > DateTime.now).to_s)
   end
 end
