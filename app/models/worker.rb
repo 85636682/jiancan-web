@@ -16,7 +16,7 @@ class Worker < ActiveRecord::Base
   # 重新生成 Private Token
   def update_private_token
     random_key = "#{SecureRandom.hex(10)}:#{id}"
-    update_attributes(:private_token => random_key, :private_token_updated_at => DateTime.now)
+    update_attributes(:private_token => random_key, :private_token_updated_at => Time.zone.now)
   end
 
   after_create :ensure_private_token!
@@ -30,7 +30,6 @@ class Worker < ActiveRecord::Base
   end
 
   def check_token_updated
-    private_token_updated_at + 7 > DateTime.now
-    JCLog.create(:content => "#{private_token_updated_at} + 7 > #{DateTime.now}:" + (private_token_updated_at + 7 > DateTime.now).to_s)
+    private_token_updated_at > Time.zone.now - 7.days
   end
 end
