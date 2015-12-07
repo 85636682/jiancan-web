@@ -4,7 +4,7 @@ module V1
       desc '更新订单里菜色的状态'
       params do
         requires :order_product_id, type: Integer, desc: "订单菜色的ID"
-        requires :status, type: Symbol, values: [:pending, :cooking, :finished, :canceled], desc: "订单菜色的状态"
+        requires :status, type: String, values: [:pending, :cooking, :finished, :canceled], desc: "订单菜色的状态"
       end
       put 'status' do
         authenticate!
