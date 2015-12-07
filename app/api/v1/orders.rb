@@ -79,7 +79,7 @@ module V1
           error!({ error: "订单不存在或者还有菜色未完成！" }, 400)
         else
           if @order.pending? && @order.settled
-            { msg: 'ok' }
+            { msg: 'ok', status: @order.status, status_text: @order.status.text }
           else
             error!({ error: "订单已经结账！" }, 400)
           end
