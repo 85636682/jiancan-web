@@ -8,7 +8,7 @@ class Cpanel::HomeController < CpanelController
   def statistic
     @totals = []
     (0..6).each do |n|
-      @totals << Order.by_day(n.days.from_now).where(:status => "completed").sum(:total_price).to_f()
+      @totals << Order.by_day(n.days.from_now).where(:status => "settled").sum(:total_price).to_f()
     end
   end
 end
