@@ -42,16 +42,17 @@ class Cpanel::OrderProductsController < CpanelController
     success = false
     case @order_product.status
     when 'pending'
-      success = @order_product.cooking
+      success = @order_product.update_attributes(:status => 'cooking')
     when 'cooking'
-      success = @order_product.finished
+      success = @order_product.update_attributes(:status => 'finished')
     when 'finished'
       success = true
     end
     if success
+      @order_product.push_to_waiter
       redirect_to cpanel_order_path(@order_product.order), :notice => "更新成功！"
     else
-      redirect_to cpanel_order_path(@order_product.order), :alert => "更新失败！"
+      redirect_to cpanel_order_path(@order_product.order), :alert => "更新失败或已完成！"
     end
   end
 

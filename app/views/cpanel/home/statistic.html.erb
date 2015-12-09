@@ -19,7 +19,7 @@
     </tr>
     <tr>
       <td><%= @totals.sum %></td>
-      <td><%= @totals.reduce(:+).to_f / @totals.size %></td>
+      <td><%= (@totals.reduce(:+).to_f / @totals.size).round(2) %></td>
       <td><%= @totals.max %></td>
       <td><%= @totals.min %></td>
     </tr>
