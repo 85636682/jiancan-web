@@ -29,7 +29,8 @@ module Ding
     config.time_zone = 'Beijing'
     config.encoding = "utf-8"
 
-    config.autoload_paths << Rails.root.join('app/api')
+    config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
+    config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
 
     config.middleware.use Rack::Cors do
       allow do

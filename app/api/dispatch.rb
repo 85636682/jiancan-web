@@ -3,6 +3,7 @@ module Api
     use ActionDispatch::RemoteIp
 
     mount V1::Root
+    mount U1::Root
 
     format :json
     content_type :json, 'application/json;charset=utf-8'
