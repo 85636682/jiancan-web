@@ -10,5 +10,6 @@ module U1
     helpers U1::Helpers
 
     mount U1::Users
+    mount U1::ReceivingAddresses
   end
 end

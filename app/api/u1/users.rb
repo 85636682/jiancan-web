@@ -21,6 +21,28 @@ module U1
         end
       end
 
+      desc "用户注册"
+      params do
+        requires :mobile, type: String, desc: "用户账号"
+        requires :password, type: String, desc: "用户密码"
+        requires :password_confirmation, type: String, desc: "用户密码"
+      end
+      post 'register' do
+        user = User.find_by_mobile(params[:mobile])
+        if user.blank?
+          error!({ error: "用户名已存在！" }, 401)
+        else
+          user = User.new(:mobile => params["mobile"],
+                          :password => params["password"],
+                          :password_confirmation => params["password_confirmation"])
+          if user.save
+            { msg: "注册成功！", access_token: user.get_private_token, pusher_id: user.pusher_id }
+          else
+            error!({ error: "用户注册失败！" }, 401)
+          end
+        end
+      end
+
       desc "微信登录，通过code获取access_token"
       params do
         requires :code, type: String, desc: "微信用户授权后返回的code"
@@ -59,7 +81,7 @@ module U1
 
       desc "微信登录，refresh Token获取新access_token"
       params do
-        
+
       end
       get 'weixin/access_token/refresh' do
         response = RestClient.get "https://api.weixin.qq.com/sns/oauth2/refresh_token?" +
