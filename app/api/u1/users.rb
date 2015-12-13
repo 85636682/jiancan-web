@@ -51,11 +51,18 @@ module U1
         current_user
       end
 
-      desc "修改头像"
+      desc "修改当前用户信息"
       params do
+        requires :update_key, type: String, desc: "要修改的字段的名称"
+        requires :update_value, type: String, desc: "要修改的字段的内容"
       end
-      post 'avatar' do
+      put 'current' do
         authenticate!
+        if current_user.update_attributes(params["update_key"].to_sym => params[:update_value])
+          { msg: "ok", params["update_key"].to_sym => params[:update_value] }
+        else
+          error!({ error: "用户信息修改失败！"}, 401)
+        end
       end
 
       desc "微信登录，通过code获取access_token"
