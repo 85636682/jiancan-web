@@ -4,7 +4,7 @@ module U1
       desc "获取用户的收货地址"
       params do
       end
-      get '', each_serializer: ReceivingAddressSerializer, root: false  do
+      get '', each_serializer: ReceivingAddressSerializer, root: false do
         authenticate!
         @receiving_addresses = current_user.receiving_addresses
       end
