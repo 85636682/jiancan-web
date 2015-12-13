@@ -43,6 +43,21 @@ module U1
         end
       end
 
+      desc "当前用户信息"
+      params do
+      end
+      get 'current', serializer: UserSerializer, root: false do
+        authenticate!
+        current_user
+      end
+
+      desc "修改头像"
+      params do
+      end
+      post 'avatar' do
+        authenticate!
+      end
+
       desc "微信登录，通过code获取access_token"
       params do
         requires :code, type: String, desc: "微信用户授权后返回的code"
