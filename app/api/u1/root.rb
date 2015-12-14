@@ -12,5 +12,7 @@ module U1
     mount U1::Settings
     mount U1::Users
     mount U1::ReceivingAddresses
+    mount U1::Rooms
+    mount U1::Orders
   end
 end
