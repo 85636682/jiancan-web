@@ -1,3 +1,5 @@
+require "addressable/uri"
+
 class Cpanel::ShopsController < CpanelController
   before_action :set_shop, only: [:show, :edit, :update]
 
