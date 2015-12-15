@@ -2,6 +2,50 @@ module U1
   class Orders < Grape::API
     resource :orders do
 
+      desc '新建外卖单'
+      params do
+        requires :shop_id, type: Integer, desc: '店铺的id'
+        requires :products_quantity, type: String, desc: 'Json格式的字符串，包含所有添加商品id和对应数量，用商品的id作为key，用所选商品的数据作为value'
+      end
+      post '', serializer: OrderSerializer, root: false do
+        authenticate!
+        begin
+          ActiveRecord::Base.transaction do
+            @shop = Shop.find(params[:shop_id])
+            @order = Order.create!(:shop_id => @shop.id, :room_id => 0,
+                               :sn => Order.create_sn(@shop.id),
+                               :total_price => 0, :takeout => true,
+                               :user_id => current_user.id)
+
+            amount = 0
+            products_quantity = JSON.parse(params[:products_quantity])
+
+            products_quantity.each do |key, value|
+              next if value.to_i < 1
+              product = Product.find_by_id(key)
+              if not product.blank?
+                order_product = OrderProduct.where(:order_id => @order.id, :product_id => key, :status => "pending").first
+                if order_product.blank?
+                  order_product = OrderProduct.create!(:order_id => @order.id, :product_id => key, :quantity => value)
+                else
+                  quantity = order_product.quantity + value.to_i
+                  order_product.update_attributes!(:quantity => quantity)
+                end
+                order_product.push_to_kitchen(OrderProductSerializer.new(order_product, root: false).as_json)
+                amount += product.price.to_i * value.to_i
+              end
+            end
+            total_price = @order.total_price + amount
+            @order.update_attributes!(:total_price => total_price)
+
+          end
+          render @order
+        rescue Exception => e
+          error!({ error: "订单创建失败！" }, 400)
+        end
+
+      end
+
       desc '给订单添加商品'
       params do
         requires :order_id, type: Integer, desc: '订单的id'

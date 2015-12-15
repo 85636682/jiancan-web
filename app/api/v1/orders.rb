@@ -14,33 +14,32 @@ module V1
           error!({ error: "订单不存在！" }, 400)
         else
           amount = 0
-          success = true
           products_quantity = JSON.parse(params[:products_quantity])
-          ActiveRecord::Base.transaction do
-            products_quantity.each do |key, value|
-              next if value.to_i < 1
-              product = Product.find_by_id(key)
-              if not product.blank?
-                order_product = OrderProduct.where(:order_id => @order.id, :product_id => key, :status => "pending").first
-                if order_product.blank?
-                  success = order_product = OrderProduct.create(:order_id => @order.id, :product_id => key, :quantity => value)
-                else
-                  quantity = order_product.quantity + value.to_i
-                  success = order_product.update(:quantity => quantity)
+          begin
+            ActiveRecord::Base.transaction do
+              products_quantity.each do |key, value|
+                next if value.to_i < 1
+                product = Product.find_by_id(key)
+                if not product.blank?
+                  order_product = OrderProduct.where(:order_id => @order.id, :product_id => key, :status => "pending").first
+                  if order_product.blank?
+                    order_product = OrderProduct.create!(:order_id => @order.id, :product_id => key, :quantity => value)
+                  else
+                    quantity = order_product.quantity + value.to_i
+                    order_product.update_attributes!(:quantity => quantity)
+                  end
+                  order_product.push_to_kitchen(OrderProductSerializer.new(order_product, root: false).as_json)
+                  amount += product.price.to_i * value.to_i
                 end
-                order_product.push_to_kitchen(OrderProductSerializer.new(order_product, root: false).as_json)
-                amount += product.price.to_i * value.to_i
               end
+              total_price = @order.total_price + amount
+              @order.update_attributes!(:total_price => total_price)
             end
-            total_price = @order.total_price + amount
-            success = @order.update(:total_price => total_price)
-          end
-
-          if success
             render @order
-          else
+          rescue Exception => e
             error!({ error: "商品失效，导致添加失败！" }, 400)
           end
+
         end
       end
 
