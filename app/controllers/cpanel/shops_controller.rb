@@ -28,17 +28,16 @@ class Cpanel::ShopsController < CpanelController
   end
 
   def update
-    response = RestClient.get Addressable::URI.parse("http://api.map.baidu.com/geocoder/v2/" +
-                              "?ak=#{Setting.baidu_map_ak}" +
-                              "&output=json" +
-                              "&address=#{@shop.address}" +
-                              "&city=#{ChinaCity.get(@shop.city)}").normalize.to_str
-    result = JSON.parse(response.force_encoding("UTF-8").gsub(/[\u0011-\u001F]/, ""))
-    if result["status"] == 0
-      params[:shop][:lat] = result["result"]["location"]["lat"]
-      params[:shop][:lng] = result["result"]["location"]["lng"]
-    end
     if @shop.update(shop_params)
+      response = RestClient.get Addressable::URI.parse("http://api.map.baidu.com/geocoder/v2/" +
+                                "?ak=#{Setting.baidu_map_ak}" +
+                                "&output=json" +
+                                "&address=#{@shop.address}" +
+                                "&city=#{ChinaCity.get(@shop.city)}").normalize.to_str
+      result = JSON.parse(response.force_encoding("UTF-8").gsub(/[\u0011-\u001F]/, ""))
+      if result["status"] == 0
+        @shop.update_attributes(:lat => result["result"]["location"]["lat"], :lng => result["result"]["location"]["lng"])
+      end
       redirect_to cpanel_shops_path, :notice => "更新成功！"
     else
       render :edit, :alert => "更新失败！"
