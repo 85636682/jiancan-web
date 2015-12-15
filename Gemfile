@@ -46,6 +46,7 @@ gem 'carrierwave'
 gem 'mini_magick'
 gem 'carrierwave-upyun'
 gem 'rest-client'
+gem 'addressable'
 
 gem 'activesupport-json_encoder'
 
