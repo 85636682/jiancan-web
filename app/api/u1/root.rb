@@ -14,5 +14,6 @@ module U1
     mount U1::ReceivingAddresses
     mount U1::Rooms
     mount U1::Orders
+    mount U1::Shops
   end
 end
