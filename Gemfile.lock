@@ -405,6 +405,8 @@ DEPENDENCIES
   redis-objects (= 1.1.0)
   responders (~> 2.0)
   rest-client
+  rgeo (= 0.5.2)
+  rgeo-activerecord
   rspec-rails (~> 2.10.0)
   sass-rails
   sdoc (~> 0.4.0)
