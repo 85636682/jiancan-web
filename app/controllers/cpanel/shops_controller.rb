@@ -36,7 +36,9 @@ class Cpanel::ShopsController < CpanelController
                                 "&city=#{ChinaCity.get(@shop.city)}").normalize.to_str
       result = JSON.parse(response.force_encoding("UTF-8").gsub(/[\u0011-\u001F]/, ""))
       if result["status"] == 0
-        @shop.update_attributes(:lat => result["result"]["location"]["lat"], :lng => result["result"]["location"]["lng"])
+        @shop.location = "POINT(#{result["result"]["location"]["lng"]} #{result["result"]["location"]["lat"]})"
+        # sets the value with WKT string
+        @shop.save
       end
       redirect_to cpanel_shops_path, :notice => "更新成功！"
     else

@@ -45,9 +45,9 @@ GEM
       activemodel (= 4.2.5)
       activesupport (= 4.2.5)
       arel (~> 6.0)
-    activerecord-postgis-adapter (3.0.0.beta2)
-      activerecord (~> 4.2)
-      rgeo-activerecord (~> 2.1)
+    activerecord-postgis-adapter (3.1.0)
+      activerecord (>= 4.2.0)
+      rgeo-activerecord (~> 4.0)
     activesupport (4.2.5)
       i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
@@ -272,8 +272,8 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
-    rgeo (0.4.0)
-    rgeo-activerecord (2.1.1)
+    rgeo (0.5.2)
+    rgeo-activerecord (4.0.0)
       activerecord (~> 4.2)
       rgeo (~> 0.3)
     rspec (2.10.0)
@@ -358,7 +358,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
-  activerecord-postgis-adapter (= 3.0.0.beta2)
+  activerecord-postgis-adapter (= 3.1.0)
   activesupport-json_encoder
   addressable
   alipay (~> 0.7.1)
@@ -405,6 +405,8 @@ DEPENDENCIES
   redis-objects (= 1.1.0)
   responders (~> 2.0)
   rest-client
+  rgeo (= 0.5.2)
+  rgeo-activerecord
   rspec-rails (~> 2.10.0)
   sass-rails
   sdoc (~> 0.4.0)

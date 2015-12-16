@@ -2,8 +2,16 @@ module U1
   class Shops < Grape::API
     resource :shops do
       desc '根据地理定位返回周边的店铺'
+      params do
+        requires :lat, type: Float, desc: ""
+        requires :lng, type: Float, desc: ""
+      end
       get '', each_serializer: ShopSerializer, root: false do
         authenticate!
+        @shops = Shop.select("shops.*, st_distance(location, 'point(#{params[:lng]} #{params[:lat]})') as distance")
+            .where("st_dwithin(location, 'point(#{params[:lng]} #{params[:lat]})', 10000)").order("distance")
+        # 查找10公里 内结果， 并按照距离进行排序
+        render @shops
       end
 
       desc '获取某店铺下所有分类'

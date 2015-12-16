@@ -23,7 +23,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem "pg"
 
 # locations
-gem 'activerecord-postgis-adapter', '3.0.0.beta2'
+gem 'rgeo', '0.5.2'
+gem 'rgeo-activerecord'
+gem 'activerecord-postgis-adapter', '3.1.0'
 
 gem 'rails-deprecated_sanitizer'
 
