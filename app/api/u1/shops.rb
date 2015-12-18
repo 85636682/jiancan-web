@@ -1,16 +1,30 @@
 module U1
   class Shops < Grape::API
     resource :shops do
-      desc '根据地理定位返回周边的店铺'
+      desc '根据地理定位返回周边的店铺，经纬度和文字性地址必须一个不为空，经纬度不需要为0，'
       params do
-        requires :lat, type: Float, desc: ""
-        requires :lng, type: Float, desc: ""
+        requires :lat, type: Float, desc: "经度"
+        requires :lng, type: Float, desc: "维度"
+        requires :address, type: String, desc: "文字性地址"
       end
       get '', each_serializer: ShopSerializer, root: false do
         authenticate!
-        @shops = Shop.select("shops.*, st_distance(location, 'point(#{params[:lng]} #{params[:lat]})') as distance")
-            .where("st_dwithin(location, 'point(#{params[:lng]} #{params[:lat]})', 10000)").order("distance")
-        # 查找10公里 内结果， 并按照距离进行排序
+        @shops = []
+        if params[:address].blank?
+          @shops = Shop.select("shops.*, st_distance(location, 'point(#{params[:lng]} #{params[:lat]})') as distance")
+              .where("st_dwithin(location, 'point(#{params[:lng]} #{params[:lat]})', 10000)").order("distance")
+          # 查找10公里 内结果， 并按照距离进行排序
+        else
+          response = RestClient.get Addressable::URI.parse("http://api.map.baidu.com/geocoder/v2/" +
+                                    "?ak=#{Setting.baidu_map_ak}" +
+                                    "&output=json" +
+                                    "&address=#{params[:address]}").normalize.to_str
+          result = JSON.parse(response.force_encoding("UTF-8").gsub(/[\u0011-\u001F]/, ""))
+          if result["status"] == 0
+            @shops = Shop.select("shops.*, st_distance(location, 'point(#{result["result"]["location"]["lng"]} #{result["result"]["location"]["lat"]})') as distance")
+                .where("st_dwithin(location, 'point(#{result["result"]["location"]["lng"]} #{result["result"]["location"]["lat"]})', 10000)").order("distance")
+          end
+        end
         render @shops
       end
 
