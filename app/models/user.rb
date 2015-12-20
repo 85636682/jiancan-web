@@ -13,6 +13,12 @@ class User < ActiveRecord::Base
     "user_#{id}"
   end
 
+  def showed
+    return nickname if not nickname.blank?
+    return mobile if not mobile.blank?
+    return ""
+  end
+
   # 重新生成 Private Token
   def update_private_token
     random_key = "#{SecureRandom.hex(10)}:#{id}"

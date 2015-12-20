@@ -85,6 +85,23 @@ module V1
         end
       end
 
+      desc '为订单关联用户'
+      params do
+        requires :order_id, type: Integer, desc: '订单id'
+        requires :user_id, type: Integer, desc: '用户id'
+      end
+      post 'associated/user' do
+        @user = User.find_by_id(params[:user_id])
+        error!({ error: "用户不存在！" }, 400) if @user.blank?
+        @order = Order.find_by_id(params[:order_id])
+        error!({ error: "订单不存在！" }, 400) if @order.blank?
+        if @order.update_attributes(:user_id => @user.id)
+          { msg: 'ok', user_id: @user.id, showed: @user.showed}
+        else
+          error!({ error: "关联失败！" }, 400)
+        end
+      end
+
     end
   end
 end
