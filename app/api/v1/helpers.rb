@@ -16,5 +16,17 @@ module V1
     def kitchen!
       error!({ error: "权限不足" }, 401) unless current_worker.department.kitchen?
     end
+
+    def counter!
+      error!({ error: "权限不足" }, 401) unless current_worker.department.counter?
+    end
+
+    def waiter_or_counter!
+      error!({ error: "权限不足" }, 401) unless current_worker.department.waiter? || current_worker.department.counter?
+    end
+
+    def kitchen_or_counter!
+      error!({ error: "权限不足" }, 401) unless current_worker.department.kitchen? || current_worker.department.counter?
+    end
   end
 end

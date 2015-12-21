@@ -5,7 +5,7 @@ module V1
       params do
         requires :login, type: String, desc: "员工账号"
         requires :password,  type: String, desc: "员工密码"
-        requires :department, type: String, desc: "部门waiter||kitchen"
+        requires :department, type: String, desc: "部门waiter||kitchen||counter"
       end
       post 'login' do
         worker = Worker.find_by_login(params[:login])

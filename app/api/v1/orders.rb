@@ -9,6 +9,7 @@ module V1
       end
       post 'products', serializer: OrderSerializer, root: false do
         authenticate!
+        waiter_or_counter!
         @order = Order.find_by_id(params[:order_id])
         if @order.blank?
           error!({ error: "订单不存在！" }, 400)
@@ -48,6 +49,8 @@ module V1
         requires :order_product_id, type: Integer, desc: 'order_product的id'
       end
       delete 'products' do
+        authenticate!
+        waiter_or_counter!
         @order_product = OrderProduct.find_by_id(params[:order_product_id])
         if @order_product.blank? || !@order_product.pending?
           error!({ error: "菜色不存在或者已经烹煮！" }, 400)
@@ -73,6 +76,8 @@ module V1
         requires :order_id, type: Integer, desc: '订单ID'
       end
       get 'settle' do
+        authenticate!
+        waiter_or_counter!
         @order = Order.find_by_id(params[:order_id])
         if @order.blank? || @order.pendings_count > 0
           error!({ error: "订单不存在或者还有菜色未完成！" }, 400)
@@ -91,6 +96,8 @@ module V1
         requires :user_id, type: Integer, desc: '用户id'
       end
       post 'associated/user' do
+        authenticate!
+        waiter_or_counter!
         @user = User.find_by_id(params[:user_id])
         error!({ error: "用户不存在！" }, 400) if @user.blank?
         @order = Order.find_by_id(params[:order_id])

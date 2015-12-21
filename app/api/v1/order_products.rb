@@ -7,7 +7,7 @@ module V1
         requires :status, type: String, values: ['pending', 'cooking', 'finished', 'canceled'], desc: "订单菜色的状态"
       end
       put 'status' do
-        authenticate!
+        kitchen_or_counter!
         kitchen!
         @order_product = OrderProduct.find_by_id(params[:order_product_id])
         if @order_product.blank?
@@ -33,6 +33,7 @@ module V1
       end
       put 'quantity' do
         authenticate!
+        waiter_or_counter!
         @order_product = OrderProduct.find_by_id(params[:order_product_id])
         if @order_product.blank? || !@order_product.pending?
           error!({ error: "菜色不存在或者已经烹煮！" }, 400)
