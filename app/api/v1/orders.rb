@@ -90,6 +90,26 @@ module V1
         end
       end
 
+      desc '订单收款'
+      params do
+        requires :order_id, type: Integer, desc: "订单id"
+        requires :collect, type: Float, desc: "实收款"
+      end
+      get 'enter' do
+        authenticate!
+        waiter_or_counter!
+        @order = Order.find_by_id(params[:order_id])
+        if @order.blank? || !@order.settled?
+          error!({ error: "订单不存在或者还有没有结账！" }, 400)
+        else
+          if @order.update_attributes(:status => "completed", :collect => params[:collect])
+            { msg: 'ok', collect: @order.collect, status: @order.status, status_text: @order.status.text }
+          else
+            error!({ error: "订单更新错误！" }, 400)
+          end
+        end
+      end
+
       desc '为订单关联用户'
       params do
         requires :order_id, type: Integer, desc: '订单id'
