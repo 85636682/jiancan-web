@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151216020914) do
+ActiveRecord::Schema.define(version: 20151228135214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,20 +110,22 @@ ActiveRecord::Schema.define(version: 20151216020914) do
   end
 
   create_table "merchants", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                    default: "", null: false
+    t.string   "encrypted_password",       default: "", null: false
     t.string   "name"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",            default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.string   "private_token"
+    t.string   "password_digest"
+    t.datetime "private_token_updated_at"
   end
 
   add_index "merchants", ["email"], name: "index_merchants_on_email", unique: true, using: :btree
@@ -147,6 +149,7 @@ ActiveRecord::Schema.define(version: 20151216020914) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "status"
+    t.integer  "worker_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -196,7 +199,7 @@ ActiveRecord::Schema.define(version: 20151216020914) do
 
   create_table "shops", force: :cascade do |t|
     t.string    "name"
-    t.string    "address"
+    t.string    "street"
     t.string    "mobile"
     t.string    "avatar"
     t.string    "province"

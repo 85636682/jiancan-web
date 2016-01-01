@@ -83,6 +83,7 @@ gem 'rails-simple-search', '~> 0.9.9'
 gem 'grape', '~> 0.13.0'
 gem 'active_model_serializers'
 gem 'grape-active_model_serializers'
+gem 'hashie-forbidden_attributes'
 
 # JWT
 gem 'jwt'

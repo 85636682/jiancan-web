@@ -1,0 +1,20 @@
+module M1
+  class Root < Grape::API
+    version 'm1'
+
+    default_error_formatter :json
+    content_type :json, 'application/json'
+    format :json
+    formatter :json, Grape::Formatter::ActiveModelSerializers
+
+    helpers M1::Helpers
+
+    mount M1::Merchants
+    mount M1::Shops
+    mount M1::Orders
+    mount M1::Categories
+    mount M1::Rooms
+    mount M1::Workers
+    mount M1::Products
+  end
+end

@@ -1,3 +1,3 @@
 class RoomSerializer < BaseSerializer
-  attributes :id, :name
+  attributes :id, :name, :seat
 end

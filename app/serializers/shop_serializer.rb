@@ -1,5 +1,6 @@
 class ShopSerializer < BaseSerializer
-  attributes :id, :name, :address, :mobile, :province, :city, :district, :merchant, :avatar, :created_at, :updated_at, :categories
+  attributes :id, :name, :street, :mobile, :province, :city, :district, :avatar,
+             :created_at, :updated_at
 
   has_many :categories, serializer: CategorySerializer
   has_one :merchant, serializer: MerchantSerializer
@@ -7,4 +8,13 @@ class ShopSerializer < BaseSerializer
   def avatar
     object.avatar.url("80x80")
   end
+
+  def created_at
+    DateTime.parse(object.created_at.iso8601).strftime('%Y年%m月%d日 %H:%M')
+  end
+
+  def updated_at
+    DateTime.parse(object.updated_at.iso8601).strftime('%Y年%m月%d日 %H:%M')
+  end
+
 end

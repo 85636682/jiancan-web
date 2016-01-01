@@ -115,6 +115,7 @@
       department:
         waiter: '前台'
         kitchen: '厨房'
+        counter: '总台'
     user:
       gender:
         male: "男"

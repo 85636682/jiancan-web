@@ -1,7 +1,9 @@
 class ProductSerializer < BaseSerializer
   attributes :id, :name, :shop_id, :avatar, :created_at, :updated_at,
-             :category_id, :sales_volume
-             
+             :category_id, :sales_volume, :price
+
+  has_one :category
+
   def avatar
     object.avatar.url("80x80")
   end

@@ -173,6 +173,8 @@ GEM
       active_model_serializers (>= 0.9.0)
       grape
     hashie (3.4.3)
+    hashie-forbidden_attributes (0.1.1)
+      hashie (>= 3.0)
     hiredis (0.6.0)
     htmlentities (4.3.4)
     http-cookie (1.0.2)
@@ -384,6 +386,7 @@ DEPENDENCIES
   font-awesome-sass (~> 4.3.1)
   grape (~> 0.13.0)
   grape-active_model_serializers
+  hashie-forbidden_attributes
   hiredis (~> 0.6.0)
   jbuilder (~> 2.0)
   jpush!
