@@ -12,14 +12,7 @@
       <div class="container">
         <a class="navbar-brand" href="<%= root_path %>"><h3>简餐</h3></a>
         <ul class="nav navbar-nav pull-right">
-        <% if merchant_signed_in? %>
-          <li class="nav-item">
-            <%= link_to "进入后台", cpanel_home_index_path, :class => "btn btn-primary" %>
-          </li>
-        <% else %>
-        <li class="nav-item">
-        </li>
-        <% end %>
+        
         </ul>
       </div>
     </nav>
