@@ -11,3 +11,4 @@
 // about supported directives.
 //
 //= require Chart.min
+//= require build
