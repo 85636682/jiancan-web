@@ -1,2 +1,0 @@
-class CpanelController < ApplicationController
-end
