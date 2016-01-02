@@ -17,4 +17,5 @@ Rails.application.routes.draw do
 
   get 'china_city/:id', to: 'city_data#show'
   get 'welcome/api'
+  get '/', to: '/index.html'
 end
