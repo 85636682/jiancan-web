@@ -36,6 +36,6 @@ class Notification < ActiveRecord::Base
 
   def content_path
     return '' if order.blank?
-    url_helpers.cpanel_order_path(order.id)
+    #url_helpers.cpanel_order_path(order.id)
   end
 end
