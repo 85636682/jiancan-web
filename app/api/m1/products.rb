@@ -73,8 +73,8 @@ module M1
         @product = Product.find_by_id(params[:product_id])
         error!({ error: "菜色不存在！" }, 400) if @product.blank?
         @totals = []
-        (0..6).each do |n|
-          @totals << @product.order_products.by_day(Date.today - n.days).where("status = 'finished'").count
+        (1..12).each do |n|
+          @totals << @product.order_products.by_month(n).where("status = 'finished'").count
         end
         @totals = @totals.reverse
       end
