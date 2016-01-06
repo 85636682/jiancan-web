@@ -77,6 +77,9 @@ module M1
           @totals << @product.order_products.by_month(n).where("status = 'finished'").count
         end
         @totals = @totals.reverse
+
+        #current_merchant.shop.orders.by_day(Date.today - n.days).where("status = 'settled' OR status = 'completed'").sum(:total_price).to_f()
+
       end
 
     end
