@@ -30,6 +30,7 @@ module V1
                     order_product.update_attributes!(:quantity => quantity)
                   end
                   order_product.push_to_kitchen(OrderProductSerializer.new(order_product, root: false).as_json)
+                  order_product.push_to_counter(OrderProductSerializer.new(order_product, root: false).as_json)
                   amount += product.price.to_i * value.to_i
                 end
               end

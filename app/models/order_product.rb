@@ -91,6 +91,33 @@ class OrderProduct < ActiveRecord::Base
     end
   end
 
+  def push_to_counter(extras)
+    begin
+      workers = Worker.where(:shop_id => order.shop.id, :department => "counter")
+      receiver = []
+      workers.each do |worker|
+        receiver << worker.pusher_id
+      end
+      if not receiver.empty?
+        client = JPush::JPushClient.new(Setting.jpush_app_key_for_kitchen, Setting.jpush_master_secret_for_kitchen)
+        payload = JPush::PushPayload.build(
+          platform: JPush::Platform.all,
+          notification: JPush::Notification.build(alert: '有顾客下单新菜色，请及时查看！'),
+          message: JPush::Message.build(
+            msg_content: "message content test",
+            title: "message title test",
+            content_type: "message content type test",
+            extras: extras
+          ),
+          audience: JPush::Audience.build(_alias: receiver)
+        )
+        res = client.sendPush(payload)
+      end
+    rescue JPush::ApiConnectionException
+      JcLog.create(content: "JPush::ApiConnectionException", level: "debug")
+    end
+  end
+
   after_create :update_sales_volume
   def update_sales_volume
     sales_volume = product.sales_volume ||= 0
