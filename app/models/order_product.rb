@@ -75,11 +75,21 @@ class OrderProduct < ActiveRecord::Base
         client = JPush::JPushClient.new(Setting.jpush_app_key_for_kitchen, Setting.jpush_master_secret_for_kitchen)
         payload = JPush::PushPayload.build(
           platform: JPush::Platform.all,
-          notification: JPush::Notification.build(alert: '有顾客下单新菜色，请及时查看！'),
+          notification: JPush::Notification.build(
+            alert: '有顾客下单新菜色，请及时查看！',
+            android: JPush::AndroidNotification.build(
+              alert: '有顾客下单新菜色，请及时查看！',
+              extras: extras
+            ),
+            ios: JPush::IOSNotification.build(
+              alert: '有顾客下单新菜色，请及时查看！',
+              extras: extras
+            )
+          ),
           message: JPush::Message.build(
-            msg_content: "message content test",
-            title: "message title test",
-            content_type: "message content type test",
+            msg_content: "有顾客下单新菜色，请及时查看！",
+            title: "新菜色",
+            content_type: "normal",
             extras: extras
           ),
           audience: JPush::Audience.build(_alias: receiver)
@@ -102,7 +112,17 @@ class OrderProduct < ActiveRecord::Base
         client = JPush::JPushClient.new(Setting.jpush_app_key_for_counter, Setting.jpush_master_secret_for_counter)
         payload = JPush::PushPayload.build(
           platform: JPush::Platform.all,
-          notification: JPush::Notification.build(alert: '有顾客下单新菜色，请及时查看！'),
+          notification: JPush::Notification.build(
+            alert: '有顾客下单新菜色，请及时查看！',
+            android: JPush::AndroidNotification.build(
+              alert: '有顾客下单新菜色，请及时查看！',
+              extras: extras
+            ),
+            ios: JPush::IOSNotification.build(
+              alert: '有顾客下单新菜色，请及时查看！',
+              extras: extras
+            )
+          ),
           message: JPush::Message.build(
             msg_content: "message content test",
             title: "message title test",
