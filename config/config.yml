@@ -11,6 +11,8 @@ defaults: &defaults
   jpush_app_key_for_kitchen: "6286de72365249a7dfe95b66"
   jpush_master_secret_for_waiter: "99b2dac8fbe48d9ef7da6c97"
   jpush_app_key_for_waiter: "15d0fe19dd0e51ae1ed40cf8"
+  jpush_master_secret_for_counter: "7e5a0a84980f42689821247b"
+  jpush_app_key_for_counter: "deec3fbf4f562059c33338cb"
   weixin_app_id: ""
   weixin_app_secret: ""
   baidu_map_ak: "ScOeW4hDG8ZtDeZit8Ie66eG"

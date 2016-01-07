@@ -99,7 +99,7 @@ class OrderProduct < ActiveRecord::Base
         receiver << worker.pusher_id
       end
       if not receiver.empty?
-        client = JPush::JPushClient.new(Setting.jpush_app_key_for_kitchen, Setting.jpush_master_secret_for_kitchen)
+        client = JPush::JPushClient.new(Setting.jpush_app_key_for_counter, Setting.jpush_master_secret_for_counter)
         payload = JPush::PushPayload.build(
           platform: JPush::Platform.all,
           notification: JPush::Notification.build(alert: '有顾客下单新菜色，请及时查看！'),
