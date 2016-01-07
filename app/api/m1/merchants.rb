@@ -23,17 +23,14 @@ module M1
       end
       post 'register' do
         merchant = Merchant.find_by_email(params[:email])
-        if merchant.blank?
-          error!({ error: "用户名已存在！" }, 401)
+        error!({ error: "用户名已存在！" }, 401) if not merchant.blank?
+        merchant = Merchant.new(:email => params["email"],
+                        :password => params["password"],
+                        :password_confirmation => params["password_confirmation"])
+        if merchant.save
+          { msg: "注册成功！", access_token: merchant.get_private_token, email: merchant.email }
         else
-          merchant = Merchant.new(:email => params["email"],
-                          :password => params["password"],
-                          :password_confirmation => params["password_confirmation"])
-          if merchant.save
-            { msg: "注册成功！", access_token: merchant.get_private_token, email: merchant.email }
-          else
-            error!({ error: "用户注册失败！" }, 401)
-          end
+          error!({ error: "用户注册失败！" }, 401)
         end
       end
 
