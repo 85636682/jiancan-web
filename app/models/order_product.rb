@@ -46,7 +46,7 @@ class OrderProduct < ActiveRecord::Base
             ),
             ios: JPush::IOSNotification.build(
               alert: '有菜色状态改变了，请及时查看！',
-              extras:  { "status" => status, "status_text" => status.text, "sn" => order.sn }
+              extras: { "status" => status, "status_text" => status.text, "sn" => order.sn }
             )
           ),
           message: JPush::Message.build(
@@ -79,17 +79,17 @@ class OrderProduct < ActiveRecord::Base
             alert: '有顾客下单新菜色，请及时查看！',
             android: JPush::AndroidNotification.build(
               alert: '有顾客下单新菜色，请及时查看！',
-              extras: extras
+              extras: { "status" => status, "status_text" => status.text, "sn" => order.sn }
             ),
             ios: JPush::IOSNotification.build(
               alert: '有顾客下单新菜色，请及时查看！',
-              extras: extras
+              extras: { "status" => status, "status_text" => status.text, "sn" => order.sn }
             )
           ),
           message: JPush::Message.build(
-            msg_content: "有顾客下单新菜色，请及时查看！",
-            title: "新菜色",
-            content_type: "normal",
+            msg_content: "message content test",
+            title: "message title test",
+            content_type: "message content type test",
             extras: extras
           ),
           audience: JPush::Audience.build(_alias: receiver)
@@ -116,11 +116,11 @@ class OrderProduct < ActiveRecord::Base
             alert: '有顾客下单新菜色，请及时查看！',
             android: JPush::AndroidNotification.build(
               alert: '有顾客下单新菜色，请及时查看！',
-              extras: extras
+              extras: { "status" => status, "status_text" => status.text, "sn" => order.sn }
             ),
             ios: JPush::IOSNotification.build(
               alert: '有顾客下单新菜色，请及时查看！',
-              extras: extras
+              extras: { "status" => status, "status_text" => status.text, "sn" => order.sn }
             )
           ),
           message: JPush::Message.build(
