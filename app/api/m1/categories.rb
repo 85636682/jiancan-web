@@ -58,6 +58,17 @@ module M1
         authenticate!
         @category = Category.find_by_id(params[:category_id])
       end
+
+      desc '返回某个分类下的菜色'
+      params do
+        requires :category_id, type: Integer, desc: "分类id"
+      end
+      get 'products', each_serializer: ProductSerializer, root: false do
+        authenticate!
+        @category = Category.find_by_id(params[:category_id])
+        error!({ error: "分类不存在！" }, 400) if @category.blank?
+        render @category.products
+      end
     end
   end
 end
