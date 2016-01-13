@@ -61,6 +61,8 @@ gem 'by_star', :git => "git://github.com/radar/by_star"
 
 gem "select2-rails"
 
+gem 'china_city'
+
 # 短信
 gem 'smart_sms'
 

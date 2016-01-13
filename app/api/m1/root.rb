@@ -16,5 +16,6 @@ module M1
     mount M1::Rooms
     mount M1::Workers
     mount M1::Products
+    mount M1::Areas
   end
 end
