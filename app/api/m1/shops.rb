@@ -28,12 +28,12 @@ module M1
       desc '修改店铺'
       params do
         requires :shop, type: Hash do
-          requires :name, type: String, desc: "店铺名称"
-          requires :province, type: String, desc: "店铺省份"
-          requires :city, type: String, desc: "店铺城市"
-          requires :district, type: String, desc: "店铺县区"
-          requires :street, type: String, desc: "店铺街道"
-          requires :mobile, type: String, desc: "店铺电话"
+          optional :name, type: String, desc: "店铺名称"
+          optional :province, type: String, desc: "店铺省份"
+          optional :city, type: String, desc: "店铺城市"
+          optional :district, type: String, desc: "店铺县区"
+          optional :street, type: String, desc: "店铺街道"
+          optional :mobile, type: String, desc: "店铺电话"
           optional :avatar, type: Hash, desc: "店铺头像"
         end
       end
