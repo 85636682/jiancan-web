@@ -6,14 +6,14 @@ module M1
       end
 
       params do
-        requires :province_id, type: Integer, desc: "省份id"
+        requires :province_id, type: String, desc: "省份id"
       end
       get 'cities' do
         @cities = ChinaCity.list(params[:province_id])
       end
 
       params do
-        requires :city_id, type: Integer, desc: "城市id"
+        requires :city_id, type: String, desc: "城市id"
       end
       get 'districts' do
         @districts = ChinaCity.list(params[:city_id])
