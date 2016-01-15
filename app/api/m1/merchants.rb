@@ -44,15 +44,34 @@ module M1
 
       desc "修改当前用户信息"
       params do
-        requires :update_key, type: String, desc: "要修改的字段的名称"
-        requires :update_value, type: String, desc: "要修改的字段的内容"
+        requires :merchant, type: Hash do
+          optional :email, type: String, desc: "邮箱"
+          optional :name, type: String, desc: "名称"
+        end
       end
       put 'current' do
         authenticate!
-        if current_merchant.update_attributes(params["update_key"].to_sym => params[:update_value])
-          { msg: "ok", params["update_key"].to_sym => params[:update_value] }
+        if current_merchant.update_attributes(params["merchant"])
+          render current_merchant
         else
           error!({ error: "用户信息修改失败！"}, 401)
+        end
+      end
+
+      desc "修改当前用户密码"
+      params do
+        requires :merchant, type: Hash do
+          requires :password, type: String, desc: "新密码"
+          requires :password_confirmation, type: String, desc: "新密码确认"
+          requires :current_password, type: String, desc: "当前密码"
+        end
+      end
+      put 'current/password' do
+        authenticate!
+        if merchant.authenticate(params[:current_password]) && current_merchant.update_attributes(params["merchant"])
+          render current_merchant
+        else
+          error!({ error: "用户密码修改失败！"}, 401)
         end
       end
 
