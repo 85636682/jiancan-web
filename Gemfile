@@ -54,12 +54,9 @@ gem 'activesupport-json_encoder'
 
 # 分页
 gem 'will_paginate', '3.0.7'
-gem 'will_paginate-bootstrap'
 
 # 实现按某年，某月，某日，或者星期几，来查询数据
 gem 'by_star', :git => "git://github.com/radar/by_star"
-
-gem "select2-rails"
 
 gem 'china_city'
 
