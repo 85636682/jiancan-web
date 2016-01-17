@@ -43,6 +43,10 @@ gem 'devise'
 gem 'devise-encryptable'
 gem 'bcrypt'
 
+# 微信开发平台
+gem 'weixin_rails_middleware'
+gem 'weui-rails'
+
 # 上传组件
 gem 'carrierwave'
 gem 'mini_magick'

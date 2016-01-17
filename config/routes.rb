@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  mount WeixinRailsMiddleware::Engine, at: "/"
   namespace :admin do
     resources :market_products
     resources :shops

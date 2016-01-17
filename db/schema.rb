@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151228135214) do
+ActiveRecord::Schema.define(version: 20160117005738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -196,6 +196,17 @@ ActiveRecord::Schema.define(version: 20151228135214) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "shop_public_accounts", force: :cascade do |t|
+    t.integer  "shop_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "weixin_secret_key"
+    t.string   "weixin_token"
+  end
+
+  add_index "shop_public_accounts", ["weixin_secret_key"], name: "index_shop_public_accounts_on_weixin_secret_key", using: :btree
+  add_index "shop_public_accounts", ["weixin_token"], name: "index_shop_public_accounts_on_weixin_token", using: :btree
 
   create_table "shops", force: :cascade do |t|
     t.string    "name"
