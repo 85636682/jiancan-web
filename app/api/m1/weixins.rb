@@ -4,7 +4,7 @@ module M1
       desc "获取公众账号信息"
       params do
       end
-      get "", serializer: ShopSerializer, root: false do
+      get "", serializer: ShopPublicAccountSerializer, root: false do
         authenticate!
         @shop_public_account = ShopPublicAccount.find_or_create_by_shop_id(current_merchant.shop.id)
         render @shop_public_account
@@ -18,7 +18,7 @@ module M1
           requires :app_secret, type: String, desc: "公众账号的app_secret"
         end
       end
-      put "binding", serializer: ShopSerializer, root: false do
+      put "binding", serializer: ShopPublicAccountSerializer, root: false do
         authenticate!
         @shop_public_account = ShopPublicAccount.find_or_create_by_shop_id(current_merchant.shop.id)
         if @shop_public_account.update_attributes(params[:shop_public_account])
