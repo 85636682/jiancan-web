@@ -45,6 +45,7 @@ gem 'bcrypt'
 
 # 微信开发平台
 gem 'weixin_rails_middleware'
+gem 'weixin_authorize'
 gem 'weui-rails'
 
 # 上传组件

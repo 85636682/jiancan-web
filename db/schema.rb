@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160117005738) do
+ActiveRecord::Schema.define(version: 20160117021723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,22 @@ ActiveRecord::Schema.define(version: 20160117005738) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "diymenus", force: :cascade do |t|
+    t.integer  "shop_public_account_id"
+    t.integer  "parent_id"
+    t.string   "name"
+    t.string   "key"
+    t.string   "url"
+    t.boolean  "is_show"
+    t.integer  "sort"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "diymenus", ["key"], name: "index_diymenus_on_key", using: :btree
+  add_index "diymenus", ["parent_id"], name: "index_diymenus_on_parent_id", using: :btree
+  add_index "diymenus", ["shop_public_account_id"], name: "index_diymenus_on_shop_public_account_id", using: :btree
 
   create_table "favorites", force: :cascade do |t|
     t.integer  "user_id"
@@ -203,6 +219,9 @@ ActiveRecord::Schema.define(version: 20160117005738) do
     t.datetime "updated_at",        null: false
     t.string   "weixin_secret_key"
     t.string   "weixin_token"
+    t.string   "app_id"
+    t.string   "app_secret"
+    t.string   "public_account"
   end
 
   add_index "shop_public_accounts", ["weixin_secret_key"], name: "index_shop_public_accounts_on_weixin_secret_key", using: :btree
