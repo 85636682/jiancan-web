@@ -6,7 +6,7 @@ module M1
       end
       get "", serializer: ShopPublicAccountSerializer, root: false do
         authenticate!
-        @shop_public_account = ShopPublicAccount.find_or_create_by_shop_id(current_merchant.shop.id)
+        @shop_public_account = ShopPublicAccount.find_or_create_by(shop_id: current_merchant.shop.id)
         render @shop_public_account
       end
 
@@ -20,7 +20,7 @@ module M1
       end
       put "binding", serializer: ShopPublicAccountSerializer, root: false do
         authenticate!
-        @shop_public_account = ShopPublicAccount.find_or_create_by_shop_id(current_merchant.shop.id)
+        @shop_public_account = ShopPublicAccount.find_or_create_by(shop_id: current_merchant.shop.id)
         if @shop_public_account.update_attributes(params[:shop_public_account])
           render @shop_public_account
         else
