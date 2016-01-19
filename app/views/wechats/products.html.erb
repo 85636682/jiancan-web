@@ -1,0 +1,39 @@
+<div class="ui bottom attached segment pushable">
+  <div class="ui visible inverted left vertical sidebar menu">
+    <% @categories.each do |category| %>
+    <a class="item" href="<%= products_wechat_path(:shop_id => @shop.id, :category_id => category.id) %>">
+      <i class="home icon"></i>
+      <%= category.name %>
+    </a>
+    <% end %>
+  </div>
+  <div class="pusher">
+    <div class="ui basic segment">
+      <table class="ui very basic collapsing celled table">
+        <thead>
+          <tr>
+            <th>菜色</th>
+            <th>价钱</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @products.each do |product| %>
+          <tr>
+            <td>
+              <h4 class="ui image header">
+                <%= image_tag(product.avatar.url("80x80"), :class=>"ui mini rounded image") %>
+                <div class="content">
+                  <%= product.name %>
+                  <div class="sub header">销售量:<%= product.sales_volume %></div>
+              </div>
+            </h4></td>
+            <td>
+              ￥<%= product.price %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

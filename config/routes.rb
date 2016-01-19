@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
 
   mount WeixinRailsMiddleware::Engine, at: "/"
+
+  resource :wechat, only: [:show, :create] do
+    collection do
+      get :products
+      get :direct_message_box
+    end
+  end
+
   namespace :admin do
     resources :market_products
     resources :shops
@@ -18,5 +26,5 @@ Rails.application.routes.draw do
 
   get 'china_city/:id', to: 'city_data#show'
   get 'welcome/api'
-  
+
 end
