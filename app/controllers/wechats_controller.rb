@@ -10,7 +10,7 @@ class WechatsController < ActionController::Base
     end
   end
 
-  def direct_message_box
-    render 'weui/message_box', locals: { title: 'Weui', description: 'directly render in controller' }
+  def product
+    @product = Product.find(params[:product_id])
   end
 end

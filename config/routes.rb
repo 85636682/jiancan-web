@@ -2,10 +2,10 @@ Rails.application.routes.draw do
 
   mount WeixinRailsMiddleware::Engine, at: "/"
 
-  resource :wechat, only: [:show, :create] do
+  resource :wechat, only: [:show] do
     collection do
       get :products
-      get :direct_message_box
+      get :product
     end
   end
 

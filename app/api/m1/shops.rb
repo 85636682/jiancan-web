@@ -105,6 +105,20 @@ module M1
         render @workers
       end
 
+      desc "店铺销售量分析"
+      params do
+
+      end
+      get 'statistic' do
+        authenticate!
+        error!({ error: "店铺不存在！" }, 400) if @current_merchant.shop.blank?
+        @totals = []
+        (1..12).each do |n|
+          @totals << @shop.orders.by_month(n).where("status = 'completed'").sum(:total_price)
+        end
+        @totals = @totals.reverse
+      end
+
     end
   end
 end
