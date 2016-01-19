@@ -1,5 +1,5 @@
 class ShopPublicAccountSerializer < BaseSerializer
-  attributes :id, :shop_id, :public_account, :app_id, :app_secret, :is_valid
+  attributes :id, :shop_id, :public_account, :app_id, :app_secret, :is_valid,
              :products_menu_url
 
   def is_valid
