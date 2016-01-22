@@ -114,7 +114,7 @@ module M1
         error!({ error: "店铺不存在！" }, 400) if @current_merchant.shop.blank?
         @totals = []
         (1..12).each do |n|
-          @totals << @current_merchant.shop.orders.by_month(n).where("status = 'completed'").sum(:total_price)
+          @totals << @current_merchant.shop.orders.by_year.by_month(n).where("status = 'completed'").sum(:total_price)
         end
         @totals = @totals.reverse
       end

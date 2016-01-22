@@ -74,7 +74,7 @@ module M1
         error!({ error: "菜色不存在！" }, 400) if @product.blank?
         @totals = []
         (1..12).each do |n|
-          @totals << @product.order_products.by_month(n).where("status = 'finished'").count
+          @totals << @product.order_products.by_year.by_month(n).where("status = 'finished'").count
         end
         @totals = @totals.reverse
 
