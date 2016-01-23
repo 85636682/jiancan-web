@@ -2,6 +2,15 @@ module M1
   class Activities < Grape::API
     resource :activities do
 
+      desc '返回某个活动'
+      params do
+        requires :activity_id, type: Integer, desc: "活动id"
+      end
+      get 'one', serializer: ActivitySerializer, root: false do
+        authenticate!
+        @activity = Activity.find_by_id(params[:activity_id])
+      end
+
       desc "创建活动"
       params do
         requires :activity, type: Hash do
@@ -104,7 +113,7 @@ module M1
 
       desc "删除活动商品"
       params do
-        
+
       end
       delete "products", each_serializer: ProductSerializer, root: false do
 
