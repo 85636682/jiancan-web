@@ -1,6 +1,6 @@
 class Activity < ActiveRecord::Base
   extend Enumerize
-  enumerize :handle,  in: [:random, :limit], default: :random
+  enumerize :handle,  in: [:random_extraction, :reach_the_limit], default: :random_extraction
   enumerize :status,  in: [:running, :finished], default: :pending
 
   belongs_to :shop
