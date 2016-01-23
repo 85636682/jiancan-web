@@ -31,7 +31,7 @@ module M1
         @room = Room.find_by_id(params[:room_id])
         error!({ error: "分类不存在！" }, 400) if @room.blank?
         if @room.update_attributes(params[:room])
-          { msg: 'ok' }
+          render @room
         else
           error!({ error: "更新失败！" }, 400)
         end

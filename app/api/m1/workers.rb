@@ -38,7 +38,7 @@ module M1
         @worker = Worker.find_by_id(params[:worker_id])
         error!({ error: "分类不存在！" }, 400) if @worker.blank?
         if @worker.update_attributes(params[:worker])
-          { msg: 'ok' }
+          render @worker
         else
           error!({ error: "更新失败！" }, 400)
         end

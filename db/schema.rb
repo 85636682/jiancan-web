@@ -11,11 +11,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160117021723) do
+ActiveRecord::Schema.define(version: 20160123011508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "activities", force: :cascade do |t|
+    t.integer  "shop_id"
+    t.string   "title"
+    t.text     "details"
+    t.datetime "deadline"
+    t.string   "status"
+    t.integer  "amount"
+    t.string   "handle"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "likes"
+  end
+
+  create_table "activity_products", force: :cascade do |t|
+    t.integer  "activity_id"
+    t.integer  "product_id"
+    t.integer  "amount"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "activity_users", force: :cascade do |t|
+    t.integer  "activity_id"
+    t.integer  "user_id"
+    t.integer  "likes"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "add_private_token_update_at_to_workers", force: :cascade do |t|
     t.datetime "private_token_updated_at"

@@ -18,5 +18,6 @@ module M1
     mount M1::Products
     mount M1::Areas
     mount M1::Weixins
+    mount M1::Activities
   end
 end

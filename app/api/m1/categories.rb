@@ -30,7 +30,7 @@ module M1
         @category = Category.find_by_id(params[:category_id])
         error!({ error: "分类不存在！" }, 400) if @category.blank?
         if @category.update_attributes(params[:category])
-          { msg: 'ok' }
+          render @category
         else
           error!({ error: "更新失败！" }, 400)
         end

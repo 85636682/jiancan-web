@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_many :receiving_addresses
   has_many :favorites, dependent: :destroy
   has_many :favorite_shops, :through => :favorites, :source => :favoriteable, :source_type => "Shop"
+  has_many :activity_users
+  has_many :activities, :through => :activity_users, :dependent => :destroy
 
   def pusher_id
     "user_#{id}"

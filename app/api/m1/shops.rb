@@ -105,6 +105,17 @@ module M1
         render @workers
       end
 
+      desc '返回店铺下所有活动'
+      params do
+        optional :offset, type: Integer, default: 0
+        optional :limit,  type: Integer, default: 20, values: 1..150
+      end
+      get 'activities', each_serializer: ActivitySerializer, root: false do
+        authenticate!
+        @activities = Activity.where(:shop_id => current_merchant.shop.id).offset(params[:offset]).limit(params[:limit]).order("id ASC")
+        render @activities
+      end
+
       desc "店铺销售量分析"
       params do
 
