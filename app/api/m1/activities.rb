@@ -62,15 +62,49 @@ module M1
 
       desc "添加活动商品"
       params do
-        
+        requires :activity_id, type: Integer, desc: '活动的id'
+        requires :products_quantity, type: String, desc: 'Json格式的字符串，包含所有添加商品id和对应数量，用商品的id作为key，用所选商品的数据作为value'
       end
       post "products", each_serializer: ProductSerializer, root: false do
+        authenticate!
+        @activity = Activity.find_by_id(params[:activity_id])
+        if @activity.blank?
+          error!({ error: "活动不存在！" }, 400)
+        else
+          amount = 0
+          products_quantity = JSON.parse(params[:products_quantity])
+          begin
+            ActiveRecord::Base.transaction do
+              products_quantity.each do |key, value|
+                next if value.to_i < 1
+                product = Product.find_by_id(key)
+                if not product.blank?
+                  activity_product = ActivityProduct.where(:activity_id => @activity.id, :product_id => key, :status => "pending").first
+                  if activity_product.blank?
+                    activity_product = ActivityProduct.create!(:activity_id => @activity.id, :product_id => key, :quantity => value)
+                  else
+                    quantity = activity_product.quantity + value.to_i
+                    activity_product.update_attributes!(:quantity => quantity)
+                  end
+                  activity_product.push_to_kitchen(ActivityProductSerializer.new(activity_product, root: false).as_json)
+                  activity_product.push_to_counter(ActivityProductSerializer.new(activity_product, root: false).as_json)
+                  amount += product.price.to_i * value.to_i
+                end
+              end
+              total_price = @activity.total_price + amount
+              @activity.update_attributes!(:total_price => total_price)
+            end
+            render @activity
+          rescue Exception => e
+            error!({ error: "商品失效，导致添加失败！" }, 400)
+          end
 
+        end
       end
 
       desc "删除活动商品"
       params do
-
+        
       end
       delete "products", each_serializer: ProductSerializer, root: false do
 
