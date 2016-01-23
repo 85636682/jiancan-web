@@ -16,7 +16,7 @@ module M1
         requires :activity, type: Hash do
           requires :title, type: String
           requires :details, type: String
-          requires :deadline, type: DateTime
+          optional :deadline, type: DateTime
           requires :likes, type: Integer
           requires :handle, type: String
           requires :amount, type: Integer
