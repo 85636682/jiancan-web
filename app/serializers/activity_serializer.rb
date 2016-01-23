@@ -4,4 +4,8 @@ class ActivitySerializer < BaseSerializer
 
   has_many :activity_users
   has_many :activity_products
+
+  def status_text
+    object.status.text
+  end
 end

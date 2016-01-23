@@ -111,6 +111,14 @@
         cooking: '烹饪'
         finished: '完成'
         canceled: '取消'
+    activity:
+      status:
+        plan: '计划中'
+        running: '进行中'
+        finished: '已结束'
+      handle:
+        random_extraction: '随机抽取'
+        reach_the_limit: '达到条件'
     worker:
       department:
         waiter: '前台'
