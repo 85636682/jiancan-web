@@ -22,7 +22,7 @@ module M1
           requires :amount, type: Integer
         end
       end
-      post "", serializer: ActivitySerializer, root: false do
+      post '' do
         authenticate!
         @activity = Activity.new(params[:activity])
         @activity.shop_id = current_merchant.shop.id
@@ -45,7 +45,7 @@ module M1
           optional :amount, type: Integer
         end
       end
-      put 'one', serializer: ActivitySerializer, root: false do
+      put 'one' do
         @activity = Activity.find_by_id(params[:activity_id])
         error!({ error: "分类不存在！" }, 400) if @activity.blank?
         if @activity.update_attributes(params[:activity])
