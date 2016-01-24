@@ -72,7 +72,7 @@ module M1
       desc "添加活动商品"
       params do
         requires :activity_id, type: Integer, desc: '活动的id'
-        requires :products, type: Arrary[Integer], desc: '商品id数组'
+        requires :products, type: Array[Integer], desc: '商品id数组'
       end
       post "products", each_serializer: ProductSerializer, root: false do
         authenticate!
