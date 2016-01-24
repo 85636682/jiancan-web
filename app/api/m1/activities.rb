@@ -82,7 +82,7 @@ module M1
         else
           begin
             ActiveRecord::Base.transaction do
-              products.each do |value|
+              params[:products].each do |value|
                 next if value.to_i < 1
                 product = Product.find_by_id(value)
                 if not product.blank?
