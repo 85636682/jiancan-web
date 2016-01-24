@@ -72,7 +72,7 @@ module M1
       desc "添加活动商品"
       params do
         requires :activity_id, type: Integer, desc: '活动的id'
-        requires :products_quantity, type: String, desc: 'Json格式的字符串，包含所有添加商品id和对应数量，用商品的id作为key，用所选商品的数据作为value'
+        requires :products, type: Arrary[Integer], desc: '商品id数组'
       end
       post "products", each_serializer: ProductSerializer, root: false do
         authenticate!
@@ -80,28 +80,21 @@ module M1
         if @activity.blank?
           error!({ error: "活动不存在！" }, 400)
         else
-          amount = 0
-          products_quantity = JSON.parse(params[:products_quantity])
           begin
             ActiveRecord::Base.transaction do
-              products_quantity.each do |key, value|
+              products.each do |value|
                 next if value.to_i < 1
-                product = Product.find_by_id(key)
+                product = Product.find_by_id(value)
                 if not product.blank?
-                  activity_product = ActivityProduct.where(:activity_id => @activity.id, :product_id => key, :status => "pending").first
+                  activity_product = ActivityProduct.where(:activity_id => @activity.id, :product_id => value).first
                   if activity_product.blank?
-                    activity_product = ActivityProduct.create!(:activity_id => @activity.id, :product_id => key, :quantity => value)
+                    activity_product = ActivityProduct.create!(:activity_id => @activity.id, :product_id => value, :amount => 1)
                   else
-                    quantity = activity_product.quantity + value.to_i
-                    activity_product.update_attributes!(:quantity => quantity)
+                    amount = activity_product.amount + 1
+                    activity_product.update_attributes!(:amount => amount)
                   end
-                  activity_product.push_to_kitchen(ActivityProductSerializer.new(activity_product, root: false).as_json)
-                  activity_product.push_to_counter(ActivityProductSerializer.new(activity_product, root: false).as_json)
-                  amount += product.price.to_i * value.to_i
                 end
               end
-              total_price = @activity.total_price + amount
-              @activity.update_attributes!(:total_price => total_price)
             end
             render @activity
           rescue Exception => e
