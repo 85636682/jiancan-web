@@ -76,6 +76,7 @@ module M1
       end
       post "products", each_serializer: ProductSerializer, root: false do
         authenticate!
+        JcLog.create(:content=>params[:products])
         @activity = Activity.find_by_id(params[:activity_id])
         if @activity.blank?
           error!({ error: "活动不存在！" }, 400)
@@ -83,6 +84,7 @@ module M1
           begin
             ActiveRecord::Base.transaction do
               params[:products].each do |value|
+                JcLog.create(:content=>value)
                 next if value.to_i < 1
                 product = Product.find_by_id(value)
                 if not product.blank?
@@ -98,7 +100,6 @@ module M1
             end
             render @activity
           rescue Exception => e
-            JcLog.create(:content=>e.message)
             error!({ error: "商品失效，导致添加失败！" }, 400)
           end
 
