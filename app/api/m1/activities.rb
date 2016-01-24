@@ -86,9 +86,9 @@ module M1
                 next if value.to_i < 1
                 product = Product.find_by_id(value)
                 if not product.blank?
-                  activity_product = ActivityProduct.where(:activity_id => @activity.id, :product_id => value).first
+                  activity_product = ActivityProduct.where(:activity_id => @activity.id, :product_id => product.id).first
                   if activity_product.blank?
-                    activity_product = ActivityProduct.create!(:activity_id => @activity.id, :product_id => value, :amount => 1)
+                    activity_product = ActivityProduct.create!(:activity_id => @activity.id, :product_id => product.id, :amount => 1)
                   else
                     amount = activity_product.amount + 1
                     activity_product.update_attributes!(:amount => amount)
@@ -98,6 +98,7 @@ module M1
             end
             render @activity
           rescue Exception => e
+            JcLog.create(:content=>e.message)
             error!({ error: "商品失效，导致添加失败！" }, 400)
           end
 
