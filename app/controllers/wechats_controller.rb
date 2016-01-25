@@ -13,4 +13,8 @@ class WechatsController < ActionController::Base
   def product
     @product = Product.find(params[:product_id])
   end
+
+  def activity
+    @activity = Activity.find_by_id(params[:activity_id])
+  end
 end
