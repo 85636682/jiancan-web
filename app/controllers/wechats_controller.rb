@@ -16,5 +16,6 @@ class WechatsController < ActionController::Base
 
   def activity
     @activity = Activity.find_by_id(params[:activity_id])
+    @target_user = User.find_by_id(params[:target_user_id])
   end
 end
