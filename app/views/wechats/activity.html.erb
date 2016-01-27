@@ -30,7 +30,11 @@
   <tr>
     <td>
       <% if @target_user.blank? %>
-      <input type="text" name="mobile" value="" placeholder="输入手机号码" />
+      <form class="ui form">
+        <div class="field">
+          <input type="text" name="mobile" value="" placeholder="输入手机号码" />
+        </div>
+      </form>
       <a class="ui primary button">绑定</a>
       <% else %>
       <a class="ui primary button">为他点赞</a>

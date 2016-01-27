@@ -5,9 +5,18 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <title>WeUI</title>
     <%= stylesheet_link_tag 'weui-rails', media: 'all' %>
-    <script src="http://cdnjs.gtimg.com/cdnjs/libs/zepto/1.1.4/zepto.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.15/vue.min.js"></script>
 </head>
-<body ontouchstart>
-  <%= yield %>
+<body>
+  <div id="app">
+    <%= yield %>
+  </div>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {},
+      methods: {}
+    })
+  </script>
 </body>
 </html>
