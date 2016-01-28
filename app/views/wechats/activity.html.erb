@@ -16,30 +16,32 @@
 </div>
 
 <% else %>
-<table class="ui very basic collapsing celled table">
-  <tr>
-    <td>
-      <%= @activity.shop.name %> - <%= @activity.title %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <%= @activity.details %>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <% if @target_user.blank? %>
-      <form class="ui form">
-        <div class="field">
-          <input type="text" name="mobile" value="" placeholder="输入手机号码" />
-        </div>
-      </form>
-      <a class="weui_btn weui_btn_primary">绑定</a>
-      <% else %>
-      <a class="weui_btn weui_btn_primary">为他点赞</a>
-      <% end %>
-    </td>
-  </tr>
-</table>
+<div class="bd">
+  <div class="weui_grids">
+    <article class="weui_article">
+      <h1><%= @activity.shop.name %> - <%= @activity.title %></h1>
+      <section>
+        <p>
+          <%= @activity.details %>
+        </p>
+      </section>
+    </article>
+    <table class="ui very basic collapsing celled table">
+      <tr>
+        <td>
+          <% if @target_user.blank? %>
+          <form class="ui form">
+            <div class="field">
+              <input type="text" name="mobile" value="" placeholder="输入手机号码" />
+            </div>
+          </form>
+          <a class="weui_btn weui_btn_primary">绑定</a>
+          <% else %>
+          <a class="weui_btn weui_btn_primary">为他点赞</a>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
 <% end %>
