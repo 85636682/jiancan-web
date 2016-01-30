@@ -26,22 +26,21 @@
         </p>
       </section>
     </article>
-    <table class="ui very basic collapsing celled table">
-      <tr>
-        <td>
-          <% if @target_user.blank? %>
-          <form class="ui form">
-            <div class="field">
-              <input type="text" name="mobile" value="" placeholder="输入手机号码" />
-            </div>
-          </form>
-          <a class="weui_btn weui_btn_primary">绑定</a>
-          <% else %>
-          <a class="weui_btn weui_btn_primary">为他点赞</a>
-          <% end %>
-        </td>
-      </tr>
-    </table>
+    <% if @target_user.blank? %>
+      <div class="weui_cells weui_cells_form">
+        <div class="weui_cell">
+          <div class="weui_cell_hd">
+            <label class="weui_label">qq</label>
+          </div>
+          <div class="weui_cell_bd weui_cell_primary">
+            <input class="weui_input" type="mobile" placeholder="输入手机号码">
+          </div>
+        </div>
+      </div>
+      <a class="weui_btn weui_btn_primary">绑定</a>
+    <% else %>
+      <a class="weui_btn weui_btn_primary">为他点赞</a>
+    <% end %>
     <div class="weui_cells_title">参加活动商品列表</div>
     <div class="weui_cells weui_cells_access">
       <% @activity.activity_products.each do |activity_product| %>
