@@ -1,5 +1,6 @@
 class OrderSerializer < BaseSerializer
-  attributes :id, :sn, :status, :status_text, :total_price, :created_at, :updated_at, :room_id, :worker_id, :shop_id
+  attributes :id, :sn, :status, :status_text, :total_price, :created_at, :updated_at,
+             :room_id, :worker_id, :shop_id, :takeout
 
   has_many :order_products, serializer: OrderProductSerializer
   has_one :room, serializer: RoomSerializer
