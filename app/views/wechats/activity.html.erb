@@ -16,51 +16,47 @@
 </div>
 
 <% else %>
-<div class="bd">
-  <div class="weui_grids">
-    <article class="weui_article">
-      <h1><%= @activity.shop.name %> - <%= @activity.title %></h1>
-      <section>
-        <p>
-          <%= @activity.details %>
-        </p>
-      </section>
-    </article>
-    <% if @target_user.blank? %>
-      <div class="weui_cells weui_cells_form">
-        <div class="weui_cell">
-          <div class="weui_cell_hd">
-            <label class="weui_label">qq</label>
-          </div>
-          <div class="weui_cell_bd weui_cell_primary">
-            <input class="weui_input" type="mobile" placeholder="输入手机号码">
-          </div>
-        </div>
-      </div>
-      <div class="bd spacing">
-        <a class="weui_btn weui_btn_primary">绑定</a>
-      </div>
-    <% else %>
-      <div class="bd spacing">
-        <a class="weui_btn weui_btn_primary">为他点赞</a>
-      </div>
-    <% end %>
-    <div class="weui_cells_title">参加活动商品列表</div>
-    <div class="weui_cells weui_cells_access">
-      <% @activity.activity_products.each do |activity_product| %>
-      <a class="weui_cell" href="javascript:;">
+  <article class="weui_article">
+    <h1><%= @activity.shop.name %> - <%= @activity.title %></h1>
+    <section>
+      <p>
+        <%= @activity.details %>
+      </p>
+    </section>
+  </article>
+  <% if @target_user.blank? %>
+    <div class="weui_cells weui_cells_form">
+      <div class="weui_cell">
         <div class="weui_cell_hd">
-          <img src="<%= activity_product.product.avatar.url("80x80") %>" alt="icon" style="width:20px;margin-right:5px;display:block">
+          <label class="weui_label">手机号码</label>
         </div>
         <div class="weui_cell_bd weui_cell_primary">
-          <p><%= activity_product.product.name %></p>
+          <input class="weui_input" type="mobile" placeholder="输入手机号码">
         </div>
-        <div class="weui_cell_ft">
-          <%= activity_product.amount %> 份
-        </div>
-      </a>
-      <% end %>
+      </div>
     </div>
+    <div class="bd spacing">
+      <a class="weui_btn weui_btn_primary">绑定</a>
+    </div>
+  <% else %>
+    <div class="bd spacing">
+      <a class="weui_btn weui_btn_primary">为他点赞</a>
+    </div>
+  <% end %>
+  <div class="weui_cells_title">参加活动商品列表</div>
+  <div class="weui_cells weui_cells_access">
+    <% @activity.activity_products.each do |activity_product| %>
+    <a class="weui_cell" href="javascript:;">
+      <div class="weui_cell_hd">
+        <img src="<%= activity_product.product.avatar.url("80x80") %>" alt="icon" style="width:20px;margin-right:5px;display:block">
+      </div>
+      <div class="weui_cell_bd weui_cell_primary">
+        <p><%= activity_product.product.name %></p>
+      </div>
+      <div class="weui_cell_ft">
+        <%= activity_product.amount %> 份
+      </div>
+    </a>
+    <% end %>
   </div>
-</div>
 <% end %>
