@@ -1,5 +1,4 @@
 <% if @activity.blank? %>
-<div class="page">
   <div class="weui_msg">
     <div class="weui_icon_area"><i class="weui_icon_warn weui_icon_msg"></i></div>
     <div class="weui_text_area">
@@ -13,19 +12,21 @@
       </p>
     </div>
   </div>
-</div>
 
 <% else %>
-<div class="page">
-  <article class="weui_article">
-    <h1><%= @activity.shop.name %> - <%= @activity.title %></h1>
-    <section>
-      <p>
-        <%= @activity.details %>
-      </p>
-    </section>
-  </article>
+  <div class="banner">
+    <article class="weui_article font-color-white">
+      <h1><%= @activity.shop.name %> - <%= @activity.title %></h1>
+      <section>
+        <p>
+          <%= @activity.details %>
+        </p>
+      </section>
+    </article>
+  </div>
+
   <% if @target_user.blank? %>
+  <div class="bd">
     <div class="weui_cells weui_cells_form">
       <div class="weui_cell">
         <div class="weui_cell_bd weui_cell_primary">
@@ -33,6 +34,7 @@
         </div>
       </div>
     </div>
+  </div>
     <div class="bd spacing">
       <div class="button_sp_area">
         <a class="weui_btn weui_btn_primary">绑定</a>
@@ -61,5 +63,4 @@
     </a>
     <% end %>
   </div>
-</div>
 <% end %>
