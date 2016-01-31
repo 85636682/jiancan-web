@@ -1,27 +1,44 @@
-<div class="ui bottom attached segment pushable">
-  <div class="ui visible inverted left vertical sidebar menu">
+<div class="hd">
+  <h1 class="page_title"><%= @shop.name %></h1>
+  <p class="page_desc">请选择菜色分类</p>
+</div>
+<div class="bd">
+  <div class="weui_grids">
+    <a href="<%= products_wechat_path(:shop_id => @shop.id) %>" class="weui_grid js_grid" data-id="button">
+      <div class="weui_grid_icon">
+        <img src="./images/icon_nav_button.png" alt="">
+      </div>
+      <p class="weui_grid_label">
+        全部
+      </p>
+    </a>
     <% @categories.each do |category| %>
-    <a class="item" href="<%= products_wechat_path(:shop_id => @shop.id, :category_id => category.id) %>">
-      <i class="home icon"></i>
-      <%= category.name %>
+    <a href="<%= products_wechat_path(:shop_id => @shop.id, :category_id => category.id) %>" class="weui_grid js_grid" data-id="button">
+      <div class="weui_grid_icon">
+        <img src="./images/icon_nav_button.png" alt="">
+      </div>
+      <p class="weui_grid_label">
+        <%= category.name %>
+      </p>
     </a>
     <% end %>
   </div>
-  <div class="pusher">
-    <div class="ui basic segment">
-      <div class="ui list">
-        <% @products.each do |product| %>
-          <div class="item">
-            <h4 class="ui image header">
-              <%= image_tag(product.avatar.url("80x80"), :class=>"ui mini rounded image") %>
-              <div class="content">
-                <%= product.name %>
-                <div class="sub header">￥<%= product.price %></div>
-              </div>
-            </h4>
-          </div>
-        <% end %>
+</div>
+<div class="bd">
+  <div class="weui_cells_title">商品列表</div>
+  <div class="weui_cells weui_cells_access">
+    <% @products.each do |product| %>
+    <a class="weui_cell" href="javascript:;">
+      <div class="weui_cell_hd">
+        <img src="<%= product.avatar.url("80x80") %>" alt="icon" style="width:20px;margin-right:5px;display:block">
       </div>
-    </div>
+      <div class="weui_cell_bd weui_cell_primary">
+        <p><%= product.name %></p>
+      </div>
+      <div class="weui_cell_ft">
+        ￥ <%= product.price %>
+      </div>
+    </a>
+    <% end %>
   </div>
 </div>
