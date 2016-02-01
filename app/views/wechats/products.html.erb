@@ -15,7 +15,7 @@
     <% @categories.each do |category| %>
     <a href="<%= products_wechat_path(:shop_id => @shop.id, :category_id => category.id) %>" class="weui_grid js_grid" data-id="button">
       <div class="weui_grid_icon">
-        <img src="./images/icon_nav_button.png" alt="">
+        <img src="<%= category.avatar.url("80x80") %>" alt="">
       </div>
       <p class="weui_grid_label">
         <%= category.name %>
