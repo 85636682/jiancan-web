@@ -23,7 +23,8 @@ module M1
       params do
         requires :category_id, type: Integer, desc: "分类id"
         requires :category, type: Hash do
-          requires :name, type: String
+          optional :name, type: String
+          optional :avatar, type: Hash
         end
       end
       put 'one' do
