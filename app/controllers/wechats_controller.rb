@@ -28,7 +28,7 @@ class WechatsController < ApplicationController
 
   private
   def create_wechat_client
-    @client ||= WeixinAuthorize::Client.new(ENV["WECHAT_APP_ID"], ENV["WECHAT_APP_SECRET"])
+    @wechat_client ||= WeixinAuthorize::Client.new(ENV["WECHAT_APP_ID"], ENV["WECHAT_APP_SECRET"])
   end
    # 调用微信授权获取openid
   def invoke_wx_auth
