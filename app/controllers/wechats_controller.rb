@@ -39,12 +39,9 @@ class WechatsController < ApplicationController
       Rails.logger.error("present")
       return # 防止进入死循环授权
     end
-    if params["need_wx_auth"].present?
-      # 生成授权url，再进行跳转
-      sns_url =  @wechat_client.authorize_url(request.url)
-      Rails.logger.error("#{sns_url}")
-      redirect_to sns_url and return
-    end
+    sns_url =  @wechat_client.authorize_url(request.url)
+    Rails.logger.error("#{sns_url}")
+    redirect_to sns_url and return
   end
 
   # 在invoke_wx_auth中做了跳转之后，此方法截取
