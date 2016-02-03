@@ -5,7 +5,7 @@ class WechatsController < ApplicationController
 
   before_action :create_wechat_client, only: [:activity]
   before_action :invoke_wx_auth, only: [:activity]
-  before_action :get_wechat_sns, only: [:activity], if: :is_wechat_brower?
+  before_action :get_wechat_sns, if: :is_wechat_brower?
 
   def products
     @shop = Shop.find(params[:shop_id])
