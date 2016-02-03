@@ -22,8 +22,6 @@ class WechatsController < ApplicationController
   end
 
   def activity
-    Rails.logger.error("#{request.user_agent == 'MicroMessenger'}")
-    Rails.logger.error("#{request.user_agent}")
     @activity = Activity.find_by_id(params[:activity_id])
     @target_user = User.find_by_id(params[:target_user_id])
   end
@@ -43,11 +41,11 @@ class WechatsController < ApplicationController
 
   # 在invoke_wx_auth中做了跳转之后，此方法截取
   def get_wechat_sns
-    Rails.logger.error("call back")
     # params[:state] 这个参数是微信特定参数，所以可以以此来判断授权成功后微信回调。
     if session[:openid].blank? && params[:state].present?
       sns_info = @wechat_client.get_oauth_access_token(params[:code])
-      Rails.logger.error("Weixin oauth2 response: #{sns_info.result}")
+      Rails.logger.error("Weixin oauth2 response: #{sns_info.result.openid}")
+      # @user = User.from_omniauth(sns_info.result)
       # 重复使用相同一个code调用时：
       if sns_info.result["errcode"] != "40029"
         session[:openid] = sns_info.result["openid"]
