@@ -11,7 +11,7 @@ module ApplicationHelper
 
     flash_messages.join("\n").html_safe
   end
-  
+
   def formattime(time, options = {})
     options[:unit]
     options[:unit] = options[:unit].blank? ? "day" : options[:unit]
@@ -30,7 +30,7 @@ module ApplicationHelper
       DateTime.parse(time.iso8601).strftime('%Y%m%d%H%M') if time
     end
   end
-  
+
   def active_controller?(c_name = nil)
     raw('active') if controller_name == c_name
   end
@@ -50,5 +50,9 @@ module ApplicationHelper
     else
       return false
     end
+  end
+
+  def is_weixin_request?
+    
   end
 end
