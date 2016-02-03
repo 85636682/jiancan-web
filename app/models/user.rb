@@ -11,6 +11,22 @@ class User < ActiveRecord::Base
   has_many :activity_users
   has_many :activities, :through => :activity_users, :dependent => :destroy
 
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.password = User.friendly_token[0, 20]
+      user.nickname = auth.info.nickname
+      user.sex = auth.info.sex
+      user.avatar = auth.info.headimgurl
+    end
+  end
+
+  def self.friendly_token(length = 20)
+    # To calculate real characters, we must perform this operation.
+    # See SecureRandom.urlsafe_base64
+    rlength = (length * 3) / 4
+    SecureRandom.urlsafe_base64(rlength).tr('lIO0', 'sxyz')
+  end
+
   def pusher_id
     "user_#{id}"
   end

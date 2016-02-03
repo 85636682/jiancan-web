@@ -47,6 +47,7 @@ gem 'bcrypt'
 gem 'weixin_rails_middleware'
 gem 'weixin_authorize'
 gem 'wechat'
+gem 'omniauth-wechat-oauth2'
 
 # 上传组件
 gem 'carrierwave'
@@ -100,6 +101,7 @@ gem 'font-awesome-sass', '~> 4.3.1'
 
 # YAML 配置信息
 gem "settingslogic"
+gem "figaro"
 
 gem "puma", "2.15.3"
 
