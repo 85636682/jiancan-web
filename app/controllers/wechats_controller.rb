@@ -3,7 +3,7 @@ class WechatsController < ApplicationController
 
   wechat_responder
 
-  before_action :create_wechat_client, only: [:activity]
+  before_action :create_wechat_client, only: [:invoke_wx_auth, :get_wechat_sns]
   before_action :invoke_wx_auth, only: [:activity]
   before_action :get_wechat_sns, if: :is_wechat_brower?
 
@@ -22,6 +22,8 @@ class WechatsController < ApplicationController
   end
 
   def activity
+    Rails.logger.error("#{request.user_agent == 'MicroMessenger'}")
+    Rails.logger.error("#{request.user_agent}")
     @activity = Activity.find_by_id(params[:activity_id])
     @target_user = User.find_by_id(params[:target_user_id])
   end
