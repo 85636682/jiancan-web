@@ -51,12 +51,5 @@ module ApplicationHelper
       return false
     end
   end
-
-  def is_wechat_brower?
-    request.user_agent == 'MicroMessenger'
-  end
-
-  def is_weixin_request?
-
-  end
+  
 end

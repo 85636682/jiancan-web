@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :unread_notify_count
   helper_method :cart_market_product_count
-  
+
   def require_merchant
     if not merchant_signed_in?
       redirect_to new_merchant_session_path
@@ -38,6 +38,14 @@ class ApplicationController < ActionController::Base
   def cart_market_product_count
     return 0 if current_merchant.blank?
     @cart_market_product_count ||= current_merchant.market_order_market_products.where(:market_order_id => nil).count
+  end
+
+  def is_wechat_brower?
+    request.user_agent == 'MicroMessenger'
+  end
+
+  def is_weixin_request?
+
   end
 
 end
