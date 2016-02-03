@@ -29,18 +29,16 @@ class WechatsController < ApplicationController
 
   private
   def create_wechat_client
-    Rails.logger.error("create_wechat_client")
+    Rails.logger.error("#{ENV["WECHAT_APP_ID"]},#{ENV["WECHAT_APP_SECRET"]}")
     @wechat_client ||= WeixinAuthorize::Client.new(ENV["WECHAT_APP_ID"], ENV["WECHAT_APP_SECRET"])
   end
    # 调用微信授权获取openid
   def invoke_wx_auth
     Rails.logger.error("invoke_wx_auth")
     if params[:state].present? || session['openid'].present? || session[:user_id].present? #|| !is_wechat_brower?
-      Rails.logger.error("present")
       return # 防止进入死循环授权
     end
     sns_url =  @wechat_client.authorize_url(request.url)
-    Rails.logger.error("#{sns_url}")
     redirect_to sns_url and return
   end
 
