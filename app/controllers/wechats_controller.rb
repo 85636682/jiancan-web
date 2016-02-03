@@ -35,7 +35,7 @@ class WechatsController < ApplicationController
     if params[:state].present? || session['openid'].present? || session[:user_id].present? #|| !is_wechat_brower?
       return # 防止进入死循环授权
     end
-    sns_url =  @wechat_client.authorize_url(request.url)
+    sns_url =  @wechat_client.authorize_url(request.url, scope="snsapi_userinfo")
     Rails.logger.error("#{sns_url}")
     redirect_to sns_url and return
   end
