@@ -36,12 +36,12 @@ class WechatsController < ApplicationController
       return # 防止进入死循环授权
     end
     sns_url =  @wechat_client.authorize_url(request.url, scope="snsapi_userinfo")
-    Rails.logger.error("#{sns_url}")
     redirect_to sns_url and return
   end
 
   # 在invoke_wx_auth中做了跳转之后，此方法截取
   def get_wechat_sns
+    Rails.logger.debug("call back")
     # params[:state] 这个参数是微信特定参数，所以可以以此来判断授权成功后微信回调。
     if session[:openid].blank? && params[:state].present?
       sns_info = @wechat_client.get_oauth_access_token(params[:code])
