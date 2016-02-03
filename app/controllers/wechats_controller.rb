@@ -33,11 +33,13 @@ class WechatsController < ApplicationController
    # 调用微信授权获取openid
   def invoke_wx_auth
     if params[:state].present? || session['openid'].present? || session[:user_id].present? #|| !is_wechat_brower?
+      Rails.logger.error("present")
       return # 防止进入死循环授权
     end
     if params["need_wx_auth"].present?
       # 生成授权url，再进行跳转
       sns_url =  @wechat_client.authorize_url(request.url)
+      Rails.logger.error("#{sns_url}")
       redirect_to sns_url and return
     end
   end
