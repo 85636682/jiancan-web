@@ -102,7 +102,7 @@ gem 'font-awesome-sass', '~> 4.3.1'
 # YAML 配置信息
 gem "settingslogic"
 
-gem "puma", "2.15.3"
+gem "puma", "~> 2.6"
 
 gem 'whenever', :require => false
 
