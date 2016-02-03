@@ -29,8 +29,8 @@ class WechatsController < ApplicationController
 
   private
   def create_wechat_client
-    Rails.logger.error("#{ENV["WECHAT_APP_ID"]},#{ENV["WECHAT_APP_SECRET"]}")
-    @wechat_client ||= WeixinAuthorize::Client.new(ENV["WECHAT_APP_ID"], ENV["WECHAT_APP_SECRET"])
+    Rails.logger.error("#{Rails.application.secrets.wechat_app_id},#{Rails.application.secrets.wechat_app_secret}")
+    @wechat_client ||= WeixinAuthorize::Client.new(Rails.application.secrets.wechat_app_id, Rails.application.secrets.wechat_app_secret)
   end
    # 调用微信授权获取openid
   def invoke_wx_auth
