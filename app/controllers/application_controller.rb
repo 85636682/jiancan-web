@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
   end
 
   def is_wechat_brower?
-    request.user_agent == 'MicroMessenger'
+    request.user_agent.index('MicroMessenger/')
   end
 
   def is_weixin_request?
