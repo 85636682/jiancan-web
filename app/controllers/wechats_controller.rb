@@ -32,7 +32,7 @@ class WechatsController < ApplicationController
   end
    # 调用微信授权获取openid
   def invoke_wx_auth
-    if params[:state].present? || !is_wechat_brower? || session['openid'].present? || session[:user_id].present?
+    if params[:state].present? || session['openid'].present? || session[:user_id].present? #|| !is_wechat_brower?
       return # 防止进入死循环授权
     end
     if params["need_wx_auth"].present?
