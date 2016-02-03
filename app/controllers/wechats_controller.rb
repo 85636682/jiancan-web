@@ -1,4 +1,4 @@
-class WechatsController < ActionController::Base
+class WechatsController < ApplicationController
   layout 'wechat'
 
   wechat_responder
