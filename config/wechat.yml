@@ -1,0 +1,21 @@
+default: &default
+  appid:    "wx799b2d765bf4b9ac"
+  secret:   "12cb0b486187ff17e90a05edbdfcd837"
+  token:    "ljh861117wss900331"
+  encrypt_mode: true
+  encoding_aes_key:  "38CSIbUth660rYLOqW4Dqob4kBAeWFQc0yyKgwnRD9X"
+
+production:
+  appid:      "wx799b2d765bf4b9ac"
+  secret:     "12cb0b486187ff17e90a05edbdfcd837"
+  token:      "ljh861117wss900331"
+  timeout:    30,
+  skip_verify_ssl: true
+  encrypt_mode: true
+  encoding_aes_key:  "38CSIbUth660rYLOqW4Dqob4kBAeWFQc0yyKgwnRD9X"
+
+development:
+  <<: *default
+
+test:
+  <<: *default

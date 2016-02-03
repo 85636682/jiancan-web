@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160201010942) do
+ActiveRecord::Schema.define(version: 20160203011316) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -286,6 +286,15 @@ ActiveRecord::Schema.define(version: 20160201010942) do
     t.string   "nickname"
     t.string   "avatar"
   end
+
+  create_table "wechat_sessions", force: :cascade do |t|
+    t.string   "openid",     null: false
+    t.string   "hash_store"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "wechat_sessions", ["openid"], name: "index_wechat_sessions_on_openid", unique: true, using: :btree
 
   create_table "workers", force: :cascade do |t|
     t.string   "imei"

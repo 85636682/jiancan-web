@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
 
-  mount WeixinRailsMiddleware::Engine, at: "/"
-
-  resource :wechat, only: [:show] do
+  resource :wechat, only: [:show, :create] do
     collection do
       get :products
       get :product
@@ -24,6 +22,7 @@ Rails.application.routes.draw do
 
   require 'dispatch'
   mount Api::Dispatch => '/api'
+  mount WeixinRailsMiddleware::Engine, at: "/"
 
   get 'china_city/:id', to: 'city_data#show'
   get 'welcome/api'

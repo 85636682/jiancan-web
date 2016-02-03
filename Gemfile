@@ -46,6 +46,7 @@ gem 'bcrypt'
 # 微信开发平台
 gem 'weixin_rails_middleware'
 gem 'weixin_authorize'
+gem 'wechat'
 
 # 上传组件
 gem 'carrierwave'
