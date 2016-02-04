@@ -44,7 +44,9 @@ class WechatsController < ApplicationController
     # params[:state] 这个参数是微信特定参数，所以可以以此来判断授权成功后微信回调。
     if session[:openid].blank? && params[:state].present?
       sns_info = @wechat_client.get_oauth_access_token(params[:code])
-      Rails.logger.error("Weixin oauth2 response: #{sns_info}")
+      # 如果网页授权作用域为snsapi_userinfo，则此时开发者可以通过access_token和openid拉取用户信息了。
+      user_info = @wechat_client.get_oauth_userinfo(sns_info.result["openid"], sns_info.result["access_token"])
+      Rails.logger.error("Weixin oauth2 response: #{user_info}")
       # @user = User.from_omniauth(sns_info.result["openid"])
       # 重复使用相同一个code调用时：
       if sns_info.result["errcode"] != "40029"
