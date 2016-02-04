@@ -24,7 +24,14 @@
     var app = new Vue({
       el: '#app',
       data: {},
-      methods: {},
+      methods: {
+        like: function() {
+          alert("click a like!");
+        },
+        binding: function() {
+          alert("click a binding!")
+        }
+      },
       ready: function() {
       }
     })
