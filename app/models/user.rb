@@ -11,12 +11,11 @@ class User < ActiveRecord::Base
   has_many :activity_users
   has_many :activities, :through => :activity_users, :dependent => :destroy
 
-  def self.from_omniauth(openid)
-    where(weixin_open_id: openid).first_or_create do |user|
+  def self.from_omniauth(auth)
+    where(weixin_open_id: auth["openid"]).first_or_create do |user|
       user.password = User.friendly_token[0, 20]
-      user.nickname = auth.info.nickname
-      user.sex = auth.info.sex
-      user.avatar = auth.info.headimgurl
+      user.nickname = auth["nickname"]
+      user.avatar = auth["headimgurl"]
     end
   end
 

@@ -25,22 +25,28 @@
     </article>
   </div>
 
-  <% if @target_user.blank? %>
-  <div class="bd">
-    <div class="weui_cells weui_cells_form">
-      <div class="weui_cell">
-        <div class="weui_cell_bd weui_cell_primary">
-          <input class="weui_input" type="mobile" placeholder="输入手机号码">
+  <% if @target_user.blank? || @target_user == @user %>
+    <% if @user.mobile.blank? %>
+      <div class="bd">
+        <div class="weui_cells weui_cells_form">
+          <div class="weui_cell">
+            <div class="weui_cell_bd weui_cell_primary">
+              <input class="weui_input" type="mobile" placeholder="输入手机号码">
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-    <div class="bd spacing">
-      <div class="button_sp_area">
-        <a class="weui_btn weui_btn_primary" v-on:click="binding">绑定</a>
+      <div class="bd spacing">
+        <div class="button_sp_area">
+          <a class="weui_btn weui_btn_primary" v-on:click="binding">绑定</a>
+        </div>
       </div>
+    <% end %>
+    <div class="bd">
+      
     </div>
-  <% else %>
+  <% end %>
+  <% if @target_user.present? && @target_user != @user %>
     <div class="bd spacing">
       <div class="button_sp_area">
         <a class="weui_btn weui_btn_primary" v-on:click="like">为他点赞</a>
