@@ -42,8 +42,15 @@
         </div>
       </div>
     <% end %>
-    <div class="bd">
-      
+    <div class="weui_cells weui_cells_access">
+      <a class="weui_cell" href="javascript:;">
+        <div class="weui_cell_bd weui_cell_primary">
+          <p><%= @user.nickname %></p>
+        </div>
+        <div class="weui_cell_ft">
+          
+        </div>
+      </a>
     </div>
   <% end %>
   <% if @target_user.present? && @target_user != @user %>
