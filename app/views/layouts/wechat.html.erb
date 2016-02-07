@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/0.3.0/weui.min.css"/>
     <%= stylesheet_link_tag 'weui-rails', media: 'all' %>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.15/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
 </head>
 <body>
   <div id="app">
@@ -23,13 +24,34 @@
   <script>
     var app = new Vue({
       el: '#app',
-      data: {},
+      data: {
+        user: {
+          mobile: "<%= @user.mobile if @user.mobile.present? %>"
+          access_token: "<%= @user.private_token %>"
+        }
+      },
       methods: {
         like: function() {
           alert("click a like!");
         },
         binding: function() {
-          alert("click a binding!")
+          alert("click a binding!");
+          $.ajax({
+            url: 'http://www.jiancan.me/api/u1/users/current.json',
+            type: 'PUT',
+            data: {
+              user: {
+                mobile: this.user.mobile
+              },
+              access_token: this.access_token
+            },
+            success:function(data) {
+              alert("Data: " + data + "\nStatus: " + status);
+            },
+            error : function(data) {
+              alert("Data: " + data + "\nStatus: " + status);
+            }
+          });
         }
       },
       ready: function() {
