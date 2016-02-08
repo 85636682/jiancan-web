@@ -6,8 +6,7 @@
     <title><%= @shop.blank? ? "简餐" : @shop.name %></title>
     <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/0.3.0/weui.min.css"/>
     <%= stylesheet_link_tag 'weui-rails', media: 'all' %>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.15/vue.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
+    <%= javascript_include_tag 'wechat' %>
 </head>
 <body>
   <div id="app">
