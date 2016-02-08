@@ -1,1 +1,2 @@
-//= zepto.min
+//= require vue
+//= require zepto.min

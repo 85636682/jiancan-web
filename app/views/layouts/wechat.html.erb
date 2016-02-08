@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/0.3.0/weui.min.css"/>
     <%= stylesheet_link_tag 'weui-rails', media: 'all' %>
     <%= javascript_include_tag 'wechat' %>
-    <script src="http://cdn.jsdelivr.net/vue/1.0.16/vue.min.js"></script>
 </head>
 <body>
   <div id="app">
@@ -37,19 +36,19 @@
         binding: function() {
           alert("click a binding!");
           $.ajax({
-            url: 'http://www.jiancan.me/api/u1/users/current.json',
             type: 'PUT',
+            url: 'http://www.jiancan.me/api/u1/users/current.json',
             data: {
               user: {
                 mobile: this.user.mobile
               },
               access_token: this.access_token
             },
-            success:function(data) {
+            success: function(data){
               alert("Data: " + data + "\nStatus: " + status);
             },
-            error : function(data) {
-              alert("Data: " + data + "\nStatus: " + status);
+            error: function(xhr, type){
+              alert('Ajax error!')
             }
           });
         }
