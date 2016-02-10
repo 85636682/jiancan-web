@@ -28,14 +28,15 @@
           mobile: "<%= @user.mobile if @user.mobile.present? %>",
           access_token: "<%= @user.private_token %>",
           likes: ""
-        }
+        },
+        showShare: false
       },
       methods: {
         like: function() {
           alert("click a like!");
         },
         share: function() {
-          alert("share!")
+          this.showShare = this.showShare ? false : true
         },
         binding: function() {
           $.ajax({
