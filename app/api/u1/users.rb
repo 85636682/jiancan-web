@@ -61,6 +61,7 @@ module U1
         end
       end
       put 'current', serializer: UserSerializer, root: false do
+        Rails.logger.error(params)
         authenticate!
         if current_user.update_attributes(params[:user])
           render current_user
