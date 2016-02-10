@@ -48,7 +48,8 @@
               alert("Data: " + data + "\nStatus: " + status);
             },
             error: function(xhr, type){
-              alert('Ajax error!')
+              console(xhr);
+              console(type);
             }
           });
         }
