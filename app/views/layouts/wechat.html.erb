@@ -34,7 +34,6 @@
           alert("click a like!");
         },
         binding: function() {
-          alert("click a binding!");
           $.ajax({
             type: 'PUT',
             url: 'http://www.jiancan.me/api/u1/users/current.json',
@@ -45,7 +44,7 @@
               access_token: this.user.access_token
             },
             success: function(data){
-              alert("Data: " + data + "\nStatus: " + status);
+              console.log(data);
             },
             error: function(xhr, type){
               alert("网络错误！");
