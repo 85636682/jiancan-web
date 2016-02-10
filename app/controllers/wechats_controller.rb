@@ -3,7 +3,7 @@ class WechatsController < ApplicationController
 
   wechat_responder
 
-  before_action :create_wechat_client, only: [:activity]
+  before_action :create_wechat_client
   before_action :invoke_wx_auth, only: [:activity]
   before_action :get_wechat_sns, only: [:activity], if: :is_wechat_brower?
 
