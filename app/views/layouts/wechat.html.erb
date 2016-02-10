@@ -22,7 +22,7 @@
       </div>
     </div>
   </div>
-  <% sign_package = @weixin_client.get_jssign_package(request.url) %>
+  <% sign_package = @wechat_client.get_jssign_package(request.url) %>
   <script>
     wx.config({
       debug: false,
