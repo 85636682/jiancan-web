@@ -42,14 +42,13 @@
               user: {
                 mobile: this.user.mobile
               },
-              access_token: this.access_token
+              access_token: this.user.access_token
             },
             success: function(data){
               alert("Data: " + data + "\nStatus: " + status);
             },
             error: function(xhr, type){
-              console.log(xhr);
-              console.log(type);
+              alert("网络错误！");
             }
           });
         }
