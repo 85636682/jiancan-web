@@ -26,12 +26,16 @@
       data: {
         user: {
           mobile: "<%= @user.mobile if @user.mobile.present? %>",
-          access_token: "<%= @user.private_token %>"
+          access_token: "<%= @user.private_token %>",
+          likes: ""
         }
       },
       methods: {
         like: function() {
           alert("click a like!");
+        },
+        share: function() {
+          alert("share!")
         },
         binding: function() {
           $.ajax({

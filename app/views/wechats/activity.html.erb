@@ -42,13 +42,18 @@
         </div>
       </div>
     <% end %>
+    <div class="bd spacing">
+      <div class="button_sp_area">
+        <a class="weui_btn weui_btn_primary" v-on:click="share">分享</a>
+      </div>
+    </div>
     <div class="weui_cells weui_cells_access">
       <a class="weui_cell" href="javascript:;">
         <div class="weui_cell_bd weui_cell_primary">
           <p><%= @user.nickname %></p>
         </div>
         <div class="weui_cell_ft">
-
+          已收货 {{user.likes}} 个点赞！
         </div>
       </a>
     </div>
