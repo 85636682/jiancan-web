@@ -72,7 +72,7 @@
         user: {
           mobile: "<%= @user.mobile if @user.mobile.present? %>",
           access_token: "<%= @user.private_token %>",
-          likes: <%= @activity_user.present? ? @activity_user.likes : 0 %>
+          likes: <%= @activity_user.present? ? @activity_user.likes.to_i : 0 %>
         },
         target_user: {
           likes: <%= @activity_target_user.present? ? @activity_target_user.likes : 0 %>
