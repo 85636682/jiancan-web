@@ -25,6 +25,10 @@ class WechatsController < ApplicationController
     @activity = Activity.find_by_id(params[:activity_id])
     @target_user = User.find_by_id(params[:target_user_id])
     @user = User.find_by_weixin_open_id(session[:openid]) if @user.blank?
+    if @target_user.present?
+      @activity_target_user = ActivityUser.where(activity_id: @activity.id, user_id: @target_user.id).first
+    end
+    @activity_user = ActivityUser.find_or_create_by(activity_id: @activity.id, user_id: @user.id)
   end
 
   private

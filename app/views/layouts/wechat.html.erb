@@ -72,12 +72,31 @@
         user: {
           mobile: "<%= @user.mobile if @user.mobile.present? %>",
           access_token: "<%= @user.private_token %>",
-          likes: ""
+          likes: <%= @activity_user.present? ? @activity_user.likes : 0 %>
+        },
+        target_user: {
+          likes: <%= @activity_target_user.present? ? @activity_target_user.likes : 0 %>
         }
       },
       methods: {
         like: function() {
           alert("click a like!");
+          $.ajax({
+            type: 'PUT',
+            url: 'http://www.jiancan.me/api/u1/users/current.json',
+            data: {
+              user: {
+                mobile: this.user.mobile
+              },
+              access_token: this.user.access_token
+            },
+            success: function(data){
+              console.log(data);
+            },
+            error: function(xhr, type){
+              alert("网络错误！");
+            }
+          });
         },
         share: function() {
           var mask = $('#mask');
