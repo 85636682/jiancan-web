@@ -83,11 +83,10 @@
           alert("click a like!");
           $.ajax({
             type: 'PUT',
-            url: 'http://www.jiancan.me/api/u1/users/current.json',
+            url: 'http://www.jiancan.me/api/u1/activities/likes.json',
             data: {
-              user: {
-                mobile: this.user.mobile
-              },
+              user_id: <%= @target_user.present? ? @target_user.id : 0 %>,
+              activity_id: <%= @activity.id %>,
               access_token: this.user.access_token
             },
             success: function(data){
