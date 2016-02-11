@@ -15,5 +15,6 @@ module U1
     mount U1::Rooms
     mount U1::Orders
     mount U1::Shops
+    mount U1::Activities
   end
 end
