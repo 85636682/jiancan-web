@@ -119,6 +119,7 @@
           }
         },
         shareFriend: function() {
+          alert("shareFriend");
           wx.onMenuShareAppMessage({
             title: '<%= @activity.title %>', // 分享标题
             desc: '', // 分享描述
@@ -135,6 +136,7 @@
           });
         },
         shareFriends: function() {
+          alert("shareFriends");
           wx.onMenuShareTimeline({
             title: '<%= @activity.title %>',  // 分享标题
             link: 'http://jiancan.me/wechat/activity?activity_id=<%= @activity.id %>&target_user_id=<%= @user.id %>',   // 分享链接
