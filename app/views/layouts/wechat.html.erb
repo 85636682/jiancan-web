@@ -34,6 +34,17 @@
         'onMenuShareAppMessage'
       ]
     });
+    wx.ready(function () {
+      wx.checkJsApi({
+        jsApiList: [
+          'onMenuShareTimeline',,
+          'onMenuShareAppMessage'
+        ]
+      });
+    });
+    wx.error(function (res) {
+      alert('wx.error: '+JSON.stringify(res));
+    });
     var app = new Vue({
       el: '#app',
       data: {
