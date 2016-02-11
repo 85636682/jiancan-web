@@ -28,7 +28,7 @@ class WechatsController < ApplicationController
     if @target_user.present?
       @activity_target_user = ActivityUser.where(activity_id: @activity.id, user_id: @target_user.id).first
     end
-    @activity_user = ActivityUser.find_or_create_by(activity_id: @activity.id, user_id: @user.id)
+    @activity_user = ActivityUser.create_with(likes: 0).find_or_create_by(activity_id: @activity.id, user_id: @user.id)
   end
 
   private
