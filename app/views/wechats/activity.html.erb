@@ -54,25 +54,6 @@
         </a>
       </div>
     </div>
-    <div class="bd spacing">
-      <div class="button_sp_area">
-        <a class="weui_btn weui_btn_primary" v-on:click="share">分享</a>
-      </div>
-    </div>
-    <!--BEGIN actionSheet-->
-    <div id="actionSheet_wrap">
-      <div class="weui_mask_transition" id="mask"></div>
-      <div class="weui_actionsheet" id="weui_actionsheet">
-        <div class="weui_actionsheet_menu">
-          <div class="weui_actionsheet_cell" v-on:click="shareFriend">发给朋友</div>
-          <div class="weui_actionsheet_cell" v-on:click="shareFriends">分享到朋友圈</div>
-        </div>
-        <div class="weui_actionsheet_action">
-          <div class="weui_actionsheet_cell" id="actionsheet_cancel">取消</div>
-        </div>
-      </div>
-    </div>
-    <!--END actionSheet-->
   <% end %>
   <% if @target_user.present? && @target_user != @user %>
     <div class="bd spacing">
