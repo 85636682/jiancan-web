@@ -84,7 +84,7 @@
               access_token: this.user.access_token
             },
             success: function(data){
-              alert(data.likes);
+              this.$set("user.likes", data.likes);
             },
             error: function(xhr, type){
               alert("网络错误！");
@@ -102,7 +102,7 @@
               access_token: this.user.access_token
             },
             success: function(data){
-              alert(data.user);
+              this.$set("user.mobile", data.user.mobile);
             },
             error: function(xhr, type){
               alert("网络错误！");
