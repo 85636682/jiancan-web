@@ -84,7 +84,7 @@
               access_token: this.user.access_token
             },
             success: function(data){
-              this.$set("user.likes", data.likes);
+              this.$set("target_user.likes", data.likes);
             },
             error: function(xhr, type){
               alert("网络错误！");
