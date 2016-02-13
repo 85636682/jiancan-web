@@ -85,6 +85,8 @@
             },
             success: function(data){
               this.$set("target_user.likes", data.likes);
+              console.log(this);
+              alert(this.target_user.likes);
             },
             error: function(xhr, type){
               alert("网络错误！");
