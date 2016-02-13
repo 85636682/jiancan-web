@@ -81,7 +81,7 @@
             data: {
               user_id: <%= @target_user.present? ? @target_user.id : 0 %>,
               activity_id: <%= @activity.id %>,
-              access_token: this.user.access_token
+              access_token: app.user.access_token
             },
             success: function(data){
               app.$set("target_user.likes", data.likes);
@@ -98,9 +98,9 @@
             url: 'http://www.jiancan.me/api/u1/users/current.json',
             data: {
               user: {
-                mobile: this.user.mobile
+                mobile: app.user.mobile
               },
-              access_token: this.user.access_token
+              access_token: app.user.access_token
             },
             success: function(data){
               app.$set("user.mobile", data.user.mobile);
