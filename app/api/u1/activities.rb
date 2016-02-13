@@ -10,12 +10,14 @@ module U1
         authenticate!
         @activity_user = ActivityUser.where(activity_id: params[:activity_id], user_id: params[:user_id]).first
         error!({ error: "活动不存在！" }, 401) if @activity_user.blank?
-        @activity_user.liked_users.push(current_user.id)
-        @activity_user.likes += 1
-        if @activity_user.save
+        if @activity_user.liked_users.include?(current_user.id)
           { likes: @activity_user.likes }
         else
-          error!({ error: "用户信息修改失败！"}, 401)
+          if @activity_user.update_attributes(likes: @activity_user.likes + 1, liked_users: @activity_user.liked_users + [ current_user.id ])
+            { likes: @activity_user.likes }
+          else
+            error!({ error: "用户信息修改失败！"}, 401)
+          end
         end
       end
     end
