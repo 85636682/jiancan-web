@@ -13,6 +13,7 @@ module U1
         if @activity_user.liked_users.present? && @activity_user.liked_users.include?(current_user.id)
           { likes: @activity_user.likes }
         else
+          @activity_user.liked_users = [] if @activity_user.liked_users.blank?
           if @activity_user.update_attributes(likes: @activity_user.likes + 1, liked_users: @activity_user.liked_users + [ current_user.id ])
             { likes: @activity_user.likes }
           else
