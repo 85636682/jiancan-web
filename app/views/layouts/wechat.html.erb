@@ -84,9 +84,9 @@
               access_token: this.user.access_token
             },
             success: function(data){
-              console.log(this);
-              alert(this.target_user.likes);
-              this.$set("target_user.likes", data.likes);
+              console.log(app);
+              alert(app.target_user.likes);
+              app.$set("target_user.likes", data.likes);
             },
             error: function(xhr, type){
               alert("网络错误！");
