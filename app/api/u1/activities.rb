@@ -10,7 +10,7 @@ module U1
         authenticate!
         @activity_user = ActivityUser.where(activity_id: params[:activity_id], user_id: params[:user_id]).first
         error!({ error: "活动不存在！" }, 401) if @activity_user.blank?
-        if @activity_user.liked_users.include?(current_user.id)
+        if @activity_user.liked_users.present? && @activity_user.liked_users.include?(current_user.id)
           { likes: @activity_user.likes }
         else
           if @activity_user.update_attributes(likes: @activity_user.likes + 1, liked_users: @activity_user.liked_users + [ current_user.id ])
