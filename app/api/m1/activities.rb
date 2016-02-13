@@ -111,6 +111,21 @@ module M1
       delete "products", each_serializer: ProductSerializer, root: false do
 
       end
+
+      desc "参与活动用户"
+      params do
+        requires :activity_id, type: Integer, desc: "活动id"
+      end
+      get "users", each_serializer: UserSerializer, root: false do
+        authenticate!
+        @activity = Activity.find_by_id(params[:activity_id])
+        if @activity.blank?
+          error!({ error: "活动不存在！" }, 400)
+        else
+          render @activity.users
+        end
+      end
+
     end
   end
 end
