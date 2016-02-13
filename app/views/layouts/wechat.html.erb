@@ -84,8 +84,6 @@
               access_token: this.user.access_token
             },
             success: function(data){
-              console.log(app);
-              alert(app.target_user.likes);
               app.$set("target_user.likes", data.likes);
             },
             error: function(xhr, type){
