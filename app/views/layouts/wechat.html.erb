@@ -88,9 +88,8 @@
               alert("点赞成功！");
             },
             error: function(xhr, type){
-              alert("网络错误！");
-              console.log(xhr);
-              console.log(type);
+              var response = JSON.parse(xhr.response);
+              alert("网络错误：" + response.error);
             }
           });
         },
@@ -105,7 +104,8 @@
             data: {
               user: {
                 mobile: app.user.mobile
-              }
+              },
+              access_token: app.user.access_token
             },
             success: function(data){
               app.$set("user.mobile", data.user.mobile);
@@ -113,8 +113,7 @@
             },
             error: function(xhr, type){
               var response = JSON.parse(xhr.response);
-              console.log(response.error);
-              alert("");
+              alert("网络错误：" + response.error);
             }
           });
         }
