@@ -97,6 +97,7 @@
         binding: function() {
           if (!app.user.mobile || app.user.mobile === null) {
             alert("电话号码不能为空！");
+            return
           }
           $.ajax({
             type: 'PUT',
@@ -111,7 +112,7 @@
               alert("绑定成功！");
             },
             error: function(xhr, type){
-              alert("网络错误！");
+              alert(xhr.response.error);
               console.log(xhr);
               console.log(type);
             }
