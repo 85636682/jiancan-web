@@ -101,8 +101,7 @@
             data: {
               user: {
                 mobile: app.user.mobile
-              },
-              access_token: app.user.access_token
+              }
             },
             success: function(data){
               app.$set("user.mobile", data.user.mobile);
@@ -110,6 +109,8 @@
             },
             error: function(xhr, type){
               alert("网络错误！");
+              console.log(xhr);
+              console.log(type);
             }
           });
         }
