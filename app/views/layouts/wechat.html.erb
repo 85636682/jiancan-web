@@ -104,7 +104,8 @@
             data: {
               user: {
                 mobile: app.user.mobile
-              }
+              },
+              access_token: app.user.access_token
             },
             success: function(data){
               app.$set("user.mobile", data.user.mobile);
