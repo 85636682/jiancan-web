@@ -24,7 +24,6 @@ class WechatsController < ApplicationController
   def activity
     @activity = Activity.find_by_id(params[:activity_id])
     @target_user = User.find_by_id(params[:target_user_id])
-    @user = User.find_by_weixin_open_id(session[:openid]) if @user.blank?
     if @target_user.present?
       @activity_target_user = ActivityUser.where(activity_id: @activity.id, user_id: @target_user.id).first
     end
@@ -38,6 +37,10 @@ class WechatsController < ApplicationController
    # 调用微信授权获取openid
   def invoke_wx_auth
     if params[:state].present? || session['openid'].present? #|| !is_wechat_brower?
+      if @user.blank?
+        @user = User.find_by_weixin_open_id(session[:openid])
+        @user.update_private_token
+      end
       return # 防止进入死循环授权
     end
     sns_url =  @wechat_client.authorize_url(request.url, scope="snsapi_userinfo")
