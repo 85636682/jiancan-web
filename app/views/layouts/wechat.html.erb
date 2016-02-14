@@ -112,8 +112,9 @@
               alert("绑定成功！");
             },
             error: function(xhr, type){
+              var response = JSON.parse(xhr.response);
+              console.log(response.error);
               alert("");
-              console.log(xhr.response);
             }
           });
         }
