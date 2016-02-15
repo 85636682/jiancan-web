@@ -1,9 +1,4 @@
 class WelcomeController < ApplicationController
-  layout false
-  
-  def index
-    render :file => 'public/index.html' and return
-  end
 
   def api
     @routes = []
