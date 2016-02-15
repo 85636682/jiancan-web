@@ -127,7 +127,7 @@ module M1
         (1..12).each do |n|
           @totals << @current_merchant.shop.orders.by_month(n, :year => Time.now.year).where("status = 'completed'").sum(:total_price)
         end
-        @totals = @totals.reverse
+        @totals
       end
 
     end
