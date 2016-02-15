@@ -122,6 +122,8 @@ module M1
       end
       get 'statistic' do
         authenticate!
+        ActiveRecord::Base.logger = Logger.new STDOUT
+        ActiveRecord::Base.logger = Logger.new File.open('log/development.log', 'a')
         error!({ error: "店铺不存在！" }, 400) if @current_merchant.shop.blank?
         @totals = []
         (1..12).each do |n|
