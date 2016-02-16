@@ -20,13 +20,13 @@ module U1
           if @favorite.save
             { msg: '已收藏！' }
           else
-            error!({ error: "收藏失败！" }, 401)
+            error!({ error: "收藏失败！" }, 400)
           end
         else
           if @favorite.destroy
             { msg: '取消收藏！' }
           else
-            error!({ error: "取消收藏失败！" }, 401)
+            error!({ error: "取消收藏失败！" }, 400)
           end
         end
       end

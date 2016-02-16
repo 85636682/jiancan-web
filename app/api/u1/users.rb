@@ -17,7 +17,7 @@ module U1
         if user && user.authenticate(params[:password])
           { msg: "登录成功！", access_token: user.get_private_token, pusher_id: user.pusher_id }
         else
-          error!({ error: "用户和密码不正确！" }, 401)
+          error!({ error: "用户和密码不正确！" }, 400)
         end
       end
 
@@ -30,7 +30,7 @@ module U1
       post 'register' do
         user = User.find_by_mobile(params[:mobile])
         if user.blank?
-          error!({ error: "用户名已存在！" }, 401)
+          error!({ error: "用户名已存在！" }, 400)
         else
           user = User.new(:mobile => params["mobile"],
                           :password => params["password"],
@@ -38,7 +38,7 @@ module U1
           if user.save
             { msg: "注册成功！", access_token: user.get_private_token, pusher_id: user.pusher_id }
           else
-            error!({ error: "用户注册失败！" }, 401)
+            error!({ error: "用户注册失败！" }, 400)
           end
         end
       end
@@ -65,7 +65,7 @@ module U1
         if current_user.update_attributes(params[:user])
           render current_user
         else
-          error!({ error: "用户信息修改失败！"}, 401)
+          error!({ error: "用户信息修改失败！"}, 400)
         end
       end
 
@@ -74,7 +74,7 @@ module U1
         requires :code, type: String, desc: "微信用户授权后返回的code"
       end
       get 'weixin/access_token' do
-        error!({ error: "code不能为空！"}, 401) if params[:code].blank?
+        error!({ error: "code不能为空！"}, 400) if params[:code].blank?
         response = RestClient.get "https://api.weixin.qq.com/sns/oauth2/access_token?" +
                                   "appid=#{Setting.weixin_app_id}" +
                                   "&secret=#{Setting.weixin_app_secret}" +
@@ -82,9 +82,9 @@ module U1
                                   "&grant_type=authorization_code"
         result = JSON.parse(response.force_encoding("UTF-8").gsub(/[\u0011-\u001F]/, ""))
         if !result["errcode"].blank? && result["errcode"] == 41002
-          error!({ error: result["errmsg"]}, 401)
+          error!({ error: result["errmsg"]}, 400)
         else
-          error!({ error: "微信返回数据有误！"}, 401) if result["access_token"].blank? || result["refresh_token"].blank? || result["openid"].blank?
+          error!({ error: "微信返回数据有误！"}, 400) if result["access_token"].blank? || result["refresh_token"].blank? || result["openid"].blank?
 
           user = User.where(:weixin_open_id => result["openid"]).first
           if user.blank?
@@ -92,7 +92,7 @@ module U1
                                       "access_token=#{result["access_token"]}&" +
                                       "openid=#{result["openid"]}"
             userinfo = JSON.parse(response.force_encoding("UTF-8").gsub(/[\u0011-\u001F]/, ""))
-            error!({ error: userinfo["errmsg"]}, 401) if !userinfo["errcode"].blank? && userinfo["errcode"] == 40003
+            error!({ error: userinfo["errmsg"]}, 400) if !userinfo["errcode"].blank? && userinfo["errcode"] == 40003
             user = User.create(:weixin_open_id => result["openid"],
                                :weixin_access_token => result["access_token"],
                                :weixin_refresh_token => result["refresh_token"],
@@ -116,10 +116,10 @@ module U1
                                   "refresh_token=#{REFRESH_TOKEN}"
         result = JSON.parse(response.force_encoding("UTF-8").gsub(/[\u0011-\u001F]/, ""))
         if !result["errcode"].blank? && result["errcode"] == 40030
-          error!({ error: result["errmsg"]}, 401)
+          error!({ error: result["errmsg"]}, 400)
         else
           user = User.where(:weixin_open_id => result["openid"]).first
-          error!({ error: "用户不存在！"}, 401) if user.blank?
+          error!({ error: "用户不存在！"}, 400) if user.blank?
           user.update_attributes(:weixin_access_token => result["access_token"],
                                  :weixin_refresh_token => result["refresh_token"])
         end

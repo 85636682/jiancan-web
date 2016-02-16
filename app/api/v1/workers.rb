@@ -13,10 +13,10 @@ module V1
           if worker.department == params[:department]
             { msg: "登录成功！", access_token: worker.get_private_token, pusher_id: worker.pusher_id }
           else
-            error!({ error: "用户不属于这个部门！" }, 401)
+            error!({ error: "用户不属于这个部门！" }, 400)
           end
         else
-          error!({ error: "用户和密码不正确！" }, 401)
+          error!({ error: "用户和密码不正确！" }, 400)
         end
       end
     end

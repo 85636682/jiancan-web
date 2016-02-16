@@ -10,23 +10,23 @@ module V1
     end
 
     def waiter!
-      error!({ error: "权限不足" }, 401) unless current_worker.department.waiter?
+      error!({ error: "权限不足" }, 403) unless current_worker.department.waiter?
     end
 
     def kitchen!
-      error!({ error: "权限不足" }, 401) unless current_worker.department.kitchen?
+      error!({ error: "权限不足" }, 403) unless current_worker.department.kitchen?
     end
 
     def counter!
-      error!({ error: "权限不足" }, 401) unless current_worker.department.counter?
+      error!({ error: "权限不足" }, 403) unless current_worker.department.counter?
     end
 
     def waiter_or_counter!
-      error!({ error: "权限不足" }, 401) unless current_worker.department.waiter? || current_worker.department.counter?
+      error!({ error: "权限不足" }, 403) unless current_worker.department.waiter? || current_worker.department.counter?
     end
 
     def kitchen_or_counter!
-      error!({ error: "权限不足" }, 401) unless current_worker.department.kitchen? || current_worker.department.counter?
+      error!({ error: "权限不足" }, 403) unless current_worker.department.kitchen? || current_worker.department.counter?
     end
   end
 end

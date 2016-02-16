@@ -30,7 +30,7 @@ module U1
         if @receiving_address.save
           { msg: 'ok', receiving_address: @receiving_address }
         else
-          error!({ error: "地址保存失败！" }, 401)
+          error!({ error: "地址保存失败！" }, 400)
         end
       end
 

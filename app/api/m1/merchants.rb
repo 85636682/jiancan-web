@@ -11,7 +11,7 @@ module M1
         if merchant && merchant.authenticate(params[:password])
           { msg: "登录成功！", access_token: merchant.get_private_token, email: merchant.email }
         else
-          error!({ error: "用户和密码不正确！" }, 401)
+          error!({ error: "用户和密码不正确！" }, 400)
         end
       end
 
@@ -23,14 +23,14 @@ module M1
       end
       post 'register' do
         merchant = Merchant.find_by_email(params[:email])
-        error!({ error: "用户名已存在！" }, 401) if not merchant.blank?
+        error!({ error: "用户名已存在！" }, 400) if not merchant.blank?
         merchant = Merchant.new(:email => params["email"],
                         :password => params["password"],
                         :password_confirmation => params["password_confirmation"])
         if merchant.save
           { msg: "注册成功！", access_token: merchant.get_private_token, email: merchant.email }
         else
-          error!({ error: "用户注册失败！" }, 401)
+          error!({ error: "用户注册失败！" }, 400)
         end
       end
 
@@ -54,7 +54,7 @@ module M1
         if current_merchant.update_attributes(params["merchant"])
           render current_merchant
         else
-          error!({ error: "用户信息修改失败！"}, 401)
+          error!({ error: "用户信息修改失败！"}, 400)
         end
       end
 
@@ -71,7 +71,7 @@ module M1
         if merchant.authenticate(params[:current_password]) && current_merchant.update_attributes(params["merchant"])
           render current_merchant
         else
-          error!({ error: "用户密码修改失败！"}, 401)
+          error!({ error: "用户密码修改失败！"}, 400)
         end
       end
 
