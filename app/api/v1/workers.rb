@@ -11,7 +11,7 @@ module V1
         worker = Worker.find_by_login(params[:login])
         if worker && worker.authenticate(params[:password])
           if worker.department == params[:department]
-            { msg: "登录成功！", access_token: worker.get_private_token, pusher_id: worker.pusher_id }
+            { msg: "登录成功！", login: worker.login, access_token: worker.get_private_token, pusher_id: worker.pusher_id }
           else
             error!({ error: "用户不属于这个部门！" }, 400)
           end
