@@ -27,16 +27,16 @@ module M1
       params do
         requires :worker_id, type: Integer, desc: "员工id"
         requires :worker, type: Hash do
-          requires :name, type: String, desc: "员工名称"
-          requires :login, type: String, desc: "员工账号"
-          requires :department, type: String, desc: "员工部门"
+          optional :name, type: String, desc: "员工名称"
+          optional :login, type: String, desc: "员工账号"
+          optional :department, type: String, desc: "员工部门"
           optional :password, type: String, desc: "密码"
           optional :password_confirmation, type: String, desc: "密码确认"
         end
       end
-      put 'one' do
+      put 'one', serializer: WorkerSerializer, root: false do
         @worker = Worker.find_by_id(params[:worker_id])
-        error!({ error: "分类不存在！" }, 400) if @worker.blank?
+        error!({ error: "员工不存在！" }, 400) if @worker.blank?
         if @worker.update_attributes(params[:worker])
           render @worker
         else
