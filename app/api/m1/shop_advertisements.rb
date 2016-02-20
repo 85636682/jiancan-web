@@ -32,6 +32,7 @@ module M1
 
       desc "更新广告"
       params do
+        requires :shop_advertisement_id, type: Integer, desc: "广告id"
         requires :shop_advertisement, type: Hash do
           optional :title, type: String
           optional :content, type: String
