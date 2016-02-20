@@ -8,7 +8,6 @@ module V1
       end
       put 'status' do
         authenticate!
-        kitchen_or_counter!
         @order_product = OrderProduct.find_by_id(params[:order_product_id])
         if @order_product.blank?
           error!({ error: "该订单不存在此菜色！" }, 400)
