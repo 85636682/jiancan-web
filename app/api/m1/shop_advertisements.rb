@@ -25,11 +25,9 @@ module M1
       params do
         requires :shop_advertisement_id, type: Integer, desc: "广告id"
       end
-      get 'one' do
-        get 'one', each_serializer: ShopAdvertisementSerializer, root: false do
-          authenticate!
-          @shop_advertisement = ShopAdvertisement.find_by_id(params[:shop_advertisement_id])
-        end
+      get 'one', each_serializer: ShopAdvertisementSerializer, root: false do
+        authenticate!
+        @shop_advertisement = ShopAdvertisement.find_by_id(params[:shop_advertisement_id])
       end
 
       desc "更新广告"
