@@ -14,4 +14,16 @@
   </div>
 
 <% else %>
+
+  <div class="banner">
+    <article class="weui_article font-color-white">
+      <h1><%= @advertisement.shop.name %> - <%= @advertisement.title %></h1>
+      <section>
+        <p>
+          <%= @advertisement.content %>
+        </p>
+      </section>
+    </article>
+  </div>
+
 <% end %>
