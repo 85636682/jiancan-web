@@ -4,8 +4,8 @@ class WechatsController < ApplicationController
   wechat_responder
 
   before_action :create_wechat_client
-  before_action :invoke_wx_auth, only: [:activity]
-  before_action :get_wechat_sns, only: [:activity], if: :is_wechat_brower?
+  before_action :invoke_wx_auth, only: [:activity, :advertisement]
+  before_action :get_wechat_sns, only: [:activity, :advertisement], if: :is_wechat_brower?
 
   def products
     @shop = Shop.find(params[:shop_id])
@@ -28,6 +28,17 @@ class WechatsController < ApplicationController
       @activity_target_user = ActivityUser.where(activity_id: @activity.id, user_id: @target_user.id).first
     end
     @activity_user = ActivityUser.create_with(likes: 0).find_or_create_by(activity_id: @activity.id, user_id: @user.id)
+    @share_title = @activity.title
+    @share_link = "http://jiancan.me/wechat/activity?activity_id=#{@activity.id}&target_user_id=#{@user.id}"
+    @is_advertisement = "false"
+  end
+
+  def advertisement
+    @advertisement = ShopAdvertisement.find_by_id(params[:advertisement_id])
+    @shop_advertisement_user = ShopAdvertisementUser.create_with(forwarding_times: 0).find_or_create_by(shop_advertisement_id: @advertisement.id, user_id: @user.id)
+    @share_title = @advertisement.title
+    @share_link = "http://jiancan.me/wechat/advertisement?advertisement_id=#{@advertisement.id}"
+    @is_advertisement = "true"
   end
 
   private

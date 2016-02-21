@@ -16,5 +16,6 @@ module U1
     mount U1::Orders
     mount U1::Shops
     mount U1::Activities
+    mount U1::ShopAdvertisements
   end
 end
