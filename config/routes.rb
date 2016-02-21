@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       get :products
       get :product
       get :activity
+      get :advertisement
     end
   end
 
