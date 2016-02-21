@@ -8,10 +8,12 @@ module U1
       end
       put 'forwarding' do
         authenticate!
-        @shop_advertisement = ShopAdvertisement.find_by_id(params[:shop_advertisement_id])
-        error!({ error: "广告不存在！" }, 400) if @shop_advertisement.blank?
-        if @shop_advertisement.update_attributes(:forwarding_times => @shop_advertisement.forwarding_times + 1)
-          render @shop_advertisement
+        @shop_advertisement_user = ShopAdvertisementUser.where(
+                                      shop_advertisement_id: params[:shop_advertisement_id],
+                                      user_id: current_user.id).first
+        error!({ error: "广告不存在！" }, 400) if @shop_advertisement_user.blank?
+        if @shop_advertisement_user.update_attributes(:forwarding_times => @shop_advertisement_user.forwarding_times + 1)
+          render @shop_advertisement_user
         else
           error!({ error: "更新失败！" }, 400)
         end
