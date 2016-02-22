@@ -43,6 +43,7 @@ module M1
           optional :likes, type: Integer
           optional :handle, type: String
           optional :amount, type: Integer
+          optional :avatar, type: Hash, desc: "活动图标"
         end
       end
       put 'one', serializer: ActivitySerializer, root: false do

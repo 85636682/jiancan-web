@@ -37,6 +37,7 @@ module M1
           optional :title, type: String
           optional :content, type: String
           optional :divide_into, type: Float
+          optional :avatar, type: Hash, desc: "广告图标"
         end
       end
       put 'one' do
