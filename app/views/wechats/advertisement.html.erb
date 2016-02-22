@@ -26,6 +26,22 @@
     </article>
   </div>
 
+  <div class="bd">
+    <div class="weui_cells">
+      <a class="weui_cell" href="javascript:;">
+        <div class="weui_cell_bd weui_cell_primary">
+          <p>分享此广告到朋友圈就可获得广告分成</p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="bd spacing">
+    <div class="button_sp_area">
+      <a class="weui_btn weui_btn_primary" v-on:click="checkForward">查看自己分成</a>
+    </div>
+  </div>
+
 <% end %>
 <% sign_package = @wechat_client.get_jssign_package(request.url) %>
 <%= javascript_include_tag '//res.wx.qq.com/open/js/jweixin-1.0.0.js' %>
@@ -45,7 +61,7 @@
     wx.onMenuShareTimeline({
       title: '<%= @share_title %>',  // 分享标题
       link: '<%= @share_link %>',   // 分享链接
-      imgUrl: '', // 分享图标
+      imgUrl: '<%= @advertisement.avatar.url("80x80") %>', // 分享图标
       success: function () {
         // 用户确认分享后执行的回调函数
         alert("分享成功");
@@ -73,7 +89,7 @@
       title: '<%= @share_title %>', // 分享标题
       desc: '', // 分享描述
       link: '<%= @share_link %>', // 分享链接
-      imgUrl: '', // 分享图标
+      imgUrl: '<%= @advertisement.avatar.url("80x80") %>', // 分享图标
       type: '', // 分享类型,music、video或link，不填默认为link
       dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
       success: function () {
@@ -116,6 +132,9 @@
             alert("网络错误：" + response.error);
           }
         });
+      },
+      checkForwad: function() {
+        
       }
     },
     ready: function() {
