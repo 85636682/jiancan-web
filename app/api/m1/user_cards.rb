@@ -5,14 +5,14 @@ module M1
       desc "创建会员卡"
       params do
         requires :user_card, type: Hash do
-          requires :brand_name, type: String, desc: ""
-          requires :title, type: String, desc: ""
-          requires :color, type: String, desc: ""
-          requires :notice, type: String, desc: ""
-          requires :description, type: String, desc: ""
-          requires :service_phone, type: String, desc: ""
-          requires :sku, type: String, desc: ""
-          requires :date_info, type: String, desc: ""
+          requires :title, type: String, desc: "会员卡标题"
+          requires :notice, type: String, desc: "使用提示"
+          requires :description, type: String, desc: "功能描述"
+          requires :service_phone, type: String, desc: "服务电话"
+          optional :brand_name, type: String, desc: ""
+          optional :color, type: String, desc: ""
+          optional :sku, type: String, desc: ""
+          optional :date_info, type: String, desc: ""
         end
       end
       post "", serializer: UserCardSerializer, root: false do
