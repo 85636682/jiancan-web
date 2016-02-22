@@ -27,7 +27,13 @@
   </div>
 
   <div class="bd">
-    <%= image_tag(@advertisement.shop.avatar.url("80x80")) %>
+    <div class="weui_icon_area">
+      <%= image_tag(@advertisement.shop.avatar.url("80x80")) %>
+    </div>
+    <div class="weui_text_area">
+      <h2 class="weui_msg_title"><%= @advertisement.shop.name %></h2>
+      <p class="weui_msg_desc"><%= @user.nickname %>，欢迎你！</p>
+    </div>
   </div>
 
   <div class="bd">
