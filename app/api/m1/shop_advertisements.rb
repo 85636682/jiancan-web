@@ -10,7 +10,7 @@ module M1
           requires :divide_into, type: Float
         end
       end
-      post '', serializer: ShopAdvertisementSerializer, root: false  do
+      post '', serializer: ShopAdvertisementSerializer, root: false do
         authenticate!
         @shop_advertisement = ShopAdvertisement.new(params[:shop_advertisement])
         @shop_advertisement.shop_id = current_merchant.shop.id

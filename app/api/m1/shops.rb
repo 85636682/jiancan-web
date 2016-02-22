@@ -123,8 +123,19 @@ module M1
       end
       get 'advertisements', each_serializer: ShopAdvertisementSerializer, root: false do
         authenticate!
-        @shop_advertisement = ShopAdvertisement.where(:shop_id => current_merchant.shop.id).offset(params[:offset]).limit(params[:limit]).order("id ASC")
-        render @shop_advertisement
+        @shop_advertisements = ShopAdvertisement.where(:shop_id => current_merchant.shop.id).offset(params[:offset]).limit(params[:limit]).order("id ASC")
+        render @shop_advertisements
+      end
+
+      desc '返回店铺下所有会员卡'
+      params do
+        optional :offset, type: Integer, default: 0
+        optional :limit,  type: Integer, default: 20, values: 1..150
+      end
+      get 'cards', each_serializer: UserCardSerializer, root: false do
+        authenticate!
+        @user_cards = UserCard.where(:shop_id => current_merchant.shop.id).offset(params[:offset]).limit(params[:limit]).order("id ASC")
+        render @user_cards
       end
 
       desc "店铺销售量分析"

@@ -20,5 +20,6 @@ module M1
     mount M1::Weixins
     mount M1::Activities
     mount M1::ShopAdvertisements
+    mount M1::UserCards
   end
 end
