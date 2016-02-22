@@ -39,7 +39,7 @@ body, html {
 .page .banner {
   width: 100%;
   height: 20em;
-  background:image-url("banner1.jpg") no-repeat center center fixed;
+  background:image-url("banner1.jpg") no-repeat center center;
   filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
   -webkit-background-size:cover;
   -moz-background-size:cover;
