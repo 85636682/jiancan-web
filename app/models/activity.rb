@@ -8,4 +8,7 @@ class Activity < ActiveRecord::Base
   has_many :products, :through => :activity_products, :dependent => :destroy
   has_many :activity_users
   has_many :users, :through => :activity_users, :dependent => :destroy
+
+  mount_uploader :avatar, ImageUploader
+  attr_accessor :uploader_secure_token
 end
