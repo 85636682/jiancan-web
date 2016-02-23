@@ -48,6 +48,23 @@
     </div>
   </div>
 
+  <% if @user.mobile.blank? %>
+    <div class="bd">
+      <div class="weui_cells weui_cells_form">
+        <div class="weui_cell">
+          <div class="weui_cell_bd weui_cell_primary">
+            <input v-model="user.mobile" class="weui_input" type="mobile" placeholder="输入手机号码">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bd spacing">
+      <div class="button_sp_area">
+        <a class="weui_btn weui_btn_primary" v-on:click="binding">绑定</a>
+      </div>
+    </div>
+  <% end %>
+
   <div class="bd spacing">
     <div class="button_sp_area">
       <a class="weui_btn weui_btn_primary" v-on:click="checkForward">查看自己分成</a>
