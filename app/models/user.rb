@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   has_many :activities, :through => :activity_users, :dependent => :destroy
   has_many :shop_advertisement_users
   has_many :shop_advertisements, :through => :shop_advertisement_users, :dependent => :destroy
+  has_many :user_card_users, :dependent => :destroy
+  has_many :user_cards, :through => :user_card_users
 
   def self.from_omniauth(auth)
     where(weixin_open_id: auth["openid"]).first_or_create do |user|
