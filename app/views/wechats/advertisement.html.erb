@@ -48,6 +48,12 @@
     </div>
   </div>
 
+  <div class="bd spacing">
+    <div class="button_sp_area">
+      <a class="weui_btn weui_btn_primary" v-on:click="checkForward">查看自己分成</a>
+    </div>
+  </div>
+
   <% if @user.mobile.blank? %>
     <div class="bd">
       <div class="weui_cells weui_cells_form">
@@ -65,11 +71,6 @@
     </div>
   <% end %>
 
-  <div class="bd spacing">
-    <div class="button_sp_area">
-      <a class="weui_btn weui_btn_primary" v-on:click="checkForward">查看自己分成</a>
-    </div>
-  </div>
 
 <% end %>
 <% sign_package = @wechat_client.get_jssign_package(request.url) %>
