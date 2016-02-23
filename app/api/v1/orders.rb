@@ -114,12 +114,12 @@ module V1
       desc '为订单关联用户'
       params do
         requires :order_id, type: Integer, desc: '订单id'
-        requires :user_id, type: Integer, desc: '用户id'
+        requires :mobile, type: Integer, desc: '用户手机'
       end
       post 'associated/user' do
         authenticate!
         waiter_or_counter!
-        @user = User.find_by_id(params[:user_id])
+        @user = User.find_by_mobile(params[:mobile])
         error!({ error: "用户不存在！" }, 400) if @user.blank?
         @order = Order.find_by_id(params[:order_id])
         error!({ error: "订单不存在！" }, 400) if @order.blank?
