@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224065008) do
+ActiveRecord::Schema.define(version: 20160224095416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -349,6 +349,7 @@ ActiveRecord::Schema.define(version: 20160224065008) do
     t.integer  "least_money_to_use_bonus", default: 100
     t.integer  "max_reduce_bonus",         default: 10
     t.integer  "discount",                 default: 10
+    t.string   "bonus_cleared"
   end
 
   create_table "users", force: :cascade do |t|
