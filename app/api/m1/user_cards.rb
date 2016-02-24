@@ -50,6 +50,9 @@ module M1
           optional :sku, type: String, desc: ""
           optional :date_info, type: String, desc: ""
           optional :logo, type: Hash, desc: ""
+          optional :bonus_rules, type: String, desc: "积分规则"
+          optional :bonus_cleared, type: String, desc: "积分清零规则"
+          optional :balance_rules, type: String, desc: "储值说明"
           optional :cost_money_unit, type: Integer, desc: "消费金额。以分为单位。"
           optional :increase_bonus, type: Integer, desc: "对应增加的积分。"
           optional :max_increase_bonus, type: Integer, desc: "用户单次可获取的积分上限。"
@@ -106,7 +109,14 @@ module M1
                       description: @user_card.description, service_phone: @user_card.service_phone,
                       sku: helper.sku("#{current_merchant.id}#{@user_card.shop.id}#{@user_card.id}".to_i),
                       date_info: helper.date_info('DATE_TYPE_FIX_TERM', nil, nil, 0, 30)})
-        if @user_card.destroy
+        bonus = helper::MemberCard.bonus(true, 'http://www.example.com', @user_card.bonus_cleared, @user_card.bonus_rules)
+        balance = helper::MemberCard.balance(true, 'http://www.example.com', @user_card.balance_rules)
+        card = helper::MemberCard.create(base_info,
+                                          { prerogative: @user_card.prerogative,
+                                            bonus: bonus, balance: balance
+                                          }
+                                        )
+        if client.card_create(card)
           { msg: 'ok' }
         else
           error!({ error: "删除失败！" }, 400)

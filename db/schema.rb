@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224022240) do
+ActiveRecord::Schema.define(version: 20160224065008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,12 @@ ActiveRecord::Schema.define(version: 20160224022240) do
   end
 
   add_index "activity_users", ["liked_users"], name: "index_activity_users_on_liked_users", using: :gin
+
+  create_table "add_bonus_cleared_to_user_cards", force: :cascade do |t|
+    t.string   "bonus_cleared"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "add_private_token_update_at_to_workers", force: :cascade do |t|
     t.datetime "private_token_updated_at"
