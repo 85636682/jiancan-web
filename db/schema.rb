@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160223013422) do
+ActiveRecord::Schema.define(version: 20160224022240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -322,8 +322,27 @@ ActiveRecord::Schema.define(version: 20160223013422) do
     t.string   "sku"
     t.string   "date_info"
     t.integer  "shop_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.string   "prerogative"
+    t.boolean  "auto_activate",            default: true
+    t.boolean  "wx_activate",              default: false
+    t.boolean  "supply_bonus",             default: true
+    t.string   "bonus_url"
+    t.boolean  "supply_balance",           default: true
+    t.string   "balance_url"
+    t.string   "bonus_rules"
+    t.string   "balance_rules"
+    t.string   "activate_url"
+    t.integer  "cost_money_unit",          default: 10
+    t.integer  "increase_bonus",           default: 10
+    t.integer  "max_increase_bonus",       default: 1000
+    t.integer  "init_increase_bonus",      default: 10
+    t.integer  "cost_bonus_unit",          default: 10
+    t.integer  "reduce_money",             default: 10
+    t.integer  "least_money_to_use_bonus", default: 100
+    t.integer  "max_reduce_bonus",         default: 10
+    t.integer  "discount",                 default: 10
   end
 
   create_table "users", force: :cascade do |t|
