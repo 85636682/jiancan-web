@@ -25,7 +25,10 @@
         <ul class="route-list">
           <% @routes.each do |route| %>
           <% if route[:desc] != "" %>
-          <li><%= route[:method] %> <a href="#route-<%= route[:id] %>"><%= route[:name] %></a></li>
+          <li style="border-bottom: solid 1px #ccc;">
+            <%= route[:method] %> <a href="#route-<%= route[:id] %>"><%= route[:name] %></a><br />
+            <span style="color: red;"><%= markdown(route[:desc] || "暂无") %></span>
+          </li>
           <% end %>
           <% end %>
         </ul>
