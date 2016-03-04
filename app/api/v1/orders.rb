@@ -51,8 +51,8 @@ module V1
       delete 'products' do
         authenticate!
         @order_product = OrderProduct.find_by_id(params[:order_product_id])
-        if @order_product.blank? || !@order_product.pending?
-          error!({ error: "菜色不存在或者已经烹煮！" }, 400)
+        if @order_product.blank? || !@order_product.finished?
+          error!({ error: "菜色不存在或者已经完成！" }, 400)
         else
           if @order_product.destroy
             { msg: 'ok' }

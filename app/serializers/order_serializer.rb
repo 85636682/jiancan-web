@@ -6,6 +6,7 @@ class OrderSerializer < BaseSerializer
   has_one :room, serializer: RoomSerializer
   has_one :shop, serializer: ShopSerializer
   has_one :worker, serializer: WorkerSerializer
+  has_one :user, serializer: UserSerializer
 
   def created_at
     DateTime.parse(object.created_at.iso8601).strftime('%Y年%m月%d日 %H:%M')
