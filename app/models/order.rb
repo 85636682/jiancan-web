@@ -15,7 +15,7 @@ class Order < ActiveRecord::Base
   end
 
   def pendings_count
-    self.order_products.where(:status => 'pending').count
+    self.order_products.where("status = 'pending' OR status = 'cooking'").count
   end
 
   after_create do
