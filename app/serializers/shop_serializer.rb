@@ -6,7 +6,7 @@ class ShopSerializer < BaseSerializer
   has_one :merchant, serializer: MerchantSerializer
 
   def avatar
-    object.avatar.url("80x80")
+    object.avatar.url("320xAuto")
   end
 
   def created_at

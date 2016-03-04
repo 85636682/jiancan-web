@@ -5,7 +5,7 @@ class ProductSerializer < BaseSerializer
   has_one :category
 
   def avatar
-    object.avatar.url("80x80")
+    object.avatar.url("320xAuto")
   end
 
   def created_at
