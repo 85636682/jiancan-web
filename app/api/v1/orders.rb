@@ -55,6 +55,7 @@ module V1
           error!({ error: "菜色不存在或者已经完成！" }, 400)
         else
           if @order_product.destroy
+            @order_product.order.update(:total_price => (@order_product.order.total_price - @order_product.product.price * @order_product.quantity.to_i))
             { msg: 'ok' }
           else
             error!({ error: "菜色删除失败！" }, 400)
