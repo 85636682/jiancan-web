@@ -107,10 +107,10 @@
         canceled: "取消"
     order_product:
       status:
-        pending: '新建'
-        cooking: '烹饪'
-        finished: '完成'
-        canceled: '取消'
+        pending: '已下单'
+        cooking: '烹饪中'
+        finished: '已完成'
+        canceled: '已取消'
     activity:
       status:
         plan: '计划中'
