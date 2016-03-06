@@ -50,7 +50,7 @@
 
   <div class="bd spacing">
     <div class="button_sp_area">
-      <a class="weui_btn weui_btn_primary" v-on:click="checkForward">查看自己分成</a>
+      <a v-el:forward class="weui_btn weui_btn_primary" v-on:click="checkForward">查看自己分成</a>
     </div>
   </div>
 
@@ -163,8 +163,24 @@
           }
         });
       },
-      checkForwad: function() {
-
+      checkForward: function() {
+        $.ajax({
+          type: 'GET',
+          url: 'http://www.jiancan.me/api/u1/shop_advertisements/check.json',
+          data: {
+            shop_advertisement_id: <%= @advertisement.id %>,
+            access_token: app.user.access_token
+          },
+          success: function(data){
+            app.$els.forward.textContent = "你已经转发" +
+                                           data.shop_advertisement_user.forwarding_times +
+                                           "次!"
+          },
+          error: function(xhr, type){
+            var response = JSON.parse(xhr.response);
+            alert("网络错误：" + response.error);
+          }
+        });
       }
     },
     ready: function() {

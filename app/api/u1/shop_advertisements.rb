@@ -19,6 +19,19 @@ module U1
         end
       end
 
+      desc "获取转发次数和分成"
+      params do
+        requires :shop_advertisement_id, type: Integer, desc: "广告id"
+      end
+      get "check" do
+        authenticate!
+        @shop_advertisement_user = ShopAdvertisementUser.where(
+                                      shop_advertisement_id: params[:shop_advertisement_id],
+                                      user_id: current_user.id).first
+        error!({ error: "广告不存在！" }, 400) if @shop_advertisement_user.blank?
+        render @shop_advertisement_user
+      end
+
     end
   end
 end
