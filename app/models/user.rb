@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
       user.password = User.friendly_token[0, 20]
       user.nickname = auth["nickname"]
       user.avatar = auth["headimgurl"]
-      user.private_token = "#{SecureRandom.hex(10)}:#{id}"
+      user.private_token = "#{SecureRandom.hex(10)}:#{user.id}"
       user.private_token_updated_at = Time.zone.now
     end
   end
