@@ -31,16 +31,16 @@ module M1
       desc "获取自定义父级菜单"
       params do
       end
-      get "diymenus/parent", serializer: DiymenuSerializer, root: false do
+      get "diymenus/parent", each_serializer: DiymenuSerializer, root: false do
         authenticate!
-        current_merchant.shop.shop_public_account.parent_menus
+        render current_merchant.shop.shop_public_account.parent_menus
       end
 
       desc "获取自定义子级菜单"
       params do
         requires :diymenu_id, type: Integer, desc: "菜单id"
       end
-      get "diymenus/sub", serializer: DiymenuSerializer, root: false do
+      get "diymenus/sub", each_serializer: DiymenuSerializer, root: false do
         authenticate!
         @parent_menu = Diymenu.find_by_id(params[:diymenu_id])
         error!({ error: "菜单不存在！" }, 400) if @parent_menu.blank?
