@@ -33,7 +33,7 @@ module M1
       end
       get "diymenus/parent", serializer: DiymenuSerializer, root: false do
         authenticate!
-        current_merchant.shop.public_account.parent_menus
+        current_merchant.shop.shop_public_account.parent_menus
       end
 
       desc "获取自定义子级菜单"
@@ -61,7 +61,7 @@ module M1
       post "diymenus", serializer: DiymenuSerializer, root: false do
         authenticate!
         @diymenu = Diymenu.new(params[:diymenu])
-        @diymenu.shop_public_account_id = current_merchant.shop_public_account.id
+        @diymenu.shop_public_account_id = current_merchant.shop.shop_public_account.id
         if @diymenu.save
           render @diymenu
         else
@@ -73,8 +73,8 @@ module M1
       params do
       end
       get "update" do
-        weixin_client = WeixinAuthorize::Client.new(current_merchant.shop_public_account.app_key, current_merchant.shop_public_account.app_secret)
-        menu = current_merchant.shop_public_account.build_menu
+        weixin_client = WeixinAuthorize::Client.new(current_merchant.shop.shop_public_account.app_key, current_merchant.shop.shop_public_account.app_secret)
+        menu = current_merchant.shop.shop_public_account.build_menu
         result = weixin_client.create_menu(menu)
         error!({ error: result["errmsg"] }, 400) if result["errcode"] != 0
         { msg: "同步成功！" }
