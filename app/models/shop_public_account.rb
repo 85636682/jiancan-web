@@ -2,6 +2,7 @@ class ShopPublicAccount < ActiveRecord::Base
   # It will auto generate weixin token and secret
   include WeixinRailsMiddleware::AutoGenerateWeixinTokenSecretKey
 
+  belongs_to :shop
   # 自定义菜单
   has_many :diymenus, dependent: :destroy
   # 当前公众账号的所有父级菜单

@@ -27,6 +27,59 @@ module M1
           error!({ error: "绑定失败！" }, 400)
         end
       end
+
+      desc "获取自定义父级菜单"
+      params do
+      end
+      get "diymenus/parent", serializer: DiymenuSerializer, root: false do
+        authenticate!
+        current_merchant.shop.public_account.parent_menus
+      end
+
+      desc "获取自定义子级菜单"
+      params do
+        requires :diymenu_id, type: Integer, desc: "菜单id"
+      end
+      get "diymenus/sub", serializer: DiymenuSerializer, root: false do
+        authenticate!
+        @parent_menu = Diymenu.find_by_id(params[:diymenu_id])
+        error!({ error: "菜单不存在！" }, 400) if @parent_menu.blank?
+        @parent_menu.sub_menus
+      end
+
+      desc "创建自定义菜单"
+      params do
+        requires :diymenu, type: Hash do
+          optional :parent_id, type: Integer, desc: "所属父级菜单，如果当前是父级菜单，则此值为空"
+          requires :name, type: String, desc: "菜单名称"
+          requires :key, type: String, desc: "click or view"
+          requires :url, type: String, desc: "点击菜单要跳转的url"
+          requires :is_show, type: Boolean, desc: "是否显示"
+          requires :sort, type: Integer, desc: "排序，数值越少，显示越前"
+        end
+      end
+      post "diymenus", serializer: DiymenuSerializer, root, false do
+        authenticate!
+        @diymenu = Diymenu.new(params[:diymenu])
+        @diymenu.shop_public_account_id = current_merchant.shop_public_account.id
+        if @diymenu.save
+          render @diymenu
+        else
+          error!({ error: "菜单创建失败！" }, 400)
+        end
+      end
+
+      desc "同步到公众账号"
+      params do
+      end
+      get "update" do
+        weixin_client = WeixinAuthorize::Client.new(current_merchant.shop_public_account.app_key, current_merchant.shop_public_account.app_secret)
+        menu = current_merchant.shop_public_account.build_menu
+        result = weixin_client.create_menu(menu)
+        error!({ error: result["errmsg"] }, 400) if result["errcode"] != 0
+        { msg: "同步成功！" }
+      end
+
     end
   end
 end
