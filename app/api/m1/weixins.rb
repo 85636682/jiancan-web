@@ -58,7 +58,7 @@ module M1
           requires :sort, type: Integer, desc: "排序，数值越少，显示越前"
         end
       end
-      post "diymenus", serializer: DiymenuSerializer, root, false do
+      post "diymenus", serializer: DiymenuSerializer, root: false do
         authenticate!
         @diymenu = Diymenu.new(params[:diymenu])
         @diymenu.shop_public_account_id = current_merchant.shop_public_account.id
