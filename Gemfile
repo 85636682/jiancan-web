@@ -106,7 +106,6 @@ gem "puma", "~> 2.6"
 
 gem 'whenever', :require => false
 
-gem 'rails_db'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -135,6 +134,8 @@ group :development, :test do
   gem 'thin'
   gem 'better_errors'            #出错提示友好版
   gem 'binding_of_caller'     #出错提示友好版
+
+  gem 'rails_db'
 
 end
 
