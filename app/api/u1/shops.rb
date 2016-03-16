@@ -1,6 +1,13 @@
 module U1
   class Shops < Grape::API
     resource :shops do
+      desc "返回所有店铺"
+      params do
+      end
+      get '', each_serializer: ShopSerializer, root: false do
+        render Shop.all
+      end
+
       desc '根据地理定位返回周边的店铺，经纬度和文字性地址必须一个不为空，经纬度不需要为0，'
       params do
         requires :lat, type: Float, desc: "经度"
