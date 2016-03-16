@@ -8,6 +8,14 @@ module U1
         render Shop.all
       end
 
+      desc "返回某一间店铺"
+      params do
+        requires :shop_id, type: Integer, desc: "店铺id"
+      end
+      get 'one', serializer: ShopSerializer, root: false do
+        @shop = Shop.find_by_id(params[:shop_id])
+      end
+
       desc '根据地理定位返回周边的店铺，经纬度和文字性地址必须一个不为空，经纬度不需要为0，'
       params do
         requires :lat, type: Float, desc: "经度"
