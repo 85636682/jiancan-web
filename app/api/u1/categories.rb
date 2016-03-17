@@ -1,4 +1,4 @@
-module V1
+module U1
   class Categories < Grape::API
     resource :categories do
       desc '获取某分类下所有商品'
