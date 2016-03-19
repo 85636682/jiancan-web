@@ -1,7 +1,3 @@
-.ui.menu {
-  border-radius: 0rem;
-}
-
 .point-outer{
     position:absolute;
     z-index:20;
@@ -19,26 +15,14 @@
 }
 
 .shop-header {
-  background:#2d3b36 url(./header.jpg) no-repeat;
-  background-size: cover;
-  border: solid 1px transparent;
+  background-color: #00b5ad;
 }
 
 .profile-header {
   background-color: #00b5ad;
-  border: solid 1px transparent;
-}
-
-.vux-flexbox-item {
-  border-right: solid 1px #ddd;
-}
-
-.vux-flexbox-item:last-child {
-  border-right: solid 0px #ddd;
 }
 
 .shop-card {
-  padding: 15px;
   img {
     width: 100px;
     height: 100px;
