@@ -1,0 +1,28 @@
+.ui.menu {
+  border-radius: 0rem;
+}
+
+.point-outer{
+    position:absolute;
+    z-index:20;
+    -webkit-transition:all 0.8s cubic-bezier(0.39,-0.4,0.83,0.23) 0s;
+}
+.point-inner{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background-color:#ff6326;
+    -webkit-transition:all 0.8s linear 0s;
+}
+.point-outer.point-pre{
+    display:none;
+}
+
+.shop-header {
+  background:#2d3b36 url(./header.jpg) no-repeat;
+  background-size: cover;
+  border: solid 1px transparent;
+}
+
+.shop-card {
+}
