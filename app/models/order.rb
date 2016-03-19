@@ -1,6 +1,7 @@
 class Order < ActiveRecord::Base
   extend Enumerize  #pending 订单新建状态  settled订单结算状态  completed 订单完成支付  canceled订单取消
   enumerize :status,     in: [:pending, :settled, :completed, :canceled], default: :pending
+  enumerize :pay_method, in: [:online, :offline], default: :online
 
   belongs_to :shop
   belongs_to :room

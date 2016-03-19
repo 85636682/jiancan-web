@@ -4,8 +4,8 @@ class WechatsController < ApplicationController
   wechat_responder
 
   before_action :create_wechat_client
-  before_action :invoke_wx_auth, only: [:activity, :advertisement]
-  before_action :get_wechat_sns, only: [:activity, :advertisement], if: :is_wechat_brower?
+  before_action :invoke_wx_auth, only: [:activity, :advertisement, :authorize]
+  before_action :get_wechat_sns, only: [:activity, :advertisement, :authorize], if: :is_wechat_brower?
 
   def products
     @shop = Shop.find(params[:shop_id])
@@ -37,6 +37,16 @@ class WechatsController < ApplicationController
     @shop_advertisement_user = ShopAdvertisementUser.create_with(forwarding_times: 0).find_or_create_by(shop_advertisement_id: @advertisement.id, user_id: @user.id)
     @share_title = @advertisement.title
     @share_link = "http://jiancan.me/wechat/advertisement?advertisement_id=#{@advertisement.id}"
+  end
+
+  def authorize
+    #param_arr = []
+    #hash.each do |key , val|
+    #  param_arr << "#{key}=#{val}"
+    #end
+    #params_str = param_arr.join("&")
+
+    #redirect_to "#{params[:request_url]}?#{params_str}"
   end
 
   private

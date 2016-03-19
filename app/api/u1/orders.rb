@@ -4,8 +4,15 @@ module U1
 
       desc '新建外卖单'
       params do
-        requires :shop_id, type: Integer, desc: '店铺的id'
-        requires :products_quantity, type: String, desc: 'Json格式的字符串，包含所有添加商品id和对应数量，用商品的id作为key，用所选商品的数据作为value'
+        requires :order, type: Hash do
+          requires :shop_id, type: Integer, desc: '店铺的id'
+          requires :takeout, type: Boolean, desc: ''
+          requires :pay_method, type: String, desc: ''
+          requires :meal_time, type: String, desc: ''
+          requires :remarks, type: String, desc: ''
+          requires :address, type: String, desc: ''
+          requires :products_quantity, type: String, desc: 'Json格式的字符串，包含所有添加商品id和对应数量，用商品的id作为key，用所选商品的数据作为value'
+        end
       end
       post '', serializer: OrderSerializer, root: false do
         authenticate!
