@@ -24,5 +24,23 @@
   border: solid 1px transparent;
 }
 
+.profile-header {
+  background-color: #00b5ad;
+  border: solid 1px transparent;
+}
+
+.vux-flexbox-item {
+  border-right: solid 1px #ddd;
+}
+
+.vux-flexbox-item:last-child {
+  border-right: solid 0px #ddd;
+}
+
 .shop-card {
+  padding: 15px;
+  img {
+    width: 100px;
+    height: 100px;
+  }
 }
