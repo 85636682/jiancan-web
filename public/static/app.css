@@ -14,15 +14,41 @@
     display:none;
 }
 
-.shop-header {
+.container {
+  width: 100%;
+  display: -webkit-box;
+  display: -moz-box;
+}
+
+.container .left {
+  width: 100px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.container .right {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-box-ordinal-group: 2;
+  -moz-box-ordinal-group: 2;
+  margin:0 5px;
+}
+
+
+
+.shop_header {
   background-color: #00b5ad;
 }
 
-.profile-header {
+.profile_header {
   background-color: #00b5ad;
 }
 
-.shop-card {
+.check_header {
+  background-color: #00b5ad;
+}
+
+.shop_card {
   img {
     width: 100px;
     height: 100px;
