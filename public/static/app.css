@@ -54,3 +54,15 @@
     height: 100px;
   }
 }
+
+i.icon-wallet {
+    color: #f90
+}
+
+i.icon-lluckybag {
+    color: #ff5f3e
+}
+
+i.icon-profile-coins, i.icon-service-phone {
+    color: #6ac20b
+}
