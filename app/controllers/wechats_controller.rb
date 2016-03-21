@@ -40,7 +40,7 @@ class WechatsController < ApplicationController
   end
 
   def authorize
-    redirect_to "http://jiancan.me/#!/authorize?request_url=#{params[:request_url]}&access_token=#{@user.access_token}"
+    redirect_to "http://jiancan.me/#!/authorize?request_url=#{params[:request_url]}&access_token=#{@user.private_token}"
   end
 
   private
