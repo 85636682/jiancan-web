@@ -40,13 +40,7 @@ class WechatsController < ApplicationController
   end
 
   def authorize
-    #param_arr = []
-    #hash.each do |key , val|
-    #  param_arr << "#{key}=#{val}"
-    #end
-    #params_str = param_arr.join("&")
-
-    #redirect_to "#{params[:request_url]}?#{params_str}"
+    redirect_to "http://jiancan.me/#!/authorize?request_url=#{params[:request_url]}&access_token=#{@user.access_token}"
   end
 
   private
