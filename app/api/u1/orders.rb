@@ -18,11 +18,13 @@ module U1
         authenticate!
         begin
           ActiveRecord::Base.transaction do
-            @shop = Shop.find(params[:shop_id])
-            @order = Order.create!(:shop_id => @shop.id, :room_id => 0,
-                               :sn => Order.create_sn(@shop.id),
-                               :total_price => 0, :takeout => true,
-                               :user_id => current_user.id)
+            @order = Order.new(params[:order])
+            @order.room_id = 0
+            @order.sn = Order.create_sn(params[:order][:shop_id])
+            @order.total_price = 0
+            @order.user = current_user
+
+            @order.save!
 
             amount = 0
             products_quantity = JSON.parse(params[:products_quantity])
