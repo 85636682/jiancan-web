@@ -2,6 +2,14 @@ module U1
   class Orders < Grape::API
     resource :orders do
 
+      desc '获取用户订单'
+      params do
+      end
+      get '', each_serializer: OrderSerializer, root: false do
+        authenticate!
+        @orders = current_user.orders
+      end
+
       desc '新建外卖单'
       params do
         requires :order, type: Hash do
