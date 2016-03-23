@@ -50,7 +50,7 @@ module U1
           end
           render @order
         rescue Exception => e
-          error!({ error: "订单创建失败！" }, 400)
+          error!({ error: "订单创建失败！#{e.message}" }, 400)
         end
 
       end
