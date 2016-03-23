@@ -11,8 +11,8 @@ module U1
           requires :meal_time, type: String, desc: ''
           requires :remarks, type: String, desc: ''
           requires :address, type: String, desc: ''
-          requires :products_quantity, type: String, desc: 'Json格式的字符串，包含所有添加商品id和对应数量，用商品的id作为key，用所选商品的数据作为value'
         end
+        requires :products_quantity, type: String, desc: 'Json格式的字符串，用商品的id作为key，用所选商品的数量作为value'
       end
       post '', serializer: OrderSerializer, root: false do
         authenticate!
