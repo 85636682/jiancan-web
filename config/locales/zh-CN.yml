@@ -105,6 +105,9 @@
         settled: "结算"
         completed: "完成"
         canceled: "取消"
+      pay_method:
+        online: "在线付款"
+        offline: "线下付款"
     order_product:
       status:
         pending: '已下单'
