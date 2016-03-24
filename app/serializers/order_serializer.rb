@@ -18,7 +18,7 @@ class OrderSerializer < BaseSerializer
   end
 
   def meal_time
-    DateTime.parse(object.meal_time.iso8601).strftime('%Y年%m月%d日 %H:%M') if object.meal_time.presence?
+    DateTime.parse(object.meal_time.iso8601).strftime('%Y年%m月%d日 %H:%M') if not object.meal_time.blank?
   end
 
   def status_text
