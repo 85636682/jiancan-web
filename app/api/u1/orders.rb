@@ -10,6 +10,15 @@ module U1
         @orders = current_user.orders
       end
 
+      desc '获取用户单一订单'
+      params do
+        requires :order_id, type: Integer, desc: '订单id'
+      end
+      get 'one', serializer: OrderSerializer, root: false do
+        authenticate!
+        @order = Order.find_by_id(params[:order_id])
+      end
+
       desc '新建外卖单'
       params do
         requires :order, type: Hash do
