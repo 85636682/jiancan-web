@@ -7,7 +7,7 @@ module U1
       end
       get '', each_serializer: OrderSerializer, root: false do
         authenticate!
-        @orders = current_user.orders
+        @orders = current_user.orders.order("created_at DESC")
       end
 
       desc '获取用户单一订单'
