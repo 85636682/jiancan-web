@@ -104,3 +104,84 @@ i.icon-lluckybag {
 i.icon-profile-coins, i.icon-service-phone {
     color: #6ac20b
 }
+
+.shop_tab .weui_navbar_item.tab_selected {
+  background: 0 0;
+  color: #04be02;
+  border-bottom: 3px solid #04be02;
+}
+
+.category_list_box {
+  position: absolute;
+  z-index: 1000;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+.category_list_box .category_list_box_item {
+  position: relative;
+  display: block;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+.category_list_bd {
+  box-sizing: border-box;
+  height: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  background-color:#FFF;
+}
+.category_list_bd.arrow_box {
+	position: relative;
+	background: #88b7d5;
+	border: 4px solid #c2e1f5;
+}
+.category_list_bd.arrow_box:after, .category_list_bd.arrow_box:before {
+	bottom: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.category_list_bd.arrow_box:after {
+	border-color: rgba(136, 183, 213, 0);
+	border-bottom-color: #88b7d5;
+	border-width: 30px;
+	margin-left: -30px;
+}
+.category_list_bd.arrow_box:before {
+	border-color: rgba(194, 225, 245, 0);
+	border-bottom-color: #c2e1f5;
+	border-width: 36px;
+	margin-left: -36px;
+}
+.category_list_bd ul {
+  width: 100%;
+}
+
+.category_list_bd li {
+  height: 40px;
+  line-height: 40px;
+  padding-left: 20px;
+  border-bottom: solid 1px #ddd;
+}
+.category_active {
+  color: red;
+}
+
+.product_list_bd .weui_media_box.weui_media_appmsg .weui_media_hd {
+  width: 100px;
+  height: 100px;
+}
+
+.product_list_bd .weui_media_box.weui_media_appmsg .weui_media_bd {
+  height: 100px;
+}
