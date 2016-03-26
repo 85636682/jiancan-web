@@ -1,21 +1,6 @@
 .page, body {
     background-color: #fbf9fe
 }
-.point-outer{
-    position:absolute;
-    z-index:20;
-    -webkit-transition:all 0.8s cubic-bezier(0.39,-0.4,0.83,0.23) 0s;
-}
-.point-inner{
-    width:10px;
-    height:10px;
-    border-radius:50%;
-    background-color:#ff6326;
-    -webkit-transition:all 0.8s linear 0s;
-}
-.point-outer.point-pre{
-    display:none;
-}
 
 .container {
   width: 100%;
@@ -51,7 +36,7 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   margin: 0 10px;
-  padding-top: 5px;
+  padding-top: 12px;
 }
 
 .navigation_bar .right {
@@ -80,13 +65,6 @@
 
 .check_header {
   background-color: #00b5ad;
-}
-
-.shop_card {
-  img {
-    width: 100px;
-    height: 100px;
-  }
 }
 
 i.icon-wallet {
