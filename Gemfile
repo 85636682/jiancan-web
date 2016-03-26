@@ -14,6 +14,10 @@ gem 'coffee-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'turbolinks', '~> 5.0.0.beta'
+
+gem 'bootstrap', '~> 4.0.0.alpha3'
+gem 'rails-assets-tether', '>= 1.1.0'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
@@ -39,15 +43,12 @@ gem 'redis-namespace', '~> 1.5.1'
 gem 'redis-objects', '1.1.0'
 
 # 用户系统
-gem 'devise'
-gem 'devise-encryptable'
 gem 'bcrypt'
 
 # 微信开发平台
 gem 'weixin_rails_middleware'
 gem 'weixin_authorize'
 gem 'wechat'
-gem 'omniauth-wechat-oauth2'
 
 # 上传组件
 gem 'carrierwave'

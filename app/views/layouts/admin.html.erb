@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>简餐</title>
-  <%= stylesheet_link_tag    'cpanel', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'cpanel', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'admin', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body class="cpanel-page">
@@ -11,14 +11,14 @@
     <nav class="navbar navbar-light bg-faded">
       <div class="container">
         <a class="navbar-brand" href="#"><em>JianCan</em></a>
-        <% if admin_signed_in? %>
+        <% if not current_admin.blank? %>
         <ul class="nav navbar-nav pull-right">
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><%= current_admin.email %></a>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="#">账 号</a>
               <div class="dropdown-divider"></div>
-              <%= link_to "注 销", destroy_admin_session_path, method: :delete, :class => "dropdown-item" %>
+              <%= link_to "注 销", admin_session_path(current_admin), method: :delete, :class => "dropdown-item" %>
             </div>
           </li>
         </ul>
@@ -27,27 +27,6 @@
     </nav>
   </div>
   <br/>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-3">
-        <div class="sidebar">
-          <div class="list-group">
-            <a href="<%= admin_shops_path %>" class="list-group-item <%= active_controller?("shops") %>">
-              店铺管理
-            </a>
-            <a href="<%= admin_orders_path %>" class="list-group-item <%= active_controller?("orders") %>">订单管理</a>
-            <a href="<%= admin_market_products_path %>" class="list-group-item <%= active_controller?("market_products") %>">采购管理</a>
-            <a href="<%= admin_market_categories_path %>" class="list-group-item <%= active_controller?("market_categories") %>">分类管理</a>
-            <a href="<%= admin_jc_logs_path %>" class="list-group-item <%= active_controller?("jc_logs") %>">日志管理</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-9">
-        <div class="card card-block right-content">
-          <%= yield %>
-        </div>
-      </div>
-    </div>
-  </div>
+  <%= yield %>
 </body>
 </html>

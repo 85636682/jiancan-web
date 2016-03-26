@@ -1,12 +1,22 @@
-    <table class="table">
-      <tbody>
-      <% @orders.each do |order| %>
-        <tr>
-          <th scope="row">1</th>
-          <td><%= order.sn %></td>
-          <td>￥<%= order.total_price %></td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
-  
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+      <%= render 'admin/shared/left_bar' %>
+    </div>
+    <div class="col-sm-9">
+      <div class="card card-block right-content">
+        <table class="table">
+          <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <th scope="row">1</th>
+              <td><%= order.sn %></td>
+              <td>￥<%= order.total_price %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  resource :wechat, only: [:show, :create] do
+  resource :wechat, only: [:show, :create]
+  resource :weixin do
     collection do
       get :products
       get :product
@@ -11,16 +12,13 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :market_products
     resources :shops
     resources :orders
-    resources :market_categories
     resources :jc_logs, only: [:index, :destroy]
+    resources :sessions
+    resources :registrations
+    resources :wechat
   end
-
-  devise_for :admins, controllers: {
-    sessions: "admins/sessions"
-  }
 
   require 'dispatch'
   mount Api::Dispatch => '/api'

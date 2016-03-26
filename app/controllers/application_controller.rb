@@ -12,10 +12,15 @@ class ApplicationController < ActionController::Base
   end
 
   def require_admin
-    if not admin_signed_in?
+    if current_admin.blank?
       redirect_to new_admin_session_path
     end
   end
+
+  def current_admin
+    @current_admin ||= Admin.find(session[:admin_id]) if session[:admin_id]
+  end
+  helper_method :current_admin
 
   protected
 
