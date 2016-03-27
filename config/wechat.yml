@@ -5,10 +5,10 @@ default: &default
   access_token: "/var/tmp/wechat_access_token"
 
 production:
-  appid: <%= ENV['wechat_app_id'] %>
-  secret: <%= ENV['wechat_app_secret'] %>
-  token:   <%= ENV['wechat_token'] %>
-  access_token:  <%= ENV['access_token'] %>
+  appid: <%= ENV['WECHAT_APPID'] %>
+  secret: <%= ENV['WECHAT_APP_SECRET'] %>
+  token:   <%= ENV['WECHAT_TOKEN'] %>
+  access_token:  <%= ENV['WECHAT_ACCESS_TOKEN'] %>
 
 development:
   <<: *default
