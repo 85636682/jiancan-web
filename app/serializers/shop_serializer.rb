@@ -9,7 +9,8 @@ class ShopSerializer < BaseSerializer
     object.avatar.url("320xAuto")
   end
 
-  def meals_texts
+  def meals
+    object.meals.to_array
   end
 
   def created_at
