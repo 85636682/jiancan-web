@@ -35,6 +35,7 @@ module M1
           optional :district, type: String, desc: "店铺县区"
           optional :street, type: String, desc: "店铺街道"
           optional :mobile, type: String, desc: "店铺电话"
+          optional :meals, type: Array, desc: ""
           optional :avatar, type: Hash, desc: "店铺头像"
         end
       end
