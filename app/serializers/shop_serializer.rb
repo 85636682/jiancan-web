@@ -10,7 +10,6 @@ class ShopSerializer < BaseSerializer
   end
 
   def meals_texts
-    object.meals.texts
   end
 
   def created_at
