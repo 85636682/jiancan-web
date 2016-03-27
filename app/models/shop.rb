@@ -1,7 +1,4 @@
 class Shop < ActiveRecord::Base
-  extend Enumerize
-  serialize :meals, Array
-  enumerize :meals, in: [:breakfast, :lunch, :afternoon_tea, :supper, :night_snack], multiple: true
 
   belongs_to :merchant
   has_many :products
