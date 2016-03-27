@@ -11,6 +11,7 @@ module M1
           requires :district, type: String, desc: "店铺县区"
           requires :street, type: String, desc: "店铺街道"
           requires :mobile, type: String, desc: "店铺电话"
+          requires :meals, type: Array, desc: ""
           optional :avatar, type: Hash, desc: "店铺头像"
         end
       end

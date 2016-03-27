@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160326052709) do
+ActiveRecord::Schema.define(version: 20160327045229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -313,6 +313,7 @@ ActiveRecord::Schema.define(version: 20160326052709) do
     t.float     "lat"
     t.float     "lng"
     t.geography "location",    limit: {:srid=>4326, :type=>"point", :geographic=>true}
+    t.string    "meals"
   end
 
   create_table "user_card_users", force: :cascade do |t|
