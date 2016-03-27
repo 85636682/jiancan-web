@@ -9,6 +9,10 @@ class ShopSerializer < BaseSerializer
     object.avatar.url("320xAuto")
   end
 
+  def meals_texts
+
+  end
+
   def created_at
     DateTime.parse(object.created_at.iso8601).strftime('%Y年%m月%d日 %H:%M')
   end
