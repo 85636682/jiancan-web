@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160327045229) do
+ActiveRecord::Schema.define(version: 20160327091340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -313,8 +313,10 @@ ActiveRecord::Schema.define(version: 20160327045229) do
     t.float     "lat"
     t.float     "lng"
     t.geography "location",    limit: {:srid=>4326, :type=>"point", :geographic=>true}
-    t.string    "meals"
+    t.string    "meals",                                                                             array: true
   end
+
+  add_index "shops", ["meals"], name: "index_shops_on_meals", using: :gin
 
   create_table "user_card_users", force: :cascade do |t|
     t.integer  "user_card_id"
