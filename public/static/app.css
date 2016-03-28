@@ -155,6 +155,15 @@ i.icon-profile-coins, i.icon-service-phone {
   color: red;
 }
 
+.shop_list_bd .weui_media_box.weui_media_appmsg .weui_media_hd {
+  width: 100px;
+  height: 100px;
+}
+
+.shop_list_bd .weui_media_box.weui_media_appmsg .weui_media_bd {
+  height: 100px;
+}
+
 .product_list_bd .weui_media_box.weui_media_appmsg .weui_media_hd {
   width: 100px;
   height: 100px;

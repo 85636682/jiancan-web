@@ -1,12 +1,16 @@
 class ShopSerializer < BaseSerializer
   attributes :id, :name, :street, :mobile, :province, :city, :district, :avatar,
-             :created_at, :updated_at, :meals, :meals_texts
+             :created_at, :updated_at, :meals, :meals_texts, :avatar80x80
 
   has_many :categories, serializer: CategorySerializer
   has_one :merchant, serializer: MerchantSerializer
 
   def avatar
     object.avatar.url("320xAuto")
+  end
+
+  def avatar80x80
+    object.avatar.url("80x80")
   end
 
   def meals_texts

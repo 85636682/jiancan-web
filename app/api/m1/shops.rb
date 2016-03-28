@@ -41,7 +41,6 @@ module M1
       end
       put 'one' do
         authenticate!
-        JcLog.create(:content => params[:shop][:meals])
         error!({ error: "店铺不存在！" }, 400) if current_merchant.shop.blank?
         if current_merchant.shop.update_attributes(params[:shop])
           render current_merchant.shop
