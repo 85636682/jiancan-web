@@ -172,3 +172,12 @@ i.icon-profile-coins, i.icon-service-phone {
 .product_list_bd .weui_media_box.weui_media_appmsg .weui_media_bd {
   height: 100px;
 }
+
+.product_header {
+
+}
+
+.product_header img {
+  width: 100%;
+  height: 300px;
+}
