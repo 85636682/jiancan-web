@@ -6,7 +6,7 @@ module U1
         optional :meal, type: String, desc: '餐次'
       end
       get '', each_serializer: ShopSerializer, root: false do
-        if params[:meal].blank?
+        if params[:meal].blank? || params[:meal] == 'all'
           @shops = Shop.all
         else
           @shops = Shop.where("'#{params[:meal]}' = ANY (meals)")
