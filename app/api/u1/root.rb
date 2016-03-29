@@ -20,5 +20,6 @@ module U1
     mount U1::Categories
     mount U1::Products
     mount U1::Wx
+    mount U1::Favorites
   end
 end
