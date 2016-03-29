@@ -11,24 +11,21 @@ module U1
 
       desc "添加用户的收货地址"
       params do
-        requires :consignee, type: String, desc: "收货人"
-        requires :mobile,  type: String, desc: "收货人电话"
-        requires :province,  type: String, desc: "省份"
-        requires :city,  type: String, desc: "城市"
-        requires :district,  type: String, desc: "区／县"
-        requires :street,  type: String, desc: "街道地址"
+        requires :address, type: Hash do
+          requires :consignee, type: String, desc: "收货人"
+          requires :mobile,  type: String, desc: "收货人电话"
+          optional :province,  type: String, desc: "省份"
+          optional :city,  type: String, desc: "城市"
+          optional :district,  type: String, desc: "区／县"
+          requires :street,  type: String, desc: "街道地址"
+        end
       end
-      post '' do
+      post '', serializer: ReceivingAddressSerializer, root: false do
         authenticate!
-        @receiving_address = ReceivingAddress.new(:consignee => params[:consignee],
-                                                  :mobile => params[:mobile],
-                                                  :province => params[:province],
-                                                  :city => params[:city],
-                                                  :district => params[:district],
-                                                  :street => params[:street],
-                                                  :user_id => current_user.id)
+        @receiving_address = ReceivingAddress.new(params[:address])
+        @receiving_address.user_id = current_user.id
         if @receiving_address.save
-          { msg: 'ok', receiving_address: @receiving_address }
+          render @receiving_address
         else
           error!({ error: "地址保存失败！" }, 400)
         end
