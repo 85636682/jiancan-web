@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160327092700) do
+ActiveRecord::Schema.define(version: 20160329045842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,18 +49,6 @@ ActiveRecord::Schema.define(version: 20160327092700) do
   end
 
   add_index "activity_users", ["liked_users"], name: "index_activity_users_on_liked_users", using: :gin
-
-  create_table "add_bonus_cleared_to_user_cards", force: :cascade do |t|
-    t.string   "bonus_cleared"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-  end
-
-  create_table "add_private_token_update_at_to_workers", force: :cascade do |t|
-    t.datetime "private_token_updated_at"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-  end
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -131,39 +119,6 @@ ActiveRecord::Schema.define(version: 20160327092700) do
     t.string   "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "market_categories", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "market_order_market_products", force: :cascade do |t|
-    t.integer  "market_order_id"
-    t.integer  "market_product_id"
-    t.integer  "count"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.integer  "merchant_id"
-  end
-
-  create_table "market_orders", force: :cascade do |t|
-    t.string   "sn"
-    t.integer  "merchant_id"
-    t.integer  "shop_id"
-    t.decimal  "total_price"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  create_table "market_products", force: :cascade do |t|
-    t.string   "name"
-    t.decimal  "price"
-    t.string   "avatar"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.integer  "market_category_id"
   end
 
   create_table "merchant_advertisements", force: :cascade do |t|
