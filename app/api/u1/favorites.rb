@@ -36,7 +36,7 @@ module U1
       params do
         requires :shop_id, type: Integer, desc: "店铺id"
       end
-      get 'is_favorited' do
+      get 'favorited' do
         authenticate!
         @favorite = Favorite.where(:user_id => current_user.id, :favoriteable_id => params[:shop_id], :favoriteable_type => "Shop").first
         if @favorite.blank?
