@@ -3,9 +3,15 @@ module U1
     resource :shops do
       desc "返回所有店铺"
       params do
+        optional :meal, type: String, desc: '餐次'
       end
       get '', each_serializer: ShopSerializer, root: false do
-        render Shop.all
+        if params[:meal].blank?
+          @shops = Shop.all
+        else
+          @shops = Shop.where("'#{params[:meal]}' = ANY (meals)")
+        end
+        render @shops
       end
 
       desc "返回某一间店铺"
