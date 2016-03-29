@@ -2,6 +2,16 @@
     background-color: #fbf9fe
 }
 
+.page {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  opacity: 0
+}
+
+.bd.spacing {
+  padding: 0 15px
+}
+
 .container {
   width: 100%;
   display: -webkit-box;
