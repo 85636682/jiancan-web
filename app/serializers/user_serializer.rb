@@ -1,5 +1,5 @@
 class UserSerializer < BaseSerializer
-  attributes :id, :name, :nickname, :avatar, :mobile
+  attributes :id, :name, :nickname, :avatar, :mobile, :wx_avatar
 
   has_many :receiving_addresses
 

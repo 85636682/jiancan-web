@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
     where(weixin_open_id: auth["openid"]).first_or_create do |user|
       user.password = User.friendly_token[0, 20]
       user.nickname = auth["nickname"]
-      user.avatar = auth["headimgurl"]
+      user.wx_avatar = auth["headimgurl"]
       user.private_token = "#{SecureRandom.hex(10)}:#{user.id}"
       user.private_token_updated_at = Time.zone.now
     end
