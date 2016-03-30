@@ -55,10 +55,13 @@ class WeixinsController < ApplicationController
     if params[:state].present? || session['openid'].present? #|| !is_wechat_brower?
       if @user.blank?
         @user = User.find_by_weixin_open_id(session[:openid])
+        @user.update_private_token
+        JcLog.create(:content => '用户不存在')
       end
-      @user.update_private_token
+      JcLog.create(:content => '用户存在')
       return # 防止进入死循环授权
     end
+    JcLog.create(:content => 'state||openid存在')
     sns_url =  @wechat_client.authorize_url(request.url, scope="snsapi_userinfo")
     redirect_to sns_url and return
   end
@@ -67,6 +70,7 @@ class WeixinsController < ApplicationController
   def get_wechat_sns
     # params[:state] 这个参数是微信特定参数，所以可以以此来判断授权成功后微信回调。
     if session[:openid].blank? && params[:state].present?
+      JcLog.create(:content => 'state存在&&openid不存在')
       sns_info = @wechat_client.get_oauth_access_token(params[:code])
       # 如果网页授权作用域为snsapi_userinfo，则此时开发者可以通过access_token和openid拉取用户信息了。
       user_info = @wechat_client.get_oauth_userinfo(sns_info.result["openid"], sns_info.result["access_token"])
@@ -77,6 +81,7 @@ class WeixinsController < ApplicationController
         session[:openid] = sns_info.result["openid"]
       end
     end
+    JcLog.create(:content => 'state不存在||openid存在')
   end
 
 end
