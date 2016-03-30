@@ -3,6 +3,7 @@ class ShopSerializer < BaseSerializer
              :created_at, :updated_at, :meals, :meals_texts, :avatar80x80
 
   has_many :categories, serializer: CategorySerializer
+  has_many :rooms, serializer: RoomSerializer
   has_one :merchant, serializer: MerchantSerializer
 
   def avatar

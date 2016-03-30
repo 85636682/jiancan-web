@@ -65,6 +65,10 @@
   -moz-box-ordinal-group:2;
 }
 
+.shop_tab .weui_navbar, .finance_bar .weui_navbar {
+  background-color: #FFF;
+}
+
 footer .weui_tab .weui_tabbar {
   position: fixed;
   z-index: 1030;
