@@ -2,6 +2,18 @@ module U1
   class Rooms < Grape::API
     resource :rooms do
 
+      desc '获取单一台桌'
+      params do
+        requires :room_id, type: Integer, desc: '台桌id'
+      end
+      get 'one', serializer: RoomSerializer, root: false do
+        @room = Room.find_by_id(params[:room_id])
+        if @room.blank?
+          error!({ error: "台桌不存在！" }, 400)
+        end
+        render @room
+      end
+
       desc '获取某台桌的订单，如果没有就生成，如果是扫描台桌二维码，用这条api'
       params do
         requires :room_id, type: Integer, desc: '台桌的Id'
