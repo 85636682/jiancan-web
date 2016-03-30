@@ -55,8 +55,8 @@ class WeixinsController < ApplicationController
     if params[:state].present? || session['openid'].present? #|| !is_wechat_brower?
       if @user.blank?
         @user = User.find_by_weixin_open_id(session[:openid])
-        @user.update_private_token
       end
+      @user.update_private_token
       return # 防止进入死循环授权
     end
     sns_url =  @wechat_client.authorize_url(request.url, scope="snsapi_userinfo")
