@@ -1,4 +1,4 @@
-class WeixinController < ApplicationController
+class WeixinsController < ApplicationController
   layout 'wechat'
 
   before_action :create_wechat_client
