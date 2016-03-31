@@ -3,6 +3,7 @@ class ProductSerializer < BaseSerializer
              :category_id, :sales_volume, :price, :avatar80x80
 
   has_one :category
+  has_many :comments, serializer: CommentSerializer
 
   def avatar
     object.avatar.url("320xAuto")

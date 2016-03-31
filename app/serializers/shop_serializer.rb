@@ -4,6 +4,7 @@ class ShopSerializer < BaseSerializer
 
   has_many :categories, serializer: CategorySerializer
   has_many :rooms, serializer: RoomSerializer
+  has_many :comments, serializer: CommentSerializer
   has_one :merchant, serializer: MerchantSerializer
 
   def avatar
