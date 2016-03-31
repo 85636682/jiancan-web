@@ -10,6 +10,7 @@ class Shop < ActiveRecord::Base
   has_many :activities
   has_many :shop_advertisements
   has_one :shop_public_account
+  has_many :comments, as: :commentable
 
   mount_uploader :avatar, ImageUploader
   attr_accessor :uploader_secure_token

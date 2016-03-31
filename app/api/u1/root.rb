@@ -21,5 +21,6 @@ module U1
     mount U1::Products
     mount U1::Wx
     mount U1::Favorites
+    mount U1::Comments
   end
 end
