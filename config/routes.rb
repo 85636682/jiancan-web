@@ -26,5 +26,8 @@ Rails.application.routes.draw do
 
   get 'china_city/:id', to: 'city_data#show'
   get 'welcome/api'
+  get 'welcome/index'
+
+  root :to => 'welcome#index'
 
 end
