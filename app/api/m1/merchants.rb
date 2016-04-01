@@ -8,11 +8,9 @@ module M1
       end
       post 'login' do
         merchant = Merchant.find_by_email(params[:email])
-        if merchant && merchant.authenticate(params[:password])
-          { msg: "登录成功！", access_token: merchant.get_private_token, email: merchant.email }
-        else
-          error!({ error: "用户和密码不正确！" }, 400)
-        end
+        error!({ error: "用户和密码不正确！" }, 400)if not merchant && merchant.authenticate(params[:password])
+        error!({ error: "账号未通过审核！" }, 400) if not merchant.examined
+        { msg: "登录成功！", access_token: merchant.get_private_token, email: merchant.email }
       end
 
       desc "用户注册"
