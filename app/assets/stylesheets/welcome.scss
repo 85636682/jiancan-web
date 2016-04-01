@@ -1,8 +1,24 @@
 @import "bootstrap";
 @import "jquery.fullpage";
 
- .view-page {
 
+.header {
+  background-color: transparent;
+  .dropdown-menu {
+    display: block;
+  }
+
+  .navbar {
+    height: 60px;
+    padding-top: 10px;
+    border-width: 0px;
+    border-radius: 0px;
+    background-color: transparent;
+
+  }
+}
+
+ .view-page {
    .container {
      width: 100%;
      height: 100%;
