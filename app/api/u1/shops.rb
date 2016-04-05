@@ -5,7 +5,7 @@ module U1
       params do
         optional :meal, type: String, desc: '餐次'
       end
-      get '', each_serializer: ShopSerializer, root: false do
+      get '', each_serializer: ShopDetailSerializer, root: false do
         if params[:meal].blank? || params[:meal] == 'all'
           @shops = Shop.all
         else
@@ -18,7 +18,7 @@ module U1
       params do
         requires :shop_id, type: Integer, desc: "店铺id"
       end
-      get 'one', serializer: ShopSerializer, root: false do
+      get 'one', serializer: ShopDetailSerializer, root: false do
         @shop = Shop.find_by_id(params[:shop_id])
       end
 
@@ -28,7 +28,7 @@ module U1
         requires :lng, type: Float, desc: "维度"
         requires :address, type: String, desc: "文字性地址"
       end
-      get '', each_serializer: ShopSerializer, root: false do
+      get '', each_serializer: ShopDetailSerializer, root: false do
         authenticate!
         @shops = []
         if params[:address].blank?
