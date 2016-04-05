@@ -3,12 +3,11 @@ module U1
     resource :bookings do
       desc '获取用户预定'
       params do
-        requires :bookingable_id, type: Integer, desc: '对象id'
         requires :bookingable_type, type: String, desc: '对象名'
       end
       get '', each_serializer: BookingSerializer, root: false do
         authenticate!
-        @bookings = current_user.bookings.where(bookingable_id: params[:bookingable_id], bookingable_type: params[:bookingable_type])
+        @bookings = current_user.bookings.where(bookingable_type: params[:bookingable_type])
       end
 
       desc '添加用户评论'
