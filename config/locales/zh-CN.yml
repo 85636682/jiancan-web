@@ -147,3 +147,8 @@
         primary: "普通"
         warning: "重要"
         danger: "紧急"
+    booking:
+      confirmed:
+        unconfirm: '未确认'
+        confirmed: '已确认'
+        canceled: '已取消'

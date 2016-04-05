@@ -10,6 +10,6 @@ class BookingSerializer < BaseSerializer
   end
 
   def confirmed_text
-    confirmed ? "等待确认" : "已确认"
+    object.confirmed.text
   end
 end
