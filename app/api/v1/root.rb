@@ -17,6 +17,7 @@ module V1
     mount V1::Rooms
     mount V1::OrderProducts
     mount V1::UserCards
+    mount V1::Pay
 
   end
 end

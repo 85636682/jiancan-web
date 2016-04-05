@@ -22,5 +22,6 @@ module U1
     mount U1::Wx
     mount U1::Favorites
     mount U1::Comments
+    mount U1::Bookings
   end
 end

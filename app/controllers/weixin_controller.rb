@@ -46,6 +46,22 @@ class WeixinsController < ApplicationController
     redirect_to url
   end
 
+  def pay_notify
+    result = Hash.from_xml(request.body.read)["xml"]
+    if WechatPay::Sign.verify?(result)
+      @order = Order.find_by_id(result["out_trade_no"])
+      unless @order.blank?
+        unless @order.completed?
+          @order.completed
+          @order.collect = result["total_fee"]
+        end
+      end
+      render :xml => { return_code: "SUCCESS" }.to_xml(root: 'xml', dasherize: false)
+    else
+      render :xml => { return_code: "FAIL", return_msg: "" }.to_xml(root: 'xml', dasherize: false)
+    end
+  end
+
   private
   def create_wechat_client
     @wechat_client ||= WeixinAuthorize::Client.new(Rails.application.secrets.wechat_app_id, Rails.application.secrets.wechat_app_secret)

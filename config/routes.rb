@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get :activity
       get :advertisement
       get :authorize
+      post :pay_notify
     end
   end
 
