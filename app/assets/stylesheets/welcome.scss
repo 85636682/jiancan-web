@@ -3,7 +3,7 @@
 
 
 .header {
-  background-color: transparent;
+
   .dropdown-menu {
     display: block;
   }
@@ -13,7 +13,9 @@
     padding-top: 10px;
     border-width: 0px;
     border-radius: 0px;
-    background-color: transparent;
+    background: rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 0 13px 3px rgba(0,0,0,.2);
+    -webkit-box-shadow: 0 0 13px 3px rgba(0,0,0,.2);
 
   }
 }
