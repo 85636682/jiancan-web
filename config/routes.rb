@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   require 'dispatch'
   mount Api::Dispatch => '/api'
   mount WeixinRailsMiddleware::Engine, at: "/"
+  mount StatusPage::Engine, at: '/'
 
   get 'china_city/:id', to: 'city_data#show'
   get 'welcome/api'

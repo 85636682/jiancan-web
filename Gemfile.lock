@@ -332,6 +332,8 @@ GEM
     sshkit (1.8.1)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    status-page (0.0.1)
+      rails (>= 4.2)
     terminal-table (1.5.2)
     thin (1.6.4)
       daemons (~> 1.0, >= 1.0.9)
@@ -448,6 +450,7 @@ DEPENDENCIES
   smart_sms
   spring
   sprockets (~> 3.3.3)
+  status-page
   thin
   turbolinks (~> 5.0.0.beta)
   uglifier
