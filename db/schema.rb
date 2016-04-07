@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160405141142) do
+ActiveRecord::Schema.define(version: 20160407134008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -169,6 +169,7 @@ ActiveRecord::Schema.define(version: 20160405141142) do
     t.string   "password_digest"
     t.datetime "private_token_updated_at"
     t.boolean  "examined",                 default: false
+    t.string   "mobile"
   end
 
   add_index "merchants", ["email"], name: "index_merchants_on_email", unique: true, using: :btree

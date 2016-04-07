@@ -3,30 +3,30 @@ module M1
     resource :merchants do
       desc "用户登录"
       params do
-        requires :email, type: String, desc: "用户邮箱"
+        requires :mobile, type: String, desc: "用户手机"
         requires :password,  type: String, desc: "用户密码"
       end
       post 'login' do
-        merchant = Merchant.find_by_email(params[:email])
+        merchant = Merchant.find_by_mobile(params[:mobile])
         error!({ error: "用户和密码不正确！" }, 400)if not merchant && merchant.authenticate(params[:password])
         error!({ error: "账号未通过审核！" }, 400) if not merchant.examined
-        { msg: "登录成功！", access_token: merchant.get_private_token, email: merchant.email }
+        { msg: "登录成功！", access_token: merchant.get_private_token, mobile: merchant.mobile }
       end
 
       desc "用户注册"
       params do
-        requires :email, type: String, desc: "用户邮箱"
+        requires :mobile, type: String, desc: "用户手机"
         requires :password, type: String, desc: "用户密码"
         requires :password_confirmation, type: String, desc: "用户密码"
       end
       post 'register' do
-        merchant = Merchant.find_by_email(params[:email])
+        merchant = Merchant.find_by_mobile(params[:mobile])
         error!({ error: "用户名已存在！" }, 400) if not merchant.blank?
-        merchant = Merchant.new(:email => params["email"],
+        merchant = Merchant.new(:mobile => params["mobile"],
                         :password => params["password"],
                         :password_confirmation => params["password_confirmation"])
         if merchant.save
-          { msg: "注册成功！", access_token: merchant.get_private_token, email: merchant.email }
+          { msg: "注册成功！", access_token: merchant.get_private_token, mobile: merchant.mobile }
         else
           error!({ error: "用户注册失败！" }, 400)
         end
@@ -43,7 +43,7 @@ module M1
       desc "修改当前用户信息"
       params do
         requires :merchant, type: Hash do
-          optional :email, type: String, desc: "邮箱"
+          optional :mobile, type: String, desc: "手机"
           optional :name, type: String, desc: "名称"
         end
       end
