@@ -4,5 +4,4 @@ class Room < ActiveRecord::Base
   has_many :bookings, as: :bookingable
 
   validates :name, :shop_id, presence: true
-  validates :name, uniqueness: true
 end
