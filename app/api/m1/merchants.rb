@@ -43,6 +43,7 @@ module M1
       desc "修改当前用户信息"
       params do
         requires :merchant, type: Hash do
+          optional :mobile, type: String, desc: "邮箱"
           optional :mobile, type: String, desc: "手机"
           optional :name, type: String, desc: "名称"
         end
