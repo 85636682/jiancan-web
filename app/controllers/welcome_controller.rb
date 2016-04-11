@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
   layout false
-  
+
   def index
 
   end
@@ -23,6 +23,10 @@ class WelcomeController < ApplicationController
       @routes << r
     end
     @routes.sort_by! { |a| a[:name] }
+  end
+
+  def error_404
+    render_404
   end
 
 end

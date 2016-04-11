@@ -32,4 +32,6 @@ Rails.application.routes.draw do
 
   root :to => 'welcome#index'
 
+  match '*path', via: :all, to: 'welcome#error_404'
+
 end
