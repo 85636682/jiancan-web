@@ -77,12 +77,10 @@ module M1
 
       desc '获取店铺下所有商品'
       params do
-        optional :offset, type: Integer, default: 0
-        optional :limit,  type: Integer, default: 20, values: 1..150
       end
       get 'products', each_serializer: ProductSerializer, root: false do
         authenticate!
-        @products = Product.where(:shop_id => current_merchant.shop.id).offset(params[:offset]).limit(params[:limit]).order("id ASC")
+        @products = Product.where(:shop_id => current_merchant.shop.id).order("id ASC")
       end
 
       desc '返回店铺下所有订单'
