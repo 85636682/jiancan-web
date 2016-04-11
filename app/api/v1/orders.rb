@@ -7,7 +7,7 @@ module V1
         requires :order_id, type: Integer, desc: '订单的id'
         requires :products_quantity, type: String, desc: 'Json格式的字符串，包含所有添加商品id和对应数量，用商品的id作为key，用所选商品的数据作为value'
       end
-      post 'products', serializer: OrderSerializer, root: false do
+      post 'products', serializer: OrderDetailSerializer, root: false do
         authenticate!
         @order = Order.find_by_id(params[:order_id])
         if @order.blank?
@@ -67,7 +67,7 @@ module V1
       params do
         requires :sn, type: String, desc: '订单编号'
       end
-      get 'search', serializer: OrderSerializer, root: false do
+      get 'search', serializer: OrderDetailSerializer, root: false do
         @order = Order.find_by_sn(params[:sn])
       end
 

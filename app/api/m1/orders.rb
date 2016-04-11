@@ -5,7 +5,7 @@ module M1
       params do
         requires :order_id, type: Integer, desc: '订单id'
       end
-      get 'one', serializer: OrderSerializer, root: false do
+      get 'one', serializer: OrderDetailSerializer, root: false do
         @order = Order.find_by_id(params[:order_id])
       end
 
@@ -13,7 +13,7 @@ module M1
       params do
         requires :sn, type: String, desc: '订单编号'
       end
-      get 'search', serializer: OrderSerializer, root: false do
+      get 'search', serializer: OrderDetailSerializer, root: false do
         @order = Order.find_by_sn(params[:sn])
       end
 

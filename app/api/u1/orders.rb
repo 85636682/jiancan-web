@@ -5,7 +5,7 @@ module U1
       desc '获取用户订单'
       params do
       end
-      get '', each_serializer: OrderSerializer, root: false do
+      get '', each_serializer: OrderDetailSerializer, root: false do
         authenticate!
         @orders = current_user.orders.order("created_at DESC")
       end
@@ -14,7 +14,7 @@ module U1
       params do
         requires :order_id, type: Integer, desc: '订单id'
       end
-      get 'one', serializer: OrderSerializer, root: false do
+      get 'one', serializer: OrderDetailSerializer, root: false do
         authenticate!
         @order = Order.find_by_id(params[:order_id])
       end
@@ -23,15 +23,16 @@ module U1
       params do
         requires :order, type: Hash do
           requires :shop_id, type: Integer, desc: '店铺的id'
-          requires :takeout, type: Boolean, desc: ''
-          requires :pay_method, type: String, desc: ''
-          requires :meal_time, type: String, desc: ''
-          requires :remarks, type: String, desc: ''
-          requires :address, type: String, desc: ''
+          requires :takeout, type: Boolean, desc: '是否外卖'
+          requires :pay_method, type: String, desc: '支付方式'
+          requires :meal_time, type: String, desc: '送货时间'
+          requires :remarks, type: String, desc: '备注'
+          requires :address, type: String, desc: '送货地址'
+          requires :mobile, type: String, desc: '送货电话'
         end
         requires :products_quantity, type: String, desc: 'Json格式的字符串，用商品的id作为key，用所选商品的数量作为value'
       end
-      post '', serializer: OrderSerializer, root: false do
+      post '', serializer: OrderDetailSerializer, root: false do
         authenticate!
         begin
           ActiveRecord::Base.transaction do
@@ -77,7 +78,7 @@ module U1
         requires :order_id, type: Integer, desc: '订单的id'
         requires :products_quantity, type: String, desc: 'Json格式的字符串，包含所有添加商品id和对应数量，用商品的id作为key，用所选商品的数据作为value'
       end
-      post 'products', serializer: OrderSerializer, root: false do
+      post 'products', serializer: OrderDetailSerializer, root: false do
         authenticate!
         @order = Order.find_by_id(params[:order_id])
         error!({ error: "订单不存在！" }, 400) if @order.blank?
@@ -133,7 +134,7 @@ module U1
       params do
         requires :sn, type: String, desc: '订单编号'
       end
-      get 'search', serializer: OrderSerializer, root: false do
+      get 'search', serializer: OrderDetailSerializer, root: false do
         @order = Order.find_by_sn(params[:sn])
         if @order.user_id != current_user.id
           error!({ error: "你不能操作该订单！" }, 400)

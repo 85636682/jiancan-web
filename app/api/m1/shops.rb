@@ -90,7 +90,7 @@ module M1
         optional :offset, type: Integer, default: 0
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
-      get 'orders', each_serializer: OrderSerializer, root: false do
+      get 'orders', each_serializer: OrderDetailSerializer, root: false do
         authenticate!
         @orders = Order.where(:shop_id => current_merchant.shop.id).offset(params[:offset]).limit(params[:limit]).order("created_at DESC")
         render @orders

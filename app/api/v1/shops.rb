@@ -43,7 +43,7 @@ module V1
         optional :offset, type: Integer, default: 0
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
-      get 'orders', each_serializer: OrderSerializer, root: false do
+      get 'orders', each_serializer: OrderDetailSerializer, root: false do
         authenticate!
         @orders = Order.where("shop_id = ? AND status = ?", @current_worker.shop_id, params[:status]).offset(params[:offset]).limit(params[:limit]).order("created_at DESC")
         render @orders

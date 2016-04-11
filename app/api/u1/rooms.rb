@@ -18,7 +18,7 @@ module U1
       params do
         requires :room_id, type: Integer, desc: '台桌的Id'
       end
-      get 'order', serializer: OrderSerializer, root: false do
+      get 'order', serializer: OrderDetailSerializer, root: false do
         authenticate!
         @room = Room.find_by_id(params[:room_id])
         if @room.blank?
