@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160410023934) do
+ActiveRecord::Schema.define(version: 20160412074756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -172,7 +172,7 @@ ActiveRecord::Schema.define(version: 20160410023934) do
     t.string   "mobile"
   end
 
-  add_index "merchants", ["email"], name: "index_merchants_on_email", unique: true, using: :btree
+  add_index "merchants", ["mobile"], name: "index_merchants_on_mobile", using: :btree
   add_index "merchants", ["reset_password_token"], name: "index_merchants_on_reset_password_token", unique: true, using: :btree
 
   create_table "notifications", force: :cascade do |t|

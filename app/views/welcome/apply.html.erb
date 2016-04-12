@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>简餐</title>
+    <%= stylesheet_link_tag    'welcome', media: 'all' %>
+    <%= javascript_include_tag 'welcome' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div class="header">
+      <nav class="navbar navbar-fixed-top navbar-light bg-faded">
+        <div class="container">
+          <a href="<%= welcome_index_path %>">
+            <%= image_tag("logo.png") %>
+          </a>
+          <ul id="menu" class="nav navbar-nav pull-xs-right">
+            <li class="nav-item small-sreen-hide active">
+              <a class="nav-link hvr-underline-from-center" href="<%= welcome_index_path %>" style="color:#FFF;">首页</a>
+            </li>
+            <li class="nav-item small-sreen-hide">
+              <span class="nav-link" style="color:#FFF;">|</span>
+            </li>
+            <li class="nav-item small-sreen-hide">
+              <span class="nav-link">
+                <a href="http://jiancan.me/cpanel.html" style="color:#FFF;" target="_blank">商家后台</a>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </body>
+</html>
