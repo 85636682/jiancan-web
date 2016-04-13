@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>简餐</title>
+    <%= stylesheet_link_tag    'welcome', media: 'all' %>
+    <%= javascript_include_tag 'welcome' %>
+    <%= csrf_meta_tags %>
+    <style media="screen">
+      body {
+        background-color: #04BE02;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <nav class="navbar navbar-fixed-top navbar-light bg-faded">
+        <div class="container">
+          <a href="<%= welcome_index_path %>">
+            <%= image_tag("logo.png") %>
+          </a>
+          <ul id="menu" class="nav navbar-nav pull-xs-right">
+            <li class="nav-item small-sreen-hide active">
+              <a class="nav-link hvr-underline-from-center" href="<%= welcome_index_path %>" style="color:#FFF;">首页</a>
+            </li>
+            <li class="nav-item small-sreen-hide">
+              <span class="nav-link" style="color:#FFF;">|</span>
+            </li>
+            <li class="nav-item small-sreen-hide">
+              <span class="nav-link">
+                <a href="http://jiancan.me/cpanel.html" style="color:#FFF;" target="_blank">商家后台</a>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="container" style="padding-top:100px;">
+      <div class="row card">
+        <div class="col-sm-8" style="padding:50px;">
+          <p>
+            谢谢你的支持，资料提交成功，我们会尽快来电和你确认！请耐心等候！
+          </p>
+        </div>
+        <div class="col-sm-1" style="text-align:center;margin-top:50px;">
+          <div class="" style="margin-left:35px;width: 1px;height: 450px;background-color: #ccc;color:#FFF;">,</div>
+        </div>
+        <div class="col-sm-3" style="padding:50px;">
+          已有简餐网商家帐号？<a href="http://jiancan.me/cpanel.html" target="_blank">立即登录</a>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

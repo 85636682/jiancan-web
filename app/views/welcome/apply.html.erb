@@ -36,41 +36,44 @@
     </div>
 
     <div class="container" style="padding-top:100px;">
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, class: "alert alert-info" %>
+      <% end %>
       <div class="row card">
         <div class="col-sm-8" style="padding:50px;">
-          <form>
+          <%= form_tag(welcome_applied_path, method: "post") do %>
             <div class="form-group row">
-              <label for="inputEmail3" class="col-sm-2 form-control-label">手机</label>
+              <label class="col-sm-2 form-control-label">手机</label>
               <div class="col-sm-10">
-                <input type="email" class="form-control">
+                <input type="text" name="merchant[mobile]" class="form-control">
                 <small class="text-muted">作为登录帐号，请填写未被简餐网商家平台注册的手机号码</small>
               </div>
             </div>
             <div class="form-group row">
-              <label for="inputPassword3" class="col-sm-2 form-control-label">密码</label>
+              <label class="col-sm-2 form-control-label">密码</label>
               <div class="col-sm-10">
-                <input type="password" class="form-control">
+                <input type="password" name="merchant[password]" class="form-control">
                 <small class="text-muted">字母、数字或者英文符号，最短6位，区分大小写</small>
               </div>
             </div>
             <div class="form-group row">
-              <label for="inputPassword3" class="col-sm-2 form-control-label">确认密码</label>
+              <label class="col-sm-2 form-control-label">确认密码</label>
               <div class="col-sm-10">
-                <input type="password" class="form-control">
+                <input type="password" name="merchant[password_confirmation]" class="form-control">
                 <small class="text-muted">请再次输入密码</small>
               </div>
             </div>
             <div class="form-group row">
-              <label for="inputEmail3" class="col-sm-2 form-control-label">店铺名称</label>
+              <label class="col-sm-2 form-control-label">店铺名称</label>
               <div class="col-sm-10">
-                <input type="email" class="form-control">
+                <input type="text" name="shop[name]" class="form-control">
                 <small class="text-muted">请填写你店铺的名称，尽量和营业执照一样，用于显示在外卖平台等</small>
               </div>
             </div>
             <div class="form-group row">
-              <label for="inputEmail3" class="col-sm-2 form-control-label">联系电话</label>
+              <label class="col-sm-2 form-control-label">联系电话</label>
               <div class="col-sm-10">
-                <input type="email" class="form-control">
+                <input type="text" name="shop[mobile]" class="form-control">
                 <small class="text-muted">请填写你店铺的联系电话，工作人员会根据你填写的电话联系你</small>
               </div>
             </div>
@@ -89,7 +92,7 @@
                 <button type="submit" class="btn btn-success">入驻</button>
               </div>
             </div>
-          </form>
+          <% end %>
         </div>
         <div class="col-sm-1" style="text-align:center;margin-top:50px;">
           <div class="" style="margin-left:35px;width: 1px;height: 450px;background-color: #ccc;color:#FFF;">,</div>

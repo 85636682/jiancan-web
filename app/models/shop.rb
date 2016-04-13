@@ -15,4 +15,6 @@ class Shop < ActiveRecord::Base
 
   mount_uploader :avatar, ImageUploader
   attr_accessor :uploader_secure_token
+
+  validates_uniqueness_of :name, :message => "你的店铺名称重复了"
 end

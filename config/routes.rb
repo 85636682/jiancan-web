@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   get 'welcome/api'
   get 'welcome/index'
   get 'welcome/apply'
+  post 'welcome/applied'
 
   root :to => 'welcome#index'
 

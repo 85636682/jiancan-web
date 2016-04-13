@@ -1,13 +1,11 @@
 class Merchant < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  # devise :database_authenticatable, :registerable,
-  #       :recoverable, :rememberable, :trackable, :validatable
-
   has_secure_password
 
   has_one :shop
   has_many :notifications, :dependent => :destroy
+
+  validates_presence_of :mobile, :message => '手机不能为空'
+  validates_uniqueness_of :mobile, :message => '此手机已经注册了，请换一个手机号码，如非本人请联系客服！'
 
   # 重新生成 Private Token
   def update_private_token
