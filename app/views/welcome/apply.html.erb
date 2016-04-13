@@ -5,6 +5,11 @@
     <%= stylesheet_link_tag    'welcome', media: 'all' %>
     <%= javascript_include_tag 'welcome' %>
     <%= csrf_meta_tags %>
+    <style media="screen">
+      body {
+        background-color: #04BE02;
+      }
+    </style>
   </head>
   <body>
     <div class="header">
@@ -29,5 +34,71 @@
         </div>
       </nav>
     </div>
+
+    <div class="container" style="padding-top:100px;">
+      <div class="row card">
+        <div class="col-sm-8" style="padding:50px;">
+          <form>
+            <div class="form-group row">
+              <label for="inputEmail3" class="col-sm-2 form-control-label">手机</label>
+              <div class="col-sm-10">
+                <input type="email" class="form-control">
+                <small class="text-muted">作为登录帐号，请填写未被简餐网商家平台注册的手机号码</small>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPassword3" class="col-sm-2 form-control-label">密码</label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control">
+                <small class="text-muted">字母、数字或者英文符号，最短6位，区分大小写</small>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputPassword3" class="col-sm-2 form-control-label">确认密码</label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control">
+                <small class="text-muted">请再次输入密码</small>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputEmail3" class="col-sm-2 form-control-label">店铺名称</label>
+              <div class="col-sm-10">
+                <input type="email" class="form-control">
+                <small class="text-muted">请填写你店铺的名称，尽量和营业执照一样，用于显示在外卖平台等</small>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputEmail3" class="col-sm-2 form-control-label">联系电话</label>
+              <div class="col-sm-10">
+                <input type="email" class="form-control">
+                <small class="text-muted">请填写你店铺的联系电话，工作人员会根据你填写的电话联系你</small>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-2"></label>
+              <div class="col-sm-10">
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox"> 我同意并遵守《简餐网平台服务协议》
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-success">入驻</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-sm-1" style="text-align:center;margin-top:50px;">
+          <div class="" style="margin-left:35px;width: 1px;height: 450px;background-color: #ccc;color:#FFF;">,</div>
+        </div>
+        <div class="col-sm-3" style="padding:50px;">
+          已有简餐网商家帐号？<a href="http://jiancan.me/cpanel.html" target="_blank">立即登录</a>
+        </div>
+      </div>
+    </div>
+
   </body>
 </html>
