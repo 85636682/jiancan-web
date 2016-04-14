@@ -117,6 +117,7 @@ gem 'whenever', :require => false
 # gem 'capistrano-rails', group: :development
 gem 'rails_db'
 gem 'status-page'
+gem 'oneapm_rpm'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
