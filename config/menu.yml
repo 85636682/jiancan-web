@@ -4,11 +4,11 @@ button:
   name: "外卖预定"
   url:  "http://jiancan.me/wx.html"
  -
-  name: "扫描下单"
+  name: "堂食"
   sub_button:
    -
     type: "click"
-    name: "进出记录"
+    name: "扫描下单"
     key:  "BADGE_IN_OUT"
    -
     type: "click"
@@ -18,9 +18,9 @@ button:
    name: "我的"
    sub_button:
     -
-     type: "click"
+     type: "view"
      name: "绑定手机"
-     key:  "BINGDING_MOBILE"
+     url:  "http://jiancan.me/"
     -
      type: "view"
      name: "下载APP"
