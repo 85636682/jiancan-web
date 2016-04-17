@@ -6,7 +6,7 @@ module U1
       params do
         requires :order_id, type: Integer, desc: '订单id'
       end
-      get '', each_serializer: OrderDetailSerializer, root: false do
+      get '' do
         authenticate!
         @order = Order.find_by_id(params[:order_id])
         error!({ error: "订单不存在！" }, 400) if @order.blank?

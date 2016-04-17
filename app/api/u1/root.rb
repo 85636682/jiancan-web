@@ -23,6 +23,6 @@ module U1
     mount U1::Favorites
     mount U1::Comments
     mount U1::Bookings
-    mount V1::Pay
+    mount U1::Pay
   end
 end
