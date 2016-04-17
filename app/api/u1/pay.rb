@@ -36,7 +36,7 @@ module U1
         if r.success? # => true
           r
         else
-          { "return_code" => "FAIL", "err_code" => r.err_code, "err_code_des" => r.err_code_des }
+          { "return_code" => "FAIL", "return_msg" => r.return_msg }
         end
       end
 

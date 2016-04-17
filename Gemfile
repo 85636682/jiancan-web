@@ -48,7 +48,7 @@ gem 'bcrypt'
 # 微信开发平台
 gem 'weixin_rails_middleware'
 gem 'weixin_authorize'
-gem 'wx_pay'
+gem 'wx_pay', :git => 'git://github.com/jasl/wx_pay'
 gem 'wechat'
 
 # 上传组件
