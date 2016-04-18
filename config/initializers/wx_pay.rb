@@ -1,6 +1,6 @@
 # required
 WxPay.appid = 'wx799b2d765bf4b9ac'
-WxPay.key = '12cb0b486187ff17e90a05edbdfcd837'
+WxPay.key = 'FFZDaU8qokcRc854grxNVvcsc8Q8c2QH'
 WxPay.mch_id = '1320744401'
 
 # cert, see https://pay.weixin.qq.com/wiki/doc/api/app.php?chapter=4_3
