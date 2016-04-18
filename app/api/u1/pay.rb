@@ -33,6 +33,7 @@ module U1
         #      "prepay_id"=>"wx2014111104255143b7605afb0314593866",
         #      "trade_type"=>"JSAPI"
         # }
+        JcLog.create(:content => r)
         if r.success? # => true
           r
         else
