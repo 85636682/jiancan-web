@@ -1,4 +1,4 @@
-class OrdersController < ApplicationController
+class OrdersController < ActionController::Base
   layout false
 
   def pay_notify
@@ -16,5 +16,5 @@ class OrdersController < ApplicationController
       render :xml => { return_code: "FAIL", return_msg: "" }.to_xml(root: 'xml', dasherize: false)
     end
   end
-  
+
 end
