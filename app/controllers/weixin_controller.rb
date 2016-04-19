@@ -1,7 +1,7 @@
 class WeixinsController < ApplicationController
   layout 'wechat'
 
-  before_action :create_wechat_client, except: [:pay_notify]
+  before_action :create_wechat_client
   before_action :invoke_wx_auth, only: [:activity, :advertisement, :authorize]
   before_action :get_wechat_sns, only: [:activity, :advertisement, :authorize], if: :is_wechat_brower?
 
@@ -44,22 +44,6 @@ class WeixinsController < ApplicationController
       url = "http://jiancan.me/wx.html#!/authorize?request_url=#{params[:request_url]}&access_token=#{@user.private_token}"
     end
     redirect_to url
-  end
-
-  def pay_notify
-    result = Hash.from_xml(request.body.read)["xml"]
-    if WxPay::Sign.verify?(result)
-      @order = Order.find_by_id(result["out_trade_no"])
-      unless @order.blank?
-        if @order.status.pending?
-          @order.payed
-          @order.update_attributes(:collect => result["total_fee"])
-        end
-      end
-      render :xml => { return_code: "SUCCESS" }.to_xml(root: 'xml', dasherize: false)
-    else
-      render :xml => { return_code: "FAIL", return_msg: "" }.to_xml(root: 'xml', dasherize: false)
-    end
   end
 
   private

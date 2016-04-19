@@ -17,7 +17,7 @@ module U1
           out_trade_no: @order.sn,
           total_fee: (@order.total_price * 100).to_i,
           spbill_create_ip: '120.55.164.64',
-          notify_url: 'http://www.jiancan.me/weixin/pay_notify',
+          notify_url: 'http://www.jiancan.me/pay_notify',
           trade_type: 'JSAPI', # could be "JSAPI", "NATIVE" or "APP",
           openid: "#{current_user.weixin_open_id}" # required when trade_type is `JSAPI`
         }
