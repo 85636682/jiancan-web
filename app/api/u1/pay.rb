@@ -33,13 +33,19 @@ module U1
         #      "prepay_id"=>"wx2014111104255143b7605afb0314593866",
         #      "trade_type"=>"JSAPI"
         # }
-        JcLog.create(:content => r)
         if r.success? # => true
-          package = "prepay_id=#{r["prepay_id"]}"
-          JcLog.create(:content => package)
-          paySign = Digest::MD5.hexdigest("appId=#{r["appid"]}&timeStamp=#{Time.now.to_i.to_s}&nonceStr=#{SecureRandom.uuid.tr('-', '')}&package=#{package}&signType=MD5").upcase
-          JcLog.create(:content => { "prepay_id" => r["prepay_id"], "nonceStr" => "#{SecureRandom.uuid.tr('-', '')}", "paySign" => "#{paySign}", "return_code" => r["return_code"], "return_msg" => r["return_msg"] })
-          { "prepay_id" => r["prepay_id"], "nonceStr" => "#{SecureRandom.uuid.tr('-', '')}", "paySign" => "#{paySign}", "return_code" => r["return_code"], "return_msg" => r["return_msg"] }
+          timeStamp = Time.now.to_i.to_s
+          nonceStr = SecureRandom.uuid.tr('-', '')
+          params = {
+            appId: r['appid'],
+            timeStamp: timeStamp,
+            nonceStr: nonceStr,
+            package: "prepay_id=#{r['prepay_id']}",
+            signType: 'MD5'
+          }
+          paySign = WxPay::Sign.generate(params)
+          JcLog.create(:content => paySign)
+          { "prepay_id" => r["prepay_id"], "timeStamp" => timeStamp, "nonceStr" => nonceStr, "paySign" => paySign, "return_code" => r["return_code"], "return_msg" => r["return_msg"] }
         else
           { "return_code" => "FAIL", "return_msg" => r["return_msg"] }
         end
