@@ -1,6 +1,6 @@
 class Order < ActiveRecord::Base
   extend Enumerize  #pending 订单新建状态  settled订单结算状态  completed 订单完成支付  canceled订单取消
-  enumerize :status,     in: [:pending, :settled, :completed, :canceled], default: :pending
+  enumerize :status,     in: [:pending, :settled, :payed, :confirmed, :express, :completed, :canceled], default: :pending
   enumerize :pay_method, in: [:online, :offline], default: :online
 
   belongs_to :shop
@@ -31,32 +31,48 @@ class Order < ActiveRecord::Base
     true
   end
 
-  def pending?
-    status == 'pending'
-  end
-
   def settled
     success = false
-    if status.pending?
+    if status.pending? && !takeout
       success = update_attributes(:status => 'settled')
     end
     success
   end
 
-  def settled?
-    status == 'settled'
-  end
-
-  def completed
+  def payed
     success = false
-    if status.settled?
-      success = update_attributes(:status => 'completed')
+    if status.pending? && takeout && pay_method == 'online'
+      success = update_attributes(:status => 'payed')
     end
     success
   end
 
-  def completed?
-    status == 'completed'
+  def confirmed
+    success = false
+    if takeout
+      if pay_method == 'online' && status.payed?
+        success = update_attributes(:status => 'confirmed')
+      elsif pay_method == 'offline' && status.pending?
+        success = update_attributes(:status => 'confirmed')
+      end
+    end
+    success
+  end
+
+  def express
+    success = false
+    if takeout && status.express?
+      success = update_attributes(:status => 'express')
+    end
+    success
+  end
+
+  def completed
+    success = false
+    if status.settled? || status.express?
+      success = update_attributes(:status => 'completed')
+    end
+    success
   end
 
   def canceled
@@ -65,10 +81,6 @@ class Order < ActiveRecord::Base
       success = update_attributes(:status => 'canceled')
     end
     success
-  end
-
-  def canceled?
-    status == 'canceled'
   end
 
 end

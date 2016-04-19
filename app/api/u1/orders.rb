@@ -121,7 +121,7 @@ module U1
       delete 'products' do
         @order_product = OrderProduct.find_by_id(params[:order_product_id])
         error!({ error: "你不能操作该订单！" }, 400) if @order_product.order.user_id != current_user.id
-        error!({ error: "菜色不存在或者已经烹煮！" }, 400) if @order_product.blank? || !@order_product.pending?
+        error!({ error: "菜色不存在或者已经烹煮！" }, 400) if @order_product.blank? || !@order_product.status.pending?
 
         if @order_product.destroy
           { msg: 'ok' }
@@ -152,7 +152,7 @@ module U1
         error!({ error: "你不能操作该订单！" }, 400) if @order.user_id != current_user.id
         error!({ error: "订单不存在或者还有菜色未完成！" }, 400) if @order.blank? || @order.pendings_count > 0
 
-        if @order.pending? && @order.settled
+        if @order.status.pending? && @order.settled
           { msg: 'ok', status: @order.status, status_text: @order.status.text }
         else
           error!({ error: "订单已经结账！" }, 400)

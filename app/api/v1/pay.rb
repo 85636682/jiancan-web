@@ -11,7 +11,7 @@ module V1
         authenticate!
         @order = Order.find_by_id(params[:order_id])
         error!({ error: "订单不存在！" }, 400) if @order.blank?
-        error!({ error: "订单已完成支付！"}, 400) if @order.completed?
+        error!({ error: "订单已完成支付！"}, 400) if @order.status.completed?
         if params[:platform] == 'wechat'
           fields = {
             appid: '',

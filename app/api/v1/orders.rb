@@ -81,7 +81,7 @@ module V1
         if @order.blank? || @order.pendings_count > 0
           error!({ error: "订单不存在或者还有菜色未完成！" }, 400)
         else
-          if @order.pending? && @order.settled
+          if @order.status.pending? && @order.settled
             { msg: 'ok', status: @order.status, status_text: @order.status.text }
           else
             error!({ error: "订单已经结账！" }, 400)
@@ -98,7 +98,7 @@ module V1
         authenticate!
         counter!
         @order = Order.find_by_id(params[:order_id])
-        if @order.blank? || !@order.settled?
+        if @order.blank? || !@order.status.settled?
           error!({ error: "订单不存在或者还有没有结账！" }, 400)
         else
           if @order.update_attributes(:status => "completed", :collect => params[:collect])

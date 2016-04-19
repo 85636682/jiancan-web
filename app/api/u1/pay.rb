@@ -10,7 +10,7 @@ module U1
         authenticate!
         @order = Order.find_by_id(params[:order_id])
         error!({ error: "订单不存在！" }, 400) if @order.blank?
-        error!({ error: "订单已支付！"}, 400) if @order.completed?
+        error!({ error: "订单已支付！"}, 400) if @order.status.completed?
         error!({ error: "用户未授权！"}, 400) if current_user.weixin_open_id.blank?
         params = {
           body: "在#{@order.shop.name}消费了#{@order.total_price}元",
@@ -44,7 +44,6 @@ module U1
             signType: 'MD5'
           }
           paySign = WxPay::Sign.generate(params)
-          JcLog.create(:content => paySign)
           { "prepay_id" => r["prepay_id"], "timeStamp" => timeStamp, "nonceStr" => nonceStr, "paySign" => paySign, "return_code" => r["return_code"], "return_msg" => r["return_msg"] }
         else
           { "return_code" => "FAIL", "return_msg" => r["return_msg"] }
