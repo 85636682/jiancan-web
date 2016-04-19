@@ -8,7 +8,6 @@ Rails.application.routes.draw do
       get :activity
       get :advertisement
       get :authorize
-      post :pay_notify
     end
   end
 
@@ -31,6 +30,7 @@ Rails.application.routes.draw do
   get 'welcome/index'
   get 'welcome/apply'
   post 'welcome/applied'
+  post "weixin/pay_notify" => "weixins#pay_notify"
 
   root :to => 'welcome#index'
 
