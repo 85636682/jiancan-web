@@ -1,7 +1,7 @@
 class WeixinsController < ApplicationController
   layout 'wechat'
 
-  before_action :create_wechat_client
+  before_action :create_wechat_client, except: [:pay_notify]
   before_action :invoke_wx_auth, only: [:activity, :advertisement, :authorize]
   before_action :get_wechat_sns, only: [:activity, :advertisement, :authorize], if: :is_wechat_brower?
 
@@ -53,7 +53,7 @@ class WeixinsController < ApplicationController
       unless @order.blank?
         if @order.status.pending?
           @order.payed
-          @order.collect = result["total_fee"]
+          @order.update_attributes(:collect => result["total_fee"])
         end
       end
       render :xml => { return_code: "SUCCESS" }.to_xml(root: 'xml', dasherize: false)
