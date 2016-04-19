@@ -1,4 +1,4 @@
-class WeixinsController < ApplicationController
+class WechatsController < ApplicationController
   def show
   end
 
