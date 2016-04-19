@@ -51,7 +51,7 @@ class WeixinsController < ApplicationController
     if WechatPay::Sign.verify?(result)
       @order = Order.find_by_id(result["out_trade_no"])
       unless @order.blank?
-        unless @order.status.pending?
+        if @order.status.pending?
           @order.payed
           @order.collect = result["total_fee"]
         end
