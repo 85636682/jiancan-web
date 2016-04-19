@@ -48,7 +48,7 @@ class WeixinsController < ApplicationController
 
   def pay_notify
     result = Hash.from_xml(request.body.read)["xml"]
-    if WechatPay::Sign.verify?(result)
+    if WxPay::Sign.verify?(result)
       @order = Order.find_by_id(result["out_trade_no"])
       unless @order.blank?
         if @order.status.pending?
