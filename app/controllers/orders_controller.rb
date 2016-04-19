@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
   def pay_notify
     result = Hash.from_xml(request.body.read)["xml"]
     if WxPay::Sign.verify?(result)
-      @order = Order.find_by_id(result["out_trade_no"])
+      @order = Order.find_by_sn(result["out_trade_no"])
       JcLog.create(:content => result)
       JcLog.create(:content => @order.id)
       unless @order.blank?
