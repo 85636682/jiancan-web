@@ -1,5 +1,7 @@
-class OrdersController < ActionController::Base
+class OrdersController < ApplicationController
   layout false
+
+  skip_before_filter :verify_authenticity_token
 
   def pay_notify
     result = Hash.from_xml(request.body.read)["xml"]
