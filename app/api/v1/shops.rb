@@ -49,6 +49,18 @@ module V1
         render @orders
       end
 
+      desc '返回店铺下所有外卖订单'
+      params do
+        requires :status, type: Symbol, values: [:pending, :settled, :completed, :canceled], default: :pending, desc: "pending 订单消费状态  settled订单结算状态  completed 订单完成支付  canceled订单取消"
+        optional :offset, type: Integer, default: 0
+        optional :limit,  type: Integer, default: 20, values: 1..150
+      end
+      get 'orders/takeout', each_serializer: OrderDetailSerializer, root: false do
+        authenticate!
+        @orders = Order.where("shop_id = ? AND status = ? AND takeout = true", @current_worker.shop_id, params[:status]).offset(params[:offset]).limit(params[:limit]).order("created_at DESC")
+        render @orders
+      end
+
       desc '获取店铺下所有订单的菜色'
       params do
         requires :status, type: Symbol, values: [:pending, :cooking, :finished, :canceled], default: :pending, desc: "订单菜色的状态"
