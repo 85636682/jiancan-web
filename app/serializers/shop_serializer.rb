@@ -1,6 +1,7 @@
 class ShopSerializer < BaseSerializer
   attributes :id, :name, :street, :mobile, :province, :city, :district, :avatar,
-             :created_at, :updated_at, :meals, :meals_texts, :avatar80x80
+             :created_at, :updated_at, :meals, :meals_texts, :avatar80x80,
+             :orders_by_month_count
 
   def avatar
     object.avatar.url("320xAuto")
@@ -12,6 +13,10 @@ class ShopSerializer < BaseSerializer
 
   def meals_texts
 
+  end
+
+  def orders_by_month_count
+    object.orders.by_month.count
   end
 
   def created_at
