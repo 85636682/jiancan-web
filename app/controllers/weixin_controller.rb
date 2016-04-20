@@ -39,9 +39,9 @@ class WeixinsController < ApplicationController
 
   def authorize
     if params[:request_url] == 'check'
-      url = "http://jiancan.me/wx.html#!/authorize?request_url=#{params[:request_url]}&shop_id=#{params[:shop_id]}&access_token=#{@user.private_token}"
+      url = "http://jiancan.me/#!/authorize?request_url=#{params[:request_url]}&shop_id=#{params[:shop_id]}&access_token=#{@user.private_token}"
     else
-      url = "http://jiancan.me/wx.html#!/authorize?request_url=#{params[:request_url]}&access_token=#{@user.private_token}"
+      url = "http://jiancan.me/#!/authorize?request_url=#{params[:request_url]}&access_token=#{@user.private_token}"
     end
     redirect_to url
   end
