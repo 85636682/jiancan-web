@@ -37,6 +37,7 @@ module M1
           optional :mobile, type: String, desc: "店铺电话"
           optional :meals, type: Array[String], desc: ""
           optional :avatar, type: Hash, desc: "店铺头像"
+          optional :full_free_courier, type: Integer, desc: "满额免运费"
         end
       end
       put 'one' do
