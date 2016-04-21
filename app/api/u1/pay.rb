@@ -46,7 +46,7 @@ module U1
           paySign = WxPay::Sign.generate(params)
           { "prepay_id" => r["prepay_id"], "timeStamp" => timeStamp, "nonceStr" => nonceStr, "paySign" => paySign, "return_code" => r["return_code"], "return_msg" => r["return_msg"] }
         else
-          { "return_code" => "FAIL", "return_msg" => r["return_msg"] }
+          { "return_code" => r["return_code"], "return_msg" => r["return_msg"], "result_code" => r["result_code"], "err_code" => r["err_code"], "err_code_des" => r["err_code_des"] }
         end
       end
 
