@@ -19,6 +19,10 @@ class Order < ActiveRecord::Base
     self.order_products.where("status = 'pending' OR status = 'cooking'").count
   end
 
+  def total_fee
+    total_price + express_charge
+  end
+
   after_create do
     Order.notify_order_created(id)
   end
