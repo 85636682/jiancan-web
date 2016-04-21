@@ -48,6 +48,7 @@ module U1
           JcLog.create(:content => { "prepay_id" => r["prepay_id"], "timeStamp" => timeStamp, "nonceStr" => nonceStr, "paySign" => paySign, "return_code" => r["return_code"], "return_msg" => r["return_msg"] })
           { "prepay_id" => r["prepay_id"], "timeStamp" => timeStamp, "nonceStr" => nonceStr, "paySign" => paySign, "return_code" => r["return_code"], "return_msg" => r["return_msg"] }
         else
+          JcLog.create(:content => { "return_code" => "FAIL", "return_msg" => r["return_msg"] })
           { "return_code" => "FAIL", "return_msg" => r["return_msg"] }
         end
       end
