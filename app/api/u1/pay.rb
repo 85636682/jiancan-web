@@ -15,7 +15,7 @@ module U1
         params = {
           body: "在#{@order.shop.name}消费了#{@order.total_fee}元",
           out_trade_no: @order.sn,
-          total_fee: (@order.total_fee * 100).to_i,
+          total_fee: (@order.total_price * 100).to_i,
           spbill_create_ip: '120.55.164.64',
           notify_url: 'http://www.jiancan.me/pay_notify',
           trade_type: 'JSAPI', # could be "JSAPI", "NATIVE" or "APP",
