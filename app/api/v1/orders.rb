@@ -84,7 +84,7 @@ module V1
           if @order.confirmed
             { msg: 'ok', status: @order.status, status_text: @order.status.text }
           else
-            error!({ error: "订单已经结账！" }, 400)
+            error!({ error: "订单未支付或已确认！" }, 400)
           end
         end
       end
@@ -102,7 +102,7 @@ module V1
           if @order.express
             { msg: 'ok', status: @order.status, status_text: @order.status.text }
           else
-            error!({ error: "订单已经结账！" }, 400)
+            error!({ error: "订单还未配送！" }, 400)
           end
         end
       end

@@ -65,7 +65,7 @@ class Order < ActiveRecord::Base
 
   def express
     success = false
-    if takeout && status.express?
+    if takeout && status.confirmed?
       success = update_attributes(:status => 'express')
     end
     success
