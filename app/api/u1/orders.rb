@@ -63,8 +63,8 @@ module U1
               end
             end
             total_price = @order.total_price + amount
-            @order.update_attributes!(:total_price => total_price)
-
+            express_charge = total_price >= @order.shop.full_free_courier ? 0 : 2.5
+            @order.update_attributes!(:total_price => total_price, :express_charge => express_charge)
           end
           render @order
         rescue Exception => e
