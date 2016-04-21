@@ -37,7 +37,7 @@ module V1
         @products = Product.where(:shop_id => current_worker.shop_id).offset(params[:offset]).limit(params[:limit]).order("id ASC")
       end
 
-      desc '返回店铺下所有订单'
+      desc '返回店铺下所有堂食订单'
       params do
         requires :status, type: Symbol, values: [:pending, :settled, :completed, :canceled], default: :pending, desc: "pending 订单消费状态  settled订单结算状态  completed 订单完成支付  canceled订单取消"
         optional :offset, type: Integer, default: 0
@@ -45,7 +45,7 @@ module V1
       end
       get 'orders', each_serializer: OrderDetailSerializer, root: false do
         authenticate!
-        @orders = Order.where("shop_id = ? AND status = ?", @current_worker.shop_id, params[:status]).offset(params[:offset]).limit(params[:limit]).order("created_at DESC")
+        @orders = Order.where("shop_id = ? AND status = ? AND takeout = false", @current_worker.shop_id, params[:status]).offset(params[:offset]).limit(params[:limit]).order("created_at DESC")
         render @orders
       end
 
