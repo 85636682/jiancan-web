@@ -51,7 +51,7 @@ module V1
 
       desc '返回店铺下所有外卖订单'
       params do
-        requires :status, type: Symbol, values: [:pending, :settled, :completed, :canceled], default: :pending, desc: "pending 订单消费状态  settled订单结算状态  completed 订单完成支付  canceled订单取消"
+        requires :status, type: Symbol, values: [:pending, :payed, :confirmed, :express, :completed, :canceled], default: :pending, desc: "pending 订单消费状态  settled订单结算状态  completed 订单完成支付  canceled订单取消"
         optional :offset, type: Integer, default: 0
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
