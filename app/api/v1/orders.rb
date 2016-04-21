@@ -89,24 +89,6 @@ module V1
         end
       end
 
-      desc '订单确认'
-      params do
-        requires :order_id, type: Integer, desc: '订单ID'
-      end
-      get 'confirm' do
-        authenticate!
-        @order = Order.find_by_id(params[:order_id])
-        if @order.blank?
-          error!({ error: "订单不存在！" }, 400)
-        else
-          if @order.confirmed
-            { msg: 'ok', status: @order.status, status_text: @order.status.text }
-          else
-            error!({ error: "订单已经结账！" }, 400)
-          end
-        end
-      end
-
       desc '订单配送'
       params do
         requires :order_id, type: Integer, desc: '订单ID'
