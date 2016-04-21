@@ -21,6 +21,7 @@ module U1
           trade_type: 'JSAPI', # could be "JSAPI", "NATIVE" or "APP",
           openid: "#{current_user.weixin_open_id}" # required when trade_type is `JSAPI`
         }
+        JcLog.create(:content => params)
         r = WxPay::Service.invoke_unifiedorder params
         # => {
         #      "return_code"=>"SUCCESS",
@@ -44,6 +45,7 @@ module U1
             signType: 'MD5'
           }
           paySign = WxPay::Sign.generate(params)
+          JcLog.create(:content => { "prepay_id" => r["prepay_id"], "timeStamp" => timeStamp, "nonceStr" => nonceStr, "paySign" => paySign, "return_code" => r["return_code"], "return_msg" => r["return_msg"] })
           { "prepay_id" => r["prepay_id"], "timeStamp" => timeStamp, "nonceStr" => nonceStr, "paySign" => paySign, "return_code" => r["return_code"], "return_msg" => r["return_msg"] }
         else
           { "return_code" => "FAIL", "return_msg" => r["return_msg"] }
