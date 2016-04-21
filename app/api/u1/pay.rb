@@ -44,10 +44,8 @@ module U1
             signType: 'MD5'
           }
           paySign = WxPay::Sign.generate(params)
-          JcLog.create(:content => { "prepay_id" => r["prepay_id"], "timeStamp" => timeStamp, "nonceStr" => nonceStr, "paySign" => paySign, "return_code" => r["return_code"], "return_msg" => r["return_msg"] })
           { "prepay_id" => r["prepay_id"], "timeStamp" => timeStamp, "nonceStr" => nonceStr, "paySign" => paySign, "return_code" => r["return_code"], "return_msg" => r["return_msg"] }
         else
-          JcLog.create(:content => r)
           { "return_code" => "FAIL", "return_msg" => r["return_msg"] }
         end
       end
