@@ -24,6 +24,7 @@ module U1
         @comment = Comment.new(params[:comment])
         @comment.user_id = current_user.id
         if @comment.save
+          @comment.commentable.comment_on if params[:comment][:commentable_type] == 'OrderProduct'
           render @comment
         else
           error!({ error: "留言失败！" }, 400)

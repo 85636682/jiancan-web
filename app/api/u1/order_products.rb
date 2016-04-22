@@ -6,7 +6,7 @@ module U1
       end
       get '', each_serializer: OrderProductSerializer, root: false do
         authenticate!
-        OrderProduct.joins(:order).where('orders.user_id' => current_user.id).where('orders.status' => 'completed').order("created_at DESC")
+        OrderProduct.where(:commented => false).joins(:order).where('orders.user_id' => current_user.id).where('orders.status' => 'completed').order("created_at DESC")
       end
 
       params do
