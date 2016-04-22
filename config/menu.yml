@@ -12,16 +12,16 @@ button:
     key:  "BADGE_IN_OUT"
    -
     type: "click"
-    name: "年假余额"
+    name: "我的订单"
     key:  "ANNUAL_LEAVE"
  -
    name: "我的"
    sub_button:
     -
      type: "view"
-     name: "绑定手机"
+     name: "下载APP"
      url:  "http://jiancan.me/"
     -
      type: "view"
-     name: "下载APP"
-     url:  "http://jiancan.me/"
+     name: "我是商家"
+     url:  "http://jiancan.me/welcome/apply"
