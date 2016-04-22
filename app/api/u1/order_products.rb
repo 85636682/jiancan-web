@@ -5,7 +5,7 @@ module U1
       end
       get '', each_serializer: OrderProductSerializer, root: false do
         authenticate!
-        OrderProduct.join(:orders).where("orders.user_id = ?", current_user.id)
+        OrderProduct.joins(:orders).where('orders.user_id' => current_user.id)
       end
     end
   end
