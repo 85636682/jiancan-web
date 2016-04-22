@@ -10,7 +10,7 @@ module U1
         authenticate!
         @order = Order.find_by_id(params[:order_id])
         error!({ error: "订单不存在！" }, 400) if @order.blank?
-        error!({ error: "订单已支付！"}, 400) if @order.status.completed?
+        error!({ error: "订单已支付或货到付款！"}, 400) if @order.can_pay?
         error!({ error: "用户未授权！"}, 400) if current_user.weixin_open_id.blank?
         params = {
           body: "在#{@order.shop.name}消费了#{@order.total_fee}元",
