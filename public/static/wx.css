@@ -197,11 +197,11 @@ i.icon-profile-coins, i.icon-service-phone {
 
 .order_product_list_bd .weui_media_box.weui_media_appmsg .weui_media_hd {
   width: 100px;
-  height: 60px;
+  height: 100px;
 }
 
 .order_product_list_bd .weui_media_box.weui_media_appmsg .weui_media_bd {
-  height: 60px;
+  height: 100px;
 }
 
 .product_header {
