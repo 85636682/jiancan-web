@@ -58,13 +58,14 @@ module U1
                   quantity = order_product.quantity + value.to_i
                   order_product.update_attributes!(:quantity => quantity)
                 end
-                order_product.push_to_kitchen(OrderProductSerializer.new(order_product, root: false).as_json)
                 amount += product.price.to_i * value.to_i
               end
             end
             total_price = @order.total_price + amount
             express_charge = total_price >= @order.shop.full_free_courier ? 0 : 2.5
             @order.update_attributes!(:total_price => total_price, :express_charge => express_charge)
+
+            @order.push_to_kitchen(OrderSerializer.new(@order, root: false).as_json)
           end
           render @order
         rescue Exception => e
