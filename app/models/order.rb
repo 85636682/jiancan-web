@@ -106,18 +106,18 @@ class Order < ActiveRecord::Base
             alert: '有新的外卖订单了，请及时查看！',
             android: JPush::AndroidNotification.build(
               alert: '有新的外卖订单了，请及时查看！',
-              extras:  { "sn" => order.sn }
+              extras:  { "sn" => sn }
             ),
             ios: JPush::IOSNotification.build(
               alert: '有新的外卖订单了，请及时查看！',
-              extras: { "sn" => order.sn }
+              extras: { "sn" => sn }
             )
           ),
           message: JPush::Message.build(
             msg_content: "message content test",
             title: "message title test",
             content_type: "message content type test",
-            extras: { "sn" => order.sn }
+            extras: { "sn" => sn }
           ),
           audience: JPush::Audience.build(_alias: receiver)
         )
