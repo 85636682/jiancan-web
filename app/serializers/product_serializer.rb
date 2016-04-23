@@ -1,6 +1,7 @@
 class ProductSerializer < BaseSerializer
   attributes :id, :name, :shop_id, :avatar, :created_at, :updated_at,
-             :category_id, :sales_volume, :price, :avatar80x80, :orders_by_month_count
+             :category_id, :sales_volume, :price, :avatar80x80, :orders_by_month_count,
+             :recommend
 
   has_one :category
   has_many :comments, serializer: CommentSerializer

@@ -25,6 +25,7 @@ module M1
         requires :category, type: Hash do
           optional :name, type: String
           optional :avatar, type: Hash
+          optional :sort, type: Integer
         end
       end
       put 'one' do

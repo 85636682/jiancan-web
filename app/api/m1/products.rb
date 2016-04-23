@@ -30,6 +30,7 @@ module M1
           optional :price, type: Float
           optional :avatar, type: Hash
           optional :category_id, type: Integer
+          optional :recommend, type: Boolean
         end
       end
       put 'one' do

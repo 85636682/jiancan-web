@@ -6,4 +6,5 @@ class Category < ActiveRecord::Base
   attr_accessor :uploader_secure_token
 
   validates :name, :shop_id, presence: true
+
 end
