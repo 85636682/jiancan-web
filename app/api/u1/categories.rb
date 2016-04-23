@@ -21,7 +21,7 @@ module U1
         requires :shop_id, type: Integer, desc: '商铺的Id'
       end
       get '', each_serializer: CategorySerializer, root: false do
-        @categories = Category.where(:shop_id => params[:shop_id]).order("created_at ASC")
+        @categories = Category.where(:shop_id => params[:shop_id]).order("sort ASC")
       end
     end
   end
