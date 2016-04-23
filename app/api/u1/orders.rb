@@ -65,7 +65,7 @@ module U1
             express_charge = total_price >= @order.shop.full_free_courier ? 0 : 2.5
             @order.update_attributes!(:total_price => total_price, :express_charge => express_charge)
 
-            @order.push_to_kitchen(OrderSerializer.new(@order, root: false).as_json)
+            @order.push_to_waiter(OrderSerializer.new(@order, root: false).as_json)
           end
           render @order
         rescue Exception => e
