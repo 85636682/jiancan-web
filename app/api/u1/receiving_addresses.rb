@@ -35,7 +35,7 @@ module U1
       params do
         requires :address_id, type: Integer
       end
-      put 'default', serializer: ReceivingAddressSerializer, root: false do
+      put 'default', each_serializer: ReceivingAddressSerializer, root: false do
         authenticate!
         begin
           ActiveRecord::Base.transaction do
