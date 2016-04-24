@@ -39,7 +39,8 @@ module U1
         authenticate!
         begin
           ActiveRecord::Base.transaction do
-            current_user.receiving_addresses.each do |address|
+            @receiving_addresses = current_user.receiving_addresses
+            @receiving_addresses.each do |address|
               if address.id == params[:address_id]
                 address.update_attributes(:defaulted => true)
               else
@@ -47,7 +48,7 @@ module U1
               end
             end
           end
-          { result_code: 'SUCCESS', result_msg: '设置成功！' }
+          render @receiving_addresses
         rescue Exception => e
           error!({ error: "默认地址设置失败！" }, 400)
         end
