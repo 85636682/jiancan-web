@@ -1,10 +1,9 @@
 class ProductDetailSerializer < BaseSerializer
   attributes :id, :name, :shop_id, :avatar, :created_at, :updated_at,
              :category_id, :sales_volume, :price, :avatar80x80, :orders_by_month_count,
-             :recommend
+             :recommend, :comments
 
   has_one :category
-  has_many :comments, serializer: CommentSerializer
 
   def avatar
     object.avatar.url("320xAuto")
@@ -12,6 +11,10 @@ class ProductDetailSerializer < BaseSerializer
 
   def avatar80x80
     object.avatar.url("80x80")
+  end
+
+  def comments
+    object.comments
   end
 
   def orders_by_month_count
