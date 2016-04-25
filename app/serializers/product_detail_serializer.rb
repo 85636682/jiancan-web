@@ -1,7 +1,10 @@
-class ProductSerializer < BaseSerializer
+class ProductDetailSerializer < BaseSerializer
   attributes :id, :name, :shop_id, :avatar, :created_at, :updated_at,
              :category_id, :sales_volume, :price, :avatar80x80, :orders_by_month_count,
              :recommend
+
+  has_one :category
+  has_many :order_products, serializer: OrderProductSerializer
 
   def avatar
     object.avatar.url("320xAuto")

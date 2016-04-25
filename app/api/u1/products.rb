@@ -5,7 +5,7 @@ module U1
       params do
         requires :product_id, type: Integer, desc: "商品id"
       end
-      get 'one', serializer: ProductSerializer, root: false do
+      get 'one', serializer: ProductDetailSerializer, root: false do
         @product = Product.find_by_id(params[:product_id])
       end
     end
