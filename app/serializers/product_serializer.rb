@@ -4,7 +4,7 @@ class ProductSerializer < BaseSerializer
              :recommend
 
   has_one :category
-  has_many :comments, serializer: CommentSerializer
+  has_many :order_products, serializer: OrderProductSerializer
 
   def avatar
     object.avatar.url("320xAuto")
@@ -16,6 +16,10 @@ class ProductSerializer < BaseSerializer
 
   def orders_by_month_count
     object.order_products.by_month.count
+  end
+
+  def comments
+    object.joins(:order_products).where()
   end
 
   def created_at

@@ -6,7 +6,7 @@ class OrderProduct < ActiveRecord::Base
 
   belongs_to :order
   belongs_to :product
-  has_many :comments, as: :commentable
+  has_one :comment, as: :commentable
 
   def self.find_quantity(product_id, order_id)
     where(:product_id => product_id, :order_id => order_id).first.quantity

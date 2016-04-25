@@ -3,6 +3,7 @@ class OrderProductSerializer < BaseSerializer
              :status_text, :created_at, :updated_at
 
   has_one :product, serializer: ProductSerializer
+  has_one :comment, serializer: CommentSerializer
 
   def order_sn
     object.order.sn
