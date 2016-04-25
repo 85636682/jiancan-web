@@ -18,10 +18,6 @@ class ProductSerializer < BaseSerializer
     object.order_products.by_month.count
   end
 
-  def comments
-    object.joins(:order_products).where()
-  end
-
   def created_at
     DateTime.parse(object.created_at.iso8601).strftime('%Y年%m月%d日 %H:%M')
   end
