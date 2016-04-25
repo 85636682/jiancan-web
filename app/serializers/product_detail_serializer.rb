@@ -4,7 +4,7 @@ class ProductDetailSerializer < BaseSerializer
              :recommend
 
   has_one :category
-  has_many :order_products, serializer: OrderProductSerializer
+  has_many :comments, serializer: CommentSerializer
 
   def avatar
     object.avatar.url("320xAuto")
