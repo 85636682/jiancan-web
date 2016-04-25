@@ -1,5 +1,6 @@
 class CommentSerializer < BaseSerializer
-  attributes :id, :content, :user_id, :commentable_id, :commentable_type
+  attributes :id, :content, :user_id, :commentable_id, :commentable_type,
+             :created_at, :updated_at
 
   has_one :user, serializer: UserSerializer
 
