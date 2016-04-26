@@ -1,6 +1,16 @@
 module U1
   class Activities < Grape::API
     resource :activities do
+
+      desc "返回所有活动"
+      params do
+        optional :offset, type: Integer, default: 0
+        optional :limit,  type: Integer, default: 20, values: 1..150
+      end
+      get '', each_serializer: ActivitySerializer, root: false  do
+        @activities = Activity.all.offset(params[:offset]).limit(params[:limit]).order("created_at DESC")
+      end
+
       desc "活动点赞"
       params do
         requires :activity_id, type: Integer, desc: "活动id"
