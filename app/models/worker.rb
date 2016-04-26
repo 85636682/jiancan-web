@@ -8,7 +8,7 @@ class Worker < ActiveRecord::Base
   has_many :orders
 
   validates :name, :login, presence: true
-  validates :name, :login, uniqueness: true
+  validates :login, uniqueness: true
 
   def pusher_id
     "#{department}_#{id}"
