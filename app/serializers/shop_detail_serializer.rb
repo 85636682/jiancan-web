@@ -8,7 +8,7 @@ class ShopDetailSerializer < BaseSerializer
   has_many :comments, serializer: CommentSerializer
   has_one :merchant, serializer: MerchantSerializer
   has_many :products, key: :recommend_products, serializer: ProductSerializer do
-    object.products.where(:recommend => true)
+    where(:recommend => true)
   end
 
   def avatar
