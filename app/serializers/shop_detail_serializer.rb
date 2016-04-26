@@ -7,8 +7,10 @@ class ShopDetailSerializer < BaseSerializer
   has_many :rooms, serializer: RoomSerializer
   has_many :comments, serializer: CommentSerializer
   has_one :merchant, serializer: MerchantSerializer
-  has_many :products, key: :recommend_products, serializer: ProductSerializer do
-    where(:recommend => true)
+  has_many :products, serializer: ProductSerializer
+
+  def products
+    object.products.where(:recommend => true)
   end
 
   def avatar
