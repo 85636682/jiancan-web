@@ -1,12 +1,15 @@
 class ShopDetailSerializer < BaseSerializer
   attributes :id, :name, :street, :mobile, :province, :city, :district, :avatar,
              :created_at, :updated_at, :meals, :meals_texts, :avatar80x80,
-             :orders_by_month_count, :full_free_courier, :recommend_products
+             :orders_by_month_count, :full_free_courier
 
   has_many :categories, serializer: CategorySerializer
   has_many :rooms, serializer: RoomSerializer
   has_many :comments, serializer: CommentSerializer
   has_one :merchant, serializer: MerchantSerializer
+  has_many :recommend_products, serializer: ProductSerializer do
+    object.products.where(:recommend => true)
+  end
 
   def avatar
     object.avatar.url("320xAuto")
@@ -18,10 +21,6 @@ class ShopDetailSerializer < BaseSerializer
 
   def meals_texts
 
-  end
-
-  def recommend_products
-    object.products.where(:recommend => true)
   end
 
   def orders_by_month_count
