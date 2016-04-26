@@ -3,6 +3,8 @@ class ProductSerializer < BaseSerializer
              :category_id, :sales_volume, :price, :avatar80x80, :orders_by_month_count,
              :recommend
 
+  has_one :category
+
   def avatar
     object.avatar.url("320xAuto")
   end
