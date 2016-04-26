@@ -4,6 +4,7 @@ class ActivitySerializer < BaseSerializer
 
   has_many :activity_users
   has_many :activity_products
+  has_one :shop, serializer: ShopSerializer
 
   def avatar
     object.avatar.url("80x80")
