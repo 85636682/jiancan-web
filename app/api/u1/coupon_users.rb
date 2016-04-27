@@ -22,7 +22,7 @@ module U1
       end
       post '', serializer: CouponUserSerializer, root: false do
         authenticate!
-        @coupon_user = current_user.coupon_users.where(coupon_id: params[:coupon_id], used: false).first
+        @coupon_user = CouponUser.find_by(user_id: current_user.id, coupon_id: params[:coupon_id], used: false)
         error!({ error: "你已经获取该优惠劵！" }, 400) unless @coupon_user.blank?
         @coupon_user = CouponUser.new(user_id: current_user.id,
                                       coupon_id: params[:coupon_id]).first
