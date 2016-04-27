@@ -139,6 +139,17 @@ module M1
         render @user_cards
       end
 
+      desc '返回店铺下所有会员卡'
+      params do
+        optional :offset, type: Integer, default: 0
+        optional :limit,  type: Integer, default: 20, values: 1..150
+      end
+      get 'coupons', each_serializer: CouponCardSerializer, root: false do
+        authenticate!
+        @coupons = Coupon.where(:shop_id => current_merchant.shop.id).offset(params[:offset]).limit(params[:limit]).order("id ASC")
+        render @coupons
+      end
+
       desc "店铺销售量分析"
       params do
 
