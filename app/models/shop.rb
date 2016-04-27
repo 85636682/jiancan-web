@@ -12,6 +12,7 @@ class Shop < ActiveRecord::Base
   has_one :shop_public_account
   has_many :comments, as: :commentable
   has_many :bookings
+  has_many :coupons
 
   mount_uploader :avatar, ImageUploader
   attr_accessor :uploader_secure_token
