@@ -40,7 +40,7 @@ module U1
       get 'check' do
         authenticate!
         @coupon_user = current_user.coupon_users.where(:coupon_id => params[:coupon_id], :used => false).first
-        if @coupon_user.blank?
+        unless @coupon_user.blank?
           { result_code: "SUCCESS" }
         else
           { result_code: "FAIL" }
