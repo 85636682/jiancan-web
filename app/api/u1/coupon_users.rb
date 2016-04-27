@@ -36,7 +36,7 @@ module U1
       params do
         requires :coupon_id, type: Integer, desc: "coupon_id"
       end
-      get 'check', serializer: CouponUserSerializer, root: false do
+      get 'check' do
         authenticate!
         @coupon_user = current_user.coupon_users.where(:coupon_id => params[:coupon_id], :used => false).first
         if @coupon_user.blank?
