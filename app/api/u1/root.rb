@@ -26,5 +26,6 @@ module U1
     mount U1::Pay
     mount U1::OrderProducts
     mount U1::Coupons
+    mount U1::CouponUsers
   end
 end
