@@ -6,7 +6,7 @@ module M1
       params do
         requires :coupon, type: Hash do
           requires :title, type: String
-          requires :details, type: Integer
+          requires :details, type: String
           requires :original_price, type: Float
           requires :preferential_price, type: Float
         end
