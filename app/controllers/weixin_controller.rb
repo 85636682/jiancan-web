@@ -41,6 +41,8 @@ class WeixinsController < ApplicationController
     if params[:request_url] == 'check'
       shop = Shop.find(params[:shop_id])
       url = "http://jiancan.me/wx.html#!/authorize?request_url=#{params[:request_url]}&shop_id=#{params[:shop_id]}&express=#{shop.full_free_courier}&access_token=#{@user.private_token}"
+    elsif params[:request_url] == 'coupon'
+      url = "http://jiancan.me/wx.html#!/authorize?request_url=#{params[:request_url]}&coupon_id=#{params[:coupon_id]}&access_token=#{@user.private_token}"
     else
       url = "http://jiancan.me/wx.html#!/authorize?request_url=#{params[:request_url]}&access_token=#{@user.private_token}"
     end
