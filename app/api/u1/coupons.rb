@@ -8,7 +8,6 @@ module U1
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
       get '', each_serializer: CouponSerializer, root: false do
-        authenticate!
         @coupons = Coupon.all.offset(params[:offset]).limit(params[:limit]).order("coupon_users_count DESC")
         render @coupons
       end
