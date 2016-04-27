@@ -1,9 +1,9 @@
-IMAGE_UPLOADER_ALLOW_IMAGE_VERSION_NAMES = %(80x80 320xAuto)
+IMAGE_UPLOADER_ALLOW_IMAGE_VERSION_NAMES = %(80x80 300x300 500x500 800x800 320xAuto)
 class BaseUploader < CarrierWave::Uploader::Base
   def store_dir
     "#{model.class.to_s.underscore}/#{mounted_as}"
   end
-  
+
   def default_url
     "#{Setting.upyun_upload_url}/anonymousUser.jpg#{version_name}"
   end
