@@ -1,6 +1,6 @@
 class CouponSerializer < BaseSerializer
   attributes :id, :title, :details, :avatar, :original_price,
-             :preferential_price, :created_at, :updated_at
+             :preferential_price, :created_at, :updated_at, :coupon_users_count
 
   has_many :coupon_users, serializer: CouponUserSerializer
 
