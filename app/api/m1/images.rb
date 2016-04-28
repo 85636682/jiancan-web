@@ -6,7 +6,7 @@ module M1
         requires :imageable_id, type: Integer, desc: '对象id'
         requires :imageable_type, type: String, desc: '对象名'
       end
-      get '', each_serializer: imageSerializer, root: false do
+      get '', each_serializer: ImageSerializer, root: false do
         @images = Image.where(imageable_id: params[:imageable_id], imageable_type: params[:imageable_type])
       end
 
@@ -18,7 +18,7 @@ module M1
           requires :imageable_type, type: String, desc: '对象名'
         end
       end
-      post '', serializer: imageSerializer, root: false do
+      post '', serializer: ImageSerializer, root: false do
         authenticate!
         @image = Image.new(params[:image])
         if @image.save
