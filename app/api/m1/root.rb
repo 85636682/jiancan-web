@@ -22,5 +22,6 @@ module M1
     mount M1::ShopAdvertisements
     mount M1::UserCards
     mount M1::Coupons
+    mount M1::Images
   end
 end
