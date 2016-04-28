@@ -1,5 +1,5 @@
-class ActivityProductSerializer < BaseSerializer
-  attributes :id, :activity_id, :product_id, :amount, :created_at, :updated_at
+class CouponProductSerializer < BaseSerializer
+  attributes :id, :coupon_id, :product_id, :amount, :created_at, :updated_at
 
   has_one :product
 

@@ -61,9 +61,44 @@ module M1
       params do
         requires :coupon_id, type: Integer, desc: "优惠卷id"
       end
-      get 'one', each_serializer: CouponSerializer, root: false do
+      get 'one', each_serializer: CouponDetailSerializer, root: false do
         authenticate!
         @coupon = Coupon.find_by_id(params[:coupon_id])
+      end
+
+      desc "添加活动商品"
+      params do
+        requires :coupon_id, type: Integer, desc: '优惠劵的id'
+        requires :products, type: String, desc: '商品id数组'
+      end
+      post "products", each_serializer: CouponDetailSerializer, root: false do
+        authenticate!
+        @coupon = Coupon.find_by_id(params[:coupon_id])
+        if @coupon.blank?
+          error!({ error: "优惠劵不存在！" }, 400)
+        else
+          begin
+            ActiveRecord::Base.transaction do
+              params[:products].split(',').each do |value|
+                next if value.to_i < 1
+                product = Product.find_by_id(value)
+                if not product.blank?
+                  coupon_product = CouponProduct.where(:coupon_id => @coupon.id, :product_id => product.id).first
+                  if coupon_product.blank?
+                    coupon_product = CouponProduct.create!(:coupon_id => @coupon.id, :product_id => product.id, :amount => 1)
+                  else
+                    amount = coupon_product.amount + 1
+                    coupon_product.update_attributes!(:amount => amount)
+                  end
+                end
+              end
+            end
+            render @coupon
+          rescue Exception => e
+            error!({ error: "商品失效，导致添加失败！" }, 400)
+          end
+
+        end
       end
 
     end

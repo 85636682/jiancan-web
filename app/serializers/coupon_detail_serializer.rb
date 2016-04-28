@@ -3,6 +3,7 @@ class CouponDetailSerializer < BaseSerializer
              :preferential_price, :created_at, :updated_at, :coupon_users_count
 
   has_many :coupon_users, serializer: CouponUserSerializer
+  has_many :coupon_products, serializer: CouponProductSerializer
   has_one :shop, serializer: ShopSerializer
 
   def avatar
