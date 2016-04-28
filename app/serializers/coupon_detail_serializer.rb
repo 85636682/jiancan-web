@@ -2,7 +2,7 @@ class CouponDetailSerializer < BaseSerializer
   attributes :id, :shop_id, :title, :details, :avatar, :avatar80x80, :original_price,
              :preferential_price, :created_at, :updated_at, :coupon_users_count
 
-  
+  has_many :coupon_users, serializer: CouponUserSerializer
   has_one :shop, serializer: ShopSerializer
 
   def avatar
