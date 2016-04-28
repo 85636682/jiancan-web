@@ -1,4 +1,4 @@
-IMAGE_UPLOADER_ALLOW_IMAGE_VERSION_NAMES = %(80x80 300x300 500x500 800x800 320xAuto)
+IMAGE_UPLOADER_ALLOW_IMAGE_VERSION_NAMES = %(80x80 300x300 500x500 800x800 320xAuto 520xAuto 820xAuto)
 class BaseUploader < CarrierWave::Uploader::Base
   def store_dir
     "#{model.class.to_s.underscore}/#{mounted_as}"

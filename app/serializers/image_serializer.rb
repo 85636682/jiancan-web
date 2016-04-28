@@ -1,9 +1,17 @@
 class ImageSerializer < BaseSerializer
   attributes :id, :img, :commentable_id, :commentable_type,
-             :created_at, :updated_at, :img80x80
+             :created_at, :updated_at, :img80x80, :img520xAuto, :img820xAuto
 
   def img
     object.img.url("320xAuto")
+  end
+
+  def img520xAuto
+    object.img.url("520xAuto")
+  end
+
+  def img820xAuto
+    object.img.url("820xAuto")
   end
 
   def img80x80
