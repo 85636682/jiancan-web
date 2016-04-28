@@ -61,7 +61,7 @@ module M1
       params do
         requires :coupon_id, type: Integer, desc: "优惠卷id"
       end
-      get 'one', each_serializer: CouponDetailSerializer, root: false do
+      get 'one', serializer: CouponDetailSerializer, root: false do
         authenticate!
         @coupon = Coupon.find_by_id(params[:coupon_id])
       end
