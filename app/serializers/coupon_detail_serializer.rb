@@ -4,7 +4,8 @@ class CouponDetailSerializer < BaseSerializer
 
   has_many :coupon_users, serializer: CouponUserSerializer
   has_many :coupon_products, serializer: CouponProductSerializer
-  has_one :shop, serializer: ShopSerializer
+  has_one  :shop, serializer: ShopSerializer
+  has_many :images, serializer: ImageSerializer
 
   def avatar
     object.avatar.url("320xAuto")

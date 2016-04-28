@@ -7,4 +7,5 @@ class Coupon < ActiveRecord::Base
   has_many :users, :through => :coupon_users
   has_many :coupon_products
   has_many :products, :through => :coupon_products, :dependent => :destroy
+  has_many :images, :as => :imageable
 end
