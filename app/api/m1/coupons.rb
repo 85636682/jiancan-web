@@ -33,7 +33,7 @@ module M1
           optional :avatar, type: Hash
         end
       end
-      put 'one' do
+      put 'one', serializer: CouponDetailSerializer, root: false do
         @coupon = Coupon.find_by_id(params[:coupon_id])
         error!({ error: "优惠卷不存在！" }, 400) if @coupon.blank?
         if @coupon.update_attributes(params[:coupon])
@@ -71,7 +71,7 @@ module M1
         requires :coupon_id, type: Integer, desc: '优惠劵的id'
         requires :products, type: String, desc: '商品id数组'
       end
-      post "products", each_serializer: CouponDetailSerializer, root: false do
+      post "products", serializer: CouponDetailSerializer, root: false do
         authenticate!
         @coupon = Coupon.find_by_id(params[:coupon_id])
         if @coupon.blank?
