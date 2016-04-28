@@ -1,7 +1,7 @@
 class ShopSerializer < BaseSerializer
   attributes :id, :name, :street, :mobile, :province, :city, :district, :avatar,
              :created_at, :updated_at, :meals, :meals_texts, :avatar80x80,
-             :orders_by_month_count, :full_free_courier
+             :orders_by_month_count, :full_free_courier, :address
 
   def avatar
     object.avatar.url("320xAuto")
@@ -13,6 +13,10 @@ class ShopSerializer < BaseSerializer
 
   def meals_texts
 
+  end
+
+  def address
+    "#{ChinaCity.get(province)}#{ChinaCity.get(city)}#{ChinaCity.get(district)}#{street}"
   end
 
   def orders_by_month_count
