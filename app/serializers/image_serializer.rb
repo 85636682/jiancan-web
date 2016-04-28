@@ -1,5 +1,5 @@
 class ImageSerializer < BaseSerializer
-  attributes :id, :img, :commentable_id, :commentable_type,
+  attributes :id, :img, :imageable_id, :imageable_type,
              :created_at, :updated_at, :img80x80, :img520xAuto, :img820xAuto
 
   def img
