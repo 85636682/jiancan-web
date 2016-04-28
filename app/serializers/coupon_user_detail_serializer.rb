@@ -1,8 +1,8 @@
-class CouponUserSerializer < BaseSerializer
+class CouponUserDetailSerializer < BaseSerializer
   attributes :id, :coupon_id, :user_id, :used,
              :used_at, :created_at, :updated_at
 
-  has_one :coupon, serializer: CouponUserSerializer
+  has_one :coupon, serializer: CouponSerializer
   has_one :user, serializer: UserSerializer
 
   def used_at
