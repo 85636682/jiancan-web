@@ -1,6 +1,7 @@
 class CouponUserDetailSerializer < BaseSerializer
   attributes :id, :coupon_id, :user_id, :used,
-             :used_at, :created_at, :updated_at
+             :used_at, :created_at, :updated_at,
+             :random_code
 
   has_one :coupon, serializer: CouponSerializer
   has_one :user, serializer: UserSerializer
