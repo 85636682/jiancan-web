@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160428033513) do
+ActiveRecord::Schema.define(version: 20160501121456) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,10 +111,11 @@ ActiveRecord::Schema.define(version: 20160428033513) do
   create_table "coupon_users", force: :cascade do |t|
     t.integer  "coupon_id"
     t.integer  "user_id"
-    t.boolean  "used",       default: false
+    t.boolean  "used",        default: false
     t.datetime "used_at"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "random_code"
   end
 
   create_table "coupons", force: :cascade do |t|
