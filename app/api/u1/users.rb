@@ -126,6 +126,15 @@ module U1
         { msg:'ok' }
       end
 
+      desc "获取用户的优惠券"
+      params do
+      end
+      get 'coupon_users', each_serializer: CouponUserDetailSerializer, root: false do
+        authenticate!
+        @coupon_users = current_user.coupon_users.where(used: false).order("created_at DESC")
+        render @coupon_users
+      end
+
     end
   end
 end
