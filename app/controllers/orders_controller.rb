@@ -8,9 +8,8 @@ class OrdersController < ApplicationController
     if WxPay::Sign.verify?(result)
       @order = Order.find_by_sn(result["out_trade_no"])
       unless @order.blank?
-        if @order.status.pending?
-          @order.payed
-          @order.update_attributes(:collect => result["total_fee"])
+        if @order.can_pay?
+          @order.update_attributes(:status => 'pending', :collect => result["total_fee"])
         end
       end
       render :xml => { return_code: "SUCCESS" }.to_xml(root: 'xml', dasherize: false)

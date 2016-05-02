@@ -41,6 +41,7 @@ module U1
             @order.sn = Order.create_sn(params[:order][:shop_id])
             @order.total_price = 0
             @order.user = current_user
+            @order.status = 'paying' if params[:order][:pay_method] == 'online'
 
             @order.save!
 

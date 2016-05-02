@@ -103,7 +103,7 @@
       status:
         pending: "新建"
         settled: "结算"
-        payed: "已付款"
+        paying: "待付款"
         confirmed: "商家已确认"
         express: "正在配送"
         completed: "完成"
