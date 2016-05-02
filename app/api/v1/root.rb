@@ -18,6 +18,7 @@ module V1
     mount V1::OrderProducts
     mount V1::UserCards
     mount V1::Pay
+    mount V1::CouponUsers
 
   end
 end

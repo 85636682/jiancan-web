@@ -44,6 +44,49 @@ module V1
         end
       end
 
+      desc "通过优惠劵添加菜色"
+      params do
+        requires :order_id, type: Integer, desc: "订单id"
+        requires :random_code, type: String, desc: "优惠劵随机码"
+      end
+      get 'coupon', serializer: OrderDetailSerializer, root: false do
+        authenticate!
+        coupon_user = CouponUser.find_by_random_code(params[:random_code])
+        error!({ error: "优惠劵不存在！" }, 400) if coupon_user.blank?
+        error!({ error: "优惠劵已经使用！" }, 400) if coupon_user.used
+
+        @order = Order.find_by_id(params[:order_id])
+        error!({ error: "订单不存在！" }, 400) if @order.blank?
+
+        amount = 0
+        coupon_products = coupon_user.coupon.coupon_products
+        error!({ error: "优惠劵没有任何菜色！" }, 400) if coupon_products.count <= 0
+        
+        begin
+          ActiveRecord::Base.transaction do
+            coupon_products.each do |coupon_product|
+              next if coupon_product.amount.to_i < 1
+              order_product = OrderProduct.where(:order_id => @order.id, :product_id => coupon_product.product_id, :status => "pending").first
+              if order_product.blank?
+                order_product = OrderProduct.create!(:order_id => @order.id, :product_id => coupon_product.product_id, :quantity => coupon_product.amount.to_i)
+              else
+                quantity = order_product.quantity + coupon_product.amount.to_i
+                order_product.update_attributes!(:quantity => quantity)
+              end
+              order_product.push_to_kitchen(OrderProductSerializer.new(order_product, root: false).as_json)
+              order_product.push_to_counter(OrderProductSerializer.new(order_product, root: false).as_json)
+              amount += product.price.to_i * coupon_product.amount.to_i
+            end
+            total_price = @order.total_price + amount
+            @order.update_attributes!(:total_price => total_price)
+          end
+          render @order
+        rescue Exception => e
+          error!({ error: "商品失效，导致添加失败！" }, 400)
+        end
+
+      end
+
       desc '从订单删除状态为pending的菜色'
       params do
         requires :order_product_id, type: Integer, desc: 'order_product的id'
