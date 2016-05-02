@@ -61,7 +61,7 @@ module V1
         amount = 0
         coupon_products = coupon_user.coupon.coupon_products
         error!({ error: "优惠劵没有任何菜色！" }, 400) if coupon_products.count <= 0
-        
+
         begin
           ActiveRecord::Base.transaction do
             coupon_products.each do |coupon_product|
@@ -79,6 +79,7 @@ module V1
             end
             total_price = @order.total_price + amount
             @order.update_attributes!(:total_price => total_price)
+            coupon_user.update_attributes!(:used => true, :used_at => Time.now)
           end
           render @order
         rescue Exception => e
