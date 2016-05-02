@@ -101,7 +101,7 @@
   enumerize:
     order:
       status:
-        pending: "新建"
+        pending: "待处理"
         settled: "结算"
         paying: "待付款"
         confirmed: "商家已确认"
