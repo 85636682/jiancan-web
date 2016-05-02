@@ -27,7 +27,7 @@ module M1
         requires :coupon_id, type: Integer, desc: "优惠卷id"
         requires :coupon, type: Hash do
           optional :title, type: String
-          optional :details, type: Integer
+          optional :details, type: String
           optional :original_price, type: Float
           optional :preferential_price, type: Float
           optional :avatar, type: Hash
