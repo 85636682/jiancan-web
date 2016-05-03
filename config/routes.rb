@@ -3,10 +3,6 @@ Rails.application.routes.draw do
   resource :wechat, only: [:show, :create]
   resource :weixin do
     collection do
-      get :products
-      get :product
-      get :activity
-      get :advertisement
       get :authorize
     end
   end
