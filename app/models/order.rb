@@ -3,7 +3,7 @@ class Order < ActiveRecord::Base
   enumerize :status,     in: [:paying, :pending, :settled, :confirmed, :express, :completed, :canceled], default: :pending
   enumerize :pay_method, in: [:online, :offline], default: :online
 
-  belongs_to :shop
+  belongs_to :shop, :counter_cache => true
   belongs_to :room
   belongs_to :user
   belongs_to :worker
