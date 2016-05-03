@@ -1,5 +1,7 @@
 class RoomSerializer < BaseSerializer
-  attributes :id, :name, :seat, :shop_id
+  attributes :id, :name, :seat, :shop_id, :current_order
 
-  has_one :shop, serializer: ShopSerializer
+  def current_order
+    Order.find_by(:room_id => object.id, :status => 'pending')
+  end
 end
