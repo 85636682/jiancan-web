@@ -13,12 +13,12 @@ module U1
           @shops = Shop.where("'#{params[:meal]}' = ANY (meals)")
         end
         unless params[:sort].blank?
-          case params[:sort] # a_variable is the variable we want to compare
+          case params[:sort]
           when 'intelligent'
             @shops = @shops.order("created_at DESC")
-          when 'distance'    #compare to 1
+          when 'distance'
             @shops = @shops.order("")
-          when 'grade'    #compare to 2
+          when 'grade'
             @shops = @shops.order("")
           when 'sales'
             @shops = @shops.order("orders_count DESC")
