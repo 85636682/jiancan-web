@@ -4,12 +4,29 @@ module U1
       desc "返回所有店铺"
       params do
         optional :meal, type: String, desc: '餐次'
+        optional :sort, type: String, desc: '排序'
       end
       get '', each_serializer: ShopDetailSerializer, root: false do
         if params[:meal].blank? || params[:meal] == 'all'
           @shops = Shop.all
         else
           @shops = Shop.where("'#{params[:meal]}' = ANY (meals)")
+        end
+        unless params[:sort].blank?
+          case params[:sort] # a_variable is the variable we want to compare
+          when 'intelligent'
+            @shops = @shops.order("created_at DESC")
+          when 'distance'    #compare to 1
+            @shops = @shops.order("")
+          when 'grade'    #compare to 2
+            @shops = @shops.order("")
+          when 'sales'
+            @shops = @shops.order("orders_count DESC")
+          when 'capita'
+            @shops = @shops.order("")
+          else
+            @shops = @shops.order("created_at ASC")
+          end
         end
         render @shops
       end
