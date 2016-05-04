@@ -50,6 +50,27 @@ module U1
         end
       end
 
+      desc '支付宝支付订单'
+      params do
+        requires :order_id, type: Integer, desc: '订单id'
+      end
+      get 'alipay' do
+        authenticate!
+        @order = Order.find_by_id(params[:order_id])
+        error!({ error: "订单不存在！" }, 400) if @order.blank?
+        error!({ error: "订单已支付或货到付款！"}, 400) if not @order.can_pay?
+        Alipay::Service.create_direct_pay_by_user_wap_url({
+          out_trade_no: '20150401000-0001',
+          subject: 'Order Name',
+          total_fee: '10.00',
+          return_url: 'https://example.com/orders/20150401000-0001',
+          notify_url: 'https://example.com/orders/20150401000-0001/notify'
+        }, {
+          pid: 'ANOTHER_PID',
+          key: 'ANOTHER_KEY',
+        })
+      end
+
     end
   end
 end

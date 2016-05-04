@@ -81,7 +81,7 @@ gem 'jpush', :git => 'git://github.com/jpush/jpush-api-ruby-client.git'
 gem 'enumerize'
 
 # alipay
-gem 'alipay', '~> 0.7.1'
+gem 'alipay', '~> 0.12.0'
 
 # 搜索
 gem 'rails-simple-search', '~> 0.9.9'
