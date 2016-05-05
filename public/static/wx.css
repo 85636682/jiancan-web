@@ -142,8 +142,8 @@ i.icon-profile-coins, i.icon-service-phone {
 .category_list_bd li {
   height: 40px;
   line-height: 40px;
-  padding-left: 20px;
-  border-bottom: solid 1px #ddd;
+  padding-left: 10px;
+  border-bottom: solid 1px #eee;
 }
 .category_active {
   color: red;
@@ -209,8 +209,8 @@ i.icon-profile-coins, i.icon-service-phone {
 .sort_list_bd li {
   height: 40px;
   line-height: 40px;
-  padding-left: 20px;
-  border-bottom: solid 1px #ddd;
+  padding-left: 10px;
+  border-bottom: solid 1px #eee;
 }
 .sort_active {
   color: red;
