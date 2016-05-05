@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160503095206) do
+ActiveRecord::Schema.define(version: 20160505112754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -392,8 +392,8 @@ ActiveRecord::Schema.define(version: 20160503095206) do
     t.string   "private_token"
     t.string   "weixin_access_token"
     t.string   "weixin_refresh_token"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.string   "weixin_open_id"
     t.string   "name"
     t.string   "nickname"
@@ -402,6 +402,9 @@ ActiveRecord::Schema.define(version: 20160503095206) do
     t.string   "uid"
     t.datetime "private_token_updated_at"
     t.string   "wx_avatar"
+    t.decimal  "balance",                  default: 0.0
+    t.integer  "points",                   default: 0
+    t.decimal  "bribery_money",            default: 0.0
   end
 
   create_table "wechat_sessions", force: :cascade do |t|
