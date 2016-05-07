@@ -18,4 +18,16 @@ class Shop < ActiveRecord::Base
   attr_accessor :uploader_secure_token
 
   validates_uniqueness_of :name, :message => "你的店铺名称重复了"
+
+  after_save: update_location
+  def update_location
+    return if address == ""
+    location_info = BaiduMap.address_geocoding_location(address)
+    JcLog.create(:content => location_info)
+    #update_attributes(lat: location_info[""], lng: location_info[""], location: "")
+  end
+
+  def address
+    "#{ChinaCity.get(province)}#{ChinaCity.get(city)}#{ChinaCity.get(district)}#{street}"
+  end
 end

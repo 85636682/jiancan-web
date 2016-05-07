@@ -120,6 +120,9 @@ gem 'rails_db'
 gem 'status-page'
 gem 'oneapm_rpm'
 
+# HTTP Client
+gem 'faraday', '~> 0.9.2'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
