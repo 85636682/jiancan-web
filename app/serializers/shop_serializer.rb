@@ -16,7 +16,7 @@ class ShopSerializer < BaseSerializer
   end
 
   def address
-    "#{ChinaCity.get(province)}#{ChinaCity.get(city)}#{ChinaCity.get(district)}#{street}"
+    object.address
   end
 
   def orders_by_month_count
