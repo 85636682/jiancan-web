@@ -22,7 +22,8 @@ class Shop < ActiveRecord::Base
   def update_location
     return if address == ""
     response = address_geocoding_location(address)
-    location = response.body["result"]["location"]
+    location_info = JSON.parse(response.body)
+    location = location_info["result"]["location"]
     update_attributes(lat: location["lat"], lng: location["lng"], location: "")
   end
 
