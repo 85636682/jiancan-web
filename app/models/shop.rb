@@ -27,13 +27,13 @@ class Shop < ActiveRecord::Base
     update_attributes(lat: location_info[""], lng: location_info[""], location: "")
   end
 
-  def address_geocoding_location(address: "", output: "json", options = {})
+  def address_geocoding_location(address: "", output: "json")
     conn = Faraday.new(:url => "http://api.map.baidu.com") do |faraday|
       faraday.request  :url_encoded             # form-encode POST params
       faraday.response :logger                  # log requests to STDOUT
       faraday.adapter  Faraday.default_adapter  # make requests with Net::HTTP
     end
-    response = conn.get '/geocoder/v2/', { address: address, ak: Setting.baidu_map_ak, output: output }.merge(options)
+    response = conn.get '/geocoder/v2/', { address: address, ak: Setting.baidu_map_ak, output: output }
   end
 
   def address
