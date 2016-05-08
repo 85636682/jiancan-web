@@ -21,9 +21,9 @@ class Shop < ActiveRecord::Base
 
   def update_location
     return if address == ""
-    location_info = address_geocoding_location(address)
-    JcLog.create(:content => location_info.body)
-    update_attributes(lat: location_info[""], lng: location_info[""], location: "")
+    response = address_geocoding_location(address)
+    location = response.body["result"]["location"]
+    update_attributes(lat: location["lat"], lng: location["lng"], location: "")
   end
 
   def address_geocoding_location(address)
