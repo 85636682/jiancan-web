@@ -44,6 +44,7 @@ module M1
         authenticate!
         error!({ error: "店铺不存在！" }, 400) if current_merchant.shop.blank?
         if current_merchant.shop.update_attributes(params[:shop])
+          current_merchant.shop.update_location
           render current_merchant.shop
         else
           error!({ error: "更新失败！" }, 400)
