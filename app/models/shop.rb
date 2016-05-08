@@ -20,6 +20,7 @@ class Shop < ActiveRecord::Base
   validates_uniqueness_of :name, :message => "你的店铺名称重复了"
 
   def update_location
+    JcLog.create(:content => address)
     return if address == ""
     location_info = address_geocoding_location(address)
     JcLog.create(:content => location_info)
