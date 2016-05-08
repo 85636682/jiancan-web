@@ -5,6 +5,8 @@ module U1
       params do
         optional :meal, type: String, desc: '餐次'
         optional :sort, type: String, desc: '排序'
+        optional :lat,  type: Float, desc: '维度'
+        optional :lng,  type: Float, desc: '经度'
       end
       get '', each_serializer: ShopDetailSerializer, root: false do
         if params[:meal].blank? || params[:meal] == 'all'
@@ -17,7 +19,11 @@ module U1
           when 'intelligent'
             @shops = @shops.order("created_at DESC")
           when 'distance'
-            @shops = @shops.order("")
+            if params[:lat].present? && params[:lnt].present?
+              @shops = @shops.select("shops.*, st_distance(location, 'point(#{params[:lng]} #{params[:lat]})') as distance")
+                             .where("st_dwithin(location, 'point(#{params[:lng]} #{params[:lat]})', 10000)")
+                             .order("distance")
+            end
           when 'grade'
             @shops = @shops.order("")
           when 'sales'
