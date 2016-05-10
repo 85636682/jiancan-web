@@ -111,7 +111,7 @@ class Order < ActiveRecord::Base
         )
         res = client.sendPush(payload)
       end
-    rescue JPush::ApiConnectionException
+    rescue e
       JcLog.create(content: "JPush::ApiConnectionException", level: "debug")
     end
   end
