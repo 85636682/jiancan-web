@@ -1,5 +1,3 @@
-require 'jpush'
-
 class OrderProduct < ActiveRecord::Base
   extend Enumerize  #pending 新建状态  cooking烹饪状态  finished完成状态  canceled取消
   enumerize :status,     in: [:pending, :cooking, :finished, :canceled], default: :pending
@@ -41,28 +39,27 @@ class OrderProduct < ActiveRecord::Base
       end
       if not receiver.empty?
         client = JPush::JPushClient.new(Setting.jpush_app_key_for_waiter, Setting.jpush_master_secret_for_waiter)
-        payload = JPush::PushPayload.build(
-          platform: JPush::Platform.all,
-          notification: JPush::Notification.build(
-            alert: '有菜色状态改变了，请及时查看！',
-            android: JPush::AndroidNotification.build(
+        payload = JPush::Push::PushPayload.new(
+          platform: 'all',
+          audience: JPush::Push::Audience.new.set_alias(receiver),
+          notification: JPush::Push::Notification.new.
+            set_alert('有菜色状态改变了，请及时查看！').
+            set_android(
               alert: '有菜色状态改变了，请及时查看！',
               extras:  { "status" => status, "status_text" => status.text, "sn" => order.sn }
-            ),
-            ios: JPush::IOSNotification.build(
+            ).
+            set_ios(
               alert: '有菜色状态改变了，请及时查看！',
               extras: { "status" => status, "status_text" => status.text, "sn" => order.sn }
             )
-          ),
-          message: JPush::Message.build(
+          ).set_message(
             msg_content: "message content test",
             title: "message title test",
             content_type: "message content type test",
             extras: { "status" => status, "status_text" => status.text, "sn" => order.sn }
-          ),
-          audience: JPush::Audience.build(_alias: receiver)
+          )
         )
-        res = client.sendPush(payload)
+        res = client.pusher.push(payload)
       end
     rescue JPush::ApiConnectionException
       JcLog.create(content: "JPush::ApiConnectionException", level: "debug")
@@ -78,28 +75,27 @@ class OrderProduct < ActiveRecord::Base
       end
       if not receiver.empty?
         client = JPush::JPushClient.new(Setting.jpush_app_key_for_kitchen, Setting.jpush_master_secret_for_kitchen)
-        payload = JPush::PushPayload.build(
-          platform: JPush::Platform.all,
-          notification: JPush::Notification.build(
-            alert: '有顾客下单新菜色，请及时查看！',
-            android: JPush::AndroidNotification.build(
+        payload = JPush::Push::PushPayload.new(
+          platform: 'all',
+          audience: JPush::Push::Audience.new.set_alias(receiver),
+          notification: JPush::Push::Notification.new.
+            set_alert('有顾客下单新菜色，请及时查看！').
+            set_android(
               alert: '有顾客下单新菜色，请及时查看！',
               extras: { "status" => status, "status_text" => status.text, "sn" => order.sn }
-            ),
-            ios: JPush::IOSNotification.build(
+            ).
+            set_ios(
               alert: '有顾客下单新菜色，请及时查看！',
               extras: { "status" => status, "status_text" => status.text, "sn" => order.sn }
             )
-          ),
-          message: JPush::Message.build(
+          ).set_message(
             msg_content: "message content test",
             title: "message title test",
             content_type: "message content type test",
             extras: extras
-          ),
-          audience: JPush::Audience.build(_alias: receiver)
+          )
         )
-        res = client.sendPush(payload)
+        res = client.pusher.push(payload)
       end
     rescue JPush::ApiConnectionException
       JcLog.create(content: "JPush::ApiConnectionException", level: "debug")
@@ -115,28 +111,27 @@ class OrderProduct < ActiveRecord::Base
       end
       if not receiver.empty?
         client = JPush::JPushClient.new(Setting.jpush_app_key_for_counter, Setting.jpush_master_secret_for_counter)
-        payload = JPush::PushPayload.build(
-          platform: JPush::Platform.all,
-          notification: JPush::Notification.build(
-            alert: '有顾客下单新菜色，请及时查看！',
-            android: JPush::AndroidNotification.build(
+        payload = JPush::Push::PushPayload.new(
+          platform: 'all',
+          audience: JPush::Push::Audience.new.set_alias(receiver),
+          notification: JPush::Push::Notification.new.
+            set_alert('有顾客下单新菜色，请及时查看！').
+            set_android(
               alert: '有顾客下单新菜色，请及时查看！',
               extras: { "status" => status, "status_text" => status.text, "sn" => order.sn }
-            ),
-            ios: JPush::IOSNotification.build(
+            ).
+            set_ios(
               alert: '有顾客下单新菜色，请及时查看！',
               extras: { "status" => status, "status_text" => status.text, "sn" => order.sn }
             )
-          ),
-          message: JPush::Message.build(
+          ).set_message(
             msg_content: "message content test",
             title: "message title test",
             content_type: "message content type test",
             extras: extras
-          ),
-          audience: JPush::Audience.build(_alias: receiver)
+          )
         )
-        res = client.sendPush(payload)
+        res = client.pusher.push(payload)
       end
     rescue JPush::ApiConnectionException
       JcLog.create(content: "JPush::ApiConnectionException", level: "debug")

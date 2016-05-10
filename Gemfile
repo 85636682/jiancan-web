@@ -75,7 +75,7 @@ gem 'smart_sms'
 gem 'message_bus'
 
 # 推送
-gem 'jpush', :git => 'git://github.com/jpush/jpush-api-ruby-client.git'
+gem 'jpush', '~> 4.0.2'
 
 # 枚举
 gem 'enumerize'
