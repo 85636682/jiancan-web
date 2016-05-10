@@ -88,30 +88,27 @@ class Order < ActiveRecord::Base
       end
       if not receiver.empty?
         client = JPush::JPushClient.new(Setting.jpush_app_key_for_waiter, Setting.jpush_master_secret_for_waiter)
-        payload = JPush::PushPayload.build(
-          platform: JPush::Platform.all,
-          notification: JPush::Notification.build(
+        payload = JPush::Push::PushPayload.new(
+          platform: 'all',
+          audience: JPush::Push::Audience.new.set_alias(receiver),
+          notification: JPush::Push::Notification.new.set_alert(
+            '有新的外卖订单了，请及时查看！'
+          ).set_android(
             alert: '有新的外卖订单了，请及时查看！',
-            android: JPush::AndroidNotification.build(
-              alert: '有新的外卖订单了，请及时查看！',
-              extras:  { "sn" => sn }
-            ),
-            ios: JPush::IOSNotification.build(
-              alert: '有新的外卖订单了，请及时查看！',
-              extras: { "sn" => sn }
-            )
-          ),
-          message: JPush::Message.build(
-            msg_content: "message content test",
-            title: "message title test",
-            content_type: "message content type test",
-            extras: { "sn" => sn }
-          ),
-          audience: JPush::Audience.build(_alias: receiver)
+            extras:  { "sn" => order.sn }
+          ).set_ios(
+            alert: '有新的外卖订单了，请及时查看！',
+            extras: { "sn" => order.sn }
+          )
+        ).set_message(
+          msg_content: "message content test",
+          title: "message title test",
+          content_type: "message content type test",
+          extras: { "sn" => order.sn }
         )
-        res = client.sendPush(payload)
+        res = client.pusher.push(payload)
       end
-    rescue e
+    rescue Exception => e
       JcLog.create(content: "JPush::ApiConnectionException", level: "debug")
     end
   end
