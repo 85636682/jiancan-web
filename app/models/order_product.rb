@@ -54,7 +54,7 @@ class OrderProduct < ActiveRecord::Base
             )
           ),
         ).set_message(
-          msg_content: "message content test",
+          "message content test",
           title: "message title test",
           content_type: "message content type test",
           extras: { "status" => status, "status_text" => status.text, "sn" => order.sn }
@@ -90,7 +90,7 @@ class OrderProduct < ActiveRecord::Base
             )
           ),
         ).set_message(
-          msg_content: "message content test",
+          "message content test",
           title: "message title test",
           content_type: "message content type test",
           extras: extras
@@ -126,7 +126,7 @@ class OrderProduct < ActiveRecord::Base
             )
           ),
         ).set_message(
-          msg_content: "message content test",
+          "message content test",
           title: "message title test",
           content_type: "message content type test",
           extras: extras
