@@ -52,7 +52,7 @@ class OrderProduct < ActiveRecord::Base
               alert: '有菜色状态改变了，请及时查看！',
               extras: { "status" => status, "status_text" => status.text, "sn" => order.sn }
             )
-          )
+          ),
         ).set_message(
           msg_content: "message content test",
           title: "message title test",
@@ -88,7 +88,7 @@ class OrderProduct < ActiveRecord::Base
               alert: '有顾客下单新菜色，请及时查看！',
               extras: { "status" => status, "status_text" => status.text, "sn" => order.sn }
             )
-          )
+          ),
         ).set_message(
           msg_content: "message content test",
           title: "message title test",
@@ -124,7 +124,7 @@ class OrderProduct < ActiveRecord::Base
               alert: '有顾客下单新菜色，请及时查看！',
               extras: { "status" => status, "status_text" => status.text, "sn" => order.sn }
             )
-          )
+          ),
         ).set_message(
           msg_content: "message content test",
           title: "message title test",
