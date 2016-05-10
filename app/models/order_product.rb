@@ -59,7 +59,7 @@ class OrderProduct < ActiveRecord::Base
         )
         res = client.pusher.push(payload)
       end
-    rescue JPush::ApiConnectionException
+    rescue e
       JcLog.create(content: "JPush::ApiConnectionException", level: "debug")
     end
   end
@@ -93,7 +93,7 @@ class OrderProduct < ActiveRecord::Base
         )
         res = client.pusher.push(payload)
       end
-    rescue JPush::ApiConnectionException
+    rescue e
       JcLog.create(content: "JPush::ApiConnectionException", level: "debug")
     end
   end
