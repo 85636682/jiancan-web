@@ -13,14 +13,12 @@ module M1
         { msg: "登录成功！", access_token: merchant.get_private_token, mobile: merchant.mobile }
       end
 
-      desc "用户登录"
+      desc "用户验证"
       params do
-        requires :mobile, type: String, desc: "用户手机"
-        requires :password,  type: String, desc: "用户密码"
       end
       post 'authenticate' do
         authenticate!
-        { msg: "登录成功！", access_token: current_merchant.get_private_token, mobile: current_merchant.mobile }
+        { msg: "验证成功！", access_token: current_merchant.get_private_token, mobile: current_merchant.mobile }
       end
 
       desc "用户注册"
