@@ -8,12 +8,6 @@ class User < ActiveRecord::Base
   has_many :receiving_addresses
   has_many :favorites, dependent: :destroy
   has_many :favorite_shops, :through => :favorites, :source => :favoriteable, :source_type => "Shop"
-  has_many :activity_users
-  has_many :activities, :through => :activity_users, :dependent => :destroy
-  has_many :shop_advertisement_users
-  has_many :shop_advertisements, :through => :shop_advertisement_users, :dependent => :destroy
-  has_many :user_card_users, :dependent => :destroy
-  has_many :user_cards, :through => :user_card_users
   has_many :bookings
   has_many :coupon_users, :dependent => :destroy
   has_many :coupons, :through => :coupon_users

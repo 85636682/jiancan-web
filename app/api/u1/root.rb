@@ -15,8 +15,6 @@ module U1
     mount U1::Rooms
     mount U1::Orders
     mount U1::Shops
-    mount U1::Activities
-    mount U1::ShopAdvertisements
     mount U1::Categories
     mount U1::Products
     mount U1::Wx

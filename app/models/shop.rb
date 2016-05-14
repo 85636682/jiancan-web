@@ -7,9 +7,6 @@ class Shop < ActiveRecord::Base
   has_many :categories
   has_many :workers
   has_many :food_materials
-  has_many :activities
-  has_many :shop_advertisements
-  has_one :shop_public_account
   has_many :comments, as: :commentable
   has_many :bookings
   has_many :coupons
