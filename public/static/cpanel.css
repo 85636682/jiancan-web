@@ -555,3 +555,19 @@ body {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
+
+.loading-bar {
+	height:20px;
+	width:200px;
+	padding:10px;
+	margin:200px auto 0;
+	background-color:rgba(0,0,0,.1);
+	-webkit-border-radius:25px;
+	-moz-border-radius:25px;
+	-ms-border-radius:25px;
+	border-radius:20px;
+	-webkit-box-shadow:0 1px 0 rgba(255,255,255,.03),inset 0 1px 0 rgba(0,0,0,.1);
+	-moz-box-shadow:0 1px 0 rgba(255,255,255,.03),inset 0 1px 0 rgba(0,0,0,.1);
+	-ms-box-shadow:0 1px 0 rgba(255,255,255,.03),inset 0 1px 0 rgba(0,0,0,.1);
+	box-shadow:0 1px 0 rgba(255,255,255,.03),inset 0 1px 0 rgba(0,0,0,.1);
+}
