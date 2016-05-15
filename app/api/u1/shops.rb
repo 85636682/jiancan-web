@@ -72,6 +72,14 @@ module U1
         render @shops
       end
 
+      desc '根据名称搜索店铺'
+      params do
+        requires :name, type: String, desc: '店铺名称'
+      end
+      get 'search', each_serializer: ShopDetailSerializer, root: false do
+        @shops = Shop.where("name LIKE ?", "%#{params[:name]}%")
+      end
+
       desc '获取某店铺下所有分类'
       params do
         requires :shop_id, type: Integer, desc: '店铺id'
