@@ -14,6 +14,15 @@ module V1
           error!({ error: "用户和密码不正确！" }, 400)
         end
       end
+
+      desc "当前员工信息"
+      params do
+      end
+      get 'current', serializer: WorkerSerializer, root: false  do
+        authenticate!
+        render current_worker
+      end
+
     end
   end
 end
