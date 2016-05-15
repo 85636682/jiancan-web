@@ -18,7 +18,7 @@ module V1
       desc "当前员工信息"
       params do
       end
-      get 'current', serializer: WorkerSerializer, root: false  do
+      get 'current', serializer: WorkerSerializer, root: false do
         authenticate!
         render current_worker
       end
