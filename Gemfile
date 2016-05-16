@@ -49,7 +49,7 @@ gem 'bcrypt'
 gem 'weixin_rails_middleware'
 gem 'weixin_authorize'
 gem 'wx_pay', :git => 'git://github.com/jasl/wx_pay'
-gem 'wechat'
+gem 'wechat', '~> 0.7.13'
 
 # 上传组件
 gem 'carrierwave'
