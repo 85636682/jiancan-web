@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   resource :wechat, only: [:show, :create]
+  resource :wechat, only: [:show, :create]
   resource :weixin do
     collection do
       get :authorize
