@@ -118,7 +118,6 @@ gem 'whenever', :require => false
 # gem 'capistrano-rails', group: :development
 gem 'rails_db'
 gem 'status-page'
-gem 'oneapm_rpm'
 
 # HTTP Client
 gem 'faraday', '~> 0.9.2'
