@@ -1,0 +1,16 @@
+default: &default
+  appid:      <%= ENV['WECHAT_APP_ID'] %>
+  secret:     <%= ENV['WECHAT_APP_SECRET'] %>
+  token:      <%= ENV['WECHAT_TOKEN'] %>
+
+production:
+  appid:      <%= ENV['WECHAT_APP_ID'] %>
+  secret:     <%= ENV['WECHAT_APP_SECRET'] %>
+  token:      <%= ENV['WECHAT_TOKEN'] %>
+
+development:
+  <<: *default
+  trusted_domain_fullname: "http://your_dev.proxy.qqbrowser.cc"
+
+test:
+  <<: *default
