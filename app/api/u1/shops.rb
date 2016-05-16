@@ -8,7 +8,7 @@ module U1
         optional :lat,  type: Float, desc: '维度'
         optional :lng,  type: Float, desc: '经度'
       end
-      get '', each_serializer: ShopDetailSerializer, root: false do
+      get '', each_serializer: ShopSerializer, root: false do
         if params[:meal].blank? || params[:meal] == 'all'
           @shops = Shop.all
         else
@@ -51,7 +51,7 @@ module U1
         requires :lng, type: Float, desc: "维度"
         requires :address, type: String, desc: "文字性地址"
       end
-      get '', each_serializer: ShopDetailSerializer, root: false do
+      get '', each_serializer: ShopSerializer, root: false do
         authenticate!
         @shops = []
         if params[:address].blank?
@@ -76,7 +76,7 @@ module U1
       params do
         requires :name, type: String, desc: '店铺名称'
       end
-      get 'search', each_serializer: ShopDetailSerializer, root: false do
+      get 'search', each_serializer: ShopSerializer, root: false do
         @shops = Shop.where("name LIKE ?", "%#{params[:name]}%")
       end
 
