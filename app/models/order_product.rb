@@ -38,7 +38,7 @@ class OrderProduct < ActiveRecord::Base
         receiver << worker.pusher_id
       end
       if not receiver.empty?
-        client = JPush::JPushClient.new(Setting.jpush_app_key_for_waiter, Setting.jpush_master_secret_for_waiter)
+        client = JPush::Client.new(Setting.jpush_app_key_for_waiter, Setting.jpush_master_secret_for_waiter)
         payload = JPush::Push::PushPayload.new(
           platform: 'all',
           audience: JPush::Push::Audience.new.set_alias(receiver),
@@ -72,7 +72,7 @@ class OrderProduct < ActiveRecord::Base
         receiver << worker.pusher_id
       end
       if not receiver.empty?
-        client = JPush::JPushClient.new(Setting.jpush_app_key_for_kitchen, Setting.jpush_master_secret_for_kitchen)
+        client = JPush::Client.new(Setting.jpush_app_key_for_kitchen, Setting.jpush_master_secret_for_kitchen)
         payload = JPush::Push::PushPayload.new(
           platform: 'all',
           audience: JPush::Push::Audience.new.set_alias(receiver),
@@ -106,7 +106,7 @@ class OrderProduct < ActiveRecord::Base
         receiver << worker.pusher_id
       end
       if not receiver.empty?
-        client = JPush::JPushClient.new(Setting.jpush_app_key_for_counter, Setting.jpush_master_secret_for_counter)
+        client = JPush::Client.new(Setting.jpush_app_key_for_counter, Setting.jpush_master_secret_for_counter)
         payload = JPush::Push::PushPayload.new(
           platform: 'all',
           audience: JPush::Push::Audience.new.set_alias(receiver),
