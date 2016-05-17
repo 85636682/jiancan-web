@@ -27,6 +27,16 @@ module V1
         @rooms = Room.where(:shop_id => current_worker.shop_id).offset(params[:offset]).limit(params[:limit]).order("id ASC")
       end
 
+      desc '返回某店铺下所有会员卡'
+      params do
+        optional :offset, type: Integer, default: 0
+        optional :limit,  type: Integer, default: 20, values: 1..150
+      end
+      get 'coupons', each_serializer: CouponSerializer, root: false do
+        @coupons = Coupon.where(:shop_id => current_worker.shop_id).offset(params[:offset]).limit(params[:limit]).order("coupon_users_count DESC")
+        render @coupons
+      end
+
       desc '获取店铺下所有商品'
       params do
         optional :offset, type: Integer, default: 0
