@@ -109,7 +109,7 @@ class Order < ActiveRecord::Base
         res = client.pusher.push(payload)
       end
     rescue Exception => e
-      JcLog.create(content: "JPush::ApiConnectionException", level: "debug")
+      JcLog.create(content: "#{e.backtrace}", level: "debug")
     end
   end
 
