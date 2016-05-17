@@ -33,8 +33,8 @@ module V1
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
       get 'coupons', each_serializer: CouponSerializer, root: false do
+        authenticate!
         @coupons = Coupon.where(:shop_id => current_worker.shop_id).offset(params[:offset]).limit(params[:limit]).order("coupon_users_count DESC")
-        render @coupons
       end
 
       desc '获取店铺下所有商品'
