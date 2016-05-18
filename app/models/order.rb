@@ -10,7 +10,7 @@ class Order < ActiveRecord::Base
   has_many :order_products, :dependent => :destroy
   has_many :products, :through => :order_products
   has_many :notifications, :dependent => :destroy
-  has_one :coupon_user
+  belongs_to :coupon_user
 
   def self.create_sn(shop_id)
     DateTime.parse(Time.now.iso8601).strftime('%Y%m%d%H%M%S') + rand(999).to_s
