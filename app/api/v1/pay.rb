@@ -11,6 +11,7 @@ module V1
         error!({ error: "订单不存在！" }, 400) if @order.blank?
         error!({ error: "订单未结算！"}, 400) if not @order.status.settled?
         error!({ error: "订单已完成支付！"}, 400) if @order.status.completed?
+        error!({ error: "订单没有任何消费！"}, 400) if @order.total_fee * 100 <= 0
         if params[:platform] == 'wechat'
           fields = {
             body: "在#{@order.shop.name}消费了#{@order.total_fee}元",
