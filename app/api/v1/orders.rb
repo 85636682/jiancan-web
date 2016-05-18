@@ -78,6 +78,7 @@ module V1
             @order.update_attributes!(:total_price => total_price, :decrease_price => (coupon_user.coupon.original_price - coupon_user.coupon.preferential_price), :coupon_user_id => coupon_user.id)
             coupon_user.update_attributes!(:used => true, :used_at => Time.now)
           end
+          @order.notify_add_products
           render @order
         rescue Exception => e
           JcLog.create(content: "#{e.message}", level: "debug")
