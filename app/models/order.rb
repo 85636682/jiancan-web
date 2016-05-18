@@ -80,7 +80,7 @@ class Order < ActiveRecord::Base
     success
   end
 
-  def notify_takeout#push_to_waiter
+  def notify_takeout
     begin
       workers = Worker.where(:shop_id => shop.id)
       receiver = []
@@ -114,7 +114,7 @@ class Order < ActiveRecord::Base
     end
   end
 
-  def notify_add_products#push_to_waiter
+  def notify_add_products
     begin
       workers = Worker.where(:shop_id => shop.id)
       receiver = []
