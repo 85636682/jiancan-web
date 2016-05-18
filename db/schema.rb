@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160518030318) do
+ActiveRecord::Schema.define(version: 20160518030825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -255,6 +255,7 @@ ActiveRecord::Schema.define(version: 20160518030318) do
     t.string   "mobile"
     t.decimal  "express_charge", default: 0.0
     t.integer  "coupon_user_id"
+    t.decimal  "decrease_price", default: 0.0
   end
 
   create_table "products", force: :cascade do |t|

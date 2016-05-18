@@ -25,7 +25,7 @@ class Order < ActiveRecord::Base
   end
 
   def total_fee
-    total_price + express_charge
+    total_price + express_charge - decrease_price
   end
 
   after_create do

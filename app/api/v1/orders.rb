@@ -78,7 +78,7 @@ module V1
               amount += product.price.to_i * coupon_product.amount.to_i
             end
             total_price = @order.total_price + amount
-            @order.update_attributes!(:total_price => total_price, coupon_user_id => coupon_user.id)
+            @order.update_attributes!(:total_price => total_price, :decrease_price => (coupon_user.coupon.original_price - coupon_user.coupon.preferential_price), coupon_user_id => coupon_user.id)
             coupon_user.update_attributes!(:used => true, :used_at => Time.now)
           end
           render @order
