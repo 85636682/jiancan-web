@@ -7,8 +7,6 @@ module M1
         requires :coupon, type: Hash do
           requires :title, type: String
           requires :details, type: String
-          requires :original_price, type: Float
-          requires :preferential_price, type: Float
         end
       end
       post '', serializer: CouponSerializer, root: false do
@@ -79,6 +77,7 @@ module M1
         else
           begin
             ActiveRecord::Base.transaction do
+              total_price = 0
               params[:products].split(',').each do |value|
                 next if value.to_i < 1
                 product = Product.find_by_id(value)
@@ -90,8 +89,11 @@ module M1
                     amount = coupon_product.amount + 1
                     coupon_product.update_attributes!(:amount => amount)
                   end
+                  total_price += product.price.to_i * value.to_i
                 end
               end
+              original_price = @coupon.original_price + total_price
+              @coupon.update_attributes!(:original_price => original_price)
             end
             render @coupon
           rescue Exception => e
