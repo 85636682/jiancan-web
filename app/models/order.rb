@@ -80,7 +80,7 @@ class Order < ActiveRecord::Base
     success
   end
 
-  def push_to_waiter
+  def notify_takeout#push_to_waiter
     begin
       workers = Worker.where(:shop_id => shop.id, :department => "waiter")
       receiver = []
@@ -102,9 +102,9 @@ class Order < ActiveRecord::Base
             extras: { "sn" => sn, "takeout" => takeout }
           )
         ).set_message(
-          msg_content: "message content test",
-          title: "message title test",
-          content_type: "message content type test",
+          msg_content: "有新的外卖订单了，请及时查看！",
+          title: "有新的外卖订单了，请及时查看！",
+          content_type: "take_out",
           extras: { "sn" => sn, "takeout" => takeout }
         )
         res = client.pusher.push(payload)

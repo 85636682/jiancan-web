@@ -74,9 +74,7 @@ module V1
                 quantity = order_product.quantity + coupon_product.amount.to_i
                 order_product.update_attributes!(:quantity => quantity)
               end
-              order_product.push_to_kitchen(OrderProductSerializer.new(order_product, root: false).as_json)
-              order_product.push_to_counter(OrderProductSerializer.new(order_product, root: false).as_json)
-              amount += product.price.to_i * coupon_product.amount.to_i
+              amount += coupon_product.product.price.to_i * coupon_product.amount.to_i
             end
             total_price = @order.total_price + amount
             @order.update_attributes!(:total_price => total_price, :decrease_price => (coupon_user.coupon.original_price - coupon_user.coupon.preferential_price), coupon_user_id => coupon_user.id)
