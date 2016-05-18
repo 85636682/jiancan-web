@@ -46,16 +46,16 @@ class OrderProduct < ActiveRecord::Base
             '有菜色状态改变了，请及时查看！'
           ).set_android(
             alert: '有菜色状态改变了，请及时查看！',
-            extras:  { "status" => status, "status_text" => status.text, "sn" => sn }
+            extras:  { "status" => status, "status_text" => status.text, "sn" => order.sn }
           ).set_ios(
             alert: '有菜色状态改变了，请及时查看！',
-            extras: { "status" => status, "status_text" => status.text, "sn" => sn }
+            extras: { "status" => status, "status_text" => status.text, "sn" => order.sn }
           )
         ).set_message(
           msg_content: "message content test",
           title: "message title test",
           content_type: "message content type test",
-          extras: { "status" => status, "status_text" => status.text, "sn" => sn }
+          extras: { "status" => status, "status_text" => status.text, "sn" => order.sn }
         )
         res = client.pusher.push(payload)
       end
@@ -80,10 +80,10 @@ class OrderProduct < ActiveRecord::Base
             '有顾客下单新菜色，请及时查看！'
           ).set_android(
             alert: '有顾客下单新菜色，请及时查看！',
-            extras: { "status" => status, "status_text" => status.text, "sn" => sn }
+            extras: { "status" => status, "status_text" => status.text, "sn" => order.sn }
           ).set_ios(
             alert: '有顾客下单新菜色，请及时查看！',
-            extras: { "status" => status, "status_text" => status.text, "sn" => sn }
+            extras: { "status" => status, "status_text" => status.text, "sn" => order.sn }
           )
         ).set_message(
           msg_content: "message content test",
@@ -114,10 +114,10 @@ class OrderProduct < ActiveRecord::Base
             '有顾客下单新菜色，请及时查看！'
           ).set_android(
             alert: '有顾客下单新菜色，请及时查看！',
-            extras: { "status" => status, "status_text" => status.text, "sn" => sn }
+            extras: { "status" => status, "status_text" => status.text, "sn" => order.sn }
           ).set_ios(
             alert: '有顾客下单新菜色，请及时查看！',
-            extras: { "status" => status, "status_text" => status.text, "sn" => sn }
+            extras: { "status" => status, "status_text" => status.text, "sn" => order.sn }
           )
         ).set_message(
           msg_content: "message content test",
