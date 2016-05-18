@@ -207,6 +207,30 @@ module V1
         end
       end
 
+      desc '生成付款二维码'
+      params do
+        requires :order_id, type: Integer, desc: '订单id'
+      end
+      get 'qrcode' do
+        @order = Order.find_by_id(params[:order_id])
+        error!({ error: "订单不存在！" }, 400) if @order.blank?
+        error!({ error: "订单已支付或货到付款！"}, 400) if not @order.can_pay?
+        params = {
+          body: "在#{@order.shop.name}消费了#{@order.total_fee}元",
+          out_trade_no: @order.sn,
+          total_fee: (@order.total_fee * 100).to_i,
+          spbill_create_ip: '120.55.164.64',
+          notify_url: 'http://www.jiancan.me/pay_notify',
+          trade_type: 'NATIVE' # could be "JSAPI", "NATIVE" or "APP",
+        }
+        r = WxPay::Service.invoke_unifiedorder params
+        if r.success?
+          { code_url: r["code_url"] }
+        else
+          error!({ error: "生成支付二维码错误！"}, 400)
+        end
+      end
+
     end
   end
 end
