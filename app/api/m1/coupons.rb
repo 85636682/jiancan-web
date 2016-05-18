@@ -26,7 +26,6 @@ module M1
         requires :coupon, type: Hash do
           optional :title, type: String
           optional :details, type: String
-          optional :original_price, type: Float
           optional :preferential_price, type: Float
           optional :avatar, type: Hash
         end
@@ -89,10 +88,10 @@ module M1
                     amount = coupon_product.amount + 1
                     coupon_product.update_attributes!(:amount => amount)
                   end
-                  total_price += product.price.to_i * value.to_i
+                  total_price += product.price.to_i * coupon_product.amount.to_i
                 end
               end
-              original_price = @coupon.original_price + total_price
+              original_price = @coupon.original_price.to_i + total_price
               @coupon.update_attributes!(:original_price => original_price)
             end
             render @coupon
