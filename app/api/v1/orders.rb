@@ -28,15 +28,13 @@ module V1
                     quantity = order_product.quantity + value.to_i
                     order_product.update_attributes!(:quantity => quantity)
                   end
-                  order_product.push_to_kitchen(OrderProductSerializer.new(order_product, root: false).as_json)
-                  order_product.push_to_counter(OrderProductSerializer.new(order_product, root: false).as_json)
                   amount += product.price.to_i * value.to_i
                 end
               end
               total_price = @order.total_price + amount
               @order.update_attributes!(:total_price => total_price)
             end
-            @order.push_to_waiter
+            @order.notify_add_products
             render @order
           rescue Exception => e
             error!({ error: "商品失效，导致添加失败！" }, 400)

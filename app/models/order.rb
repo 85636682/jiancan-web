@@ -82,7 +82,7 @@ class Order < ActiveRecord::Base
 
   def notify_takeout#push_to_waiter
     begin
-      workers = Worker.where(:shop_id => shop.id, :department => "waiter")
+      workers = Worker.where(:shop_id => shop.id)
       receiver = []
       workers.each do |worker|
         receiver << worker.pusher_id
@@ -105,6 +105,40 @@ class Order < ActiveRecord::Base
           msg_content: "有新的外卖订单了，请及时查看！",
           title: "有新的外卖订单了，请及时查看！",
           content_type: "take_out",
+          extras: { "sn" => sn, "takeout" => takeout }
+        )
+        res = client.pusher.push(payload)
+      end
+    rescue Exception => e
+      JcLog.create(content: "#{e.message}#{e.backtrace}", level: "debug")
+    end
+  end
+
+  def notify_add_products#push_to_waiter
+    begin
+      workers = Worker.where(:shop_id => shop.id)
+      receiver = []
+      workers.each do |worker|
+        receiver << worker.pusher_id
+      end
+      if not receiver.empty?
+        client = JPush::Client.new(Setting.jpush_app_key_for_waiter, Setting.jpush_master_secret_for_waiter)
+        payload = JPush::Push::PushPayload.new(
+          platform: 'all',
+          audience: JPush::Push::Audience.new.set_alias(receiver),
+          notification: JPush::Push::Notification.new.set_alert(
+            '有订单添加了新菜色，请及时查看！'
+          ).set_android(
+            alert: '有订单添加了新菜色，请及时查看！',
+            extras:  { "sn" => sn, "takeout" => takeout }
+          ).set_ios(
+            alert: '有订单添加了新菜色，请及时查看！',
+            extras: { "sn" => sn, "takeout" => takeout }
+          )
+        ).set_message(
+          msg_content: "有订单添加了新菜色，请及时查看！",
+          title: "有订单添加了新菜色，请及时查看！",
+          content_type: "add_product",
           extras: { "sn" => sn, "takeout" => takeout }
         )
         res = client.pusher.push(payload)
