@@ -83,6 +83,7 @@ module V1
           end
           render @order
         rescue Exception => e
+          JcLog.create(content: "#{e.message}", level: "debug")
           error!({ error: "商品失效，导致添加失败！" }, 400)
         end
 
