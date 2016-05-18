@@ -15,11 +15,11 @@ module V1
           if params[:status] == "cooking"
             error!({ error: "菜色状态不是新建！" }, 400) unless @order_product.pending?
             error!({ error: "菜色变为烹饪出错！" }, 400) unless @order_product.update_attributes(:status => 'cooking')
-            #@order_product.push_to_waiter
+            @order_product.push_to_waiter
           elsif params[:status] == "finished"
             error!({ error: "菜色状态不是烹饪！" }, 400) unless @order_product.cooking?
             error!({ error: "菜色变为完成出错！" }, 400) unless @order_product.update_attributes(:status => 'finished')
-            #@order_product.push_to_waiter
+            @order_product.push_to_waiter
           end
           { msg: 'ok', status: @order_product.status, status_text: @order_product.status_text }
         end

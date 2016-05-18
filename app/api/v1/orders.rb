@@ -36,6 +36,7 @@ module V1
               total_price = @order.total_price + amount
               @order.update_attributes!(:total_price => total_price)
             end
+            @order.push_to_waiter
             render @order
           rescue Exception => e
             error!({ error: "商品失效，导致添加失败！" }, 400)

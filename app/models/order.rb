@@ -96,16 +96,16 @@ class Order < ActiveRecord::Base
             '有新的外卖订单了，请及时查看！'
           ).set_android(
             alert: '有新的外卖订单了，请及时查看！',
-            extras:  { "sn" => sn }
+            extras:  { "sn" => sn, "takeout" => takeout }
           ).set_ios(
             alert: '有新的外卖订单了，请及时查看！',
-            extras: { "sn" => sn }
+            extras: { "sn" => sn, "takeout" => takeout }
           )
         ).set_message(
           msg_content: "message content test",
           title: "message title test",
           content_type: "message content type test",
-          extras: { "sn" => sn }
+          extras: { "sn" => sn, "takeout" => takeout }
         )
         res = client.pusher.push(payload)
       end
