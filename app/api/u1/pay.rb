@@ -11,6 +11,7 @@ module U1
         @order = Order.find_by_id(params[:order_id])
         error!({ error: "订单不存在！" }, 400) if @order.blank?
         error!({ error: "订单已支付或货到付款！"}, 400) if not @order.can_pay?
+        error!({ error: "订单没有任何消费！"}, 400) if @order.total_fee * 100 <= 0
         error!({ error: "用户未授权！"}, 400) if current_user.weixin_open_id.blank?
         params = {
           body: "在#{@order.shop.name}消费了#{@order.total_fee}元",
