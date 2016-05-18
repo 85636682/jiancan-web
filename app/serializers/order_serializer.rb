@@ -3,6 +3,8 @@ class OrderSerializer < BaseSerializer
              :room_id, :worker_id, :shop_id, :takeout, :address, :meal_time, :pay_method,
              :remarks, :pay_method_text, :mobile, :use_coupon
 
+  has_one :coupon_user,   serializer: CouponUserSerializer
+
   def created_at
     DateTime.parse(object.created_at.iso8601).strftime('%Y年%m月%d日 %H:%M')
   end
@@ -12,7 +14,7 @@ class OrderSerializer < BaseSerializer
   end
 
   def use_coupon
-    false
+    !coupon_user.blank?
   end
 
   def meal_time
