@@ -18,7 +18,7 @@ module M1
       end
       post 'authenticate' do
         authenticate!
-        { msg: "验证成功！", access_token: current_merchant.get_private_token, mobile: current_merchant.mobile }
+        { msg: "验证成功！", access_token: current_merchant.private_token, mobile: current_merchant.mobile }
       end
 
       desc "用户注册"

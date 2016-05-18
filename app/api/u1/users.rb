@@ -48,7 +48,7 @@ module U1
       end
       post 'authenticate' do
         authenticate!
-        { msg: "验证成功！", access_token: current_user.get_private_token, mobile: current_user.mobile }
+        { msg: "验证成功！", access_token: current_user.private_token, mobile: current_user.mobile }
       end
 
       desc "当前用户信息"
