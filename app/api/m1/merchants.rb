@@ -75,7 +75,7 @@ module M1
       end
       put 'current/password' do
         authenticate!
-        if merchant.authenticate(params[:current_password]) && current_merchant.update_attributes(params["merchant"])
+        if current_merchant.authenticate(params[:current_password]) && current_merchant.update_attributes(params["merchant"])
           render current_merchant
         else
           error!({ error: "用户密码修改失败！"}, 400)
