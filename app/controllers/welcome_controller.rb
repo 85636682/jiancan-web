@@ -5,6 +5,10 @@ class WelcomeController < ApplicationController
 
   end
 
+  def downapp
+
+  end
+
   def apply
 
   end

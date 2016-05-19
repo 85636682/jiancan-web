@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get 'china_city/:id', to: 'city_data#show'
   get 'welcome/api'
   get 'welcome/index'
+  get 'welcome/downapp'
   get 'welcome/apply'
   post 'welcome/applied'
   post "pay_notify" => "orders#pay_notify"

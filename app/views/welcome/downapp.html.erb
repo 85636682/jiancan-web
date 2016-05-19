@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>简餐</title>
+    <%= stylesheet_link_tag    'weui.min', media: 'all' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div class="weui_msg">
+      <div class="weui_icon_area"><i class="weui_icon_success weui_icon_msg"></i></div>
+      <div class="weui_text_area">
+        <h2 class="weui_msg_title">下载 APP</h2>
+        <p class="weui_msg_desc">内容详情，可根据实际需要安排</p>
+      </div>
+    </div>
+    <div class="weui_grids">
+      <a href="http://jiancan.me/static/com.jiancan.waiter_1.1.7.apk" class="weui_grid">
+        <div class="weui_grid_icon">
+          <%= image_tag('merchant-app.png') %>
+        </div>
+        <p class="weui_grid_label">
+          商家版
+        </p>
+      </a>
+      <a href="javascript:;" class="weui_grid">
+        <div class="weui_grid_icon">
+          <%= image_tag('user-app.png') %>
+        </div>
+        <p class="weui_grid_label">
+          用户版
+        </p>
+      </a>
+      <a href="javascript:;" class="weui_grid">
+        <div class="weui_grid_icon">
+          <%= image_tag('kitchen-app.png') %>
+        </div>
+        <p class="weui_grid_label">
+          厨房版
+        </p>
+      </a>
+    </div>
+  </body>
+</html>
