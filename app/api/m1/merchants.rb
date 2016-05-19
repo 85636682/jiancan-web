@@ -70,8 +70,8 @@ module M1
         requires :merchant, type: Hash do
           requires :password, type: String, desc: "新密码"
           requires :password_confirmation, type: String, desc: "新密码确认"
-          requires :current_password, type: String, desc: "当前密码"
         end
+        requires :current_password, type: String, desc: "当前密码"
       end
       put 'current/password' do
         authenticate!
