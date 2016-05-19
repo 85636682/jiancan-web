@@ -111,6 +111,9 @@
       pay_method:
         online: "在线付款"
         offline: "线下付款"
+      send_method:
+        jiancan: "简餐配送"
+        merchant: "商家自送"
     order_product:
       status:
         pending: '已下单'

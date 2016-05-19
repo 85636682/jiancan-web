@@ -135,6 +135,7 @@ module V1
       desc '订单配送'
       params do
         requires :order_id, type: Integer, desc: '订单ID'
+        requires :send_method, type: String, desc: '配送方式'
       end
       get 'express' do
         authenticate!
@@ -142,8 +143,8 @@ module V1
         if @order.blank?
           error!({ error: "订单不存在！" }, 400)
         else
-          if @order.express
-            { msg: 'ok', status: @order.status, status_text: @order.status.text }
+          if @order.express(params[:send_method])
+            { msg: 'ok', status: @order.status, status_text: @order.status.text, :send_method: @order.send_method, send_method_text: @order.send_method.text }
           else
             error!({ error: "订单还未配送！" }, 400)
           end

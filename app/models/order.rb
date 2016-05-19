@@ -1,7 +1,8 @@
 class Order < ActiveRecord::Base
   extend Enumerize  #pending 订单新建状态  settled订单结算状态  completed 订单完成支付  canceled订单取消
-  enumerize :status,     in: [:paying, :pending, :settled, :confirmed, :express, :completed, :canceled], default: :pending
-  enumerize :pay_method, in: [:online, :offline], default: :online
+  enumerize :status,      in: [:paying, :pending, :settled, :confirmed, :express, :completed, :canceled], default: :pending
+  enumerize :pay_method,  in: [:online, :offline], default: :online
+  enumerize :send_method, in: [:jiancan, :merchant], default: :merchant
 
   belongs_to :shop, :counter_cache => true
   belongs_to :room
@@ -56,10 +57,10 @@ class Order < ActiveRecord::Base
     success
   end
 
-  def express
+  def express(send_method)
     success = false
     if takeout && status.confirmed?
-      success = update_attributes(:status => 'express')
+      success = update_attributes(:status => 'express', :send_method => send_method)
     end
     success
   end

@@ -1,7 +1,7 @@
 class OrderDetailSerializer < BaseSerializer
   attributes :id, :sn, :status, :status_text, :total_price, :total_fee, :created_at, :updated_at,
              :room_id, :worker_id, :shop_id, :takeout, :address, :meal_time, :pay_method,
-             :remarks, :pay_method_text, :mobile, :use_coupon
+             :remarks, :pay_method_text, :mobile, :use_coupon, :send_method, :send_method_text
 
   has_many :order_products, serializer: OrderProductSerializer
   has_one :room, serializer: RoomSerializer
@@ -36,6 +36,10 @@ class OrderDetailSerializer < BaseSerializer
 
   def pay_method_text
     object.pay_method.text
+  end
+
+  def send_method_text
+    object.send_method.text
   end
 
 end
