@@ -18,7 +18,7 @@ body {
   position: absolute;
   top: 5%;
   right: 5%;
-  background: image-url(mask0506_ios.png) no-repeat top left;
+  background: image-url("mask0506_ios.png") no-repeat top left;
   background-size: 100% 100%;
   z-index: 999;
 }
@@ -39,7 +39,7 @@ body {
   position: absolute;
   top: 5%;
   right: 5%;
-  background: image-url(mask0506_android.png) no-repeat top left;
+  background: image-url("mask0506_android.png") no-repeat top left;
   background-size: 100% 100%;
   z-index: 999;
 }
