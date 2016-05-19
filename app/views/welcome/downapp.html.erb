@@ -3,9 +3,21 @@
   <head>
     <title>简餐</title>
     <%= stylesheet_link_tag    'weui.min', media: 'all' %>
+    <%= stylesheet_link_tag    'downapp', media: 'all' %>
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js" charset="utf-8"></script>
     <%= csrf_meta_tags %>
   </head>
   <body>
+    <!-- 20160506 add -->
+    <div class="wx_mask_ios">
+      <div class="wx_mask_ios_tip">
+      </div>
+    </div>
+    <div class="wx_mask_android">
+      <div class="wx_mask_ios_tip">
+      </div>
+    </div>
+    <!-- 20160506 end -->
     <div class="weui_msg">
       <div class="weui_icon_area"><i class="weui_icon_success weui_icon_msg"></i></div>
       <div class="weui_text_area">
@@ -14,7 +26,7 @@
       </div>
     </div>
     <div class="weui_grids">
-      <a href="http://jiancan.me/static/com.jiancan.waiter_1.1.7.apk" class="weui_grid">
+      <a id="c1_2_1" href="http://jiancan.me/static/com.jiancan.waiter_1.1.7.apk" class="weui_grid">
         <div class="weui_grid_icon">
           <%= image_tag('merchant-app.png') %>
         </div>
@@ -22,7 +34,7 @@
           商家版
         </p>
       </a>
-      <a href="javascript:;" class="weui_grid">
+      <a id="c1_2_2" href="javascript:;" class="weui_grid">
         <div class="weui_grid_icon">
           <%= image_tag('user-app.png') %>
         </div>
@@ -30,7 +42,7 @@
           用户版
         </p>
       </a>
-      <a href="javascript:;" class="weui_grid">
+      <a id="c1_2_3" href="javascript:;" class="weui_grid">
         <div class="weui_grid_icon">
           <%= image_tag('kitchen-app.png') %>
         </div>
@@ -40,4 +52,52 @@
       </a>
     </div>
   </body>
+  <script>
+    $(document).ready(function(e) {
+      // 20160506 ADD
+      function isWeiXin() {
+        var ua = navigator.userAgent.toLowerCase();
+        if(ua.match(/MicroMessenger/i)=="micromessenger") {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      function isIos() {
+        var u = navigator.userAgent.toLowerCase();
+        if (u.indexOf('iphone') > -1 || u.indexOf('ipod') > -1 ) {
+          return true;
+        }
+        return false;
+      }
+
+      if(isWeiXin()){
+        if(isIos()) {
+          $("#c1_2_1").click(function(){
+            $(".wx_mask_ios").show();
+          });
+          $("#c1_2_2").click(function(){
+            $(".wx_mask_ios").show();
+          });
+          $("#c1_2_3").click(function(){
+            $(".wx_mask_ios").show();
+          });
+        }else{
+          $("#c1_2_1").click(function(){
+            $(".wx_mask_android").show();
+          });
+          $("#c1_2_2").click(function(){
+            $(".wx_mask_android").show();
+          });
+          $("#c1_2_3").click(function(){
+            $(".wx_mask_android").show();
+          });
+        }
+      }
+      // 20160506 END
+    });
+
+
+</script>
 </html>

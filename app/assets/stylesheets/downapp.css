@@ -1,0 +1,45 @@
+body {
+  background: #eee;
+}
+/*201160506 add*/
+.wx_mask_ios {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+  z-index: 99;
+}
+
+.wx_mask_ios .wx_mask_ios_tip {
+  width: 240px;
+  height: 168px;
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  background: image-url(mask0506_ios.png) no-repeat top left;
+  background-size: 100% 100%;
+  z-index: 999;
+}
+
+.wx_mask_android {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+  z-index: 99;
+}
+
+.wx_mask_android .wx_mask_ios_tip {
+  width: 240px;
+  height: 168px;
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  background: image-url(mask0506_android.png) no-repeat top left;
+  background-size: 100% 100%;
+  z-index: 999;
+}
