@@ -23,6 +23,7 @@ class WeixinsController < ApplicationController
    # 调用微信授权获取openid
   def invoke_wx_auth
     if params[:state].present? || session['openid'].present? || !is_wechat_brower?
+      @user = User.find_by_weixin_open_id(session['openid']) if @user.blank?
       return # 防止进入死循环授权
     end
     sns_url =  @wechat_client.authorize_url(request.url, scope="snsapi_userinfo")
@@ -32,7 +33,7 @@ class WeixinsController < ApplicationController
   # 在invoke_wx_auth中做了跳转之后，此方法截取
   def get_wechat_sns
     # params[:state] 这个参数是微信特定参数，所以可以以此来判断授权成功后微信回调。
-    if session[:openid].blank? && params[:state].present? && @user.blank?
+    if session[:openid].blank? && params[:state].present?
       sns_info = @wechat_client.get_oauth_access_token(params[:code])
       # 如果网页授权作用域为snsapi_userinfo，则此时开发者可以通过access_token和openid拉取用户信息了。
       user_info = @wechat_client.get_oauth_userinfo(sns_info.result["openid"], sns_info.result["access_token"])
