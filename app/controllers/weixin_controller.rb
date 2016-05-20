@@ -8,11 +8,11 @@ class WeixinsController < ApplicationController
   def authorize
     if params[:request_url] == 'check'
       shop = Shop.find(params[:shop_id])
-      url = "http://jiancan.me/wx.html#!/authorize?request_url=#{params[:request_url]}&shop_id=#{params[:shop_id]}&express=#{shop.full_free_courier}&access_token=#{@user.private_token}"
+      url = "http://jiancan.me/wx/index.html#!/authorize?request_url=#{params[:request_url]}&shop_id=#{params[:shop_id]}&express=#{shop.full_free_courier}&access_token=#{@user.private_token}"
     elsif params[:request_url] == 'coupon'
-      url = "http://jiancan.me/wx.html#!/authorize?request_url=#{params[:request_url]}&coupon_id=#{params[:coupon_id]}&access_token=#{@user.private_token}"
+      url = "http://jiancan.me/wx/index.html#!/authorize?request_url=#{params[:request_url]}&coupon_id=#{params[:coupon_id]}&access_token=#{@user.private_token}"
     else
-      url = "http://jiancan.me/wx.html#!/authorize?request_url=#{params[:request_url]}&access_token=#{@user.private_token}"
+      url = "http://jiancan.me/wx/index.html#!/authorize?request_url=#{params[:request_url]}&access_token=#{@user.private_token}"
     end
     redirect_to url
   end
@@ -39,7 +39,7 @@ class WeixinsController < ApplicationController
       user_info = @wechat_client.get_oauth_userinfo(sns_info.result["openid"], sns_info.result["access_token"])
       #Rails.logger.error("Weixin oauth2 response: #{user_info.result}")
       @user = User.from_omniauth(user_info.result)
-      @user.update_private_token unless @user.check_token_updated    
+      @user.update_private_token unless @user.check_token_updated
       # 重复使用相同一个code调用时：
       if sns_info.result["errcode"] != "40029"
         session[:openid] = sns_info.result["openid"]
