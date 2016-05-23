@@ -54,6 +54,20 @@ ul {
   color: #434343;
   font-size: 24px;
 }
+.sizeButton {
+  background-color: #FFF;
+  border: solid 1px #6a6a6a;
+}
+
+.sizeButtonActive {
+  background-color: #23a05a;
+  color: #FFF;
+  border: solid 1px #23a05a;
+}
+.sizeButtonActive:hover {
+  background-color: #23a05a;
+  color: #FFF;
+}
 
 .sub-menus {
   display: flex;
