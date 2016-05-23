@@ -43,17 +43,27 @@ ul {
 
 .size-table {
   width: 100%;
+  table-layout: fixed;
   margin-top: 20px;
   border: solid 1px #E2E2E2;
 }
 
-.size-table td {
-  width: 25%;
+.size-table thead th {
   text-align: center;
   height: 80px;
   color: #434343;
   font-size: 24px;
+  border-bottom: solid 1px #E2E2E2;
 }
+
+.size-table tbody td {
+  text-align: center;
+  height: 80px;
+  color: #434343;
+  font-size: 24px;
+  border-bottom: solid 1px #E2E2E2;
+}
+
 .sizeButton {
   background-color: #FFF;
   border: solid 1px #6a6a6a;
