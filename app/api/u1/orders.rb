@@ -150,11 +150,29 @@ module U1
         requires :order_id, type: Integer, desc: '订单ID'
       end
       get 'settle' do
+        authenticate!
         @order = Order.find_by_id(params[:order_id])
         error!({ error: "你不能操作该订单！" }, 400) if @order.user_id != current_user.id
         error!({ error: "订单不存在或者还有菜色未完成！" }, 400) if @order.blank? || @order.pendings_count > 0
 
         if @order.status.pending? && @order.settled
+          { msg: 'ok', status: @order.status, status_text: @order.status.text }
+        else
+          error!({ error: "订单已经结账！" }, 400)
+        end
+      end
+
+      desc '外卖订单确认收货'
+      params do
+        requires :order_id, type: Integer, desc: '订单ID'
+      end
+      get 'completed' do
+        authenticate!
+        @order = Order.find_by_id(params[:order_id])
+        error!({ error: "你不能操作该订单！" }, 400) if @order.user_id != current_user.id
+        error!({ error: "订单不存在或者还有菜色未完成！" }, 400) if @order.blank?
+
+        if @order.completed
           { msg: 'ok', status: @order.status, status_text: @order.status.text }
         else
           error!({ error: "订单已经结账！" }, 400)
