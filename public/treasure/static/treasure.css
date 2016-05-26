@@ -108,9 +108,7 @@ ul {
 
 .unit-move {
   /* applied to the element when moving */
-  transition-property: all;
-  transition-duration: .5s;
-  transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+  transition: transform .5s cubic-bezier(.55,0,.1,1);
 }
 
 .unit-show-box {
