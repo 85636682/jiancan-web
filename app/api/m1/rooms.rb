@@ -25,6 +25,7 @@ module M1
         requires :room_id, type: Integer, desc: "台桌id"
         requires :room, type: Hash do
           requires :name, type: String
+          requires :seat, type: Integer
         end
       end
       put 'one' do
