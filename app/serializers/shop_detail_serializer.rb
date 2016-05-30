@@ -1,7 +1,7 @@
 class ShopDetailSerializer < BaseSerializer
   attributes :id, :name, :street, :mobile, :province, :city, :district, :avatar,
              :created_at, :updated_at, :meals, :meals_texts, :avatar80x80,
-             :orders_by_month_count, :full_free_courier
+             :orders_by_month_count, :full_free_courier, :pay_methods, :pay_methods_texts
 
   has_many :categories, serializer: CategorySerializer
   has_many :rooms, serializer: RoomSerializer
@@ -23,6 +23,10 @@ class ShopDetailSerializer < BaseSerializer
   end
 
   def meals_texts
+
+  end
+
+  def pay_methods_texts
 
   end
 

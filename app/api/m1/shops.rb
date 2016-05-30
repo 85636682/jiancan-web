@@ -11,7 +11,7 @@ module M1
           requires :district, type: String, desc: "店铺县区"
           requires :street, type: String, desc: "店铺街道"
           requires :mobile, type: String, desc: "店铺电话"
-          requires :meals, type: Array[String], desc: ""
+          requires :meals, type: Array[String], desc: "提供餐次"
           optional :avatar, type: Hash, desc: "店铺头像"
         end
       end
@@ -35,7 +35,8 @@ module M1
           optional :district, type: String, desc: "店铺县区"
           optional :street, type: String, desc: "店铺街道"
           optional :mobile, type: String, desc: "店铺电话"
-          optional :meals, type: Array[String], desc: ""
+          optional :meals, type: Array[String], desc: "提供餐次"
+          optional :pay_methods, type: Array[String], desc: "支持支付方式"
           optional :avatar, type: Hash, desc: "店铺头像"
           optional :full_free_courier, type: Integer, desc: "满额免运费"
         end
