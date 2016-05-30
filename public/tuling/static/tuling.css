@@ -1,0 +1,371 @@
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+}
+
+.page, body {
+    background-color: #fbf9fe;
+}
+
+.page {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  opacity: 0
+}
+
+.bd.spacing {
+  padding: 0 15px
+}
+
+.container {
+  width: 100%;
+  display: -webkit-box;
+  display: -moz-box;
+}
+
+.container .left {
+  width: 100px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.container .right {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-box-ordinal-group: 2;
+  -moz-box-ordinal-group: 2;
+  margin:0 5px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+@-webkit-keyframes fadeInUp {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: none;
+        transform: none;
+    }
+}
+
+.fadeInUp {
+    -webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+}
+
+footer .weui_tab .weui_tabbar {
+  position: fixed;
+  z-index: 1030;
+  bottom: 0;
+  left: 0;
+  background-color: #FFF;
+}
+
+.chufa-mudi {
+  background-image: url(./images/文字背景@3x.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.chufa-mudi .chufadi {
+  width: 100%;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.chufa-mudi .mudidi {
+  width: 100%;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.chufa-mudi .chufa-mudi-fenge {
+  background-image: url(images/分割线@3x.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 3px;
+}
+
+.airport {
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+
+.airport img {
+  width: 100%;
+}
+
+.airport .title {
+  position: absolute;
+  color: #FFF;
+  top: 15px;
+  left: 20px;
+}
+
+.airport .search {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  background-image: url(images/search-input.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100px;
+  height: 30px;
+}
+
+.airport .search .search-input {
+  width: auto;
+  height: 20px;
+}
+
+.airport .search .search-button {
+  position: absolute;
+  top: 5px;
+  right: 85px;
+  width: 10px;
+  height: 10px;
+}
+
+.airport .search span {
+  font-size: 14px;
+  position: absolute;
+  top: 0px;
+  right: -25px;
+  width: 100px;
+}
+
+.airport-service {
+  background-image: url(images/机场服务图@3x.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 20px;
+  position: relative;
+}
+
+.airport-service .title {
+  position: absolute;
+  left: 43%;
+  top: -10px;
+}
+
+.airport-services.weui_grids::before {
+  border: solid 0px #FFF;
+}
+
+.airport-services.weui_grids::after {
+  border: solid 0px #FFF;
+}
+
+.airport-services.weui_grids .weui_grid {
+  padding: 10px 5px;
+}
+
+.airport-services.weui_grids .weui_grid::before {
+  border: solid 0px #FFF;
+}
+
+.airport-services.weui_grids .weui_grid::after {
+  border: solid 0px #FFF;
+}
+
+.size-table {
+  width: 100%;
+  table-layout: fixed;
+  margin-top: 20px;
+  border: solid 1px #E2E2E2;
+}
+
+.size-table thead th {
+  text-align: center;
+  height: 80px;
+  color: #434343;
+  font-size: 16px;
+  border-bottom: solid 1px #E2E2E2;
+}
+
+.size-table tbody td {
+  text-align: center;
+  height: 80px;
+  color: #434343;
+  font-size: 16px;
+  border-bottom: solid 1px #E2E2E2;
+}
+
+.sizeButton {
+  background-color: #FFF;
+  border: solid 1px #6a6a6a;
+}
+
+.sizeButtonActive {
+  background-color: #23a05a;
+  color: #FFF;
+  border: solid 1px #23a05a;
+}
+.sizeButtonActive:hover {
+  background-color: #23a05a;
+  color: #FFF;
+}
+
+.sub-menus {
+  display: flex;
+  flex-flow: row;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.sub-menus-list {
+  flex: 1;
+  overflow: auto;
+}
+
+.sub-menus-list ul {
+  display: flex;
+  flex-flow: row;
+  line-height: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.sub-menus-list ul li {
+  flex: 1;
+  width: 6rem;
+  text-align: center;
+}
+
+.unit-move {
+  /* applied to the element when moving */
+  transition: transform .5s cubic-bezier(.55,0,.1,1);
+}
+
+.unit-show-box {
+  width: 100%;
+}
+
+.unit-show-box .unit-show-screen {
+  display: flex;
+  display: -webkit-flex;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 44px;
+  border: solid 1px #23a05a;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius:5px;
+}
+
+.unit-show-box .unit-show-screen .unit-show-screen-left, .unit-show-screen-right {
+  flex: 1;
+  text-align: center;
+  font-size: 20px;
+  padding-top: 24px;
+  padding-bottom:24px;
+}
+
+.unit-show-box .unit-show-screen .unit-show-screen-left input, .unit-show-screen-right input {
+  width: 90%;
+  text-align: center;
+  border: 0px;
+  background-color: transparent;
+}
+
+.unit-show-list-box {
+  width: 100%;
+  max-height: 500px;
+}
+
+.unit-show-list-box .unit-show-list-screen {
+  display: flex;
+  display: -webkit-flex;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 44px;
+}
+
+.unit-show-list-box .unit-show-list-screen .unit-show-list {
+  text-align: center;
+  flex: 1;
+  position:relative;
+}
+
+.unit-show-list-box .unit-show-list-screen .unit-selected {
+  height: 80px;
+  background-color: #23a05a;
+}
+
+.unit-show-list-box .unit-show-list-screen .unit-selected.left {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.unit-show-list-box .unit-show-list-screen .unit-selected.right {
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.unit-show-list-box .unit-show-list-screen .unit-show-list .unit-show-list-item {
+  text-align: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 80px;
+  line-height: 80px;
+}
+
+.unit-tabbar {
+  position: fixed;
+  z-index: 1030;
+  width: 100%;
+  height: 80px;
+  bottom: 0;
+  left: 0;
+  background-color: #B8EFCF;
+  display: flex;
+  display: -webkit-flex;
+}
+
+.unit-tabbar-item {
+  text-align: center;
+  line-height: 80px;
+  height: 100%;
+  display: block;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.unit-tabbar-item.active {
+  background-color: #23a05a;
+}
