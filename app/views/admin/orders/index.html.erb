@@ -6,11 +6,40 @@
     <div class="col-sm-9">
       <div class="card card-block right-content">
         <table class="table">
+          <thead>
+            <tr>
+              <th>订单编号</th>
+              <th>时间</th>
+              <th>状态</th>
+              <th>所属店铺</th>
+              <th>
+                送货
+              </th>
+              <th>
+                支付方式
+              </th>
+              <th>价格</th>
+            </tr>
+          </thead>
           <tbody>
           <% @orders.each do |order| %>
             <tr>
-              <th scope="row">1</th>
               <td><%= order.sn %></td>
+              <td>
+                <%= formattime(order.created_at, :unit => "hour") %>
+              </td>
+              <td>
+                <%= order.status.text %>
+              </td>
+              <td>
+                <%= order.shop.name %>
+              </td>
+              <td>
+                <%= order.send_method.text %>
+              </td>
+              <td>
+                <%= order.pay_method.text %>
+              </td>
               <td>￥<%= order.total_price %></td>
             </tr>
           <% end %>
