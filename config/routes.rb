@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :shops
     resources :orders
     resources :jc_logs, only: [:index, :destroy]
-    resources :sessions
+    resources :sessions, only: [:new, :create, :destroy]
     resources :registrations
     resources :wechat
   end
