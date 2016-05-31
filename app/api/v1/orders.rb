@@ -207,6 +207,15 @@ module V1
         end
       end
 
+      desc '简餐配送的订单'
+      params do
+        optional :offset, type: Integer, default: 0
+        optional :limit,  type: Integer, default: 20, values: 1..150
+      end
+      get 'express/jiancan', each_serializer: OrderDetailSerializer, root: false  do
+        @orders = Order.where("status = 'express' AND takeout = true AND send_method = 'jiancan' AND expressed = false").offset(params[:offset]).limit(params[:limit]).order("created_at DESC")
+      end
+
       desc '更新是否已经配送'
       params do
         requires :order_id, type: Integer, desc: '订单id'
