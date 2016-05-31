@@ -207,6 +207,22 @@ module V1
         end
       end
 
+      desc '更新是否已经配送'
+      params do
+        requires :order_id, type: Integer, desc: '订单id'
+      end
+      post 'expressed' do
+        @order = Order.find_by_id(params[:order_id])
+        error!({ error: "订单不存在！" }, 400) if @order.blank?
+        error!({ error: "订单已配送！" }, 400) if @order.expressed
+        error!({ error: "订单不是简餐配送！" }, 400) if @order.send_method.merchant?
+        if @order.update_attributes(:expressed => true)
+          { msg: 'ok', expressed: true }
+        else
+          error!({ error: "配送失败！" }, 400)
+        end
+      end
+
     end
   end
 end
