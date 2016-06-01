@@ -8,6 +8,7 @@ class Order < ActiveRecord::Base
   belongs_to :room
   belongs_to :user
   belongs_to :worker
+  belongs_to :courier
   has_many :order_products, :dependent => :destroy
   has_many :products, :through => :order_products
   has_many :notifications, :dependent => :destroy
