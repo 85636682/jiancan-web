@@ -4,6 +4,8 @@ class Courier < ActiveRecord::Base
   validates :name, :login, presence: true
   validates :login, uniqueness: true
 
+  has_many :orders
+
   def pusher_id
     "courier_#{id}"
   end

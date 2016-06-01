@@ -23,6 +23,16 @@ module C1
         render current_courier
       end
 
+      desc '简餐配送的订单'
+      params do
+        optional :offset, type: Integer, default: 0
+        optional :limit,  type: Integer, default: 20, values: 1..150
+      end
+      get 'express', each_serializer: OrderDetailSerializer, root: false  do
+        authenticate!
+        @orders = current_courier.orders.offset(params[:offset]).limit(params[:limit]).order("created_at DESC")
+      end
+
     end
   end
 end
