@@ -38,8 +38,8 @@
                 <%= courier.mobile %>
               </td>
               <td>
-                <%= link_to "修改" %>
-                <%= link_to "删除" %>
+                <%= link_to "修改", edit_admin_courier_path(courier) %>
+                <%= link_to "删除", admin_courier_path(courier), method: :delete %>
               </td>
             </tr>
           <% end %>
