@@ -144,7 +144,7 @@ module V1
           error!({ error: "订单不存在！" }, 400)
         else
           if @order.express(params[:send_method])
-            if params[:send_method] == "jiancan"
+            @order.notify_express if params[:send_method] == "jiancan"
             { msg: 'ok', status: @order.status, status_text: @order.status.text, send_method: @order.send_method, send_method_text: @order.send_method.text }
           else
             error!({ error: "订单还未配送！" }, 400)
