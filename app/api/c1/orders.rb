@@ -38,7 +38,7 @@ module C1
         @order = Order.find_by_id(params[:order_id])
         error!({ error: "订单不存在！" }, 400) if @order.blank?
         error!({ error: "订单不是简餐配送！" }, 400) if @order.send_method.merchant?
-        error!({ error: "订单未被快递员认单！" }, 400) if @order.express_status.wait?
+        error!({ error: "订单未被快递员认单！" }, 400) if not @order.express_status.wait?
         if @order.update_attributes(:express_status => :picked)
           { msg: 'ok', express_status: "picked" }
         else
@@ -55,7 +55,7 @@ module C1
         @order = Order.find_by_id(params[:order_id])
         error!({ error: "订单不存在！" }, 400) if @order.blank?
         error!({ error: "订单不是简餐配送！" }, 400) if @order.send_method.merchant?
-        error!({ error: "订单未被快递员认单！" }, 400) if @order.express_status.sent?
+        error!({ error: "订单未被快递员取货！" }, 400) if not @order.express_status.picked?
         if @order.update_attributes(:express_status => :sent)
           { msg: 'ok', express_status: "sent" }
         else
