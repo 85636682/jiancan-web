@@ -1,7 +1,8 @@
 class OrderDetailSerializer < BaseSerializer
   attributes :id, :sn, :status, :status_text, :total_price, :total_fee, :created_at, :updated_at,
              :room_id, :worker_id, :shop_id, :takeout, :address, :meal_time, :pay_method,
-             :remarks, :pay_method_text, :mobile, :use_coupon, :send_method, :send_method_text
+             :remarks, :pay_method_text, :mobile, :use_coupon, :send_method, :send_method_text,
+             :expressed
 
   has_many :order_products, serializer: OrderProductSerializer
   has_one :room, serializer: RoomSerializer
@@ -9,6 +10,7 @@ class OrderDetailSerializer < BaseSerializer
   has_one :worker, serializer: WorkerSerializer
   has_one :user, serializer: UserSerializer
   has_one :coupon_user,   serializer: CouponUserSerializer
+  has_one :courier, serializer: CourierSerializer
 
   def created_at
     DateTime.parse(object.created_at.iso8601).strftime('%Y年%m月%d日 %H:%M')

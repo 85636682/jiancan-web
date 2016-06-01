@@ -1,7 +1,8 @@
 class OrderSerializer < BaseSerializer
   attributes :id, :sn, :status, :status_text, :total_price, :created_at, :updated_at,
              :room_id, :worker_id, :shop_id, :takeout, :address, :meal_time, :pay_method,
-             :remarks, :pay_method_text, :mobile, :use_coupon, :send_method, :send_method_text
+             :remarks, :pay_method_text, :mobile, :use_coupon, :send_method, :send_method_text,
+             :expressed
 
   def created_at
     DateTime.parse(object.created_at.iso8601).strftime('%Y年%m月%d日 %H:%M')
