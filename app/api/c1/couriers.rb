@@ -28,7 +28,7 @@ module C1
         optional :offset, type: Integer, default: 0
         optional :limit,  type: Integer, default: 20, values: 1..150
       end
-      get 'express', each_serializer: OrderDetailSerializer, root: false  do
+      get 'orders', each_serializer: OrderDetailSerializer, root: false  do
         authenticate!
         @orders = current_courier.orders.offset(params[:offset]).limit(params[:limit]).order("created_at DESC")
       end
