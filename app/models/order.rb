@@ -3,6 +3,7 @@ class Order < ActiveRecord::Base
   enumerize :status,      in: [:paying, :pending, :settled, :confirmed, :express, :completed, :canceled], default: :pending
   enumerize :pay_method,  in: [:online, :offline], default: :online
   enumerize :send_method, in: [:jiancan, :merchant], default: :merchant
+  enumerize :express_status, in: [:halt, :wait, :picked, :sent], default: :halt
 
   belongs_to :shop, :counter_cache => true
   belongs_to :room

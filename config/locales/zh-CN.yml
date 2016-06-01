@@ -114,6 +114,11 @@
       send_method:
         jiancan: "简餐配送"
         merchant: "商家自送"
+      express_status:
+        halt: "挂起"
+        wait: "等待取货"
+        picked: "已取货"
+        sent: "已送达"
     order_product:
       status:
         pending: '已下单'

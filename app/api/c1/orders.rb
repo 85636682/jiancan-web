@@ -22,10 +22,44 @@ module C1
         error!({ error: "订单不存在！" }, 400) if @order.blank?
         error!({ error: "订单已配送！" }, 400) if @order.expressed
         error!({ error: "订单不是简餐配送！" }, 400) if @order.send_method.merchant?
-        if @order.update_attributes(:expressed => true, :courier_id => current_courier.id)
-          { msg: 'ok', expressed: true, courier_id: current_courier.id }
+        if @order.update_attributes(:expressed => true, :courier_id => current_courier.id, :express_status => :wait)
+          { msg: 'ok', expressed: true, express_status: "wait", courier_id: current_courier.id }
         else
           error!({ error: "配送失败！" }, 400)
+        end
+      end
+
+      desc '更新已取货'
+      params do
+        requires :order_id, type: Integer, desc: '订单id'
+      end
+      put 'picked' do
+        authenticate!
+        @order = Order.find_by_id(params[:order_id])
+        error!({ error: "订单不存在！" }, 400) if @order.blank?
+        error!({ error: "订单不是简餐配送！" }, 400) if @order.send_method.merchant?
+        error!({ error: "订单未被快递员认单！" }, 400) if @order.express_status.wait?
+        if @order.update_attributes(:express_status => :picked)
+          { msg: 'ok', express_status: "picked" }
+        else
+          error!({ error: "取货失败！" }, 400)
+        end
+      end
+
+      desc '更新已送达'
+      params do
+        requires :order_id, type: Integer, desc: '订单id'
+      end
+      put 'sent' do
+        authenticate!
+        @order = Order.find_by_id(params[:order_id])
+        error!({ error: "订单不存在！" }, 400) if @order.blank?
+        error!({ error: "订单不是简餐配送！" }, 400) if @order.send_method.merchant?
+        error!({ error: "订单未被快递员认单！" }, 400) if @order.express_status.sent?
+        if @order.update_attributes(:express_status => :sent)
+          { msg: 'ok', express_status: "sent" }
+        else
+          error!({ error: "送达失败！" }, 400)
         end
       end
 
