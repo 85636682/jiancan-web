@@ -149,4 +149,38 @@ class Order < ActiveRecord::Base
     end
   end
 
+  def notify_express
+    begin
+      couriers = Courier.all
+      receiver = []
+      couriers.each do |courier|
+        receiver << courier.pusher_id
+      end
+      if not receiver.empty?
+        client = JPush::Client.new(Setting.jpush_app_key_for_courier, Setting.jpush_master_secret_for_courier)
+        payload = JPush::Push::PushPayload.new(
+          platform: 'all',
+          audience: JPush::Push::Audience.new.set_alias(receiver),
+          notification: JPush::Push::Notification.new.set_alert(
+            '有订单要求配送，请及时查看！'
+          ).set_android(
+            alert: '有订单要求配送，请及时查看！',
+            extras:  { "sn" => sn }
+          ).set_ios(
+            alert: '有订单要求配送，请及时查看！',
+            extras: { "sn" => sn }
+          )
+        ).set_message(
+          msg_content: "有订单要求配送，请及时查看！",
+          title: "有订单要求配送，请及时查看！",
+          content_type: "order_express",
+          extras: { "sn" => sn }
+        )
+        res = client.pusher.push(payload)
+      end
+    rescue Exception => e
+      JcLog.create(content: "#{e.message}#{e.backtrace}", level: "debug")
+    end
+  end
+
 end

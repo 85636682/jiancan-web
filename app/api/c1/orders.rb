@@ -29,6 +29,14 @@ module C1
         end
       end
 
+      desc '根据订单号SN搜索订单'
+      params do
+        requires :sn, type: String, desc: '订单编号'
+      end
+      get 'search', serializer: OrderDetailSerializer, root: false do
+        @order = Order.find_by_sn(params[:sn])
+      end
+
     end
   end
 end
