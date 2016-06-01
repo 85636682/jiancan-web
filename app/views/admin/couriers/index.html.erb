@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+      <%= render 'admin/shared/left_bar' %>
+    </div>
+    <div class="col-sm-9">
+      <div class="card card-block right-content">
+        <div class="navbar navbar-light bg-faded navigation">
+          <a class="nav-link btn btn-primary-outline btn-sm">
+            <i class="fa fa-arrow-left"></i> 返回
+          </a>
+          <span class="title">快递员管理</span>
+          <a href="<%= new_admin_courier_path %>" class="nav-link btn btn-primary-outline btn-sm pull-xs-right">
+            <i class="fa fa-plus"></i> 添加
+          </a>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>编号</th>
+              <th>名称</th>
+              <th>登录名</th>
+              <th>电话</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @couriers.each do |courier| %>
+            <tr>
+              <td><%= courier.id %></td>
+              <td>
+                <%= courier.name %>
+              </td>
+              <td>
+                <%= courier.login %>
+              </td>
+              <td>
+                <%= courier.mobile %>
+              </td>
+              <td>
+                <%= link_to "修改" %>
+                <%= link_to "删除" %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

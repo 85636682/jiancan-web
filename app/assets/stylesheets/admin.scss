@@ -1,1 +1,19 @@
 @import "bootstrap";
+
+.right-content {
+  background-color: #FFF;
+}
+
+.right-content .navbar {
+  height: 60px;
+  border-radius: 0px;
+  background-color: #FFF;
+}
+
+.right-content .navbar .title {
+  margin-left: 35%;
+}
+
+.right-content td {
+  vertical-align: middle;
+}

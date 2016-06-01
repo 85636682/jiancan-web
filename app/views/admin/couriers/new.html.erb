@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+      <%= render 'admin/shared/left_bar' %>
+    </div>
+    <div class="col-sm-9">
+      <div class="card card-block right-content">
+        <div class="navbar navbar-light bg-faded navigation">
+          <a href="<%= admin_couriers_path %>" class="nav-link btn btn-primary-outline btn-sm">
+            <i class="fa fa-arrow-left"></i> 返回
+          </a>
+          <span class="title">添加快递员</span>
+        </div>
+        <%= form_for [:admin, @courier] do |f| %>
+          <div class="form-group">
+            <label for="exampleInputEmail1">名称</label>
+            <%= f.text_field :name, class: "form-control", placeholder: "名称" %>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">登录名</label>
+            <%= f.text_field :login, class: "form-control", placeholder: "登录名" %>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">电话</label>
+            <%= f.text_field :mobile, class: "form-control", placeholder: "电话" %>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">密码</label>
+            <%= f.password_field :password, class: "form-control", placeholder: "密码" %>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">确认密码</label>
+            <%= f.password_field :password_confirmation, class: "form-control", placeholder: "确认密码" %>
+          </div>
+          <%= f.submit "保 存", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

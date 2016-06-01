@@ -5,6 +5,7 @@ module Api
     mount V1::Root
     mount U1::Root
     mount M1::Root
+    mount C1::Root
 
     format :json
     content_type :json, 'application/json;charset=utf-8'
