@@ -1,6 +1,6 @@
 class Admin::CouriersController < AdminController
 
-  before_action :set_courier, only: [:show, :edit, :destroy]
+  before_action :set_courier, only: [:show, :edit, :update, :destroy]
 
   def index
     @couriers = Courier.all
