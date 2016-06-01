@@ -16,7 +16,7 @@ module C1
       params do
         requires :order_id, type: Integer, desc: '订单id'
       end
-      post 'expressed' do
+      put 'expressed' do
         authenticate!
         @order = Order.find_by_id(params[:order_id])
         error!({ error: "订单不存在！" }, 400) if @order.blank?
