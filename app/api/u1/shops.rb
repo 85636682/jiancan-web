@@ -7,13 +7,15 @@ module U1
         optional :sort, type: String, desc: '排序'
         optional :lat,  type: Float, desc: '维度'
         optional :lng,  type: Float, desc: '经度'
+        optional :debug, type: Boolean, desc: '是否开发模式'
       end
       get '', each_serializer: ShopSerializer, root: false do
-        if params[:meal].blank? || params[:meal] == 'all'
+        if !params[:debug].blank? && params[:debug]
           @shops = Shop.all
         else
-          @shops = Shop.where("'#{params[:meal]}' = ANY (meals)")
+          @shops = Shop.where("id != 1")
         end
+        @shops = @shops.where("'#{params[:meal]}' = ANY (meals)") if !params[:meal].blank? && params[:meal] != 'all'
         unless params[:sort].blank?
           case params[:sort]
           when 'intelligent'

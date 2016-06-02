@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :registrations
     resources :wechat
     resources :couriers
+    resources :apis, only: [:index]
   end
 
   require 'dispatch'
@@ -24,7 +25,6 @@ Rails.application.routes.draw do
   mount StatusPage::Engine, at: '/'
 
   get 'china_city/:id', to: 'city_data#show'
-  get 'welcome/api'
   get 'welcome/index'
   get 'welcome/downapp'
   get 'welcome/apply'

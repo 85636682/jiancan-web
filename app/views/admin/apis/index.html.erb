@@ -1,0 +1,111 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+      <%= render 'admin/shared/left_bar' %>
+    </div>
+    <div class="col-sm-9">
+      <div class="card card-block right-content">
+        <div class="navbar navbar-light bg-faded navigation">
+          <a class="nav-link btn btn-primary-outline btn-sm">
+            <i class="fa fa-arrow-left"></i> 返回
+          </a>
+          <span class="title">api文档
+            <strong>
+              <em>
+                <a href="javascript:;" onclick="$('#instructions').toggle()">说明</a>
+              </em>
+            </strong>
+          </span>
+          <a href="javascript:;" class="nav-link btn btn-primary-outline btn-sm pull-xs-right">
+            <i class="fa fa-plus"></i> 选择
+          </a>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th id="instructions" colspan="3" style="display: none;" class="panel-body markdown">
+                <h4>Response 说明</h4>
+                <p>所有 Response 采用 JSON 格式返回，请求状态通过 HTTP Status 返回</p>
+                <h5>HTTP Status</h5>
+                <ul>
+                  <li>200, 201 - 请求成功，或执行成功</li>
+                  <li>400 - 参数不符合 API 的要求、或者数据格式验证没有通过，请配合 Response Body 里面的 error 信息确定问题。</li>
+                  <li>401 - 用户认证失败，或缺少认证信息，比如 access_token 过期，或没传。</li>
+                  <li>403 - 当前用户对资源没有操作权限</li>
+                  <li>404 - 资源不存在。</li>
+                  <li>500 - 服务器异常</li>
+                </ul>
+                <p>错误的情况 Response Body 一定会是这样的格式: <code>{ "error" : "Error message" }</code></p>
+
+                <h4>API 路由</h4>
+
+                <p>URL 基本路径：<%= request.protocol %><%= Setting.domain %>/api/v1</p>
+              </th>
+            </tr>
+            <tr>
+              <th>方式</th>
+              <th>URL</th>
+              <th>描述</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <% @routes.each do |route| %>
+            <tr>
+              <td>
+                <%= route[:method] %>
+              </td>
+              <td>
+                <a href="javascript:;" onclick="$('#<%= route[:id] %>').toggle()"><%= route[:version] %><%= route[:name] %></a>
+              </td>
+              <td>
+                <%= markdown(route[:desc] || "暂无") %>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3" style="display:none;" id="<%= route[:id] %>">
+                <div class="route">
+                  <h5><label><%= route[:method] %></label> <%= route[:name] %></h5>
+                  <div class="content">
+                    <div class="desc markdown"><%= markdown(route[:desc] || "暂无") %></div>
+                    <% if route[:params].count > 0 %>
+                    <h6>Params</h6>
+                    <table class="table table-striped table-bordered params">
+                      <thead>
+                        <th>参数名</th>
+                        <th>类型</th>
+                        <th>必填</th>
+                        <th>默认值</th>
+                        <th>值范围</th>
+                        <th>说明</th>
+                      </thead>
+                      <tbody>
+                        <% route[:params].each do |k,param| %>
+                        <%
+                        if not param.is_a?(Hash)
+                          param = { type: "String", required: true, desc: "主键" }
+                        end
+                        %>
+                        <tr>
+                          <td class="field"><%= k %></td>
+                          <td class="type"><%= param[:type] %></td>
+                          <td class="required"><%= param[:required] %></td>
+                          <td class="default"><%= param[:default] %></td>
+                          <td class="values"><%= param[:values] %></td>
+                          <td><%= markdown(param[:desc] || "") %></td>
+                        </tr>
+                        <% end %>
+                      </tbody>
+                    </table>
+                    <% end %>
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
