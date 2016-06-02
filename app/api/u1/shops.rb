@@ -11,29 +11,29 @@ module U1
       end
       get '', each_serializer: ShopSerializer, root: false do
         if !params[:debug].blank? && params[:debug]
-          @shops = Shop.all
+          @shops = Shop.where("id = 1")
         else
           @shops = Shop.where("id != 1")
-        end
-        @shops = @shops.where("'#{params[:meal]}' = ANY (meals)") if !params[:meal].blank? && params[:meal] != 'all'
-        unless params[:sort].blank?
-          case params[:sort]
-          when 'intelligent'
-            @shops = @shops.order("created_at DESC")
-          when 'distance'
-            if params[:lat].present? && params[:lnt].present?
-              @shops = @shops.select("shops.*, st_distance(location, 'point(#{params[:lng]} #{params[:lat]})') as distance")
-                             .where("st_dwithin(location, 'point(#{params[:lng]} #{params[:lat]})', 10000)")
-                             .order("distance")
+          @shops = @shops.where("'#{params[:meal]}' = ANY (meals)") if !params[:meal].blank? && params[:meal] != 'all'
+          unless params[:sort].blank?
+            case params[:sort]
+            when 'intelligent'
+              @shops = @shops.order("created_at DESC")
+            when 'distance'
+              if params[:lat].present? && params[:lnt].present?
+                @shops = @shops.select("shops.*, st_distance(location, 'point(#{params[:lng]} #{params[:lat]})') as distance")
+                               .where("st_dwithin(location, 'point(#{params[:lng]} #{params[:lat]})', 10000)")
+                               .order("distance")
+              end
+            when 'grade'
+              @shops = @shops.order("")
+            when 'sales'
+              @shops = @shops.order("orders_count DESC")
+            when 'capita'
+              @shops = @shops.order("")
+            else
+              @shops = @shops.order("created_at ASC")
             end
-          when 'grade'
-            @shops = @shops.order("")
-          when 'sales'
-            @shops = @shops.order("orders_count DESC")
-          when 'capita'
-            @shops = @shops.order("")
-          else
-            @shops = @shops.order("created_at ASC")
           end
         end
         render @shops
