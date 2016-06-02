@@ -3,7 +3,7 @@ class Admin::ApisController < AdminController
     @routes = []
     Api::Dispatch.routes.each do |route|
       next if route.route_method.blank?
-      puts route.route_version
+      next if route.route_version.blank?
       path = route.route_path
       path.sub!('(.:format)', '.json')
       path.sub!('/:version', '')
