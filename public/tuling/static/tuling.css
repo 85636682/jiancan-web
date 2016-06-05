@@ -102,16 +102,18 @@ footer .weui_tab .weui_tabbar {
 
 .chufa-mudi .chufadi {
   width: 100%;
-  padding-left: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
 }
 
 .chufa-mudi .mudidi {
   width: 100%;
-  padding-left: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.chufa-mudi .chufadi span, .mudidi span {
+  margin-left: 10px;
 }
 
 .chufa-mudi .chufa-mudi-fenge {
@@ -149,25 +151,23 @@ footer .weui_tab .weui_tabbar {
   height: 30px;
 }
 
+.airport .search .search-box {
+  margin-top: -3px;
+}
+
 .airport .search .search-input {
   width: auto;
   height: 20px;
 }
 
 .airport .search .search-button {
-  position: absolute;
-  top: 5px;
-  right: 85px;
   width: 10px;
   height: 10px;
+  margin-left: 5px;
 }
 
 .airport .search span {
-  font-size: 14px;
-  position: absolute;
-  top: 0px;
-  right: -25px;
-  width: 100px;
+  font-size: 12px;
 }
 
 .airport-service {
