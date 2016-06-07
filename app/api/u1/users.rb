@@ -54,7 +54,7 @@ module U1
       desc "当前用户信息"
       params do
       end
-      get 'current', serializer: UserSerializer, root: false do
+      get 'current', serializer: CurrentUserSerializer, root: false do
         authenticate!
         current_user
       end
