@@ -1,4 +1,4 @@
-class Room < ActiveRecord::Base
+class Room < ApplicationRecord
   belongs_to :shop
   has_many :orders
   has_many :bookings, as: :bookingable

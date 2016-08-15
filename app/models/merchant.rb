@@ -1,4 +1,4 @@
-class Merchant < ActiveRecord::Base
+class Merchant < ApplicationRecord
   has_secure_password
 
   has_one :shop

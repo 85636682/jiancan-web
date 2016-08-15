@@ -1,3 +1,3 @@
-class ReceivingAddress < ActiveRecord::Base
+class ReceivingAddress < ApplicationRecord
   belongs_to :user
 end

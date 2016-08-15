@@ -1,5 +1,5 @@
 # config valid only for Capistrano 3.1
-lock '3.4.0'
+lock '3.6.0'
 
 #set :application, 'dingist'
 set :application, 'jiancan'
@@ -27,15 +27,6 @@ set :rbenv_roles, :all # default value
 set :linked_dirs, %w{tmp/pids tmp/sockets log}
 
 namespace :deploy do
-
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      invoke 'puma:restart'
-    end
-  end
-
-  after :publishing, :restart
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do

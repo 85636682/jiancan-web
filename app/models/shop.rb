@@ -1,4 +1,4 @@
-class Shop < ActiveRecord::Base
+class Shop < ApplicationRecord
 
   belongs_to :merchant
   has_many :products

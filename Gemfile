@@ -1,46 +1,47 @@
 source 'https://ruby.taobao.org'
 
-gem 'rails', '~> 4.2.5'
-gem 'sprockets', '~> 3.3.3'
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '~> 5.0.0'
+gem 'sprockets'
 
 # Use SCSS for stylesheets
-gem 'sass-rails'
+gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier'
+gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails'
+gem 'coffee-rails', '~> 4.2'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-gem 'turbolinks', '~> 5.0.0.beta'
+gem 'turbolinks', '~> 5'
 
-gem 'bootstrap', '~> 4.0.0.alpha3'
-gem 'rails-assets-tether', '>= 1.1.0'
+gem 'bootstrap'
+gem 'rails-assets-tether'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder', '~> 2.5'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem "pg"
 
 # locations
-gem 'rgeo', '0.5.2'
+gem 'rgeo'
 gem 'rgeo-activerecord'
-gem 'activerecord-postgis-adapter', '3.1.0'
+gem 'activerecord-postgis-adapter'
 
 gem 'rails-deprecated_sanitizer'
 
-gem 'responders', '~> 2.0'
+gem 'responders'
 
-gem 'redis', '~> 3.2.1'
-gem 'hiredis', '~> 0.6.0'
+gem 'redis'
+gem 'hiredis'
 # Redis 命名空间
-gem 'redis-namespace', '~> 1.5.1'
+gem 'redis-namespace'
 # 将一些数据存放入 Redis
-gem 'redis-objects', '1.1.0'
+gem 'redis-objects'
 
 # 用户系统
 gem 'bcrypt'
@@ -49,7 +50,7 @@ gem 'bcrypt'
 gem 'weixin_rails_middleware'
 gem 'weixin_authorize'
 gem 'wx_pay', :git => 'git://github.com/jasl/wx_pay'
-gem 'wechat', '~> 0.7.13'
+gem 'wechat'
 
 # 上传组件
 gem 'carrierwave'
@@ -58,36 +59,28 @@ gem 'carrierwave-upyun'
 gem 'rest-client'
 gem 'addressable'
 
-gem 'activesupport-json_encoder'
-
 # 分页
-gem 'will_paginate', '3.0.7'
+gem 'will_paginate'
 
 # 实现按某年，某月，某日，或者星期几，来查询数据
 gem 'by_star', :git => "git://github.com/radar/by_star"
 
-gem 'china_city'
-
-# 短信
-gem 'smart_sms'
-
 # 实时通知
 gem 'message_bus'
 
-# 推送
-gem 'jpush', '~> 4.0.2'
+
 
 # 枚举
 gem 'enumerize'
 
 # alipay
-gem 'alipay', '~> 0.12.0'
+gem 'alipay'
 
 # 搜索
-gem 'rails-simple-search', '~> 0.9.9'
+gem 'rails-simple-search'
 
 # Grape APIs
-gem 'grape', '~> 0.13.0'
+gem 'grape'
 gem 'active_model_serializers'
 gem 'grape-active_model_serializers'
 gem 'hashie-forbidden_attributes'
@@ -99,12 +92,12 @@ gem 'jwt'
 gem 'rack-cors', require: 'rack/cors'
 
 # Font Awesome
-gem 'font-awesome-sass', '~> 4.3.1'
+gem 'font-awesome-sass'
 
 # YAML 配置信息
 gem "settingslogic"
 
-gem "puma", "~> 2.6"
+gem "puma", "~> 3"
 
 gem 'whenever', :require => false
 
@@ -143,6 +136,9 @@ group :development, :test do
   gem 'binding_of_caller'     #出错提示友好版
 
 end
+
+# 推送
+gem 'jpush'
 
 group :production do
   gem 'dalli'

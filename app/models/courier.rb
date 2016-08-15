@@ -1,4 +1,4 @@
-class Courier < ActiveRecord::Base
+class Courier < ApplicationRecord
   has_secure_password
 
   validates :name, :login, presence: true

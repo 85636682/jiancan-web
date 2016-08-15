@@ -1,2 +1,2 @@
-class JcLog < ActiveRecord::Base
+class JcLog < ApplicationRecord
 end

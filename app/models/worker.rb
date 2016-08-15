@@ -1,4 +1,4 @@
-class Worker < ActiveRecord::Base
+class Worker < ApplicationRecord
   extend Enumerize  #pending 订单新建状态  settled订单结算状态  completed 订单完成支付  canceled订单取消
   enumerize :department,     in: [:waiter, :kitchen, :counter], default: :waiter
 
