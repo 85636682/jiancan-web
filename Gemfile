@@ -109,8 +109,6 @@ gem 'whenever', :require => false
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'rails_db'
-gem 'status-page'
 
 # HTTP Client
 gem 'faraday', '~> 0.9.2'
