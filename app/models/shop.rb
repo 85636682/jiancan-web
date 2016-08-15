@@ -33,7 +33,7 @@ class Shop < ApplicationRecord
     response = conn.get '/geocoder/v2/', { address: address, ak: Setting.baidu_map_ak, output: "json" }
   end
 
-  def address
-    "#{ChinaCity.get(province)}#{ChinaCity.get(city)}#{ChinaCity.get(district)}#{street}"
-  end
+  #def address
+  #  "#{ChinaCity.get(province)}#{ChinaCity.get(city)}#{ChinaCity.get(district)}#{street}"
+  #end
 end
