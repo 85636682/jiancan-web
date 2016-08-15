@@ -1,6 +1,4 @@
 class Shop < ApplicationRecord
-  include ChinaCity
-
   belongs_to :merchant
   has_many :products
   has_many :rooms
