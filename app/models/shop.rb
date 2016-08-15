@@ -33,6 +33,6 @@ class Shop < ApplicationRecord
   end
 
   def address
-    "#{ChinaCity.get(province)}#{ChinaCity.get(city)}#{ChinaCity.get(district)}#{street}"
+  #  "#{ChinaCity.get(province)}#{ChinaCity.get(city)}#{ChinaCity.get(district)}#{street}"
   end
 end
